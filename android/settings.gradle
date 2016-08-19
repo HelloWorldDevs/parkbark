@@ -1,0 +1,3 @@
+rootProject.name = 'parkBark'
+
+include ':app'
