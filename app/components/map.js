@@ -1,83 +1,49 @@
 import React, { Component } from 'react';
 import {
-  View,
-  MapView,
-  StyleSheet
+    View,
+    MapView,
+    StyleSheet
+} from 'react-native';
+import makeStore from '../redux/store';
+import reducer from '../redux/reducer';
+
+const store = makeStore(reducer);
+
+store.dispatch({
+  type: 'SET_LOCATION',
+  state: {
+    coords: {
+      latitude: 45.513752,
+      longitude: -122.661654
+    },
+    markers: {
+      latitude: 45.513752,
+      longitude: -122.661654
+    }
+  }
+});
+
+console.log(store.getState());
+console.log(store.get(location.coords.markers));
 
 
 export default class Map extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      position: {
-        coords: {
-          latitude: 45.513752,
-          longitude: -122.661654
-        }
-      },
-      markers: [{
-        latitude: 45.513752,
-        longitude: -122.661654,
-        title: 'Howe is here!',
-        subtitle: 'Come see us!',
-        description: 'Come see us!'
-      }]
-    }
-  }
-
   render() {
-    <View style={styles.mapContainer}>
+    return <View style={styles.mapContainer}>
       <MapView
           style={styles.map}
           region={{
-            latitude: this.state.position.coords.latitude,
+            latitude: 45.513752,
             latitudeDelta: 0.001,
-            longitude: this.state.position.coords.longitude,
+            longitude: 122.661654,
             longitudeDelta: 0.001
           }}
-          type="MapView"
-          ref="theMap"
-          annotations={this.state.markers}
+          type='MapView'
+          ref='theMap'
+
       >
       </MapView>
     </View>
-  }
-
-
-  componentDidMount() {
-    navigator.geolocation.getCurrentPosition(
-        (position) => {
-          this.setState({
-            position: {
-              coords: {
-                latitude: parseFloat(position.coords.latitude),
-                longitude: parseFloat(position.coords.longitude)
-              }
-            },
-            markers: [{
-              latitude: parseFloat(position.coords.latitude),
-              longitude: parseFloat(position.coords.longitude)
-            }]
-          });
-        },
-        (error) => alert(error.message),
-        {enableHighAccuracy: true, timeout: 20000, maximumAge: 1000}
-    );
-    navigator.geolocation.watchPosition((position) => {
-      this.setState({
-        position: {
-          coords: {
-            latitude: parseFloat(position.coords.latitude),
-            longitude: parseFloat(position.coords.longitude)
-          }
-        },
-        markers: [{
-          latitude: parseFloat(position.coords.latitude),
-          longitude: parseFloat(position.coords.longitude)
-        }]
-      });
-      ;
-    });
   }
 };
 

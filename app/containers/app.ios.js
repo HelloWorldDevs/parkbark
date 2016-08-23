@@ -7,11 +7,10 @@ import {
     TouchableHighlight
 } from 'react-native';
 import Map from '../components/map';
-import makeStore from '../reducers/store';
-import reducer from '../reducers/reducer';
+
+
 
 export default class App extends Component {
-
   render() {
     return (
         <View style={styles.container}>
@@ -22,7 +21,7 @@ export default class App extends Component {
           </View>
           <Map />
           <Text style={styles.coords}>
-            {this.state.position.coords.latitude}, {this.state.position.coords.longitude}
+            {/*{this.state.position.coords.latitude}, {this.state.position.coords.longitude}*/}
           </Text>
           <View style={styles.buttonWrapper}>
             {this.findParks()}
@@ -44,28 +43,28 @@ export default class App extends Component {
     </TouchableHighlight>
   }
 
-  _onPressButton(){
-    fetch('', {
-      method: 'POST',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        'location_lat': this.state.position.coords.latitude,
-        'location_lat': this.state.position.coords.longitude
-      })
-    })
-        .then(function(res) {
-          return res.json();
-        })
-        .then(function(resJson) {
-          console.log(resJson);
-        })
-        .catch((error) => {
-          console.error(error);
-        });
-  }
+  // _onPressButton(){
+  //   fetch('', {
+  //     method: 'POST',
+  //     headers: {
+  //       'Accept': 'application/json',
+  //       'Content-Type': 'application/json'
+  //     },
+  //     body: JSON.stringify({
+  //       'location_lat': this.state.position.coords.latitude,
+  //       'location_lat': this.state.position.coords.longitude
+  //     })
+  //   })
+  //       .then(function(res) {
+  //         return res.json();
+  //       })
+  //       .then(function(resJson) {
+  //         console.log(resJson);
+  //       })
+  //       .catch((error) => {
+  //         console.error(error);
+  //       });
+  // }
 };
 
 
