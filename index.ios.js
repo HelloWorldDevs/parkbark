@@ -4,7 +4,9 @@
  * @flow
  */
 import { AppRegistry} from 'react-native';
-import App from "./app/containers/app";
+import Main from "./app/index";
 
 
-AppRegistry.registerComponent('parkBark', () => App);
+AppRegistry.registerComponent('parkBark', () => Main);
+
+

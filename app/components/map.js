@@ -4,30 +4,13 @@ import {
     MapView,
     StyleSheet
 } from 'react-native';
-import makeStore from '../redux/store';
-import reducer from '../redux/reducer';
+import { connect } from 'react-redux';
 
-const store = makeStore(reducer);
 
-store.dispatch({
-  type: 'SET_LOCATION',
-  state: {
-    coords: {
-      latitude: 45.513752,
-      longitude: -122.661654
-    },
-    markers: {
-      latitude: 45.513752,
-      longitude: -122.661654
-    }
+class Map extends Component {
+  log(){
+    console.log(this.props);
   }
-});
-
-console.log(store.getState());
-console.log(store.get(location.coords.markers));
-
-
-export default class Map extends Component {
   render() {
     return <View style={styles.mapContainer}>
       <MapView
@@ -44,6 +27,9 @@ export default class Map extends Component {
       >
       </MapView>
     </View>
+  }
+  componentDidMount() {
+    this.log();
   }
 };
 
@@ -71,3 +57,12 @@ var styles = StyleSheet.create({
   },
 })
 
+
+const mapStateToProps = (state) => {
+  return {
+    coords: state.get('coords'),
+    markers: state.get('markers')
+  }
+}
+
+export default connect(mapStateToProps)(Map);
