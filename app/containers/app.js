@@ -3,7 +3,6 @@ import {
     StyleSheet,
     Text,
     View,
-    MapView,
     TouchableHighlight
 } from 'react-native';
 import Map from '../components/map';
@@ -21,7 +20,7 @@ export default class App extends Component {
           </View>
           <Map />
           <Text style={styles.coords}>
-            {/*{this.state.position.coords.latitude}, {this.state.position.coords.longitude}*/}
+            {/*{this.props.location.coords.latitude}, {this.props.location.coords.longitude}*/}
           </Text>
           <View style={styles.buttonWrapper}>
             {this.findParks()}
@@ -43,28 +42,26 @@ export default class App extends Component {
     </TouchableHighlight>
   }
 
-  // _onPressButton(){
-  //   fetch('', {
-  //     method: 'POST',
-  //     headers: {
-  //       'Accept': 'application/json',
-  //       'Content-Type': 'application/json'
-  //     },
-  //     body: JSON.stringify({
-  //       'location_lat': this.state.position.coords.latitude,
-  //       'location_lat': this.state.position.coords.longitude
-  //     })
-  //   })
-  //       .then(function(res) {
-  //         return res.json();
-  //       })
-  //       .then(function(resJson) {
-  //         console.log(resJson);
-  //       })
-  //       .catch((error) => {
-  //         console.error(error);
-  //       });
-  // }
+  _onPressButton(){
+    fetch('http://parkbark-api.bfdig.com/parks', {
+      method: 'get',
+      mode: 'cors',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      }
+    })
+        .then(function(res) {
+          return res.json();
+        })
+        .then(function(resJson) {
+          console.log(resJson);
+        })
+        .catch((error) => {
+          console.error(error);
+        })
+        .done();
+  }
 };
 
 

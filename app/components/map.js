@@ -9,24 +9,26 @@ import { connect } from 'react-redux';
 
 class Map extends Component {
   log(){
-    console.log(this.props);
+    console.log(this.props.location);
   }
   render() {
-    return <View style={styles.mapContainer}>
+    return (
+      <View style={styles.mapContainer}>
       <MapView
           style={styles.map}
           region={{
-            latitude: 45.513752,
+            latitude: this.props.location.coords.latitude,
             latitudeDelta: 0.001,
-            longitude: 122.661654,
+            longitude: this.props.location.coords.latitude,
             longitudeDelta: 0.001
           }}
           type='MapView'
           ref='theMap'
-
+          annotations={this.props.location.markers}
       >
       </MapView>
     </View>
+    )
   }
   componentDidMount() {
     this.log();
@@ -60,8 +62,7 @@ var styles = StyleSheet.create({
 
 const mapStateToProps = (state) => {
   return {
-    coords: state.get('coords'),
-    markers: state.get('markers')
+    location: state.get('location'),
   }
 }
 

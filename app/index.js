@@ -6,7 +6,9 @@ import {Provider} from 'react-redux';
 import makeStore from './redux/store';
 import reducer from './redux/reducer';
 
-const store = makeStore(reducer);
+const store = makeStore(
+    reducer
+);
 
 store.dispatch({
   type: 'SET_LOCATION',
@@ -15,21 +17,26 @@ store.dispatch({
       latitude: 45.513752,
       longitude: -122.661654
     },
-    markers: {
+    markers: [{
       latitude: 45.513752,
-      longitude: -122.661654
-    }
+      longitude: -122.661654,
+      title: 'ParkBark Start Location',
+      subtitle: 'NXT Lab'
+    }]
   }
 });
 
+const AppProvider = (
+    <Provider store={store}>
+      <App />
+    </Provider>
+);
 
 
 class Main extends Component {
   render() {
     return (
-      <Provider store={store}>
-        <App />
-      </Provider>
+        AppProvider
     )
   }
 }
