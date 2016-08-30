@@ -7,7 +7,6 @@
   },
   "dependencies": {
     "immutable": "^3.8.1",
-    "leaflet": "^0.7.7",
     "react": "15.2.1",
     "react-native": "0.31.0",
     "react-native-maps": "^0.7.1",
