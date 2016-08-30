@@ -8,9 +8,6 @@ import { connect } from 'react-redux';
 
 
 class Map extends Component {
-  log(){
-    console.log(this.props.location);
-  }
   render() {
     return (
       <View style={styles.mapContainer}>
@@ -19,7 +16,7 @@ class Map extends Component {
           region={{
             latitude: this.props.location.coords.latitude,
             latitudeDelta: 0.001,
-            longitude: this.props.location.coords.latitude,
+            longitude: this.props.location.coords.longitude,
             longitudeDelta: 0.001
           }}
           type='MapView'
@@ -29,9 +26,6 @@ class Map extends Component {
       </MapView>
     </View>
     )
-  }
-  componentDidMount() {
-    this.log();
   }
 };
 

@@ -2,10 +2,10 @@ import React, { Component } from 'react';
 import {
     StyleSheet,
     Text,
-    View,
-    TouchableHighlight
+    View
 } from 'react-native';
 import Map from '../components/map';
+import FindParksButton from '../components/find_parks_button';
 
 
 
@@ -20,47 +20,10 @@ export default class App extends Component {
           </View>
           <Map />
           <Text style={styles.coords}>
-            {/*{this.props.location.coords.latitude}, {this.props.location.coords.longitude}*/}
           </Text>
-          <View style={styles.buttonWrapper}>
-            {this.findParks()}
-          </View>
+          <FindParksButton/>
         </View>
     );
-  }
-
-
-  findParks(){
-    return <TouchableHighlight
-        style={styles.button}
-        underlayColor="gray"
-        onPress={this._onPressButton}>
-      <Text style={{textAlign: 'center', fontWeight: 'bold'}}>
-        Search
-        Parks
-      </Text>
-    </TouchableHighlight>
-  }
-
-  _onPressButton(){
-    fetch('http://parkbark-api.bfdig.com/parks', {
-      method: 'get',
-      mode: 'cors',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      }
-    })
-        .then(function(res) {
-          return res.json();
-        })
-        .then(function(resJson) {
-          console.log(resJson);
-        })
-        .catch((error) => {
-          console.error(error);
-        })
-        .done();
   }
 };
 
@@ -90,35 +53,10 @@ var styles = StyleSheet.create({
     textAlign: 'center',
     justifyContent: 'center',
     color: '#4f4f4f'
-    // borderWidth: 1,
-    // borderColor: 'orange'
-    // marginTop: 20,
   },
   coords: {
-    // fontWeight: 'bold',
     fontSize: 20,
-    // color: '#dddddd',
     textAlign: 'center',
-    // alignSelf: 'flex-end',
     marginBottom: 24
   },
-  button: {
-    borderWidth: 1,
-    borderColor: '#1095ff',
-    height: 75,
-    width: 75,
-    borderRadius: 50,
-    justifyContent: 'center',
-    alignItems: 'center'
-  },
-  buttonWrapper: {
-    flex: 1,
-    // flexDirection: 'row',
-    margin: 5,
-    alignSelf: 'stretch',
-    justifyContent: 'space-around',
-    alignItems: 'center',
-    backgroundColor: '#e5e5e5',
-    borderRadius: 6,
-  }
 });
