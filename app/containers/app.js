@@ -4,8 +4,10 @@ import {
     Text,
     View
 } from 'react-native';
-import Map from '../components/map';
+import Map from './map';
 import FindParksButton from '../components/find_parks_button';
+import { connect } from 'react-redux';
+import {fetchParksAction} from '../src/core';
 
 
 
@@ -21,11 +23,20 @@ export default class App extends Component {
           <Map />
           <Text style={styles.coords}>
           </Text>
-          <FindParksButton/>
+          <FindParksButton fetchParks={this.fetchParks.bind(this)}/>
         </View>
     );
   }
+
+  fetchParks() {
+    console.log(this.props);
+    fetchParksAction().done((state) => {
+      this.props.dispatch({type: 'UPDATE_ANNOTATIONS', state: state});
+      console.log(this.props);
+    });
+  }
 };
+
 
 
 var styles = StyleSheet.create({
@@ -60,3 +71,13 @@ var styles = StyleSheet.create({
     marginBottom: 24
   },
 });
+
+
+const mapStateToProps = (state) => {
+  return {
+    coords: state.getIn(['location', 'coords']),
+    markers: state.getIn(['location', 'markers'])
+  };
+}
+
+export default connect(mapStateToProps)(App);

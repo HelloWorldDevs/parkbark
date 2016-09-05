@@ -2,28 +2,33 @@
 
 import React, { Component } from 'react';
 import App from './containers/app';
+import { Map } from 'immutable';
 import {Provider} from 'react-redux';
-import makeStore from './redux/store';
+import {applyMiddleware, createStore} from 'redux';
+// import makeStore from './redux/store';
 import reducer from './redux/reducer';
+import thunk from 'redux-thunk';
 
-const store = makeStore(
+const store = createStore(
     reducer
+    // applyMiddleware(thunk)
 );
 
 store.dispatch({
   type: 'SET_LOCATION',
-  state: {
-    coords: {
+  state : Map ({
+    coords:{
       latitude: 45.513752,
-      longitude: -122.661654
+      longitude: -122.661654,
+      latitudeDelta: .1,
+      longitudeDelta: .1
     },
     markers: [{
       latitude: 45.513752,
       longitude: -122.661654,
-      title: 'ParkBark Start Location',
-      subtitle: 'NXT Lab'
+      title: 'NXT Lab',
     }]
-  }
+  })
 });
 
 const AppProvider = (

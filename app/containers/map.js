@@ -13,15 +13,10 @@ class Map extends Component {
       <View style={styles.mapContainer}>
       <MapView
           style={styles.map}
-          region={{
-            latitude: this.props.location.coords.latitude,
-            latitudeDelta: 0.001,
-            longitude: this.props.location.coords.longitude,
-            longitudeDelta: 0.001
-          }}
+          region={this.props.coords}
           type='MapView'
           ref='theMap'
-          annotations={this.props.location.markers}
+          annotations={this.props.markers}
       >
       </MapView>
     </View>
@@ -56,7 +51,8 @@ var styles = StyleSheet.create({
 
 const mapStateToProps = (state) => {
   return {
-    location: state.get('location'),
+    coords: state.getIn(['location', 'coords']),
+    markers: state.getIn(['location', 'markers'])
   }
 }
 

@@ -7,9 +7,8 @@ import {
 } from 'react-native';
 
 
-
 export default class FindParksButton extends Component {
-  render(){
+  render() {
     return (
         <View style={styles.buttonWrapper}>
           {this.parksButton()}
@@ -17,39 +16,21 @@ export default class FindParksButton extends Component {
     )
   }
 
-  parksButton(){
-   return <TouchableHighlight
-            style={styles.button}
-            underlayColor="gray"
-            onPress={this._fetchParks}>
-             <Text style={{textAlign: 'center', fontWeight: 'bold'}}>
-               Search
-               Parks
-             </Text>
-          </TouchableHighlight>
+  parksButton() {
+    return <TouchableHighlight
+        style={styles.button}
+        underlayColor="gray"
+        onPress={this.props.fetchParks}>
+      <Text style={{textAlign: 'center', fontWeight: 'bold'}}>
+        Search
+        Parks
+      </Text>
+    </TouchableHighlight>
   }
 
-  _fetchParks(){
-    fetch('http://parkbark-api.bfdig.com/parks', {
-      method: 'get',
-      mode: 'cors',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      }
-    })
-        .then(function(res) {
-          return res.json();
-        })
-        .then(function(resJson) {
-          console.log(resJson);
-        })
-        .catch((error) => {
-          console.error(error);
-        })
-        .done();
-  }
 }
+
+
 
 var styles = StyleSheet.create({
   button: {
@@ -72,4 +53,6 @@ var styles = StyleSheet.create({
     borderRadius: 6,
   }
 })
+
+
 
