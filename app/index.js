@@ -24,9 +24,12 @@ store.dispatch({
       longitudeDelta: .1
     },
     markers: [{
-      latitude: 45.513752,
-      longitude: -122.661654,
+      latlng: {
+        latitude:45.513752,
+        longitude: -122.661654
+      },
       title: 'NXT Lab',
+      description: 'Here we are at HelloWorld building parkBark!'
     }]
   })
 });

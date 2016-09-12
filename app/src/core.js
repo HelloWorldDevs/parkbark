@@ -7,7 +7,7 @@ export function setLocations(state, locations) {
 }
 
 export function updateAnnotations(state, newState) {
-  console.log(newState);
+  // console.log(newState);
   return state.updateIn(['location','markers'], 0,  markers => markers = newState);
 }
 
@@ -25,11 +25,16 @@ export function fetchParksAction(){
         return res.json();
       })
       .then(function(resJson) {
+        console.log(resJson);
         var markers = [];
         resJson.forEach((item)=> {
           var marker = {};
-            marker.latitude = parseFloat(item.field_park_address.split(',')[0]);
-            marker.longitude = parseFloat(item.field_park_address.split(',')[1]);
+            var latitude = parseFloat(item.field_park_address.split(',')[0]);
+            var longitude = parseFloat(item.field_park_address.split(',')[1]);
+            marker.latlng = {
+              latitude: latitude,
+              longitude: longitude
+            }
             marker.title = item.title;
             markers.push(marker);
         })

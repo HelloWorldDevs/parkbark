@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import {
     View,
-    MapView,
     StyleSheet
 } from 'react-native';
 import { connect } from 'react-redux';
+import MapView from 'react-native-maps';
 
 
 class Map extends Component {
@@ -13,11 +13,15 @@ class Map extends Component {
       <View style={styles.mapContainer}>
       <MapView
           style={styles.map}
-          region={this.props.coords}
-          type='MapView'
-          ref='theMap'
-          annotations={this.props.markers}
+          initialRegion={this.props.coords}
       >
+        {this.props.markers.map(marker => (
+            <MapView.Marker
+                coordinate={marker.latlng}
+                title={marker.title}
+                description={marker.description}
+            />
+        ))}
       </MapView>
     </View>
     )

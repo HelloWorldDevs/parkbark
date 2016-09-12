@@ -29,10 +29,10 @@ export default class App extends Component {
   }
 
   fetchParks() {
-    console.log(this.props);
+    // console.log(this.props);
     fetchParksAction().done((state) => {
       this.props.dispatch({type: 'UPDATE_ANNOTATIONS', state: state});
-      console.log(this.props);
+      // console.log(this.props);
     });
   }
 };
