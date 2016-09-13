@@ -34,7 +34,7 @@ class Map extends Component {
 
 
   onRegionChangeComplete(region) {
-    console.log(region);
+    // console.log(region);
   }
 };
 

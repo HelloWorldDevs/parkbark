@@ -3,7 +3,6 @@ import { View, Image, StyleSheet , Text} from 'react-native';
 import Button from './common/button.js'
 
 
-
 export default React.createClass ({
   render:function() {
     return (
