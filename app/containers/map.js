@@ -17,7 +17,7 @@ class Map extends Component {
         <MapView
             style={styles.map}
             initialRegion={this.props.coords}
-            onRegionChangeComplete={this.onRegionChangeComplete}
+            onRegionChangeComplete={this.onRegionChangeComplete.bind(this)}
         >
           {this.props.markers.map(marker => (
               <MapView.Marker
@@ -32,9 +32,12 @@ class Map extends Component {
     )
   }
 
-
   onRegionChangeComplete(region) {
-    // console.log(region);
+    this.props.dispatch({
+      type: 'UPDATE_REGION',
+      state: region
+    })
+    console.log(this.props.coords);
   }
 };
 

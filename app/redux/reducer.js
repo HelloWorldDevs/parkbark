@@ -1,6 +1,5 @@
 import {Map} from 'immutable';
-import {setLocations, setNavigatorProps, updateAnnotations} from '../src/core';
-
+import {setLocations, updateAnnotations, updateRegion} from '../src/core';
 
 
 export default function(state = Map(), action) {
@@ -11,6 +10,8 @@ export default function(state = Map(), action) {
         return setNavigatorProps(state, action.state);
     case 'UPDATE_ANNOTATIONS':
       return updateAnnotations(state, action.state);
+    case 'UPDATE_REGION':
+      return updateRegion(state, action.state);
   }
   return state;
 }

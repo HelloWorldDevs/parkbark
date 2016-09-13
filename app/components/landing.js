@@ -24,7 +24,6 @@ export default React.createClass ({
   },
 
   onNextPress: function() {
-    //navigate to next component
     this.props.navigator.push({name: 'map'});
   }
 })

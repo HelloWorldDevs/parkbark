@@ -17,6 +17,10 @@ export function updateAnnotations(state, newState) {
   return state.updateIn(['location','markers'], 0,  markers => markers = newState);
 }
 
+export function updateRegion(state, newState) {
+  return state.updateIn(['location', 'coords'], 0, coords => coords = newState);
+}
+
 
 export function fetchParksAction(){
   // return (dispatch, getState) => {
