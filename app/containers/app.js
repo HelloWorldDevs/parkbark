@@ -17,20 +17,11 @@ import Navigator from '../navigation/navigator';
 // };
 
 
-export default class App extends Component {
-  renderScene(route, navigator) {
-    var Component = ROUTES[route.name];
-    return <Component route={route} navigator={navigator} />
-  }
+class App extends Component {
 
   render() {
     return (
         <Navigator />
-        // <Navigator
-        //     initialRoute={{name: 'landing'}}
-        //     renderScene={this.renderScene}
-        //     configureScene={()=> {return Navigator.SceneConfigs.FloatFromRight}}
-        // />
         // <View style={styles.container}>
         //   <View style={styles.titleWrapper}>
         //     <Text style={styles.title} type="text">
@@ -45,6 +36,8 @@ export default class App extends Component {
     );
   }
 
+
+
   fetchParks() {
     // console.log(this.props);
     fetchParksAction().done((state) => {
@@ -53,7 +46,7 @@ export default class App extends Component {
     });
   }
   componentDidMount(){
-    console.log(this.props);
+    // console.log(this.props);
   }
 };
 

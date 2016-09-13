@@ -6,11 +6,11 @@ export function setLocations(state, locations) {
   return state.set('location', locations);
 }
 
-export function setNavigatorProps(state, navigatorProps){
-  console.log('inside of setRoutes');
-  console.log(navigatorProps);
-  return state.merge({navigator_props: navigatorProps});
-}
+//TODO set navigator props and routes to redux store?
+// export function setNavigatorProps(state, navigatorProps){
+//   console.log('inside of setRoutes');
+//   return state.set('navigator_props', navigatorProps);
+// }
 
 export function updateAnnotations(state, newState) {
   // console.log(newState);

@@ -2,11 +2,8 @@ import Map from '../containers/map';
 import Landing from '../components/landing';
 import React, { Component } from 'react';
 import { Navigator } from 'react-native';
-import makeStore from '../redux/store';
-// import reducer from '../redux/reducer';
 import { connect } from 'react-redux';
 
-const store = makeStore();
 
 var ROUTES = {
   landing: Landing,
@@ -14,20 +11,13 @@ var ROUTES = {
 };
 
 
-export default class NavigatorComponent extends Component {
-  renderScene(route, navigator) {
-    store.dispatch({
-      type: 'SET_NAVIGATOR_PROPS',
-      state: {
-        navigator: navigator,
-        route: route
-      }
-    });
+export default React.createClass ({
+  renderScene: function(route, navigator) {
     var Component = ROUTES[route.name];
-    return <Component />
-  }
+    return <Component route={route} navigator={navigator} />
+  },
 
-  render() {
+  render: function() {
     return (
         <Navigator
             initialRoute={{name: 'landing'}}
@@ -37,21 +27,36 @@ export default class NavigatorComponent extends Component {
             }}
         />
     )
-  }
-  componentDidMount(){
+  },
+
+
+  componentDidMount: function(){
     console.log(this.props);
   }
-}
+});
 
 
-const mapStateToProps = (state) => {
-  return {
-    navigator: state.getIn(['navigator_props', 'navigator']),
-    route: state
-  };
-}
 
-export default connect(mapStateToProps)(NavigatorComponent);
+//TODO Dispatch Navigator Properties to Redux Store?
+
+// setNavigatorProps(route, navigator) {
+//   this.props.dispatch({
+//     type: 'SET_NAVIGATOR_PROPS',
+//     state: {
+//       navigator: navigator,
+//       route: route
+//     }
+//   });
+// }
+
+
+// const mapStateToProps = (state) => {
+//   return {
+//     navigator_props: state.get('navigator_props')
+//   };
+// }
+//
+// export default connect(mapStateToProps)(NavigatorComponent);
 
 
 

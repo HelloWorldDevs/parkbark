@@ -4,8 +4,8 @@ import Button from './common/button.js'
 
 
 
-export default class Landing extends Component {
-  render() {
+export default React.createClass ({
+  render:function() {
     return (
         <View style={styles.container}>
           <View style={styles.imageContainer}>
@@ -22,14 +22,13 @@ export default class Landing extends Component {
           </View>
         </View>
     );
-  }
+  },
 
-  onNextPress() {
+  onNextPress: function() {
     //navigate to next component
-    // this.props.navigator.push({name: 'map'});
-    console.log(this);
+    this.props.navigator.push({name: 'map'});
   }
-}
+})
 
 
 var styles = StyleSheet.create({
