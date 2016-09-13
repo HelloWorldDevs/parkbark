@@ -6,6 +6,7 @@ import {
 import { connect } from 'react-redux';
 import MapView from 'react-native-maps';
 import SearchField from '../components/search_field.js';
+import {updateRegionMarkersAction} from '../src/core';
 
 
 class Map extends Component {
@@ -19,8 +20,9 @@ class Map extends Component {
             initialRegion={this.props.coords}
             onRegionChangeComplete={this.onRegionChangeComplete.bind(this)}
         >
-          {this.props.markers.map(marker => (
+          {this.props.markers.map((marker, i )=> (
               <MapView.Marker
+                  key={i}
                   coordinate={marker.latlng}
                   title={marker.title}
                   description={marker.description}
@@ -33,11 +35,18 @@ class Map extends Component {
   }
 
   onRegionChangeComplete(region) {
-    this.props.dispatch({
-      type: 'UPDATE_REGION',
-      state: region
-    })
-    console.log(this.props.coords);
+    setTimeout(()=>{
+      this.props.dispatch({
+        type: 'UPDATE_REGION',
+        state: region
+      })
+      var DIST = this.props.coords.latitudeDelta * 69;
+      var LAT = this.props.coords.latitude;
+      var LNG = this.props.coords.longitude;
+      updateRegionMarkersAction(LAT , LNG, DIST).done((state) => {
+        this.props.dispatch({type: 'UPDATE_ANNOTATIONS', state: state});
+      });
+    }, 1500);
   }
 };
 

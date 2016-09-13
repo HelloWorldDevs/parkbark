@@ -55,3 +55,39 @@ export function fetchParksAction(){
       })
   // };
 }
+
+
+export function updateRegionMarkersAction(LAT , LNG, DIST){
+  // return (dispatch, getState) => {
+  return fetch('http://parkbark-api.bfdig.com/parks?loc='+ LAT + ',' + LNG + '<=' + DIST + 'miles', {
+    method: 'get',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    }
+  })
+      .then(function(res) {
+        return res.json();
+      })
+      .then(function(resJson) {
+        console.log(resJson);
+        var markers = [];
+        resJson.forEach((item)=> {
+          var marker = {};
+          var latitude = parseFloat(item.field_park_address.split(',')[0]);
+          var longitude = parseFloat(item.field_park_address.split(',')[1]);
+          marker.latlng = {
+            latitude: latitude,
+            longitude: longitude
+          }
+          marker.title = item.title;
+          markers.push(marker);
+        })
+        console.log(markers);
+        return markers;
+      })
+      .catch((error) => {
+        console.error(error);
+      })
+  // };
+}

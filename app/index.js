@@ -19,8 +19,8 @@ store.dispatch({
     coords:{
       latitude: 45.513752,
       longitude: -122.661654,
-      latitudeDelta: .1,
-      longitudeDelta: .1
+      latitudeDelta: .08,
+      longitudeDelta: .08
     },
     markers: [{
       latlng: {
