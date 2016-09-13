@@ -8,23 +8,40 @@ import Map from './map';
 import FindParksButton from '../components/find_parks_button';
 import { connect } from 'react-redux';
 import {fetchParksAction} from '../src/core';
+import Landing from '../components/landing';
+import Navigator from '../navigation/navigator';
 
+// var ROUTES = {
+//   landing: Landing,
+//   map: Map
+// };
 
 
 export default class App extends Component {
+  renderScene(route, navigator) {
+    var Component = ROUTES[route.name];
+    return <Component route={route} navigator={navigator} />
+  }
+
   render() {
     return (
-        <View style={styles.container}>
-          <View style={styles.titleWrapper}>
-            <Text style={styles.title} type="text">
-              Park Bark
-            </Text>
-          </View>
-          <Map />
-          <Text style={styles.coords}>
-          </Text>
-          <FindParksButton fetchParks={this.fetchParks.bind(this)}/>
-        </View>
+        <Navigator />
+        // <Navigator
+        //     initialRoute={{name: 'landing'}}
+        //     renderScene={this.renderScene}
+        //     configureScene={()=> {return Navigator.SceneConfigs.FloatFromRight}}
+        // />
+        // <View style={styles.container}>
+        //   <View style={styles.titleWrapper}>
+        //     <Text style={styles.title} type="text">
+        //       Park Bark
+        //     </Text>
+        //   </View>
+        //   <Map />
+        //   <Text style={styles.coords}>
+        //   </Text>
+        //   <FindParksButton fetchParks={this.fetchParks.bind(this)}/>
+        // </View>
     );
   }
 
@@ -34,6 +51,9 @@ export default class App extends Component {
       this.props.dispatch({type: 'UPDATE_ANNOTATIONS', state: state});
       // console.log(this.props);
     });
+  }
+  componentDidMount(){
+    console.log(this.props);
   }
 };
 

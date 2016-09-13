@@ -6,6 +6,12 @@ export function setLocations(state, locations) {
   return state.set('location', locations);
 }
 
+export function setNavigatorProps(state, navigatorProps){
+  console.log('inside of setRoutes');
+  console.log(navigatorProps);
+  return state.merge({navigator_props: navigatorProps});
+}
+
 export function updateAnnotations(state, newState) {
   // console.log(newState);
   return state.updateIn(['location','markers'], 0,  markers => markers = newState);

@@ -14,6 +14,7 @@ class Map extends Component {
       <MapView
           style={styles.map}
           initialRegion={this.props.coords}
+          onRegionChangeComplete={this.onRegionChangeComplete}
       >
         {this.props.markers.map(marker => (
             <MapView.Marker
@@ -25,6 +26,11 @@ class Map extends Component {
       </MapView>
     </View>
     )
+  }
+
+
+  onRegionChangeComplete(region) {
+    console.log(region);
   }
 };
 
