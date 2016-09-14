@@ -1,5 +1,5 @@
 import {Map} from 'immutable';
-import {setLocations, updateAnnotations, updateRegion} from '../src/core';
+import {setLocations, updateSearch, updateAnnotations, updateRegion} from '../src/core';
 
 
 export default function(state = Map(), action) {
@@ -12,6 +12,8 @@ export default function(state = Map(), action) {
       return updateAnnotations(state, action.state);
     case 'UPDATE_REGION':
       return updateRegion(state, action.state);
+    case 'UPDATE_SEARCH':
+      return updateSearch(state, action.state);
   }
   return state;
 }

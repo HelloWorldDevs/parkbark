@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Map } from 'immutable';
 import { View, Image, StyleSheet, Text, TextInput, TouchableOpacity} from 'react-native';
 import { connect } from 'react-redux';
 import {fetchParksAction} from '../src/core';
@@ -10,9 +11,20 @@ class SearchFieldComponent extends Component {
     return (
         <View style={styles.fieldContainer}>
           {this.searchParksInput()}
-          <TextInput placeholder="Search for dog parks near..." style={styles.input}/>
+          <TextInput onChangeText={this.handleChange.bind(this)} placeholder="Address, Zip, City" style={styles.input}/>
         </View>
     )
+  }
+
+  handleChange(text) {
+    console.log(text);
+    this.props.dispatch({
+      type: 'UPDATE_SEARCH',
+      state: Map({
+        search: text
+      })
+    });
+    console.log(this.props);
   }
 
   searchParksInput() {
@@ -24,9 +36,10 @@ class SearchFieldComponent extends Component {
   }
 
   fetchParks() {
-    fetchParksAction().done((state) => {
-      this.props.dispatch({type: 'UPDATE_ANNOTATIONS', state: state});
-    });
+    console.log(this.props);
+    // fetchLocationAction().done((state) => {
+    //   this.props.dispatch({type: 'UPDATE_REGION', state: state});
+    // });
   }
 }
 
@@ -58,6 +71,8 @@ var styles = StyleSheet.create({
 
 const mapStateToProps = (state) => {
   return {
+       state: state,
+       search: state.getIn(['search', 'search'])
     // coords: state.getIn(['location', 'coords']),
     // markers: state.getIn(['location', 'markers'])
   };

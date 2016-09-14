@@ -1,5 +1,5 @@
 import {Map} from 'immutable';
-
+import {googleapi} from '../api/googleapi.js';
 
 export function setLocations(state, locations) {
   console.log('inside of setLocation');
@@ -21,6 +21,10 @@ export function updateRegion(state, newState) {
   return state.updateIn(['location', 'coords'], 0, coords => coords = newState);
 }
 
+export function updateSearch(state, search){
+  console.log(search)
+  return state.set('search', search);
+}
 
 export function fetchParksAction(){
   // return (dispatch, getState) => {
@@ -35,7 +39,7 @@ export function fetchParksAction(){
         return res.json();
       })
       .then(function(resJson) {
-        console.log(resJson);
+        // console.log(resJson);
         var markers = [];
         resJson.forEach((item)=> {
           var marker = {};
@@ -70,7 +74,7 @@ export function updateRegionMarkersAction(LAT , LNG, DIST){
         return res.json();
       })
       .then(function(resJson) {
-        console.log(resJson);
+        // console.log(resJson);
         var markers = [];
         resJson.forEach((item)=> {
           var marker = {};
@@ -83,11 +87,24 @@ export function updateRegionMarkersAction(LAT , LNG, DIST){
           marker.title = item.title;
           markers.push(marker);
         })
-        console.log(markers);
+        // console.log(markers);
         return markers;
       })
       .catch((error) => {
         console.error(error);
       })
   // };
+}
+
+export function fetchLocationAction(address, googleapi) {
+  return fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${address}&key=${googleapi}`)
+      .then(function(res) {
+        return res.json();
+      })
+      .then(function(resJson) {
+        console.log(resJson);
+      })
+      .catch((error) => {
+        console.error(error);
+      })
 }
