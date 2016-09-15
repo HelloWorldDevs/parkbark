@@ -1,37 +1,60 @@
 import React, { Component } from 'react';
-import { View, StyleSheet, Text, TextInput, TouchableOpacity } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import { connect } from 'react-redux';
 
-class Survey extends Component {
+import { Form, InputField } from 'react-native-form-generator';
+
+export default class Survey extends Component {
+    constructor(props){
+    super(props);
+    this.state = {
+      formData:{},
+    }
+  }
+  handleFormChange(formData){
+    this.setState({formData:formData})
+    this.props.onFormChange && this.props.onFormChange(formData);
+  }
+  handleFormFocus(e, component){
+    // console.log(e, component);
+  }
+
     render() {
+        console.log('state: ', this.state.formData);
         return (
-            <View style={styles.fieldContainer}>
-            <Text>Hello World</Text>
-            <TextInput />
-            </View>
+            <Form
+                ref='surveyForm'
+                onFocus={this.handleFormFocus.bind(this)}
+                onChange={this.handleFormChange.bind(this)}
+                style={styles.form}
+            >
+                <InputField
+                    multiline={true}
+                    ref='notes'
+                    placeholder='Notes'
+                />
+                <InputField
+                    ref='num_dogs'
+                    placeholder='Number of Dogs'
+                />
+            </Form>
         )
     }
 }
 
 var styles = StyleSheet.create({
-  fieldContainer: {
-    alignSelf: 'stretch',
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
-    borderWidth: 1,
-    borderColor: 'blue',
-    paddingTop: 10,
-    paddingBottom: 10
-  },
-  input: {
-    padding: 4,
-    height: 40,
-    borderColor: 'gray',
-    borderWidth: 1,
-    borderRadius: 5,
-    width: 300
-  }
-});
-
-export default (Survey);
+    form: {
+        flex: 0,
+        padding: 30,
+    },
+    close: {
+        marginTop: 30,
+        textAlign: 'right',
+        marginRight: 10,
+    },
+    container: {
+      flex: 1,
+      justifyContent: 'center',
+      padding: 20,
+    }
+})

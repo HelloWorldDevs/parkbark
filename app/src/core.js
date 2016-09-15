@@ -108,3 +108,33 @@ export function fetchLocationAction(address, googleapi) {
         console.error(error);
       })
 }
+
+export function sendSurveyResponses(deviceId, num_dogs, amenities, notes) {
+    fetch('http://parkbark-api.bfdig.com/entity/node', {
+        method: 'POST',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/hal+json',
+            'Authorization': 'Basic Og== '
+        },
+        body: JSON.stringify({
+            "_links": {
+            	"type": {
+            		"href":"http://parkbark-api.bfdig.com/rest/type/node/survey_responses"
+            	},
+            	"http://parkbark-api.bfdig.com/rest/relation/node/survey_responses/field_park_amenities": {
+            		"href": "http://parkbark-api.bfdig.com/taxonomy/term/1?_format=hal_json"
+            	}
+            },
+            "type":[{"target_id":"survey_responses"}],
+            "title":[{"value":"testing-RN"}],
+            "field_notes":[{"value":"How are you?"}],
+            "field_number_of_dogs":[{"value":5}],
+            "field_device_id":[{"value": "abc123"}],
+            "field_park_amenities": [
+            	{"target_id": "2"},
+            	{"target_id": "4"}
+            ]
+        })
+    })
+}

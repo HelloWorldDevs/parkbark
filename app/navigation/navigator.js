@@ -1,6 +1,6 @@
 import Map from '../containers/map';
 import Landing from '../components/landing';
-import Survey from '../components/survey'
+import Survey from '../components/survey';
 import React, { Component } from 'react';
 import { Navigator } from 'react-native';
 import { connect } from 'react-redux';
