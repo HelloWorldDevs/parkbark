@@ -33,11 +33,8 @@ var styles = StyleSheet.create({
 });
 
 //
-// const mapStateToProps = (state) => {
-//   return {
-//     coords: state.getIn(['location', 'coords']),
-//     markers: state.getIn(['location', 'markers'])
-//   };
-// }
-//
-// export default connect(mapStateToProps)(App);
+const mapStateToProps = (state) => {
+  return {};
+}
+
+export default connect(mapStateToProps)(App);

@@ -1,8 +1,7 @@
-import {Map} from 'immutable';
-import {googleapi} from '../api/googleapi.js';
 
 export function setLocations(state, locations) {
-  console.log('inside of setLocation');
+  // console.log('inside of setLocation');
+  // console.log(locations);
   return state.set('location', locations);
 }
 
@@ -13,7 +12,6 @@ export function setLocations(state, locations) {
 // }
 
 export function updateAnnotations(state, newState) {
-  // console.log(newState);
   return state.updateIn(['location','markers'], 0,  markers => markers = newState);
 }
 
@@ -22,8 +20,7 @@ export function updateRegion(state, newState) {
 }
 
 export function updateSearch(state, search){
-  console.log(search)
-  return state.set('search', search);
+  return state.merge({'search': search});
 }
 
 export function fetchParksAction(){
@@ -39,7 +36,6 @@ export function fetchParksAction(){
         return res.json();
       })
       .then(function(resJson) {
-        // console.log(resJson);
         var markers = [];
         resJson.forEach((item)=> {
           var marker = {};
@@ -87,7 +83,6 @@ export function updateRegionMarkersAction(LAT , LNG, DIST){
           marker.title = item.title;
           markers.push(marker);
         })
-        // console.log(markers);
         return markers;
       })
       .catch((error) => {
@@ -102,7 +97,12 @@ export function fetchLocationAction(address, googleapi) {
         return res.json();
       })
       .then(function(resJson) {
-        console.log(resJson);
+        var region = {};
+        region.latitude = resJson.results[0].geometry.location.lat;
+        region.longitude = resJson.results[0].geometry.location.lng;
+        region.latitudeDelta = .1;
+        region.longitudeDelta = .1;
+        return region;
       })
       .catch((error) => {
         console.error(error);

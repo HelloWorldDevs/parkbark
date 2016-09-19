@@ -2,7 +2,9 @@ import React, { Component } from 'react';
 import { Map } from 'immutable';
 import { View, Image, StyleSheet, Text, TextInput, TouchableOpacity} from 'react-native';
 import { connect } from 'react-redux';
-import {fetchParksAction} from '../src/core';
+import {fetchLocationAction} from '../src/core';
+import {googleapi} from '../api/googleapi.js';
+
 
 
 
@@ -17,14 +19,12 @@ class SearchFieldComponent extends Component {
   }
 
   handleChange(text) {
-    console.log(text);
     this.props.dispatch({
       type: 'UPDATE_SEARCH',
-      state: Map({
+      state: {
         search: text
-      })
+      }
     });
-    console.log(this.props);
   }
 
   searchParksInput() {
@@ -36,10 +36,9 @@ class SearchFieldComponent extends Component {
   }
 
   fetchParks() {
-    console.log(this.props);
-    // fetchLocationAction().done((state) => {
-    //   this.props.dispatch({type: 'UPDATE_REGION', state: state});
-    // });
+    fetchLocationAction(this.props.search, googleapi).done((state) => {
+      this.props.dispatch({type: 'UPDATE_REGION', state: state});
+    });
   }
 }
 
@@ -71,10 +70,7 @@ var styles = StyleSheet.create({
 
 const mapStateToProps = (state) => {
   return {
-       state: state,
        search: state.getIn(['search', 'search'])
-    // coords: state.getIn(['location', 'coords']),
-    // markers: state.getIn(['location', 'markers'])
   };
 }
 

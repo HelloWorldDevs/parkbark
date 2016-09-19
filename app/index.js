@@ -15,7 +15,7 @@ const store = makeStore();
 
 store.dispatch({
   type: 'SET_LOCATION',
-  state : Map ({
+  state : Map({
     coords:{
       latitude: 45.513752,
       longitude: -122.661654,

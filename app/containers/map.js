@@ -17,7 +17,7 @@ class Map extends Component {
         <View style={styles.mapContainer}>
         <MapView
             style={styles.map}
-            initialRegion={this.props.coords}
+            region={this.props.coords}
             onRegionChangeComplete={this.onRegionChangeComplete.bind(this)}
         >
           {this.props.markers.map((marker, i )=> (
@@ -26,6 +26,7 @@ class Map extends Component {
                   coordinate={marker.latlng}
                   title={marker.title}
                   description={marker.description}
+                  image={require('../img/marker_blue.png')}
               />
           ))}
         </MapView>
@@ -39,7 +40,7 @@ class Map extends Component {
       this.props.dispatch({
         type: 'UPDATE_REGION',
         state: region
-      })
+      });
       var DIST = this.props.coords.latitudeDelta * 69;
       var LAT = this.props.coords.latitude;
       var LNG = this.props.coords.longitude;
