@@ -1,4 +1,4 @@
-rootProject.name = 'parkBark'
+rootProject.name = 'parkbark'
 
 include ':app'
 include ':react-native-maps'

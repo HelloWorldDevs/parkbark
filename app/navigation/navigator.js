@@ -1,5 +1,6 @@
 import Map from '../containers/map';
 import Landing from '../components/landing';
+import Survey from '../components/survey';
 import React, { Component } from 'react';
 import { Navigator } from 'react-native';
 import { connect } from 'react-redux';
@@ -7,7 +8,8 @@ import { connect } from 'react-redux';
 
 var ROUTES = {
   landing: Landing,
-  map: Map
+  map: Map,
+  survey: Survey,
 };
 
 
@@ -54,7 +56,3 @@ export default React.createClass ({
 // }
 //
 // export default connect(mapStateToProps)(NavigatorComponent);
-
-
-
-

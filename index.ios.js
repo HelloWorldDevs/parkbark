@@ -7,6 +7,4 @@ import { AppRegistry} from 'react-native';
 import Main from "./app/index";
 
 
-AppRegistry.registerComponent('parkBark', () => Main);
-
-
+AppRegistry.registerComponent('parkbark', () => Main);
