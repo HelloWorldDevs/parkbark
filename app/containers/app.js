@@ -9,7 +9,7 @@ import Navigator from '../navigation/navigator';
 
 
 
-export default class App extends Component {
+class App extends Component {
 
   render() {
     return (
