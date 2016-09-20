@@ -109,7 +109,7 @@ export function fetchLocationAction(address, googleapi) {
       })
 }
 
-export function sendSurveyResponses(deviceId, num_dogs, amenities, notes) {
+export function sendSurveyResponses(formData) {
     fetch('http://parkbark-api.bfdig.com/entity/node', {
         method: 'POST',
         headers: {
@@ -127,14 +127,18 @@ export function sendSurveyResponses(deviceId, num_dogs, amenities, notes) {
             	}
             },
             "type":[{"target_id":"survey_responses"}],
-            "title":[{"value":"testing-RN"}],
-            "field_notes":[{"value":"How are you?"}],
-            "field_number_of_dogs":[{"value":5}],
-            "field_device_id":[{"value": "abc123"}],
+            "title":[{"value":"Testing from RN"}],
+            "field_notes":[{"value":formData.notes}],
+            "field_number_of_dogs":[{"value":formData.num_dogs}],
+            "field_device_id":[{"value": 'abc123'}],
             "field_park_amenities": [
-            	{"target_id": "2"},
-            	{"target_id": "4"}
+            	{"target_id": "3"},
+            	{"target_id":"2"}
             ]
         })
     })
+    .then((response) => response.json())
+    .then((responseData) => {
+    })
+    .done();
 }

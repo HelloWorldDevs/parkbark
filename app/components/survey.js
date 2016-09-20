@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { connect } from 'react-redux';
-
+import { sendSurveyResponses } from '../src/core';
+import { RNDeviceInfo } from 'react-native-device-info';
 import { Form, InputField } from 'react-native-form-generator';
 
 export default class Survey extends Component {
@@ -14,13 +15,16 @@ export default class Survey extends Component {
   handleFormChange(formData){
     this.setState({formData:formData})
     this.props.onFormChange && this.props.onFormChange(formData);
+    sendSurveyResponses(formData);
+    console.log('Data: ', formData);
   }
+
   handleFormFocus(e, component){
     // console.log(e, component);
   }
 
     render() {
-        console.log('state: ', this.state.formData);
+        // console.log('Device Unique: ', RNDeviceInfo.getUniqueID());
         return (
             <Form
                 ref='surveyForm'
