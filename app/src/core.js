@@ -133,6 +133,7 @@ export function sendSurveyResponses(formData) {
             "field_notes":[{"value":formData.notes}],
             "field_number_of_dogs":[{"value":formData.num_dogs}],
             "field_device_id":[{"value": 'abc123'}],
+            "field_park_address_suggested":[{"value": formData.suggested_park}],
             "field_park_amenities": [
             	{"target_id": "3"},
             	{"target_id":"2"}
@@ -141,6 +142,7 @@ export function sendSurveyResponses(formData) {
     })
     .then((response) => response.json())
     .then((responseData) => {
+        console.log(responseData)
     })
     .done();
 }
