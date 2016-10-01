@@ -12,53 +12,52 @@ export function setLocations(state, locations) {
 // }
 
 export function updateAnnotations(state, newState) {
-  return state.updateIn(['location','markers'], 0,  markers => markers = newState);
+  return state.updateIn(['location','parks'], 0,  parks => parks = newState);
 }
 
 export function updateRegion(state, newState) {
   return state.updateIn(['location', 'coords'], 0, coords => coords = newState);
 }
 
-export function updateSearch(state, search){
+export function updateSearch(state, search) {
   return state.merge({'search': search});
 }
 
-export function fetchParksAction(){
-  // return (dispatch, getState) => {
-  return fetch('http://parkbark-api.bfdig.com/parks', {
-    method: 'get',
-    headers: {
-      'Accept': 'application/json',
-      'Content-Type': 'application/json'
-    }
-  })
-      .then(function(res) {
-        return res.json();
-      })
-      .then(function(resJson) {
-        var markers = [];
-        resJson.forEach((item)=> {
-          var marker = {};
-            var latitude = parseFloat(item.field_park_address.split(',')[0]);
-            var longitude = parseFloat(item.field_park_address.split(',')[1]);
-            marker.latlng = {
-              latitude: latitude,
-              longitude: longitude
-            }
-            marker.title = item.title;
-            markers.push(marker);
-        })
-        return markers;
-      })
-      .catch((error) => {
-        console.error(error);
-      })
-  // };
-}
+// export function fetchParksAction() {
+//   // return (dispatch, getState) => {
+//   return fetch('http://parkbark-api.bfdig.com/parks', {
+//     method: 'get',
+//     headers: {
+//       'Accept': 'application/json',
+//       'Content-Type': 'application/json'
+//     }
+//   })
+//       .then(function(res) {
+//         return res.json();
+//       })
+//       .then(function(resJson) {
+//         var markers = [];
+//         resJson.forEach((item)=> {
+//           var marker = {};
+//             var latitude = parseFloat(item.field_park_address.split(',')[0]);
+//             var longitude = parseFloat(item.field_park_address.split(',')[1]);
+//             marker.latlng = {
+//               latitude: latitude,
+//               longitude: longitude
+//             }
+//             marker.title = item.title;
+//             markers.push(marker);
+//         })
+//         return markers;
+//       })
+//       .catch((error) => {
+//         console.error(error);
+//       })
+//   // };
+// }
 
 
-export function updateRegionMarkersAction(LAT , LNG, DIST){
-  // return (dispatch, getState) => {
+export function updateParksAction(LAT, LNG, DIST){
   return fetch('http://parkbark-api.bfdig.com/parks?loc='+ LAT + ',' + LNG + '<=' + DIST + 'miles', {
     method: 'get',
     headers: {
@@ -70,25 +69,28 @@ export function updateRegionMarkersAction(LAT , LNG, DIST){
         return res.json();
       })
       .then(function(resJson) {
-        // console.log(resJson);
-        var markers = [];
+        var parks = [];
         resJson.forEach((item)=> {
-          var marker = {};
+          var park = {};
+          park.title = item.title;
+          park.image = item.field_park_image;
+          park.address = item.field_park_address;
+          park.amenities = item.field_park_amenities;
           var latitude = parseFloat(item.field_park_address.split(',')[0]);
           var longitude = parseFloat(item.field_park_address.split(',')[1]);
-          marker.latlng = {
+          park.latlng = {
             latitude: latitude,
             longitude: longitude
           }
-          marker.title = item.title;
-          markers.push(marker);
+          park.distance = parseFloat(item.field_park_address_proximity).toFixed(1) + 'mi';
+          parks.push(park);
         })
-        return markers;
+        console.log(parks);
+        return parks;
       })
       .catch((error) => {
         console.error(error);
       })
-  // };
 }
 
 export function fetchLocationAction(address, googleapi) {

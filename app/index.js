@@ -22,7 +22,7 @@ store.dispatch({
       latitudeDelta: .1,
       longitudeDelta: .1
     },
-    markers: [{
+    parks: [{
       latlng: {
         latitude:45.513752,
         longitude: -122.661654

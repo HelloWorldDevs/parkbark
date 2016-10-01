@@ -6,7 +6,7 @@ import {
 import { connect } from 'react-redux';
 import MapView from 'react-native-maps';
 import SearchField from '../components/search_field.js';
-import {updateRegionMarkersAction} from '../src/core';
+import {updateParksAction} from '../src/core';
 import ParkList from '../components/ParkList.js';
 
 
@@ -27,16 +27,17 @@ class Map extends Component {
                   key={marker.title}
                   coordinate={marker.latlng}
                   title={marker.title}
-                  description={marker.description}
+                  description={marker.address + ' ' + marker.distance}
                   image={require('../img/marker_blue.png')}
               />
           ))}
         </MapView>
       </View>
-      <ParkList />
+        {this.parkListRender()}
     </View>
     )
   }
+
 
   regionUpdate(region) {
       this.props.dispatch({
@@ -51,11 +52,20 @@ class Map extends Component {
       var DIST = this.props.coords.latitudeDelta * 69;
       var LAT = this.props.coords.latitude;
       var LNG = this.props.coords.longitude;
-      updateRegionMarkersAction(LAT , LNG, DIST).done((state) => {
+      updateParksAction(LAT , LNG, DIST).done((state) => {
         this.props.dispatch({type: 'UPDATE_ANNOTATIONS', state: state});
+        // this.props.dispatch({type: 'UPDATE_PARKSLIST', state: state});
       });
-    }, 2000);
+    }, 2000)
+    console.log(this.props);
   }
+
+  parkListRender(){
+    return(
+        <ParkList/>
+    )
+  }
+
 };
 
 var styles = StyleSheet.create({
@@ -93,8 +103,9 @@ var styles = StyleSheet.create({
 
 const mapStateToProps = (state) => {
   return {
+    state: state,
     coords: state.getIn(['location', 'coords']),
-    markers: state.getIn(['location', 'markers'])
+    markers: state.getIn(['location', 'parks'])
   }
 }
 

@@ -11,9 +11,29 @@ const ParkListDetails = (props) => {
           <Text>Park Title</Text>
           <Text>Park Address</Text>
         </CardSection>
-        <Text>0.0mi</Text>
+        <Text style={styles.parkDistance}>0.0mi</Text>
       </Card>
       )
+}
+
+
+const styles = {
+  // parkTitle :{
+  //
+  // },
+  // parkAddress: {
+  //
+  // },
+  parkDistance: {
+    flex: 1,
+    color: '#f58120',
+    textAlign: 'right',
+    backgroundColor: '#e1f6ff'
+    // alignItems: 'flex-end',
+    // flexDirection: 'row',
+    // alignSelf: 'flex-end',
+    // right: 0
+  }
 }
 
 

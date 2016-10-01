@@ -1,32 +1,42 @@
 import React from 'react';
-import {View} from 'react-native';
+import {View, ScrollView} from 'react-native';
+import Button from './common/Button.js';
+
 
 import ParkListDetail from './ParkListDetail.js';
 
 
-// renderParkListItems() {
-//   return props.parkdetails.map(parkdetail => <ParkListDetail key={parkdetail.title}/>)
-// }
+renderParkListDetails = (props) => {
+  console.log('hi')
+  // return props.parkdetails.map(parkdetail => <ParkListDetail key={parkdetail.title} title={parkdetail.title} address={parkdetail.address} distance={parkdetail.distance}/>)
+};
 
 const ParkList = (props) => {
   return (
-      <View style={styles.containerStyle}>
-        <ParkListDetail/>
-      </View>
+      <ScrollView style={styles.scrollView}>
+        <View>
+          <Button style={styles.listShowButton} text={' See Parks List '} onPress={renderParkListDetails}/>
+        </View>
+      </ScrollView>
   )
 };
 
 const styles = {
-  containerStyle : {
+  scrollView : {
+  height: 200,
   position: 'absolute',
   zIndex: 2,
   bottom: 10,
   left: 0,
   right: 0,
-  flex: 1,
-  alignItems: 'stretch',
+  // flex: 1,
+  // alignItems: 'stretch',
+  },
+  listShowButton: {
+    backgroundColor: 'blue'
   }
-}
+};
+
 
 export default ParkList;
 
