@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { View, Image, StyleSheet , Text} from 'react-native';
-import Button from './common/button.js'
+import Button from './common/Button.js';
 
 export default React.createClass ({
   render:function() {

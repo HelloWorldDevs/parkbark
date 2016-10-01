@@ -7,6 +7,7 @@ import { connect } from 'react-redux';
 import MapView from 'react-native-maps';
 import SearchField from '../components/search_field.js';
 import {updateRegionMarkersAction} from '../src/core';
+import ParkList from '../components/ParkList.js';
 
 
 class Map extends Component {
@@ -18,11 +19,12 @@ class Map extends Component {
         <MapView
             style={styles.map}
             region={this.props.coords}
-            onRegionChangeComplete={this.onRegionChangeComplete.bind(this)}
+            onRegionChange={this.regionUpdate.bind(this)}
+            onRegionChangeComplete={this.annotationUpdate.bind(this)}
         >
           {this.props.markers.map((marker, i )=> (
               <MapView.Marker
-                  key={i}
+                  key={marker.title}
                   coordinate={marker.latlng}
                   title={marker.title}
                   description={marker.description}
@@ -31,29 +33,34 @@ class Map extends Component {
           ))}
         </MapView>
       </View>
+      <ParkList />
     </View>
     )
   }
 
-  onRegionChangeComplete(region) {
-    setTimeout(()=>{
+  regionUpdate(region) {
       this.props.dispatch({
         type: 'UPDATE_REGION',
         state: region
       });
+  }
+
+  annotationUpdate(region){
+    setTimeout(()=>{
+      console.log('fire!');
       var DIST = this.props.coords.latitudeDelta * 69;
       var LAT = this.props.coords.latitude;
       var LNG = this.props.coords.longitude;
       updateRegionMarkersAction(LAT , LNG, DIST).done((state) => {
         this.props.dispatch({type: 'UPDATE_ANNOTATIONS', state: state});
       });
-    }, 1500);
+    }, 2000);
   }
 };
 
 var styles = StyleSheet.create({
   container: {
-    flex: 1,
+    flex: 2,
     flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
@@ -72,7 +79,6 @@ var styles = StyleSheet.create({
   },
   map: {
     position: 'absolute',
-    // 'alignSelf': 'stretch',
     right: 0,
     left: 0,
     top: 0,

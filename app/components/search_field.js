@@ -38,6 +38,7 @@ class SearchFieldComponent extends Component {
   fetchParks() {
     fetchLocationAction(this.props.search, googleapi).done((state) => {
       this.props.dispatch({type: 'UPDATE_REGION', state: state});
+      // this.props.dispatch(type: '')
     });
   }
 }
