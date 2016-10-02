@@ -1,42 +1,88 @@
 import React from 'react';
-import {View, ScrollView} from 'react-native';
+import {View, ScrollView, Animated, Easing} from 'react-native';
+import { connect } from 'react-redux';
 import Button from './common/Button.js';
+
 
 
 import ParkListDetail from './ParkListDetail.js';
 
 
 renderParkListDetails = (props) => {
-  console.log('hi')
-  // return props.parkdetails.map(parkdetail => <ParkListDetail key={parkdetail.title} title={parkdetail.title} address={parkdetail.address} distance={parkdetail.distance}/>)
+  return props.parks.map(park => <ParkListDetail key={park.title} title={park.title} address={park.address} distance={park.distance}/>)
 };
 
 const ParkList = (props) => {
+
+  // this.componentDidMount = () => {
+  //   console.log(props);
+  // }
+  //
+  // componentDidMount()
+
+  this.slideValue = new Animated.Value(0);
+
+  this.slideIn = () => {
+    Animated.timing(
+        this.slideValue,
+        {
+          toValue: 1,
+          duration: 1500,
+          easing: Easing.elastic(1)
+        }
+    ).start()
+  }
+
+  this.slideOut = () => {
+    Animated.timing(
+        this.slideValue,
+        {
+          toValue: 0,
+          duration: 1500,
+          easing: Easing.elastic(1)
+        }
+    ).start()
+  }
+
+  const bottom = this.slideValue.interpolate({
+    inputRange: [0, 1],
+    outputRange: [-400, 0]
+  });
+
   return (
-      <ScrollView style={styles.scrollView}>
-        <View>
-          <Button style={styles.listShowButton} text={' See Parks List '} onPress={renderParkListDetails}/>
-        </View>
-      </ScrollView>
+    <View style={styles.scrollConainer}>
+    <Button bgcolor={'#fff'} text={' See Parks List '} onPress={this.slideIn}/>
+      <Animated.View
+          style={ { position: 'absolute', zIndex: 2, bottom, left: 0, right: 0, }}
+      >
+        <ScrollView style={styles.scrollView}>
+          <Button bgcolor={'#fff'} text={'Close'} onPress={this.slideOut}/>
+          {renderParkListDetails(props)}
+        </ScrollView>
+      </Animated.View>
+      </View>
   )
 };
 
 const styles = {
   scrollView : {
-  height: 200,
-  position: 'absolute',
-  zIndex: 2,
-  bottom: 10,
-  left: 0,
-  right: 0,
-  // flex: 1,
-  // alignItems: 'stretch',
+    height: 300,
+    backgroundColor: '#fff'
+
   },
-  listShowButton: {
-    backgroundColor: 'blue'
+  scrollConainer: {
+    alignSelf: 'stretch',
+    padding: 5
   }
 };
 
 
-export default ParkList;
+const mapStateToProps = (state) => {
+  return {
+    coords: state.getIn(['location', 'coords']),
+    parks: state.getIn(['location', 'parks'])
+  }
+}
+
+export default connect(mapStateToProps)(ParkList);
 

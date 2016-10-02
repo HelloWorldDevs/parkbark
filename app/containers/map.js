@@ -49,12 +49,13 @@ class Map extends Component {
   annotationUpdate(region){
     setTimeout(()=>{
       console.log('fire!');
-      var DIST = this.props.coords.latitudeDelta * 69;
+      var DIST = Math.floor(this.props.coords.longitudeDelta * 69/2);
+      console.log(DIST);
+      console.log(Math.floor(this.props.coords.latitudeDelta * 69/2));
       var LAT = this.props.coords.latitude;
       var LNG = this.props.coords.longitude;
       updateParksAction(LAT , LNG, DIST).done((state) => {
         this.props.dispatch({type: 'UPDATE_ANNOTATIONS', state: state});
-        // this.props.dispatch({type: 'UPDATE_PARKSLIST', state: state});
       });
     }, 2000)
     console.log(this.props);
@@ -79,12 +80,16 @@ var styles = StyleSheet.create({
     borderColor: '#008eff'
   },
   mapContainer: {
-    margin: 5,
+    // margin: 5,
+    // marginTop: 5,
+    // marginBottom: 5,
+    marginLeft: 0,
+    marginRight: 0,
     flex: 5,
     alignSelf: 'stretch',
     justifyContent : 'center',
     alignItems: 'center',
-    borderWidth: 2,
+    // borderWidth: 2,
     borderColor: '#008eff'
   },
   map: {
@@ -93,7 +98,7 @@ var styles = StyleSheet.create({
     left: 0,
     top: 0,
     bottom: 0,
-    margin: 10,
+    // margin: 10,
     borderWidth: 1,
     borderColor: '#7ac4ff',
     borderRadius: 5
@@ -103,7 +108,6 @@ var styles = StyleSheet.create({
 
 const mapStateToProps = (state) => {
   return {
-    state: state,
     coords: state.getIn(['location', 'coords']),
     markers: state.getIn(['location', 'parks'])
   }

@@ -16,8 +16,8 @@ export default React.createClass ({
               Looking for just the perfect place to let your dog run free? Fenced? Water available? We've got all of the
               details you're looking for.
             </Text>
-            <Button text={' --> '} onPress={this.onNextPress}/>
-            <Button text={'Survey'} onPress={this.surveyPress} />
+            <Button bgcolor={'#E79C23'} text={' --> '} onPress={this.onNextPress}/>
+            <Button bgcolor={'#E79C23'} text={'Survey'} onPress={this.surveyPress} />
           </View>
         </View>
     );
