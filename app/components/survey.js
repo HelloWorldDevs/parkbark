@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 import { sendSurveyResponses } from '../src/core';
 import { RNDeviceInfo } from 'react-native-device-info';
 import { Form, InputField } from 'react-native-form-generator';
-import WrappedInputField from './common/input_field';
 
 export default class Survey extends Component {
     constructor(props){
