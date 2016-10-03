@@ -19,6 +19,7 @@ class SearchFieldComponent extends Component {
   }
 
   handleChange(text) {
+    console.log(this.props)
     this.props.dispatch({
       type: 'UPDATE_SEARCH',
       state: {

@@ -5,7 +5,7 @@ import Button from './common/Button.js';
 import ParkListDetail from './ParkListDetail.js';
 
 renderParkListDetails = (props) => {
-  return props.parks.map(park => <ParkListDetail key={park.title} title={park.title} address={park.address} distance={park.distance}/>)
+  return props.parks.map(park => <ParkListDetail navigator={props.navigator} key={park.title} title={park.title} address={park.address} distance={park.distance} amenities={park.amenities}/>)
 };
 
 const ParkList = (props) => {
@@ -69,7 +69,6 @@ const styles = {
 
 const mapStateToProps = (state) => {
   return {
-    coords: state.getIn(['location', 'coords']),
     parks: state.getIn(['location', 'parks'])
   }
 }

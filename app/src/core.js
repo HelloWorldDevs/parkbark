@@ -23,6 +23,11 @@ export function updateSearch(state, search) {
   return state.merge({'search': search});
 }
 
+export function updateSelectedPark(state, selectedPark) {
+  console.log(selectedPark);
+  return state.merge({'current_park': selectedPark});
+}
+
 // export function fetchParksAction() {
 //   // return (dispatch, getState) => {
 //   return fetch('http://parkbark-api.bfdig.com/parks', {

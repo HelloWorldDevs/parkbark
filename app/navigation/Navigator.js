@@ -1,5 +1,6 @@
-import Map from '../containers/map';
-import Landing from '../components/landing';
+import Map from '../containers/Map';
+import Landing from '../containers/Landing';
+import ParkDetail from '../containers/ParkDetail.js'
 import Survey from '../components/survey';
 import React, { Component } from 'react';
 import { Navigator } from 'react-native';
@@ -10,6 +11,7 @@ var ROUTES = {
   landing: Landing,
   map: Map,
   survey: Survey,
+  parkdetail: ParkDetail
 };
 
 

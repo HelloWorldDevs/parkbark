@@ -13,7 +13,7 @@ const CardSection = (props) => {
 const styles = {
   containerStyle: {
     padding: 5,
-    backgroundColor: '#fdcfa9',
+    backgroundColor: '#fff4ea',
     borderColor: '#ddd',
     borderBottomWidth: 1,
   }

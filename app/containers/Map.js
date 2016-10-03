@@ -5,7 +5,7 @@ import {
 } from 'react-native';
 import { connect } from 'react-redux';
 import MapView from 'react-native-maps';
-import SearchField from '../components/search_field.js';
+import SearchField from '../components/Search_Field.js';
 import {updateParksAction} from '../src/core';
 import ParkList from '../components/ParkList.js';
 
@@ -70,7 +70,7 @@ scrollToMarker(region) {
 
   parkListRender(){
     return(
-        <ParkList/>
+        <ParkList navigator={this.props.navigator}/>
     )
   }
 

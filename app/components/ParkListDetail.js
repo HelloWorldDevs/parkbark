@@ -1,5 +1,6 @@
 import  React, {Component} from 'react';
-import {View, Text, Animated, Easing} from 'react-native';
+import {View, TouchableOpacity, Text, Animated, Easing} from 'react-native';
+import { connect } from 'react-redux';
 import Card from './common/Card.js'
 import CardSection from './common/CardSection.js'
 
@@ -45,6 +46,13 @@ class ParkListDetails extends Component{
     this.fadeOut();
   }
 
+  onPress(props) {
+    const selectedPark = this.props.title;
+    this.props.dispatch({type: 'UPDATE_SElECTED_PARK', state: selectedPark})
+    this.props.navigator.push({name:'parkdetail'});
+  }
+
+
   render(){
     const opacity = this.fadeValue.interpolate({
       inputRange: [0, 1],
@@ -52,6 +60,7 @@ class ParkListDetails extends Component{
     });
     return(
       <Animated.View style={{opacity}}>
+        <TouchableOpacity onPress={this.onPress.bind(this)}>
           <Card>
             <CardSection>
               <Text>{this.props.title}</Text>
@@ -59,10 +68,12 @@ class ParkListDetails extends Component{
             </CardSection>
             <Text style={styles.parkDistance}>{this.props.distance}</Text>
           </Card>
+        </TouchableOpacity>
       </Animated.View>
     )
   }
 }
+
 
 
 const styles = {
@@ -81,4 +92,11 @@ const styles = {
 }
 
 
-export default ParkListDetails;
+const mapStateToProps = (state) => {
+  return {
+    parks: state.getIn(['location', 'parks'])
+  }
+}
+
+export default connect(mapStateToProps)(ParkListDetails);
+
