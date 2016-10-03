@@ -2,23 +2,13 @@ import React from 'react';
 import {View, ScrollView, Animated, Easing} from 'react-native';
 import { connect } from 'react-redux';
 import Button from './common/Button.js';
-
-
-
 import ParkListDetail from './ParkListDetail.js';
-
 
 renderParkListDetails = (props) => {
   return props.parks.map(park => <ParkListDetail key={park.title} title={park.title} address={park.address} distance={park.distance}/>)
 };
 
 const ParkList = (props) => {
-
-  // this.componentDidMount = () => {
-  //   console.log(props);
-  // }
-  //
-  // componentDidMount()
 
   this.slideValue = new Animated.Value(0);
 

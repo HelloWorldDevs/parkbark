@@ -17,6 +17,7 @@ class Map extends Component {
         <SearchField/>
         <View style={styles.mapContainer}>
         <MapView
+            ref={ref => { this.map = ref; }}
             style={styles.map}
             region={this.props.coords}
             onRegionChange={this.regionUpdate.bind(this)}
@@ -24,7 +25,7 @@ class Map extends Component {
         >
           {this.props.markers.map((marker, i )=> (
               <MapView.Marker
-                  key={marker.title}
+                  key={i}
                   coordinate={marker.latlng}
                   title={marker.title}
                   description={marker.address + ' ' + marker.distance}
@@ -39,7 +40,15 @@ class Map extends Component {
   }
 
 
-  regionUpdate(region) {
+//onPress={this.scrollToMarker.bind(this)}
+
+scrollToMarker(region) {
+    this.map.animateToCoordinate(region.nativeEvent.coordinate, 100);
+  }
+
+
+  regionUpdate(region){
+    console.log('updating region')
       this.props.dispatch({
         type: 'UPDATE_REGION',
         state: region
@@ -48,17 +57,15 @@ class Map extends Component {
 
   annotationUpdate(region){
     setTimeout(()=>{
-      console.log('fire!');
-      var DIST = Math.floor(this.props.coords.longitudeDelta * 69/2);
-      console.log(DIST);
-      console.log(Math.floor(this.props.coords.latitudeDelta * 69/2));
+      console.log('updating annotations');
+      var DIST = Math.ceil(this.props.coords.latitudeDelta * 69/2);
       var LAT = this.props.coords.latitude;
       var LNG = this.props.coords.longitude;
+      console.log('lat: ' + LAT, 'long: ' + LNG, 'dist: ' + DIST);
       updateParksAction(LAT , LNG, DIST).done((state) => {
         this.props.dispatch({type: 'UPDATE_ANNOTATIONS', state: state});
       });
     }, 2000)
-    console.log(this.props);
   }
 
   parkListRender(){

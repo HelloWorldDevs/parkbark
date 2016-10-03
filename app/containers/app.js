@@ -16,10 +16,6 @@ class App extends Component {
         <Navigator />
     );
   }
-
-  componentDidMount(){
-    // console.log(this.props);
-  }
 };
 
 
