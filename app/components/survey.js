@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, View, Modal, TouchableHighlight, Text } from 'react-native';
 import { connect } from 'react-redux';
 import { sendSurveyResponses } from '../src/core';
 import { RNDeviceInfo } from 'react-native-device-info';
@@ -10,38 +10,84 @@ export default class Survey extends Component {
     super(props);
     this.state = {
       formData:{},
+      notesModalVisible: true,
+      numModalVisibile: true,
     }
   }
   handleFormChange(formData){
     this.setState({formData:formData})
     this.props.onFormChange && this.props.onFormChange(formData);
-    sendSurveyResponses(formData);
-    console.log('Data: ', formData);
   }
 
-  handleFormFocus(e, component){
-    // console.log(e, component);
+  saveFormData(formData) {
+     sendSurveyResponses(formData);
+     console.log(formData)
+  }
+
+  setNotesModalVisible(visible, formData) {
+      this.setState({notesModalVisible: visible});
+      this.saveFormData(formData);
+  }
+  setNumModalVisible(visible, formData) {
+      this.setState({numModalVisible: visible});
+      this.saveFormData(formData);
   }
 
     render() {
         // console.log('Device Unique: ', RNDeviceInfo.getUniqueID());
         return (
-            <Form
+            <View
                 ref='surveyForm'
-                onFocus={this.handleFormFocus.bind(this)}
-                onChange={this.handleFormChange.bind(this)}
                 style={styles.form}
             >
-                <InputField
-                    multiline={true}
-                    ref='notes'
-                    placeholder='Notes'
-                />
-                <InputField
-                    ref='num_dogs'
-                    placeholder='Number of Dogs'
-                />
-            </Form>
+                <Modal
+                    animationType={"fade"}
+                    transparent={false}
+                    visible={this.state.notesModalVisible}
+                >
+                    <Form
+                        ref='surveyFormNotes'
+                        onChange={this.handleFormChange.bind(this)}
+                    >
+                        <InputField
+                            multiline={true}
+                            ref='notes'
+                            placeholder='Notes'
+                        />
+                        <TouchableHighlight
+                            onPress={() => {
+                                 this.setNotesModalVisible(!this.state.notesModalVisible, this.state.formData)
+                               }}
+                        >
+                             <Text>Hide Modal</Text>
+                       </TouchableHighlight>
+                   </Form>
+                   <Modal
+                       animationType={"fade"}
+                       transparent={false}
+                       visible={this.state.numModalVisible}
+                   >
+                       <Form
+                           ref='surveyFormNumDogs'
+                           onChange={this.handleFormChange.bind(this)}
+                       >
+                           <InputField
+                               ref='num_dogs'
+                               placeholder='Number of Dogs'
+                           />
+                           <TouchableHighlight
+                               onPress={() => {
+                                    this.setNumModalVisible(!this.state.numModalVisible, this.state.formData)
+                                  }}
+                           >
+                                <Text>Hide Modal</Text>
+                          </TouchableHighlight>
+                      </Form>
+                   </Modal>
+                </Modal>
+
+
+            </View>
         )
     }
 }
@@ -57,8 +103,8 @@ var styles = StyleSheet.create({
         marginRight: 10,
     },
     container: {
-      flex: 1,
+      flex: 0,
       justifyContent: 'center',
-      padding: 20,
+      padding: 50,
     }
 })
