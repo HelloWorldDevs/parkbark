@@ -14,6 +14,7 @@ class SearchFieldComponent extends Component {
         <View style={styles.fieldContainer}>
           {this.searchParksInput()}
           <TextInput onChangeText={this.handleChange.bind(this)} placeholder="Address, Zip, City" style={styles.input}/>
+          {this.searchParksFilter()}
         </View>
     )
   }
@@ -36,6 +37,20 @@ class SearchFieldComponent extends Component {
     </TouchableOpacity>
   }
 
+  searchParksFilter(){
+   return <TouchableOpacity
+        underlayColor="gray"
+        onPress={this.showFilters.bind()}>
+      <Image source={require('../img/empty_filter@3x.png')} style={styles.filterIcon}/>
+    </TouchableOpacity>
+  }
+
+
+  showFilters(){
+    console.log(this.props);
+    // this.props.navigator.push({name: 'filters'});
+}
+
   fetchParks() {
     fetchLocationAction(this.props.search, googleapi).done((state) => {
       this.props.dispatch({type: 'UPDATE_REGION', state: state});
@@ -48,6 +63,7 @@ class SearchFieldComponent extends Component {
 
 var styles = StyleSheet.create({
   fieldContainer: {
+    backgroundColor: 'red',
     alignSelf: 'stretch',
     flexDirection: 'row',
     alignItems: 'center',
@@ -59,6 +75,9 @@ var styles = StyleSheet.create({
   },
   searchIcon: {
     marginRight: 5
+  },
+  filterIcon: {
+
   },
   input: {
     padding: 4,
