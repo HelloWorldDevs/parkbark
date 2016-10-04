@@ -24,13 +24,17 @@ export function updateSearch(state, search) {
 }
 
 export function updateSelectedPark(state, selectedPark) {
-  console.log(selectedPark);
   return state.merge({'current_park': selectedPark});
 }
 
 export function setParkSurvey(state, selectedParkTitle) {
-  console.log(selectedParkTitle);
   return state.merge({'park_form': {'title': selectedParkTitle}});
+}
+
+export function updateParkSurvey(state, updateValue) {
+    var update = {};
+    update[updateValue.title] = updateValue.value;
+    return state.setIn(['park_form', updateValue.title], updateValue.value);
 }
 
 // export function fetchParksAction() {
@@ -79,7 +83,7 @@ export function updateParksAction(LAT, LNG, DIST){
         return res.json();
       })
       .then(function(resJson) {
-        console.log(resJson);
+        // console.log(resJson);
         var parks = [];
         resJson.forEach((item)=> {
           var park = {};
@@ -97,7 +101,7 @@ export function updateParksAction(LAT, LNG, DIST){
           park.distance = parseFloat(item.field_park_address_proximity).toFixed(1) + 'mi';
           parks.push(park);
         })
-        console.log(parks);
+        // console.log(parks);
         return parks;
       })
       .catch((error) => {
@@ -141,14 +145,14 @@ export function sendSurveyResponses(formData) {
             	}
             },
             "type":[{"target_id":"survey_responses"}],
-            "title":[{"value":formData.title}],
+            "title":[{"value":'Check in at ' + formData.title}],
             "field_notes":[{"value":formData.notes}],
             "field_number_of_dogs":[{"value":formData.num_dogs}],
             "field_device_id":[{"value": 'abc123'}],
             "field_park_address_suggested":[{"value": formData.suggested_park}],
             "field_park_amenities": [
-            	{"target_id": "3"},
-            	{"target_id":"2"}
+            	{"target_id": formData.water},
+            	{"target_id": formData.benches}
             ]
         })
     })

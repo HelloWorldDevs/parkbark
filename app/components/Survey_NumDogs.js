@@ -3,37 +3,31 @@ import { StyleSheet, View, Modal, TouchableHighlight, Text } from 'react-native'
 import { connect } from 'react-redux';
 import { sendSurveyResponses } from '../src/core';
 import Button from './common/Button.js';
-import { RNDeviceInfo } from 'react-native-device-info';
 import { Form, InputField } from 'react-native-form-generator';
 
-class Survey extends Component {
+class Survey_NumDogs extends Component {
     constructor(props){
     super(props);
     this.state = {
       formData:{},
-      notesModalVisible: true,
-      numModalVisibile: true,
     }
   }
   handleFormChange(formData){
     this.setState({formData:formData})
-    console.log(this.state.formData.num_dogs);
     this.props.onFormChange && this.props.onFormChange(formData);
   }
 
   saveFormData() {
-    // this.props.dispatch({type: 'UPDATE_SURVEY', state: this.state.formData.num_dogs});
-    // this.props.navigator.push({'name': 'survey_two'});
-     const formData = {};
-     formData.num_dogs = this.state.formData.num_dogs;
-     formData.title = this.props.parkForm.title;
-      console.log(formData)
-     sendSurveyResponses(formData);
+      const updateValue = {};
+      updateValue.title = 'num_dogs';
+      updateValue.value = this.state.formData.num_dogs;
+      this.props.dispatch({type: 'UPDATE_SURVEY', state: updateValue});
+      this.props.navigator.push({name: 'surveyNotes'});
   }
 
 
   componentDidMount() {
-    console.log(this.props);
+    // console.log(this.props);
   }
 
     render() {
@@ -80,5 +74,4 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default connect(mapStateToProps)(Survey);
-
+export default connect(mapStateToProps)(Survey_NumDogs);

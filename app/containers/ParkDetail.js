@@ -26,11 +26,10 @@ class ParkDetail extends Component {
 
   componentDidMount(){
     const {currentPark} = this.props;
-    console.log(currentPark);
   }
 
   renderAmenities({amenities}){
-    console.log(amenities);
+    // console.log(amenities);
     return amenities.split(',').map(amenity => <Amenity key={amenity} amenity={amenity}/>)
   }
 
@@ -39,10 +38,10 @@ class ParkDetail extends Component {
   }
 
   surveyPress() {
-    console.log(this.props);
+    // console.log(this.props);
     const title = this.props.currentPark.title;
     this.props.dispatch({type: 'SET_PARK_SURVEY', state: title});
-    this.props.navigator.push({name: 'survey'});
+    this.props.navigator.push({name: 'surveyNumDogs'});
 }
 
   render(){
@@ -72,7 +71,7 @@ class ParkDetail extends Component {
           <Card>
             {this.renderAmenities(currentPark)}
           </Card>
-          <Button bgcolor={'#E79C23'} text={'Survey'} onPress={this.surveyPress.bind(this)} />
+          <Button bgcolor={'#E79C23'} text={'Check In'} onPress={this.surveyPress.bind(this)} />
         </ScrollView>
     )
   }

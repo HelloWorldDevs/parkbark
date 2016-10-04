@@ -2,11 +2,10 @@ import React, { Component } from 'react';
 import { StyleSheet, View, Modal, TouchableHighlight, Text } from 'react-native';
 import { connect } from 'react-redux';
 import { sendSurveyResponses } from '../src/core';
-import { RNDeviceInfo } from 'react-native-device-info';
 import Button from './common/Button.js';
 import { Form, InputField } from 'react-native-form-generator';
 
-export default class Survey extends Component {
+class Survey_Notes extends Component {
     constructor(props){
     super(props);
     this.state = {
@@ -18,17 +17,31 @@ export default class Survey extends Component {
     this.props.onFormChange && this.props.onFormChange(formData);
   }
 
-  saveFormData(formData) {
-     // sendSurveyResponses(formData);
+  saveFormData() {
+    const updateValue = {};
+    updateValue.title = 'notes';
+    updateValue.value = this.state.formData.notes;
+    this.props.dispatch({type: 'UPDATE_SURVEY', state: updateValue});
+    // If last question...
+    const formData = this.props.parkForm;
+    sendSurveyResponses(formData);
   }
 
+  componentDidMount() {
+    //   console.log(this.props.parkForm);
+
+  }
 
     render() {
         return (
             <View ref='surveyForm' style={styles.form}>
                     <Form ref='surveyFormNotes' onChange={this.handleFormChange.bind(this)}>
                        <Text>Tell Us About The Park</Text>
-                      <Button bgcolor={'#E79C23'} text={' Yes'} onPress={this.saveFormDataYes.bind(this)}/>
+                       <InputField
+                           ref='notes'
+                           placeholder='Notes'
+                       />
+                      <Button bgcolor={'#E79C23'} text={' -->'} onPress={this.saveFormData.bind(this)}/>
                     </Form>
             </View>
         )
@@ -55,8 +68,8 @@ var styles = StyleSheet.create({
 
 const mapStateToProps = (state) => {
   return {
-    state: state
+    parkForm: state.get('park_form').toJS()
   }
 }
 
-export default connect(mapStateToProps)(Survey);
+export default connect(mapStateToProps)(Survey_Notes);
