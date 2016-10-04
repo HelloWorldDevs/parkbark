@@ -17,7 +17,6 @@ export default React.createClass ({
               details you're looking for.
             </Text>
             <Button bgcolor={'#E79C23'} text={' --> '} onPress={this.onNextPress}/>
-            <Button bgcolor={'#E79C23'} text={'Survey'} onPress={this.surveyPress} />
           </View>
         </View>
     );
@@ -27,9 +26,7 @@ export default React.createClass ({
     this.props.navigator.push({name: 'map'});
 },
 
-  surveyPress: function() {
-      this.props.navigator.push({name: 'survey'});
-  }
+
 })
 
 

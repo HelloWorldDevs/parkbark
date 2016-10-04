@@ -1,7 +1,7 @@
 import Map from '../containers/Map';
 import Landing from '../containers/Landing';
 import ParkDetail from '../containers/ParkDetail.js'
-import Survey from '../components/survey';
+import Survey_One from '../components/Survey_One.js';
 import React, { Component } from 'react';
 import { Navigator } from 'react-native';
 import { connect } from 'react-redux';
@@ -10,7 +10,7 @@ import { connect } from 'react-redux';
 var ROUTES = {
   landing: Landing,
   map: Map,
-  survey: Survey,
+  survey: Survey_One,
   parkdetail: ParkDetail
 };
 

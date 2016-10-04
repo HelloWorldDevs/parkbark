@@ -9,6 +9,7 @@ import {
     TouchableOpacity
 } from 'react-native';
 var ResponsiveImage = require('react-native-responsive-image');
+import Button from '../components/common/Button';
 import Card from '../components/common/Card.js';
 import CardSection from '../components/common/CardSection.js';
 import Amenity from '../components/common/Amenity.js';
@@ -33,16 +34,23 @@ class ParkDetail extends Component {
     return amenities.split(',').map(amenity => <Amenity key={amenity} amenity={amenity}/>)
   }
 
-  onPress(){
+  onBackPress(){
     this.props.navigator.pop();
   }
+
+  surveyPress() {
+    console.log(this.props);
+    const title = this.props.currentPark.title;
+    this.props.dispatch({type: 'SET_PARK_SURVEY', state: title});
+    this.props.navigator.push({name: 'survey'});
+}
 
   render(){
     const {currentPark} = this.props;
     return (
         <ScrollView bounces={false}>
           <TouchableOpacity
-              onPress={this.onPress.bind(this)}
+              onPress={this.onBackPress.bind(this)}
               style={{position: 'absolute', top: 20, left: 20, zIndex: 1}}>
             <Image style={{width: 25, height: 25, padding: 10}} source={require('../img/back-arrow@3x.png')}/>
           </TouchableOpacity>
@@ -64,6 +72,7 @@ class ParkDetail extends Component {
           <Card>
             {this.renderAmenities(currentPark)}
           </Card>
+          <Button bgcolor={'#E79C23'} text={'Survey'} onPress={this.surveyPress.bind(this)} />
         </ScrollView>
     )
   }

@@ -28,6 +28,11 @@ export function updateSelectedPark(state, selectedPark) {
   return state.merge({'current_park': selectedPark});
 }
 
+export function setParkSurvey(state, selectedParkTitle) {
+  console.log(selectedParkTitle);
+  return state.merge({'park_form': {'title': selectedParkTitle}});
+}
+
 // export function fetchParksAction() {
 //   // return (dispatch, getState) => {
 //   return fetch('http://parkbark-api.bfdig.com/parks', {
@@ -136,7 +141,7 @@ export function sendSurveyResponses(formData) {
             	}
             },
             "type":[{"target_id":"survey_responses"}],
-            "title":[{"value":"Testing from RN"}],
+            "title":[{"value": formData.title}],
             "field_notes":[{"value":formData.notes}],
             "field_number_of_dogs":[{"value":formData.num_dogs}],
             "field_device_id":[{"value": 'abc123'}],
