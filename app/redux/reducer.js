@@ -1,5 +1,5 @@
 import {Map} from 'immutable';
-import {setLocations, updateSearch, updateAnnotations, updateRegion, updateSelectedPark, setParkSurvey} from '../src/core';
+import {setLocations, updateSearch, updateAnnotations, updateRegion, updateSelectedPark, setParkSurvey, updateParkSurvey} from '../src/core';
 
 
 export default function(state = Map(), action) {
@@ -23,4 +23,3 @@ export default function(state = Map(), action) {
   }
   return state;
 }
-
