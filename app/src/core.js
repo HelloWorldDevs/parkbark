@@ -74,6 +74,7 @@ export function updateParksAction(LAT, LNG, DIST){
         return res.json();
       })
       .then(function(resJson) {
+        console.log(resJson);
         var parks = [];
         resJson.forEach((item)=> {
           var park = {};
@@ -81,6 +82,7 @@ export function updateParksAction(LAT, LNG, DIST){
           park.image = item.field_park_image;
           park.address = item.field_park_address;
           park.amenities = item.field_park_amenities;
+          park.details = item.field_park_details;
           var latitude = parseFloat(item.field_park_address.split(',')[0]);
           var longitude = parseFloat(item.field_park_address.split(',')[1]);
           park.latlng = {

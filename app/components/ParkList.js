@@ -5,7 +5,7 @@ import Button from './common/Button.js';
 import ParkListDetail from './ParkListDetail.js';
 
 renderParkListDetails = (props) => {
-  return props.parks.map(park => <ParkListDetail navigator={props.navigator} key={park.title} title={park.title} address={park.address} distance={park.distance} amenities={park.amenities}/>)
+  return props.parks.map(park => <ParkListDetail touchable={true} navigator={props.navigator} key={park.title} title={park.title} address={park.address} distance={park.distance} amenities={park.amenities}/>)
 };
 
 const ParkList = (props) => {
@@ -45,7 +45,7 @@ const ParkList = (props) => {
       <Animated.View
           style={ { position: 'absolute', zIndex: 2, bottom, left: 0, right: 0, }}
       >
-        <ScrollView style={styles.scrollView}>
+        <ScrollView bounces={false} style={styles.scrollView}>
           <Button bgcolor={'#fff'} text={'Close'} onPress={this.slideOut}/>
           {renderParkListDetails(props)}
         </ScrollView>
@@ -58,7 +58,6 @@ const styles = {
   scrollView : {
     height: 300,
     backgroundColor: '#fff'
-
   },
   scrollConainer: {
     alignSelf: 'stretch',

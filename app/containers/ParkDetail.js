@@ -2,13 +2,18 @@ import React, { Component } from 'react';
 import {fromJS} from 'immutable';
 import {
     View,
+    ScrollView,
     Text,
     StyleSheet,
-    Image
+    Image,
+    TouchableOpacity
 } from 'react-native';
 var ResponsiveImage = require('react-native-responsive-image');
 import Card from '../components/common/Card.js';
 import CardSection from '../components/common/CardSection.js';
+import Amenity from '../components/common/Amenity.js';
+import ParkListDetail from '../components/ParkListDetail.js'
+import stylesheet from '../styles/styles.js'
 import { connect } from 'react-redux';
 
 
@@ -23,6 +28,11 @@ class ParkDetail extends Component {
     console.log(currentPark);
   }
 
+  renderAmenities({amenities}){
+    console.log(amenities);
+    return amenities.split(',').map(amenity => <Amenity key={amenity} amenity={amenity}/>)
+  }
+
   onPress(){
     this.props.navigator.pop();
   }
@@ -30,43 +40,31 @@ class ParkDetail extends Component {
   render(){
     const {currentPark} = this.props;
     return (
-        <View>
-            <Text onPress={this.onPress.bind(this)}>Back</Text>
-              <View style={{flex: 1, justifyContent: 'center', alignItems: 'stretch'}}>
-                <ResponsiveImage
-                    source={{uri: currentPark.image}}
-                     initHeight="225"
-                />
-              </View>
-            <Card>
+        <ScrollView bounces={false}>
+          <TouchableOpacity
+              onPress={this.onPress.bind(this)}
+              style={{position: 'absolute', top: 20, left: 20, zIndex: 1}}>
+            <Image style={{width: 25, height: 25, padding: 10}} source={require('../img/back-arrow@3x.png')}/>
+          </TouchableOpacity>
+          <View style={{flex: 1, justifyContent: 'center', alignItems: 'stretch'}}>
+            <ResponsiveImage
+                source={{uri: currentPark.image}}
+                 initHeight="225"
+            />
+          </View>
+          <ParkListDetail key={currentPark.title} title={currentPark.title} address={currentPark.address} distance={currentPark.distance}/>
+          <Card>
+            <View style={{flex: 1, flexDirection: 'column'}}>
               <CardSection>
-                <View>
-                  <Text>
-                    Hello ParkList Detail
-                  </Text>
-                </View>
-                <View>
-                  <Text>
-                    Hello ParkList Detail
-                  </Text>
-                </View>
+                  <Text style={styles.detailsTitle}>PARK DETAILS</Text>
+                  <Text>{currentPark.details}</Text>
               </CardSection>
-            </Card>
-            <Card>
-            <CardSection>
-              <View>
-                <Text>
-                  Hello ParkList Detail
-                </Text>
-              </View>
-              <View>
-                <Text>
-                  Hello ParkList Detail
-                </Text>
-              </View>
-            </CardSection>
+            </View>
           </Card>
-        </View>
+          <Card>
+            {this.renderAmenities(currentPark)}
+          </Card>
+        </ScrollView>
     )
   }
 
@@ -80,6 +78,9 @@ const styles = {
   image: {
     flex: 1,
     height: 20
+  },
+  detailTitle: {
+    fontWeight: 'bold'
   }
 }
 

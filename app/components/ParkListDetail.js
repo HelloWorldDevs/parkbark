@@ -59,22 +59,28 @@ class ParkListDetails extends Component{
       outputRange: [0, 1]
     });
     return(
+      this.props.touchable ?
       <Animated.View style={{opacity}}>
         <TouchableOpacity onPress={this.onPress.bind(this)}>
           <Card>
             <CardSection>
               <Text>{this.props.title}</Text>
-              <Text>{this.props.address}</Text>
+              <Text>6336 SE Lincoln St, Portland, OR 97215</Text>
             </CardSection>
             <Text style={styles.parkDistance}>{this.props.distance}</Text>
           </Card>
         </TouchableOpacity>
-      </Animated.View>
+      </Animated.View>  :
+      <Card>
+        <CardSection>
+          <Text>{this.props.title}</Text>
+          <Text>6336 SE Lincoln St, Portland, OR 97215</Text>
+        </CardSection>
+        <Text style={styles.parkDistance}>{this.props.distance}</Text>
+      </Card>
     )
   }
 }
-
-
 
 const styles = {
   // parkTitle :{
@@ -87,7 +93,6 @@ const styles = {
     flex: 1,
     color: '#f58120',
     textAlign: 'right',
-    backgroundColor: '#e1f6ff'
   }
 }
 
