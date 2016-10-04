@@ -148,7 +148,7 @@ export function sendSurveyResponses(formData) {
             "title":[{"value":'Check in at ' + formData.title}],
             "field_notes":[{"value":formData.notes}],
             "field_number_of_dogs":[{"value":formData.num_dogs}],
-            "field_device_id":[{"value": 'abc123'}],
+            "field_device_id":[{"value": formData.deviceId}],
             "field_park_address_suggested":[{"value": formData.suggested_park}],
             "field_park_amenities": [
             	{"target_id": formData.water},
