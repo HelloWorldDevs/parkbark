@@ -141,7 +141,7 @@ export function sendSurveyResponses(formData) {
             	}
             },
             "type":[{"target_id":"survey_responses"}],
-            "title":[{"value": formData.title}],
+            "title":[{"value":formData.title}],
             "field_notes":[{"value":formData.notes}],
             "field_number_of_dogs":[{"value":formData.num_dogs}],
             "field_device_id":[{"value": 'abc123'}],
