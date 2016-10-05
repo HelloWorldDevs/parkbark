@@ -1,8 +1,9 @@
 import Map from '../containers/Map';
 import Landing from '../containers/Landing';
-import ParkDetail from '../containers/ParkDetail.js'
-import Survey_NumDogs from '../components/Survey_NumDogs.js';
+import ParkDetail from '../containers/ParkDetail';
+import Survey_NumDogs from '../components/Survey_NumDogs';
 import Survey_Notes from '../components/Survey_Notes';
+import FilterList from '../components/FilterList';
 import React, { Component } from 'react';
 import { Navigator } from 'react-native';
 import { connect } from 'react-redux';
@@ -13,7 +14,8 @@ var ROUTES = {
   map: Map,
   surveyNumDogs: Survey_NumDogs,
   surveyNotes: Survey_Notes,
-  parkdetail: ParkDetail
+  parkdetail: ParkDetail,
+  filterlist: FilterList
 };
 
 

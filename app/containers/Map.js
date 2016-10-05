@@ -14,7 +14,7 @@ class Map extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <SearchField/>
+        <SearchField navigator={this.props.navigator}/>
         <View style={styles.mapContainer}>
         <MapView
             ref={ref => { this.map = ref; }}
