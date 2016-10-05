@@ -11,6 +11,7 @@ import ParkList from '../components/ParkList.js';
 
 
 class Map extends Component {
+
   render() {
     return (
       <View style={styles.container}>
@@ -23,12 +24,12 @@ class Map extends Component {
             onRegionChange={this.regionUpdate.bind(this)}
             onRegionChangeComplete={this.annotationUpdate.bind(this)}
         >
-          {this.props.markers.map((marker, i )=> (
+          {this.props.markers.map((marker)=> (
               <MapView.Marker
-                  key={i}
+                  key={marker.title}
                   coordinate={marker.latlng}
                   title={marker.title}
-                  description={marker.address + ' ' + marker.distance}
+                  description={marker.address_display + ' ' + marker.distance}
                   image={require('../img/marker_blue.png')}
               />
           ))}

@@ -11,20 +11,24 @@ export default React.createClass ({
             <Image source={require('../img/parkBarkLogo.jpg')}/>
           </View>
           <View style={styles.textContainer}>
-            <Text style={styles.title} type="text">Find dog parks near you.</Text>
+            <Text style={styles.title} type="text">We're working on some cool stuff for you.</Text>
             <Text style={styles.text}>
-              Looking for just the perfect place to let your dog run free? Fenced? Water available? We've got all of the
-              details you're looking for.
+              We don't want you to get left out from seeing when your friends are at the park and popular park times.
             </Text>
-            <Button bgcolor={'#E79C23'} text={' --> '} onPress={this.onNextPress}/>
+            <Button bgcolor={'#fff'} text={'I don\'t want cool features'} onPress={this.onNextPress}/>
+            <Button bgcolor={'#fff'} text={'I want cool features'} onPress={this.onFeaturesPress}/>
           </View>
         </View>
     );
   },
 
   onNextPress: function() {
-    this.props.navigator.push({name: 'features'});
-},
+    this.props.navigator.push({name: 'map'});
+  },
+
+  onFeaturesPress(){
+  console.log('features!!!!')
+  }
 
 
 })

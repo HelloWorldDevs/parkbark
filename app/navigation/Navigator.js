@@ -1,5 +1,6 @@
 import Map from '../containers/Map';
 import Landing from '../containers/Landing';
+import AdditionalFeatures from '../containers/AdditionalFeatures';
 import ParkDetail from '../containers/ParkDetail';
 import Survey_NumDogs from '../components/Survey_NumDogs';
 import Survey_Notes from '../components/Survey_Notes';
@@ -11,6 +12,7 @@ import { connect } from 'react-redux';
 
 var ROUTES = {
   landing: Landing,
+  features: AdditionalFeatures,
   map: Map,
   surveyNumDogs: Survey_NumDogs,
   surveyNotes: Survey_Notes,

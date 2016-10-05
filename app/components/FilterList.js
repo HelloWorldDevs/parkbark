@@ -21,7 +21,6 @@ class FilterList extends Component {
   }
 
 
-
   renderFilters(){
     const currentFilters = [
       'Fenced',
@@ -42,37 +41,36 @@ class FilterList extends Component {
 
   render(){
     return (
-        <ScrollView bounces={false}>
+        <View>
           <TouchableOpacity
               onPress={this.onBackPress.bind(this)}
-              style={{position: 'absolute', top: 20, left: 20, zIndex: 1}}>
-            <Image style={{width: 25, height: 25, padding: 10}} source={require('../img/back-arrow@3x.png')}/>
+              style={{position: 'absolute', top: 30, right: 15, zIndex: 1}}>
+            <Image style={{width: 20, height: 20}} source={require('../img/button_close.png')}/>
           </TouchableOpacity>
+          <ScrollView style={styles.filterScrollView}bounces={false}>
+            <Text style={styles.filterTitle}>Filter Parks</Text>
             {this.renderFilters()}
-        </ScrollView>
+          </ScrollView>
+        </View>
     )
   }
 
 };
 
 const styles = {
-  // imageWrapper: {
-  //   flex: 1,
-  //   alignItems: 'stretch'
-  // },
-  // image: {
-  //   flex: 1,
-  //   height: 20
-  // },
-  // detailTitle: {
-  //   fontWeight: 'bold'
-  // }
+  filterScrollView: {
+    marginTop: 50,
+    padding: 10
+  },
+  filterTitle: {
+    color: '#ef3a39',
+    fontWeight: 'bold'
+  }
 }
 
 const mapStateToProps = (state) => {
   return {
-    state: state
-    // currentPark: state.getIn(['location', 'parks']).find((park) => park['title'] === state.get('current_park'))
+    selectedFilters: state
   }
 }
 

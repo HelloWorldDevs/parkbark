@@ -1,3 +1,5 @@
+var Entities = require('html-entities').XmlEntities;
+entities = new Entities();
 
 export function setLocations(state, locations) {
   // console.log('inside of setLocation');
@@ -35,6 +37,16 @@ export function updateParkSurvey(state, updateValue) {
     var update = {};
     update[updateValue.title] = updateValue.value;
     return state.setIn(['park_form', updateValue.title], updateValue.value);
+}
+
+export function updateFilter(state, filterAdd) {
+  // console.log('add ' + filterAdd);
+  return state.setIn(['filters' , 'selected'], filterAdd);
+}
+
+export function removeFilter(state, filterRemove) {
+  console.log('remove ' + filterRemove);
+  return state.removeIn(['filters', 'filter'], filterRemove);
 }
 
 // export function fetchParksAction() {
@@ -83,13 +95,14 @@ export function updateParksAction(LAT, LNG, DIST){
         return res.json();
       })
       .then(function(resJson) {
-        // console.log(resJson);
+        console.log(resJson);
         var parks = [];
         resJson.forEach((item)=> {
           var park = {};
           park.title = item.title;
           park.image = item.field_park_image;
           park.address = item.field_park_address;
+          park.address_display = entities.decode(item.field_park_address_display);
           park.amenities = item.field_park_amenities;
           park.details = item.field_park_details;
           var latitude = parseFloat(item.field_park_address.split(',')[0]);
