@@ -7,8 +7,7 @@ export default React.createClass ({
     return (
         <View style={styles.container}>
           <View style={styles.imageContainer}>
-            <Text style={styles.title}>Welcome to Park Bark</Text>
-            <Image source={require('../img/parkBarkLogo.jpg')}/>
+            <Image source={require('../img/construction_pup@2x.png')}/>
           </View>
           <View style={styles.textContainer}>
             <Text style={styles.title} type="text">We're working on some cool stuff for you.</Text>
@@ -16,7 +15,7 @@ export default React.createClass ({
               We don't want you to get left out from seeing when your friends are at the park and popular park times.
             </Text>
             <Button bgcolor={'#fff'} text={'I don\'t want cool features'} onPress={this.onNextPress}/>
-            <Button bgcolor={'#fff'} text={'I want cool features'} onPress={this.onFeaturesPress}/>
+            <Button bgcolor={'#f0382c'} text={'I want cool features'} onPress={this.onFeaturesPress}/>
           </View>
         </View>
     );
@@ -54,12 +53,12 @@ var styles = StyleSheet.create({
     padding: 1
   },
   title: {
-    color: '#E79C23',
+    color: '#f0382c',
     fontSize: 30,
     fontWeight: "200"
 
   },
   text: {
-    color: "#8E8E8E"
+    color: "#f0382c"
   }
 });

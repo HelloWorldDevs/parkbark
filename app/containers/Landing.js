@@ -8,7 +8,7 @@ export default React.createClass ({
         <View style={styles.container}>
           <View style={styles.imageContainer}>
             <Text style={styles.title}>Welcome to Park Bark</Text>
-            <Image source={require('../img/parkBarkLogo.jpg')}/>
+            <Image source={require('../img/welcomePup@2x.png')}/>
           </View>
           <View style={styles.textContainer}>
             <Text style={styles.title} type="text">Find dog parks near you.</Text>
