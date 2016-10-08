@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { View, Image, StyleSheet , Text} from 'react-native';
+import PushController from '../components/pushController';
+
 import Button from '../components/common/Button.js';
 
 export default React.createClass ({
@@ -16,6 +18,7 @@ export default React.createClass ({
             </Text>
             <Button bgcolor={'#fff'} text={'I don\'t want cool features'} onPress={this.onNextPress}/>
             <Button bgcolor={'#f0382c'} text={'I want cool features'} onPress={this.onFeaturesPress}/>
+            <PushController />
           </View>
         </View>
     );
@@ -26,7 +29,7 @@ export default React.createClass ({
   },
 
   onFeaturesPress(){
-  console.log('features!!!!')
+  return
   }
 
 
