@@ -3,6 +3,7 @@ import Landing from '../containers/Landing';
 import AdditionalFeatures from '../containers/AdditionalFeatures';
 import ParkDetail from '../containers/ParkDetail';
 import Survey_NumDogs from '../components/Survey_NumDogs';
+import Survey_DrinkingWater from '../components/Survey_DrinkingWater';
 import Survey_Notes from '../components/Survey_Notes';
 import FilterList from '../components/FilterList';
 import React, { Component } from 'react';
@@ -15,6 +16,7 @@ var ROUTES = {
   features: AdditionalFeatures,
   map: Map,
   surveyNumDogs: Survey_NumDogs,
+  surveyDrinkingWater: Survey_DrinkingWater,
   surveyNotes: Survey_Notes,
   parkdetail: ParkDetail,
   filterlist: FilterList
