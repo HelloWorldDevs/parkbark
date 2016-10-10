@@ -5,24 +5,32 @@ import { sendSurveyResponses } from '../src/core';
 import Button from './common/Button.js';
 import { Form, InputField } from 'react-native-form-generator';
 
-class Survey_NumDogs extends Component {
+class Survey_DrinkingWater extends Component {
     constructor(props){
     super(props);
     this.state = {
       formData:{},
     }
   }
-  handleFormChange(formData){
-    this.setState({formData:formData})
-    this.props.onFormChange && this.props.onFormChange(formData);
+
+  clickYes() {
+      const updateValue = {};
+      updateValue.title = 'drinking_water';
+      // Drinking Water TID for api
+      updateValue.value = 2;
+      this.saveFormData(updateValue);
   }
 
-  saveFormData() {
+  clickNo() {
       const updateValue = {};
-      updateValue.title = 'num_dogs';
-      updateValue.value = this.state.formData.num_dogs;
+      updateValue.title = 'drinking_water';
+      updateValue.value = 0;
+      this.saveFormData(updateValue);
+  }
+
+  saveFormData(updateValue) {
       this.props.dispatch({type: 'UPDATE_SURVEY', state: updateValue});
-      this.props.navigator.push({name: 'surveyDrinkingWater'});
+      this.props.navigator.push({name: 'surveyNotes'});
   }
 
 
@@ -37,16 +45,24 @@ class Survey_NumDogs extends Component {
                 style={styles.form}
             >
                        <Form
-                           ref='surveyFormNumDogs'
-                           onChange={this.handleFormChange.bind(this)}
+                           ref='surveyFormDrinkingWater'
                        >
-                           <InputField
-                               ref='num_dogs'
-                               placeholder='Number of Dogs'
+                           <Text>Is there drinking water for dogs here?</Text>
+
+                           <Button
+                            bgcolor={'#E79C23'}
+                            text={'YES'}
+                            onPress={this.clickYes.bind(this)}
+                            ref='drinking_water'
+                           />
+                           <Button
+                            bgcolor={'#E79C23'}
+                            text={'NO'}
+                            onPress={this.clickNo.bind(this)}
+                            ref='drinking_water'
                            />
 
                       </Form>
-              <Button bgcolor={'#E79C23'} text={' -->'} onPress={this.saveFormData.bind(this)}/>
             </View>
         )
     }
@@ -75,4 +91,4 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default connect(mapStateToProps)(Survey_NumDogs);
+export default connect(mapStateToProps)(Survey_DrinkingWater);

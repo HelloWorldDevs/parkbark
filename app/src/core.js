@@ -184,7 +184,7 @@ export function sendSurveyResponses(formData) {
             "field_device_id":[{"value": formData.deviceId}],
             "field_park_address_suggested":[{"value": formData.suggested_park}],
             "field_park_amenities": [
-            	{"target_id": formData.water},
+            	{"target_id": formData.drinking_water},
             	{"target_id": formData.benches}
             ]
         })
