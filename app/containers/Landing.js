@@ -1,8 +1,15 @@
 import React, { Component } from 'react';
 import { View, Image, StyleSheet , Text} from 'react-native';
+import { connect } from 'react-redux';
 import Button from '../components/common/Button.js';
+import {fetchAmenitiesAction} from '../src/core';
 
-export default React.createClass ({
+
+const Landing = React.createClass ({
+
+  componentDidMount: function(){
+    fetchAmenitiesAction().done((amenities) => this.props.dispatch({type: 'SET_AMENITIES', state: amenities}));
+  },
   render:function() {
     return (
         <View style={styles.container}>
@@ -25,6 +32,8 @@ export default React.createClass ({
   onNextPress: function() {
     this.props.navigator.push({name: 'features'});
 },
+
+
 
 
 })
@@ -59,3 +68,10 @@ var styles = StyleSheet.create({
     color: "#8E8E8E"
   }
 });
+
+
+const mapStateToProps = (state) => {
+  return {}
+}
+
+export default connect(mapStateToProps)(Landing);

@@ -1,10 +1,15 @@
 import React, { Component } from 'react';
-import { View, Image, StyleSheet , Text} from 'react-native';
+import { View, Image, StyleSheet , Text, AppState} from 'react-native';
 import PushController from '../components/pushController';
-
+import PushNotification from 'react-native-push-notification';
 import Button from '../components/common/Button.js';
-
 export default React.createClass ({
+
+  //TODO: setup geolocation setting location of current user on mount
+
+
+
+
   render:function() {
     return (
         <View style={styles.container}>
@@ -29,7 +34,11 @@ export default React.createClass ({
   },
 
   onFeaturesPress(){
-  return
+    PushNotification.requestPermissions();
+    PushNotification.localNotificationSchedule({
+      message: "My Notification Message", // (required)
+      date: new Date(Date.now() + (5 * 1000)) // in 5 secs
+    });
   }
 
 

@@ -39,14 +39,18 @@ export function updateParkSurvey(state, updateValue) {
     return state.setIn(['park_form', updateValue.title], updateValue.value);
 }
 
+export function setAmenities(state, amenities) {
+  return state.set('amenities', amenities);
+}
+
 export function updateFilter(state, filterAdd) {
   // console.log('add ' + filterAdd);
-  return state.setIn(['filters' , 'selected'], filterAdd);
+  return state.setIn(['filters' , filterAdd.title], filterAdd.value);
 }
 
 export function removeFilter(state, filterRemove) {
-  console.log('remove ' + filterRemove);
-  return state.removeIn(['filters', 'filter'], filterRemove);
+  // console.log('remove ' + filterRemove);
+  return state.removeIn(['filters', filterRemove.title], filterRemove.value);
 }
 
 // export function fetchParksAction() {
@@ -95,7 +99,7 @@ export function updateParksAction(LAT, LNG, DIST){
         return res.json();
       })
       .then(function(resJson) {
-        console.log(resJson);
+        // console.log(resJson);
         var parks = [];
         resJson.forEach((item)=> {
           var park = {};
@@ -140,6 +144,22 @@ export function fetchLocationAction(address, googleapi) {
       })
 }
 
+export function fetchAmenitiesAction() {
+  return fetch('http://parkbark-api.bfdig.com/amenities', {
+    method: 'get',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    }
+  })
+      .then(function(res) {
+        return res.json();
+      })
+      .then(function(resJson) {
+        return resJson;
+      });
+}
+
 export function sendSurveyResponses(formData) {
     fetch('http://parkbark-api.bfdig.com/entity/node', {
         method: 'POST',
@@ -171,7 +191,7 @@ export function sendSurveyResponses(formData) {
     })
     .then((response) => response.json())
     .then((responseData) => {
-        console.log(responseData)
+        // console.log(responseData)
     })
     .done();
 }

@@ -16,23 +16,14 @@ class FilterList extends Component {
     super(props);
   }
 
-  componentDidMount(){
+  componentWillMount(){
     const {currentPark} = this.props;
+    console.log(this.props.amenities)
   }
 
 
   renderFilters(){
-    const currentFilters = [
-      'Fenced',
-      'Small dog area',
-      'Water available',
-      'Off-leash',
-      'Dog swimming area',
-      'Trails',
-      'Benches',
-      'Restrooms'
-    ];
-    return currentFilters.map(filter => <FilterListDetail key={filter} filter={filter}/>)
+    return this.props.amenities.map(filter => <FilterListDetail key={filter.name} filter={filter.name}/>)
   }
 
   onBackPress(){
@@ -70,7 +61,8 @@ const styles = {
 
 const mapStateToProps = (state) => {
   return {
-    selectedFilters: state
+    selectedFilters: state,
+    amenities: state.get('amenities')
   }
 }
 

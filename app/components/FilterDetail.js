@@ -1,7 +1,7 @@
 import  React, {Component} from 'react';
 import {View, TouchableOpacity, Text, Animated, Easing} from 'react-native';
 import { connect } from 'react-redux';
-import Card from './common/Card.js'
+import Card from './common/Card.js';
 import CardSection from './common/CardSection.js'
 
 
@@ -40,12 +40,16 @@ export default class FilterDetail extends Component {
   }
 
   onPress(){
+    // const filter = {};
+    // filter.title = this.props.filter;
     // if(!this.state.red) {
-    //   this.props.dispatch({type: 'ADD_FILTER', state: this.props.filter});
-    //   console.log(this.props.filters);
+    //   filter.value = true;
+    //   this.props.dispatch({type: 'ADD_FILTER', state: filter});
+    //   console.log(this.props.filters.toJS());
     // }
     // else {
-    //   this.props.dispatch({type: 'REMOVE_FILTER', state: this.props.filter});
+    //   // this.props.dispatch({type: 'REMOVE_FILTER', state: filter});
+    //   // console.log(this.props.filters.toJS())
     // }
     this.colorFade();
   }

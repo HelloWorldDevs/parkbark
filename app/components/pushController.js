@@ -6,7 +6,8 @@ export default class PushController extends Component{
     PushNotification.configure({
       onNotification: function (notification) {
         console.log('notification: ', notification)
-      }
+      },
+      requestPermissions: false
     })
   }
   render() {
