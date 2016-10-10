@@ -1,5 +1,5 @@
 import {Map} from 'immutable';
-import {setLocations, updateSearch, updateAnnotations, updateRegion, updateSelectedPark, setParkSurvey, updateParkSurvey, setAmenities, updateFilter, removeFilter} from '../src/core';
+import {setLocations, updateSearch, updateAnnotations, updateRegion, updateSelectedPark, setParkSurvey, updateParkSurvey, setAmenities, addFilter, removeFilter} from '../src/core';
 
 
 export default function(state = Map(), action) {
@@ -23,7 +23,7 @@ export default function(state = Map(), action) {
     case 'SET_AMENITIES' :
       return setAmenities(state, action.state);
     case 'ADD_FILTER' :
-      return updateFilter(state, action.state);
+      return addFilter(state, action.state);
     case 'REMOVE_FILTER' :
         return removeFilter(state, action.state);
   }

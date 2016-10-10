@@ -1,3 +1,4 @@
+import {fromJS} from 'immutable';
 var Entities = require('html-entities').XmlEntities;
 entities = new Entities();
 
@@ -40,17 +41,17 @@ export function updateParkSurvey(state, updateValue) {
 }
 
 export function setAmenities(state, amenities) {
-  return state.set('amenities', amenities);
+  return state.set('amenities', fromJS(amenities));
 }
 
-export function updateFilter(state, filterAdd) {
-  // console.log('add ' + filterAdd);
-  return state.setIn(['filters' , filterAdd.title], filterAdd.value);
+export function addFilter(state, filterIndex) {
+  console.log('add ' + filterIndex);
+  return state.setIn(['amenities', filterIndex, 'selected'], true);
 }
 
 export function removeFilter(state, filterRemove) {
   // console.log('remove ' + filterRemove);
-  return state.removeIn(['filters', filterRemove.title], filterRemove.value);
+  return state.setIn(['amenities', filterRemove, 'selected'], false);
 }
 
 // export function fetchParksAction() {

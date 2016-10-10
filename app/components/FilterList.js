@@ -61,8 +61,7 @@ const styles = {
 
 const mapStateToProps = (state) => {
   return {
-    selectedFilters: state,
-    amenities: state.get('amenities')
+    amenities: state.get('amenities').toJS()
   }
 }
 

@@ -8,15 +8,16 @@ import CardSection from './common/CardSection.js'
 export default class FilterDetail extends Component {
   constructor(props) {
     super(props)
-    this.colorValue = new Animated.Value(0);
-    this.state = {
-      red: false,
-      selectedFilters: []
+    if (this.props.currentFilter.selected) {
+      this.colorValue = new Animated.Value(1);
+    } else {
+      this.colorValue = new Animated.Value(0);
     }
+
   }
 
   colorFade() {
-    if (!this.state.red) {
+    if (!this.props.currentFilter.selected) {
       Animated.timing(
           this.colorValue,
           {
@@ -40,17 +41,14 @@ export default class FilterDetail extends Component {
   }
 
   onPress(){
-    // const filter = {};
-    // filter.title = this.props.filter;
-    // if(!this.state.red) {
-    //   filter.value = true;
-    //   this.props.dispatch({type: 'ADD_FILTER', state: filter});
-    //   console.log(this.props.filters.toJS());
-    // }
-    // else {
-    //   // this.props.dispatch({type: 'REMOVE_FILTER', state: filter});
-    //   // console.log(this.props.filters.toJS())
-    // }
+    console.log(this.props.currentFilter);
+    console.log(this.props.currentFilterIndex);
+    if(!this.props.currentFilter.selected) {
+      this.props.dispatch({type: 'ADD_FILTER', state: this.props.currentFilterIndex});
+    }
+    else {
+      this.props.dispatch({type: 'REMOVE_FILTER', state: this.props.currentFilterIndex});
+    }
     this.colorFade();
   }
 
@@ -64,7 +62,6 @@ export default class FilterDetail extends Component {
       inputRange: [0, 1],
       outputRange: ['#fff', '#ef3a39']
     })
-
     return (
         <View>
             <TouchableOpacity
@@ -90,9 +87,10 @@ const styles = {
 }
 
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state, ownProps) => {
   return {
-    filters: state.get('filters')
+    currentFilterIndex: state.get('amenities').toJS().findIndex(a => a['name'] === ownProps.filter),
+    currentFilter: state.get('amenities').toJS().find((a) => a['name'] === ownProps.filter)
   }
 }
 

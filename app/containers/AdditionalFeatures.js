@@ -5,10 +5,6 @@ import PushNotification from 'react-native-push-notification';
 import Button from '../components/common/Button.js';
 export default React.createClass ({
 
-  //TODO: setup geolocation setting location of current user on mount
-
-
-
 
   render:function() {
     return (
