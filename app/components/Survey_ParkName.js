@@ -5,7 +5,7 @@ import { sendSurveyResponses } from '../src/core';
 import Button from './common/Button.js';
 import { Form, InputField } from 'react-native-form-generator';
 
-class Survey_Notes extends Component {
+class Survey_ParkName extends Component {
     constructor(props){
     super(props);
     this.state = {
@@ -18,35 +18,26 @@ class Survey_Notes extends Component {
   }
 
   saveFormData() {
-    const updateValue = {};
-    updateValue.title = 'notes';
-    updateValue.value = this.state.formData.notes;
-    this.props.dispatch({type: 'UPDATE_SURVEY', state: updateValue});
-    // If last question...
-    // Wait for dispatch to UPDATE_SURVEY to complete
-    setTimeout(() => {
-        this.sendFormData();
-    }, 2000);
-  }
-
-  sendFormData() {
-      const formData = this.props.parkForm;
-      console.log(formData)
-      sendSurveyResponses(formData);
+      const updateValue = {};
+      updateValue.title = 'title';
+      updateValue.value = this.state.formData.title;
+      this.props.dispatch({type: 'UPDATE_SURVEY', state: updateValue});
+      this.props.navigator.push({name: 'parkAddress'});
   }
 
   componentDidMount() {
     //   console.log(this.props.parkForm);
+
   }
 
     render() {
         return (
-            <View ref='surveyForm' style={styles.form}>
-                    <Form ref='surveyFormNotes' onChange={this.handleFormChange.bind(this)}>
-                       <Text>Tell Us About The Park</Text>
+            <View ref='suggest_park' style={styles.form}>
+                    <Form ref='SuggestedPark' onChange={this.handleFormChange.bind(this)}>
+                       <Text>What's this park called?</Text>
                        <InputField
-                           ref='notes'
-                           placeholder='Notes'
+                           ref='title'
+                           placeholder='Park name'
                        />
                       <Button bgcolor={'#E79C23'} text={' -->'} onPress={this.saveFormData.bind(this)}/>
                     </Form>
@@ -79,4 +70,4 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default connect(mapStateToProps)(Survey_Notes);
+export default connect(mapStateToProps)(Survey_ParkName);

@@ -31,7 +31,8 @@ const ParkList = (props) => {
   }
 
   this.onNextPress = () => {
-      props.navigator.push({name: 'fullSurvey'});
+      props.dispatch({type: 'SET_PARK_SURVEY', state: 'Suggest a Park'});
+      props.navigator.push({name: 'parkName'});
   }
 
   const bottom = this.slideValue.interpolate({
@@ -78,7 +79,7 @@ const styles = {
 
 const mapStateToProps = (state) => {
   return {
-    parks: state.getIn(['location', 'parks'])
+    parks: state.getIn(['location', 'parks']),
   }
 }
 
