@@ -20,7 +20,7 @@ class Survey_NumDogs extends Component {
   saveFormData() {
       const updateValue = {};
       updateValue.title = 'num_dogs';
-      updateValue.value = this.state.formData.num_dogs;
+      updateValue.value = this.state.formData.num_dogs || 5;
       this.props.dispatch({type: 'UPDATE_SURVEY', state: updateValue});
       this.props.navigator.push({name: 'surveyDrinkingWater'});
   }
@@ -40,13 +40,14 @@ class Survey_NumDogs extends Component {
                            ref='surveyFormNumDogs'
                            onChange={this.handleFormChange.bind(this)}
                        >
+                           <Text>How many dogs do you see at the park?</Text>
                            <InputField
                                ref='num_dogs'
-                               placeholder='Number of Dogs'
+                               value='5'
                            />
 
                       </Form>
-              <Button bgcolor={'#E79C23'} text={' -->'} onPress={this.saveFormData.bind(this)}/>
+              <Button bgcolor={'#E79C23'} text={' OK '} onPress={this.saveFormData.bind(this)}/>
             </View>
         )
     }
