@@ -7,20 +7,16 @@ import {
     Image,
     TouchableOpacity
 } from 'react-native';
-import Card from '../components/common/Card';
-import FilterListDetail from './FilterDetail';
 import { connect } from 'react-redux';
+import Button from './common/Button';
+import FilterListDetail from './FilterDetail';
+import {updateParksByFilterAction} from '../src/core';
+
 
 class FilterList extends Component {
   constructor(props){
     super(props);
   }
-
-  componentWillMount(){
-    const {currentPark} = this.props;
-    console.log(this.props.amenities)
-  }
-
 
   renderFilters(){
     return this.props.amenities.map(filter => <FilterListDetail key={filter.name} filter={filter.name}/>)
@@ -30,6 +26,25 @@ class FilterList extends Component {
     this.props.navigator.pop();
   }
 
+  onFilterPress() {
+    console.log('filter');
+    console.log(this.props.selectedFilters);
+    const filterQuery = this.props.selectedFilters.reduce((p, n, i) => {
+      if ( i !== 0) {
+        return p + ',' + n.name
+      }
+      return p + n.name
+    }, '');
+    const coords = this.props.coords.latitude + ',' + this.props.coords.longitude;
+    updateParksByFilterAction(coords, filterQuery).done((state) => {
+      this.props.dispatch({type: 'UPDATE_ANNOTATIONS', state: state});
+      this.props.navigator.pop()
+    });
+  }
+
+  onClearFiltersPress() {
+    console.log('clear filters')
+  }
   render(){
     return (
         <View>
@@ -38,10 +53,12 @@ class FilterList extends Component {
               style={{position: 'absolute', top: 30, right: 15, zIndex: 1}}>
             <Image style={{width: 20, height: 20}} source={require('../img/button_close.png')}/>
           </TouchableOpacity>
-          <ScrollView style={styles.filterScrollView}bounces={false}>
+          <View style={styles.filterScrollView}>
             <Text style={styles.filterTitle}>Filter Parks</Text>
             {this.renderFilters()}
-          </ScrollView>
+            <Button bgcolor={'transparent'} text={'Clear Filters'} onPress={this.onClearFiltersPress}/>
+            <Button bgcolor={'#f0382c'} text={'Filter'} onPress={this.onFilterPress.bind(this)}/>
+          </View>
         </View>
     )
   }
@@ -59,9 +76,12 @@ const styles = {
   }
 }
 
+
 const mapStateToProps = (state) => {
   return {
-    amenities: state.get('amenities').toJS()
+    amenities: state.get('amenities').toJS(),
+    selectedFilters: state.get('amenities').toJS().filter((a) => a['selected'] === true),
+    coords: state.getIn(['location', 'coords'])
   }
 }
 

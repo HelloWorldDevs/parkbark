@@ -42,14 +42,14 @@ class Map extends Component {
 
 
 //onPress={this.scrollToMarker.bind(this)}
-
-scrollToMarker(region) {
-    this.map.animateToCoordinate(region.nativeEvent.coordinate, 100);
-  }
+//
+// scrollToMarker(region) {
+//     this.map.animateToCoordinate(region.nativeEvent.coordinate, 100);
+//   }
 
 
   regionUpdate(region){
-    console.log('updating region')
+    // console.log('updating region')
       this.props.dispatch({
         type: 'UPDATE_REGION',
         state: region
@@ -58,11 +58,11 @@ scrollToMarker(region) {
 
   annotationUpdate(region){
     setTimeout(()=>{
-      console.log('updating annotations');
+      // console.log('updating annotations');
       var DIST = Math.ceil(this.props.coords.latitudeDelta * 69/2);
       var LAT = this.props.coords.latitude;
       var LNG = this.props.coords.longitude;
-      console.log('lat: ' + LAT, 'long: ' + LNG, 'dist: ' + DIST);
+      // console.log('lat: ' + LAT, 'long: ' + LNG, 'dist: ' + DIST);
       updateParksAction(LAT , LNG, DIST).done((state) => {
         this.props.dispatch({type: 'UPDATE_ANNOTATIONS', state: state});
       });
@@ -85,20 +85,14 @@ var styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: 'white',
     borderWidth: 3,
-    borderColor: '#008eff'
   },
   mapContainer: {
-    // margin: 5,
-    // marginTop: 5,
-    // marginBottom: 5,
     marginLeft: 0,
     marginRight: 0,
     flex: 5,
     alignSelf: 'stretch',
     justifyContent : 'center',
     alignItems: 'center',
-    // borderWidth: 2,
-    borderColor: '#008eff'
   },
   map: {
     position: 'absolute',
@@ -106,10 +100,6 @@ var styles = StyleSheet.create({
     left: 0,
     top: 0,
     bottom: 0,
-    // margin: 10,
-    borderWidth: 1,
-    borderColor: '#7ac4ff',
-    borderRadius: 5
   },
 })
 

@@ -17,9 +17,8 @@ export default React.createClass ({
             <Text style={styles.text}>
               We don't want you to get left out from seeing when your friends are at the park and popular park times.
             </Text>
-            <Button bgcolor={'#fff'} text={'I don\'t want cool features'} onPress={this.onNextPress}/>
+            <Button bgcolor={'transparent'} text={'I don\'t want cool features'} onPress={this.onNextPress}/>
             <Button bgcolor={'#f0382c'} text={'I want cool features'} onPress={this.onFeaturesPress}/>
-            <PushController />
           </View>
         </View>
     );
@@ -30,7 +29,13 @@ export default React.createClass ({
   },
 
   onFeaturesPress(){
-    PushNotification.requestPermissions();
+    PushNotification.configure({
+      onNotification: function (notification) {
+        console.log('notification: ', notification)
+      },
+      requestPermissions: true
+    })
+    // PushNotification.requestPermissions();
     PushNotification.localNotificationSchedule({
       message: "My Notification Message", // (required)
       date: new Date(Date.now() + (5 * 1000)) // in 5 secs

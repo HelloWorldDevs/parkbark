@@ -13,7 +13,6 @@ export default class FilterDetail extends Component {
     } else {
       this.colorValue = new Animated.Value(0);
     }
-
   }
 
   colorFade() {
@@ -26,7 +25,6 @@ export default class FilterDetail extends Component {
             easing: Easing.elastic(1)
           }
       ).start()
-      this.setState({red: true});
     } else {
       Animated.timing(
           this.colorValue,
@@ -36,13 +34,10 @@ export default class FilterDetail extends Component {
             easing: Easing.elastic(1)
           }
       ).start();
-      this.setState({red: false})
     }
   }
 
   onPress(){
-    console.log(this.props.currentFilter);
-    console.log(this.props.currentFilterIndex);
     if(!this.props.currentFilter.selected) {
       this.props.dispatch({type: 'ADD_FILTER', state: this.props.currentFilterIndex});
     }
@@ -65,8 +60,7 @@ export default class FilterDetail extends Component {
     return (
         <View>
             <TouchableOpacity
-                onPress={this.onPress.bind(this)}
-                style={styles.filterButton}>
+                onPress={this.onPress.bind(this)}>
               <Card>
                   <Animated.Text  style={{color}} >{this.props.filter}</Animated.Text>
                   <Animated.Image style={{backgroundColor, borderRadius: 10, width: 20, height: 20}} source={require('../img/Ok@3x.png')} />

@@ -4,12 +4,8 @@ import { connect } from 'react-redux';
 import Button from './common/Button.js';
 import ParkListDetail from './ParkListDetail.js';
 
-renderParkListDetails = (props) => {
-  return props.parks.map(park => <ParkListDetail touchable={true} navigator={props.navigator} key={park.title} title={park.title} address={park.address} distance={park.distance} amenities={park.amenities}/>)
-};
 
 const ParkList = (props) => {
-
   this.slideValue = new Animated.Value(0);
 
   this.slideIn = () => {
@@ -38,6 +34,15 @@ const ParkList = (props) => {
     inputRange: [0, 1],
     outputRange: [-400, 0]
   });
+
+  this.onDetailPress = (title) => {
+    props.dispatch({type: 'UPDATE_SElECTED_PARK', state: title});
+    props.navigator.push({name:'parkdetail'});
+  }
+
+  renderParkListDetails = (props) => {
+    return props.parks.map(park => <ParkListDetail onPress={() => this.onDetailPress(park.title)} touchable={true} navigator={props.navigator} key={park.title} title={park.title} address={park.address} address_display={park.address_display} distance={park.distance} amenities={park.amenities}/>)
+  };
 
   return (
     <View style={styles.scrollConainer}>

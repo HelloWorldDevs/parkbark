@@ -12,7 +12,6 @@ class ParkListDetails extends Component{
 
   }
 
-
   fadeIn() {
     this.fadeValue.setValue(0);
     Animated.timing(
@@ -22,8 +21,8 @@ class ParkListDetails extends Component{
         duration: 1000,
         easing: Easing.elastic(1)
       }
-  ).start()
-}
+    ).start()
+  }
 
   fadeOut() {
     this.fadeValue.setValue(1);
@@ -37,7 +36,6 @@ class ParkListDetails extends Component{
     ).start()
   }
 
-
   componentDidMount(){
     this.fadeIn();
   }
@@ -46,38 +44,23 @@ class ParkListDetails extends Component{
     this.fadeOut();
   }
 
-  onPress(props) {
-    const selectedPark = this.props.title;
-    this.props.dispatch({type: 'UPDATE_SElECTED_PARK', state: selectedPark})
-    this.props.navigator.push({name:'parkdetail'});
-  }
-
-
   render(){
     const opacity = this.fadeValue.interpolate({
       inputRange: [0, 1],
       outputRange: [0, 1]
     });
     return(
-      this.props.touchable ?
       <Animated.View style={{opacity}}>
-        <TouchableOpacity onPress={this.onPress.bind(this)}>
+        <TouchableOpacity onPress={this.props.onPress}>
           <Card>
             <CardSection>
               <Text>{this.props.title}</Text>
-              <Text>6336 SE Lincoln St, Portland, OR 97215</Text>
+              <Text style={styles.parkAddress}>{this.props.address_display}</Text>
             </CardSection>
             <Text style={styles.parkDistance}>{this.props.distance}</Text>
           </Card>
         </TouchableOpacity>
-      </Animated.View>  :
-      <Card>
-        <CardSection>
-          <Text>{this.props.title}</Text>
-          <Text>6336 SE Lincoln St, Portland, OR 97215</Text>
-        </CardSection>
-        <Text style={styles.parkDistance}>{this.props.distance}</Text>
-      </Card>
+      </Animated.View>
     )
   }
 }
@@ -86,9 +69,9 @@ const styles = {
   // parkTitle :{
   //
   // },
-  // parkAddress: {
-  //
-  // },
+  parkAddress: {
+    width: 200
+  },
   parkDistance: {
     flex: 1,
     color: '#f58120',

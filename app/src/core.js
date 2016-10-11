@@ -161,6 +161,47 @@ export function fetchAmenitiesAction() {
       });
 }
 
+
+export function updateParksByFilterAction(coords, query) {
+  console.log('http://parkbark-api.bfdig.com/parks?loc=' + coords + '<=5miles&amenities=' + query);
+  return fetch('http://parkbark-api.bfdig.com/parks?loc=' + coords + '<=5miles&amenities=' + query, {
+    method: 'get',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    }
+  })
+      .then(function(res) {
+        console.log(res);
+        return res.json();
+      }).then(function(resJson) {
+        console.log(resJson);
+        var parks = [];
+        resJson.forEach((item)=> {
+          var park = {};
+          park.title = item.title;
+          park.image = item.field_park_image;
+          park.address = item.field_park_address;
+          park.address_display = entities.decode(item.field_park_address_display);
+          park.amenities = item.field_park_amenities;
+          park.details = item.field_park_details;
+          var latitude = parseFloat(item.field_park_address.split(',')[0]);
+          var longitude = parseFloat(item.field_park_address.split(',')[1]);
+          park.latlng = {
+            latitude: latitude,
+            longitude: longitude
+          }
+          park.distance = parseFloat(item.field_park_address_proximity).toFixed(1) + 'mi';
+          parks.push(park);
+        })
+        // console.log(parks);
+        return parks;
+      })
+      .catch((error) => {
+        console.error(error);
+      })
+}
+
 export function sendSurveyResponses(formData) {
     fetch('http://parkbark-api.bfdig.com/entity/node', {
         method: 'POST',

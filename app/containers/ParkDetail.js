@@ -6,7 +6,8 @@ import {
     Text,
     StyleSheet,
     Image,
-    TouchableOpacity
+    TouchableOpacity,
+    Linking
 } from 'react-native';
 var ResponsiveImage = require('react-native-responsive-image');
 import Button from '../components/common/Button';
@@ -29,7 +30,6 @@ class ParkDetail extends Component {
   }
 
   renderAmenities({amenities}){
-    // console.log(amenities);
     return amenities.split(',').map(amenity => <Amenity key={amenity} amenity={amenity}/>)
   }
 
@@ -43,6 +43,14 @@ class ParkDetail extends Component {
     this.props.dispatch({type: 'SET_PARK_SURVEY', state: title});
     this.props.navigator.push({name: 'surveyNumDogs'});
 }
+
+  onDetailPress() {
+    //TODO: set url on android platform
+    lat = parseInt(this.props.currentPark.address.split(',')[0]);
+    long = parseInt(this.props.currentPark.address.split(',')[1]);
+    var url = 'http://maps.apple.com/?daddr=' + this.props.currentPark.address;
+    Linking.openURL(url)
+  }
 
   render(){
     const {currentPark} = this.props;
@@ -59,7 +67,7 @@ class ParkDetail extends Component {
                  initHeight="225"
             />
           </View>
-          <ParkListDetail key={currentPark.title} title={currentPark.title} address={currentPark.address} distance={currentPark.distance}/>
+          <ParkListDetail key={currentPark.title} onPress={this.onDetailPress.bind(this)} title={currentPark.title} address={currentPark.address} address_display={currentPark.address_display} distance={currentPark.distance}/>
           <Card>
             <View style={{flex: 1, flexDirection: 'column'}}>
               <CardSection>
