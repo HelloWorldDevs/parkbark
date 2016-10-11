@@ -2,6 +2,7 @@ import Map from '../containers/Map';
 import Landing from '../containers/Landing';
 import AdditionalFeatures from '../containers/AdditionalFeatures';
 import ParkDetail from '../containers/ParkDetail';
+import FullSurvey from '../components/FullSurvey';
 import Survey_NumDogs from '../components/Survey_NumDogs';
 import Survey_DrinkingWater from '../components/Survey_DrinkingWater';
 import Survey_Notes from '../components/Survey_Notes';
@@ -18,6 +19,7 @@ var ROUTES = {
   surveyNumDogs: Survey_NumDogs,
   surveyDrinkingWater: Survey_DrinkingWater,
   surveyNotes: Survey_Notes,
+  fullSurvey: FullSurvey,
   parkdetail: ParkDetail,
   filterlist: FilterList
 };
