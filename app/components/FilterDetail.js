@@ -6,17 +6,23 @@ import CardSection from './common/CardSection.js'
 
 
 export default class FilterDetail extends Component {
-  constructor(props) {
-    super(props)
-    if (this.props.currentFilter.selected) {
+
+  //assigns colorValue for animation on component mount depending on staged or selected
+  componentWillMount() {
+    const { staged, selected } = this.props.currentFilter;
+    if (selected || staged === 'add') {
       this.colorValue = new Animated.Value(1);
     } else {
       this.colorValue = new Animated.Value(0);
     }
   }
 
+
+
+  //colorFade in or out depending on staged or selected props
   colorFade() {
-    if (!this.props.currentFilter.selected) {
+    const { staged, selected } = this.props.currentFilter;
+    if (!staged || staged === 'remove') {
       Animated.timing(
           this.colorValue,
           {
@@ -25,7 +31,8 @@ export default class FilterDetail extends Component {
             easing: Easing.elastic(1)
           }
       ).start()
-    } else {
+    }
+    if(staged === 'add' || selected) {
       Animated.timing(
           this.colorValue,
           {
@@ -37,26 +44,43 @@ export default class FilterDetail extends Component {
     }
   }
 
+
+  //adds staged for add or remove prop to park amenity object in immutable state.
   onPress(){
-    if(!this.props.currentFilter.selected) {
-      this.props.dispatch({type: 'ADD_FILTER', state: this.props.currentFilterIndex});
+    const {currentFilterIndex} = this.props;
+    const { staged, selected } = this.props.currentFilter;
+    if(!staged || staged === 'remove') {
+      this.props.dispatch({type: 'ADD_STAGED_FILTER', state: currentFilterIndex});
     }
-    else {
-      this.props.dispatch({type: 'REMOVE_FILTER', state: this.props.currentFilterIndex});
-    }
+    if(staged === 'add' || selected) {
+        this.props.dispatch({type: 'REMOVE_STAGED_FILTER', state: currentFilterIndex});
+      }
     this.colorFade();
   }
 
+
+
   render() {
+    //double check for staged or selected on re-render
+    const { staged, selected } = this.props.currentFilter;
+    if(!staged && !selected) {
+      Animated.timing(
+          this.colorValue,
+          {
+            toValue: 0,
+            duration: 500,
+            easing: Easing.elastic(1)
+          }
+      ).start();
+    }
     const color = this.colorValue.interpolate({
       inputRange: [0, 1],
       outputRange: ['#5e5e5e', '#ef3a39']
     });
-
     const backgroundColor = this.colorValue.interpolate({
       inputRange: [0, 1],
       outputRange: ['#fff', '#ef3a39']
-    })
+    });
     return (
         <View>
             <TouchableOpacity
@@ -69,7 +93,6 @@ export default class FilterDetail extends Component {
         </View>
     )
   }
-
 }
 
 const styles = {

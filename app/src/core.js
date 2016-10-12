@@ -3,16 +3,8 @@ var Entities = require('html-entities').XmlEntities;
 entities = new Entities();
 
 export function setLocations(state, locations) {
-  // console.log('inside of setLocation');
-  // console.log(locations);
   return state.set('location', locations);
 }
-
-//TODO set navigator props and routes to redux store?
-// export function setNavigatorProps(state, navigatorProps){
-//   console.log('inside of setRoutes');
-//   return state.set('navigator_props', navigatorProps);
-// }
 
 export function updateAnnotations(state, newState) {
   return state.updateIn(['location','parks'], 0,  parks => parks = newState);
@@ -44,14 +36,29 @@ export function setAmenities(state, amenities) {
   return state.set('amenities', fromJS(amenities));
 }
 
-export function addFilter(state, filterIndex) {
-  console.log('add ' + filterIndex);
-  return state.setIn(['amenities', filterIndex, 'selected'], true);
+export function addStagedFilter(state, filterIndex) {
+  return state.setIn(['amenities', filterIndex, 'staged'], 'add');
 }
 
-export function removeFilter(state, filterRemove) {
-  // console.log('remove ' + filterRemove);
-  return state.setIn(['amenities', filterRemove, 'selected'], false);
+export function removeStagedFilter(state, filterIndex) {
+  return state.setIn(['amenities', filterIndex, 'staged'], 'remove');
+}
+
+export function addFilter(state, filterIndex) {
+  console.log('add filter index', filterIndex)
+  return state.setIn(['amenities', filterIndex, 'selected'], true);
+}
+export function removeFilter(state, filterIndex) {
+  console.log('remove filter index', filterIndex)
+  return state.setIn(['amenities', filterIndex, 'selected'], false);
+}
+
+export function clearFilters(state, filterState) {
+  return state.update('amenities', amenities => amenities.map(amenity => amenity.update('selected', selected => selected = filterState)));
+}
+
+export function clearStaged(state, filterState){
+  return state.update('amenities', amenities => amenities.map(amenity => amenity.update('staged', staged => staged = filterState)));
 }
 
 // export function fetchParksAction() {
@@ -163,7 +170,7 @@ export function fetchAmenitiesAction() {
 
 
 export function updateParksByFilterAction(coords, query) {
-  console.log('http://parkbark-api.bfdig.com/parks?loc=' + coords + '<=5miles&amenities=' + query);
+  // console.log('http://parkbark-api.bfdig.com/parks?loc=' + coords + '<=5miles&amenities=' + query);
   return fetch('http://parkbark-api.bfdig.com/parks?loc=' + coords + '<=5miles&amenities=' + query, {
     method: 'get',
     headers: {
@@ -172,10 +179,10 @@ export function updateParksByFilterAction(coords, query) {
     }
   })
       .then(function(res) {
-        console.log(res);
+        // console.log(res);
         return res.json();
       }).then(function(resJson) {
-        console.log(resJson);
+        // console.log(resJson);
         var parks = [];
         resJson.forEach((item)=> {
           var park = {};
