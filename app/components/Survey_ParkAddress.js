@@ -5,7 +5,7 @@ import { sendSurveyResponses } from '../src/core';
 import Button from './common/Button.js';
 import { Form, InputField } from 'react-native-form-generator';
 
-class Survey_Notes extends Component {
+class Survey_ParkAddress extends Component {
     constructor(props){
     super(props);
     this.state = {
@@ -18,35 +18,27 @@ class Survey_Notes extends Component {
   }
 
   saveFormData() {
-    const updateValue = {};
-    updateValue.title = 'notes';
-    updateValue.value = this.state.formData.notes;
-    this.props.dispatch({type: 'UPDATE_SURVEY', state: updateValue});
-    // If last question...
-    // Wait for dispatch to UPDATE_SURVEY to complete
-    setTimeout(() => {
-        this.sendFormData();
-    }, 2000);
+      const updateValue = {};
+      updateValue.title = 'suggested_park';
+      updateValue.value = this.state.formData.park_address;
+      this.props.dispatch({type: 'UPDATE_SURVEY', state: updateValue});
+      this.props.navigator.push({name: 'surveyNotes'});
   }
 
-  sendFormData() {
-      const formData = this.props.parkForm;
-      console.log(formData)
-      sendSurveyResponses(formData);
-  }
 
   componentDidMount() {
     //   console.log(this.props.parkForm);
+
   }
 
     render() {
         return (
-            <View ref='surveyForm' style={styles.form}>
-                    <Form ref='surveyFormNotes' onChange={this.handleFormChange.bind(this)}>
-                       <Text>Tell Us About The Park</Text>
+            <View ref='suggest_park' style={styles.form}>
+                    <Form ref='SuggestedPark' onChange={this.handleFormChange.bind(this)}>
+                       <Text>Where is this park?</Text>
                        <InputField
-                           ref='notes'
-                           placeholder='Notes'
+                           ref='park_address'
+                           placeholder='Park address'
                        />
                       <Button bgcolor={'#E79C23'} text={' -->'} onPress={this.saveFormData.bind(this)}/>
                     </Form>
@@ -72,11 +64,10 @@ var styles = StyleSheet.create({
     }
 })
 
-
 const mapStateToProps = (state) => {
   return {
     parkForm: state.get('park_form').toJS() || {}
   }
 }
 
-export default connect(mapStateToProps)(Survey_Notes);
+export default connect(mapStateToProps)(Survey_ParkAddress);

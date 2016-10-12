@@ -23,6 +23,7 @@ export function updateSelectedPark(state, selectedPark) {
 }
 
 export function setParkSurvey(state, selectedParkTitle) {
+    console.log('set park survey')
   return state.merge({'park_form': {'title': selectedParkTitle}});
 }
 

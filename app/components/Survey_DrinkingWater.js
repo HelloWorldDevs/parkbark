@@ -59,7 +59,7 @@ class Survey_DrinkingWater extends Component {
                             bgcolor={'#E79C23'}
                             text={'NO'}
                             onPress={this.clickNo.bind(this)}
-                            ref='drinking_water'
+                            ref='drinking_water_no'
                            />
 
                       </Form>

@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, ScrollView, Animated, Easing} from 'react-native';
+import {View, ScrollView, Animated, Easing, Text} from 'react-native';
 import { connect } from 'react-redux';
 import Button from './common/Button.js';
 import ParkListDetail from './ParkListDetail.js';
@@ -30,6 +30,11 @@ const ParkList = (props) => {
     ).start()
   }
 
+  this.onNextPress = () => {
+      props.dispatch({type: 'SET_PARK_SURVEY', state: 'Suggest a Park'});
+      props.navigator.push({name: 'parkName'});
+  }
+
   const bottom = this.slideValue.interpolate({
     inputRange: [0, 1],
     outputRange: [-400, 0]
@@ -53,10 +58,12 @@ const ParkList = (props) => {
         <ScrollView bounces={false} style={styles.scrollView}>
           <Button bgcolor={'#fff'} text={'Close'} onPress={this.slideOut}/>
           {renderParkListDetails(props)}
+          <Button bgcolor={'#f0382c'} text={'Suggest a park'} onPress={this.onNextPress.bind(this)}/>
         </ScrollView>
       </Animated.View>
       </View>
   )
+
 };
 
 const styles = {
@@ -70,12 +77,10 @@ const styles = {
   }
 };
 
-
 const mapStateToProps = (state) => {
   return {
-    parks: state.getIn(['location', 'parks'])
+    parks: state.getIn(['location', 'parks']),
   }
 }
 
 export default connect(mapStateToProps)(ParkList);
-
