@@ -1,6 +1,7 @@
 package com.parkbark;
 
 import com.facebook.react.ReactActivity;
+import com.sbugert.rnadmob.RNAdMobPackage;
 
 public class MainActivity extends ReactActivity {
 
