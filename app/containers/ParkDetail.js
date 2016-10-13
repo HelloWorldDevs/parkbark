@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import {fromJS} from 'immutable';
+import { AdMobBanner } from 'react-native-admob';
 import {
     View,
     ScrollView,
@@ -70,6 +71,13 @@ class ParkDetail extends Component {
           <ParkListDetail key={currentPark.title} onPress={this.onDetailPress.bind(this)} title={currentPark.title} address={currentPark.address} address_display={currentPark.address_display} distance={currentPark.distance}/>
           <Card>
             <View style={{flex: 1, flexDirection: 'column'}}>
+            <CardSection>
+            <AdMobBanner
+              bannerSize="banner"
+              adUnitID="ca-app-pub-3940256099942544/6300978111" //fake id
+              testDeviceID="EMULATOR"
+              didFailToReceiveAdWithError={this.bannerError} />
+            </CardSection>
               <CardSection>
                   <Text style={styles.detailsTitle}>PARK DETAILS</Text>
                   <Text>{currentPark.details}</Text>
