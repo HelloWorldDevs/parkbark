@@ -15,6 +15,7 @@ import Card from '../components/common/Card.js';
 import CardSection from '../components/common/CardSection.js';
 import Amenity from '../components/common/Amenity.js';
 import ParkListDetail from '../components/ParkListDetail.js'
+import FilterListDetail from '../components/FilterDetail';
 import stylesheet from '../styles/styles.js'
 import { connect } from 'react-redux';
 
@@ -22,6 +23,10 @@ import { connect } from 'react-redux';
 class ParkDetail extends Component {
   constructor(props){
     super(props);
+  }
+
+  renderFilters(){
+    return this.props.amenities.map(filter => <FilterListDetail key={filter.name} filter={filter.name}/>)
   }
 
 
@@ -79,6 +84,7 @@ class ParkDetail extends Component {
           <Card>
             {this.renderAmenities(currentPark)}
           </Card>
+          {this.renderFilters()}
           <Button bgcolor={'#E79C23'} text={'Check In'} onPress={this.surveyPress.bind(this)} />
         </ScrollView>
     )
@@ -102,6 +108,7 @@ const styles = {
 
 const mapStateToProps = (state) => {
   return {
+    amenities: state.get('amenities').toJS(),
     currentPark: state.getIn(['location', 'parks']).find((park) => park['title'] === state.get('current_park'))
   }
 }

@@ -34,8 +34,6 @@ const Landing = React.createClass ({
 },
 
 
-
-
 })
 
 

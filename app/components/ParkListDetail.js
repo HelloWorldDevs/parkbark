@@ -12,6 +12,8 @@ class ParkListDetails extends Component{
 
   }
 
+
+
   fadeIn() {
     this.fadeValue.setValue(0);
     Animated.timing(
