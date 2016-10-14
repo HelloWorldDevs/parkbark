@@ -27,7 +27,7 @@ class ParkDetail extends Component {
   }
 
   renderFilters(){
-    return this.props.amenities.map(filter => <FilterListDetail key={filter.name} filter={filter.name}/>)
+    return this.props.amenities.map(filter => <FilterListDetail disabled={true} key={filter.name} filter={filter.name}/>)
   }
 
 

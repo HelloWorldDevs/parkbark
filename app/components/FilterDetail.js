@@ -47,15 +47,15 @@ export default class FilterDetail extends Component {
 
   //adds staged for add or remove prop to park amenity object in immutable state.
   onPress(){
-    const {currentFilterIndex} = this.props;
-    const { staged, selected } = this.props.currentFilter;
-    if(!staged || staged === 'remove') {
-      this.props.dispatch({type: 'ADD_STAGED_FILTER', state: currentFilterIndex});
-    }
-    if(staged === 'add' || selected) {
+      const {currentFilterIndex} = this.props;
+      const { staged, selected } = this.props.currentFilter;
+      if(!staged || staged === 'remove') {
+        this.props.dispatch({type: 'ADD_STAGED_FILTER', state: currentFilterIndex});
+      }
+      if(staged === 'add' || selected) {
         this.props.dispatch({type: 'REMOVE_STAGED_FILTER', state: currentFilterIndex});
       }
-    this.colorFade();
+      this.colorFade();
   }
 
 
@@ -84,6 +84,7 @@ export default class FilterDetail extends Component {
     return (
         <View>
             <TouchableOpacity
+                disabled={this.props.disabled}
                 onPress={this.onPress.bind(this)}>
               <Card>
                   <Animated.Text  style={{color}} >{this.props.filter}</Animated.Text>

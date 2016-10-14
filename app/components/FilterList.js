@@ -20,7 +20,7 @@ class FilterList extends Component {
 
 //renders all FilterDetail components
   renderFilters(){
-    return this.props.amenities.map(filter => <FilterListDetail key={filter.name} filter={filter.name}/>)
+    return this.props.amenities.map(filter => <FilterListDetail disabled={false} key={filter.name} filter={filter.name}/>)
   }
 
   //clears staged when back is press, does not clear selected
