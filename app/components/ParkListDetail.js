@@ -54,7 +54,7 @@ class ParkListDetails extends Component{
 
     var ads;
     if (this.props.index == 0) {
-        ads = <Card shown={false}><AdMobBanner
+        ads = <Card><AdMobBanner
                bannerSize="banner"
                adUnitID="ca-app-pub-3940256099942544/6300978111" //fake id
                testDeviceID="EMULATOR"
