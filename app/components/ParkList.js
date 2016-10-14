@@ -45,8 +45,9 @@ const ParkList = (props) => {
     props.navigator.push({name:'parkdetail'});
   }
 
+  let parkIndex = 0;
   renderParkListDetails = (props) => {
-    return props.parks.map(park => <ParkListDetail onPress={() => this.onDetailPress(park.title)} touchable={true} navigator={props.navigator} key={park.title} title={park.title} address={park.address} address_display={park.address_display} distance={park.distance} amenities={park.amenities}/>)
+    return props.parks.map(park => <ParkListDetail onPress={() => this.onDetailPress(park.title)} touchable={true} navigator={props.navigator} index={parkIndex++} key={park.title} title={park.title} address={park.address} address_display={park.address_display} distance={park.distance} amenities={park.amenities} />)
   };
 
   return (

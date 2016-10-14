@@ -1,6 +1,7 @@
 import  React, {Component} from 'react';
 import {View, TouchableOpacity, Text, Animated, Easing} from 'react-native';
 import { connect } from 'react-redux';
+import { AdMobBanner } from 'react-native-admob';
 import Card from './common/Card.js'
 import CardSection from './common/CardSection.js'
 
@@ -9,7 +10,6 @@ class ParkListDetails extends Component{
   constructor(props) {
     super(props)
     this.fadeValue = new Animated.Value(0);
-
   }
 
 
@@ -51,16 +51,27 @@ class ParkListDetails extends Component{
       inputRange: [0, 1],
       outputRange: [0, 1]
     });
+
+    var ads;
+    if (this.props.index == 0) {
+        ads = <Card shown={false}><AdMobBanner
+               bannerSize="banner"
+               adUnitID="ca-app-pub-3940256099942544/6300978111" //fake id
+               testDeviceID="EMULATOR"
+               didFailToReceiveAdWithError={this.bannerError}/></Card>;
+    }
+
     return(
       <Animated.View style={{opacity}}>
         <TouchableOpacity onPress={this.props.onPress}>
-          <Card>
+          <Card key='test'>
             <CardSection>
               <Text>{this.props.title}</Text>
               <Text style={styles.parkAddress}>{this.props.address_display}</Text>
             </CardSection>
             <Text style={styles.parkDistance}>{this.props.distance}</Text>
           </Card>
+          { ads }
         </TouchableOpacity>
       </Animated.View>
     )
@@ -89,4 +100,3 @@ const mapStateToProps = (state) => {
 }
 
 export default connect(mapStateToProps)(ParkListDetails);
-
