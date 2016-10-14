@@ -9,7 +9,9 @@ class Survey_NumDogs extends Component {
     constructor(props){
     super(props);
     this.state = {
-      formData:{},
+      formData:{
+          num_dogs: 5
+      },
     }
   }
   handleFormChange(formData){
@@ -20,17 +22,31 @@ class Survey_NumDogs extends Component {
   saveFormData() {
       const updateValue = {};
       updateValue.title = 'num_dogs';
-      updateValue.value = this.state.formData.num_dogs || 5;
+      updateValue.value = this.state.formData.num_dogs;
       this.props.dispatch({type: 'UPDATE_SURVEY', state: updateValue});
       this.props.navigator.push({name: 'surveyDrinkingWater'});
   }
 
+  addNumber(formData) {
+      var newFormData = this.state.formData;
+      newFormData.num_dogs = parseInt(this.state.formData.num_dogs) + 1;
+      this.setState({formData: newFormData});
+      this.refs.surveyFormNumDogs.refs.num_dogs.setValue(this.state.formData.num_dogs.toString());
+  }
+
+  subtractNumber(formData) {
+      var newFormData = this.state.formData;
+      newFormData.num_dogs = parseInt(this.state.formData.num_dogs) - 1;
+      this.setState({formData: newFormData});
+      this.refs.surveyFormNumDogs.refs.num_dogs.setValue(this.state.formData.num_dogs.toString());
+  }
 
   componentDidMount() {
-    // console.log(this.props);
+    // console.log(this.state.formData);
   }
 
     render() {
+        let value = this.state.formData.num_dogs.toString();
         return (
             <View
                 ref='surveyForm'
@@ -43,8 +59,10 @@ class Survey_NumDogs extends Component {
                            <Text>How many dogs do you see at the park?</Text>
                            <InputField
                                ref='num_dogs'
-                               value='5'
+                               value={value}
                            />
+                           <Button bgcolor={'#f0382c'} text={' + '} onPress={this.addNumber.bind(this)}/>
+                           <Button bgcolor={'#f0382c'} text={' - '} onPress={this.subtractNumber.bind(this)}/>
 
                       </Form>
               <Button bgcolor={'#E79C23'} text={' OK '} onPress={this.saveFormData.bind(this)}/>
