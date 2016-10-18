@@ -64,7 +64,7 @@ class ParkListDetails extends Component{
     return(
       <Animated.View style={{opacity}}>
         <TouchableOpacity onPress={this.props.onPress}>
-          <Card key='test'>
+          <Card>
             <CardSection>
               <Text>{this.props.title}</Text>
               <Text style={styles.parkAddress}>{this.props.address_display}</Text>

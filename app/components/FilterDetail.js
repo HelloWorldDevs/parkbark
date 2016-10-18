@@ -46,7 +46,7 @@ export default class FilterDetail extends Component {
 
 
   //adds staged for add or remove prop to park amenity object in immutable state.
-  onPress(){
+  onPress() {
       const {currentFilterIndex} = this.props;
       const { staged, selected } = this.props.currentFilter;
       if(!staged || staged === 'remove') {

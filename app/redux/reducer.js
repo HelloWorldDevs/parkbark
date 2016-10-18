@@ -1,5 +1,5 @@
 import {Map} from 'immutable';
-import {setLocations, updateSearch, updateAnnotations, updateRegion, updateSelectedPark, setParkSurvey, updateParkSurvey, setAmenities, addStagedFilter, removeStagedFilter, addSelectedFilters, addFilter, removeFilter, clearFilters, clearStaged} from '../src/core';
+import {setLocations, updateSearch, updateAnnotations, mapHide, updateRegion, updateSelectedPark, setParkSurvey, updateParkSurvey, setAmenities, addStagedFilter, removeStagedFilter, addFilter, removeFilter, clearFilters, clearStaged} from '../src/core';
 
 
 export default function(state = Map(), action) {
@@ -10,6 +10,8 @@ export default function(state = Map(), action) {
         return setNavigatorProps(state, action.state);
     case 'UPDATE_ANNOTATIONS':
       return updateAnnotations(state, action.state);
+    case 'MAP_HIDE':
+      return mapHide(state, action.state);
     case 'UPDATE_REGION':
       return updateRegion(state, action.state);
     case 'UPDATE_SEARCH':

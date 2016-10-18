@@ -21,43 +21,48 @@ class Map extends Component {
             ref={ref => { this.map = ref; }}
             style={styles.map}
             region={this.props.coords}
+            onPress={this.regionShow.bind(this)}
             onRegionChange={this.regionUpdate.bind(this)}
             onRegionChangeComplete={this.annotationUpdate.bind(this)}
         >
-          {this.props.markers.map((marker)=> (
+          {this.props.markers.map((marker, i)=> (
               <MapView.Marker
-                  key={marker.title}
+                  key={i}
                   coordinate={marker.latlng}
                   title={marker.title}
                   description={marker.address_display + ' ' + marker.distance}
-                  image={require('../img/marker_blue.png')}
               />
           ))}
         </MapView>
       </View>
-        {this.parkListRender()}
+        <ParkList navigator={this.props.navigator}/>
     </View>
     )
   }
 
 
+//image={require('../img/marker_blue.png')}
+
 //onPress={this.scrollToMarker.bind(this)}
 //
 // scrollToMarker(region) {
-//     this.map.animateToCoordinate(region.nativeEvent.coordinate, 100);
+//     // this.map.animateToCoordinate(region.nativeEvent.coordinate, 100);
 //   }
 
+regionShow() {
+  this.props.dispatch({type:'MAP_HIDE', state: true})
+}
 
-  regionUpdate(region){
-    // console.log('updating region')
+
+  regionUpdate(region) {
       this.props.dispatch({
         type: 'UPDATE_REGION',
         state: region
       });
   }
 
-  annotationUpdate(region){
-    setTimeout(()=>{
+  annotationUpdate(region) {
+    setTimeout(()=> {
       // console.log('updating annotations');
       var DIST = Math.ceil(this.props.coords.latitudeDelta * 69/2);
       var LAT = this.props.coords.latitude;
@@ -67,12 +72,6 @@ class Map extends Component {
         this.props.dispatch({type: 'UPDATE_ANNOTATIONS', state: state});
       });
     }, 2000)
-  }
-
-  parkListRender(){
-    return(
-        <ParkList navigator={this.props.navigator}/>
-    )
   }
 
 };
@@ -106,6 +105,7 @@ var styles = StyleSheet.create({
 
 const mapStateToProps = (state) => {
   return {
+    state: state,
     coords: state.getIn(['location', 'coords']),
     markers: state.getIn(['location', 'parks'])
   }

@@ -10,6 +10,10 @@ export function updateAnnotations(state, newState) {
   return state.updateIn(['location','parks'], 0,  parks => parks = newState);
 }
 
+export function mapHide(state, hideState) {
+  return state.set('hide', hideState)
+}
+
 export function updateRegion(state, newState) {
   return state.updateIn(['location', 'coords'], 0, coords => coords = newState);
 }
