@@ -8,7 +8,7 @@ export default class Button extends Component {
         backgroundColor: this.props.bgcolor,
         justifyContent: 'center',
         alignItems: 'center',
-        borderRadius: 5,
+        borderRadius: 15,
         padding: 5,
         margin: 10
       },

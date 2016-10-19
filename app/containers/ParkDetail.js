@@ -97,7 +97,6 @@ class ParkDetail extends Component {
         </ScrollView>
     )
   }
-
 };
 
 const styles = {

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { View, Image, StyleSheet , Text} from 'react-native';
+import { View, Image, StyleSheet , Text, Platform} from 'react-native';
+import PushNotification from 'react-native-push-notification';
 import { connect } from 'react-redux';
 import Button from '../components/common/Button.js';
 import {fetchAmenitiesAction} from '../src/core';
@@ -7,8 +8,17 @@ import {fetchAmenitiesAction} from '../src/core';
 
 const Landing = React.createClass ({
 
-  componentDidMount: function(){
+  componentDidMount: function() {
     fetchAmenitiesAction().done((amenities) => this.props.dispatch({type: 'SET_AMENITIES', state: amenities}));
+    if (Platform.OS === 'ios') {
+      PushNotification.checkPermissions((response) => {
+        for (var item in response){
+          if (response[item]){
+            console.log(item);
+          }
+        }
+      })
+    }
   },
   render:function() {
     return (
@@ -32,7 +42,6 @@ const Landing = React.createClass ({
   onNextPress: function() {
     this.props.navigator.push({name: 'features'});
 },
-
 
 })
 

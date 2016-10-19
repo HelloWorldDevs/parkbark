@@ -5,6 +5,14 @@ import PushNotification from 'react-native-push-notification';
 import Button from '../components/common/Button.js';
 export default React.createClass ({
 
+  componentDidMount: function() {
+    PushNotification.configure({
+      onNotification: function (notification) {
+        console.log('notification: ', notification)
+      },
+      requestPermissions: false
+    })
+  },
 
   render:function() {
     return (
@@ -28,21 +36,16 @@ export default React.createClass ({
     this.props.navigator.push({name: 'map'});
   },
 
-  onFeaturesPress(){
-    PushNotification.configure({
-      onNotification: function (notification) {
-        console.log('notification: ', notification)
-      },
-      requestPermissions: true
-    })
+  onFeaturesPress() {
     // PushNotification.requestPermissions();
-    PushNotification.localNotificationSchedule({
-      message: "My Notification Message", // (required)
-      date: new Date(Date.now() + (5 * 1000)) // in 5 secs
-    });
+    PushNotification.requestPermissions().then(() => {
+      PushNotification.localNotificationSchedule({
+        message: "There are new Park Bark Features!", // (required)
+        date: new Date(Date.now() + (5 * 1000)).getTime() // in 5 secs
+      });
+      this.props.navigator.push({name: 'map'});
+    })
   }
-
-
 })
 
 
@@ -69,7 +72,6 @@ var styles = StyleSheet.create({
     color: '#f0382c',
     fontSize: 30,
     fontWeight: "200"
-
   },
   text: {
     color: "#f0382c"
