@@ -1,11 +1,13 @@
 import {Map} from 'immutable';
-import {setLocations, updateSearch, updateAnnotations, mapHide, updateRegion, updateSelectedPark, setParkSurvey, updateParkSurvey, setAmenities, addStagedFilter, removeStagedFilter, addFilter, removeFilter, clearFilters, clearStaged} from '../src/core';
+import {setLocations, setNotifcations, updateSearch, updateAnnotations, mapHide, updateRegion, updateSelectedPark, setParkSurvey, updateParkSurvey, setAmenities, addStagedFilter, removeStagedFilter, addFilter, removeFilter, clearFilters, clearStaged} from '../src/core';
 
 
 export default function(state = Map(), action) {
   switch (action.type) {
     case 'SET_LOCATION':
       return setLocations(state, action.state);
+    case 'SET_NOTIFICATIONS':
+      return setNotifcations(state, action.state);
     case 'SET_NAVIGATOR_PROPS':
         return setNavigatorProps(state, action.state);
     case 'UPDATE_ANNOTATIONS':

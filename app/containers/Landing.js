@@ -8,17 +8,21 @@ import {fetchAmenitiesAction} from '../src/core';
 
 const Landing = React.createClass ({
 
-  componentDidMount: function() {
-    fetchAmenitiesAction().done((amenities) => this.props.dispatch({type: 'SET_AMENITIES', state: amenities}));
+  componentWillMount: function() {
+    //TODO: Set notifications set check for android.
     if (Platform.OS === 'ios') {
       PushNotification.checkPermissions((response) => {
-        for (var item in response){
-          if (response[item]){
-            console.log(item);
+        for (var item in response) {
+          if (response[item]) {
+            this.props.dispatch({type: 'SET_NOTIFICATIONS', state: true})
           }
         }
       })
     }
+  },
+
+  componentDidMount: function() {
+    fetchAmenitiesAction().done((amenities) => this.props.dispatch({type: 'SET_AMENITIES', state: amenities}));
   },
   render:function() {
     return (
@@ -40,7 +44,11 @@ const Landing = React.createClass ({
   },
 
   onNextPress: function() {
-    this.props.navigator.push({name: 'features'});
+    if (this.props.notificationState) {
+      this.props.navigator.push({name: 'map'});
+    } else {
+      this.props.navigator.push({name: 'features'});
+    }
 },
 
 })
@@ -78,7 +86,9 @@ var styles = StyleSheet.create({
 
 
 const mapStateToProps = (state) => {
-  return {}
+  return {
+    notificationState: state.get('notifications')
+  }
 }
 
 export default connect(mapStateToProps)(Landing);

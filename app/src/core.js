@@ -6,6 +6,10 @@ export function setLocations(state, locations) {
   return state.set('location', locations);
 }
 
+export function setNotifcations(state, notificationState) {
+  return state.set('notifications', notificationState)
+}
+
 export function updateAnnotations(state, newState) {
   return state.updateIn(['location','parks'], 0,  parks => parks = newState);
 }
