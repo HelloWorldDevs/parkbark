@@ -95,6 +95,6 @@ const mapStateToProps = (state) => {
     markers: state.getIn(['map', 'location', 'parks']),
     notificationState: state.getIn(['core','notifications'])
   }
-
+}
 
 export default connect(mapStateToProps)(Landing);
