@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { StyleSheet, View, Modal, TouchableHighlight, Text } from 'react-native';
 import { connect } from 'react-redux';
-import { sendSurveyResponses } from '../src/core';
+import { sendSurveyResponses } from '../src/survey_core';
 import Button from './common/Button.js';
 import { Form, InputField } from 'react-native-form-generator';
 
@@ -75,7 +75,7 @@ var styles = StyleSheet.create({
 
 const mapStateToProps = (state) => {
   return {
-    parkForm: state.get('park_form').toJS() || {}
+    parkForm: state.getIn(['survey', 'park_form']).toJS() || {}
   }
 }
 

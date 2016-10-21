@@ -16,10 +16,14 @@ store.dispatch({
   type: 'SET_LOCATION',
   state : Map({
     coords:{
-      latitude: 45.513752,
-      longitude: -122.661654,
+      latitude: 45.523031,
+      longitude: -122.676772,
       latitudeDelta: .1,
       longitudeDelta: .1
+    },
+    default_position: {
+      latitude: 45.523031,
+      longitude: -122.676772,
     },
     parks: [{
       latlng: {

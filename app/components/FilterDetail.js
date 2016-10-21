@@ -107,8 +107,8 @@ const styles = {
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    currentFilterIndex: state.get('amenities').toJS().findIndex(a => a['name'] === ownProps.filter),
-    currentFilter: state.get('amenities').toJS().find((a) => a['name'] === ownProps.filter)
+    currentFilterIndex: state.getIn(['filter','amenities']).toJS().findIndex(a => a['name'] === ownProps.filter),
+    currentFilter: state.getIn(['filter','amenities']).toJS().find((a) => a['name'] === ownProps.filter)
   }
 }
 

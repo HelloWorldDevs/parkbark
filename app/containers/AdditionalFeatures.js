@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import { View, Image, StyleSheet , Text, AppState} from 'react-native';
-import PushController from '../components/pushController';
+import { connect } from 'react-redux';
 import PushNotification from 'react-native-push-notification';
 import Button from '../components/common/Button.js';
-export default React.createClass ({
+
+
+const AdditionalFeatures = React.createClass ({
 
   componentDidMount: function() {
     PushNotification.configure({
@@ -37,7 +39,6 @@ export default React.createClass ({
   },
 
   onFeaturesPress() {
-    // PushNotification.requestPermissions();
     PushNotification.requestPermissions().then(() => {
       PushNotification.localNotificationSchedule({
         message: "There are new Park Bark Features!", // (required)
@@ -77,3 +78,9 @@ var styles = StyleSheet.create({
     color: "#f0382c"
   }
 });
+
+const mapStateToProps = (state) => {
+  return {}
+}
+
+export default connect(mapStateToProps)(AdditionalFeatures);

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Map } from 'immutable';
 import { View, Image, StyleSheet, Text, TextInput, TouchableOpacity} from 'react-native';
 import { connect } from 'react-redux';
-import {fetchLocationAction} from '../src/core';
+import {fetchLocationAction} from '../src/search_core';
 import {googleapi} from '../api/googleapi.js';
 
 
@@ -22,7 +22,7 @@ class SearchFieldComponent extends Component {
   }
 
   handleChange(text) {
-    console.log()
+    console.log(text)
     this.props.dispatch({
       type: 'UPDATE_SEARCH',
       state: {
@@ -54,7 +54,7 @@ class SearchFieldComponent extends Component {
 }
 
   fetchParks() {
-    fetchLocationAction(this.props.search, googleapi).done((state) => {
+    fetchLocationAction(this.props.search.search, googleapi).done((state) => {
       this.props.dispatch({type: 'UPDATE_REGION', state: state});
     });
   }

@@ -3,7 +3,7 @@ import { View, Image, StyleSheet , Text, Platform} from 'react-native';
 import PushNotification from 'react-native-push-notification';
 import { connect } from 'react-redux';
 import Button from '../components/common/Button.js';
-import {fetchAmenitiesAction} from '../src/core';
+import {fetchAmenitiesAction} from '../src/map_core';
 
 
 const Landing = React.createClass ({
@@ -15,6 +15,7 @@ const Landing = React.createClass ({
         for (var item in response) {
           if (response[item]) {
             this.props.dispatch({type: 'SET_NOTIFICATIONS', state: true})
+            break
           }
         }
       })
@@ -22,6 +23,7 @@ const Landing = React.createClass ({
   },
 
   componentDidMount: function() {
+    console.log(this.props);
     fetchAmenitiesAction().done((amenities) => this.props.dispatch({type: 'SET_AMENITIES', state: amenities}));
   },
   render:function() {
@@ -44,6 +46,8 @@ const Landing = React.createClass ({
   },
 
   onNextPress: function() {
+    // console.log(this.props);
+
     if (this.props.notificationState) {
       this.props.navigator.push({name: 'map'});
     } else {
@@ -87,8 +91,10 @@ var styles = StyleSheet.create({
 
 const mapStateToProps = (state) => {
   return {
-    notificationState: state.get('notifications')
+    state: state,
+    markers: state.getIn(['map', 'location', 'parks']),
+    notificationState: state.getIn(['core','notifications'])
   }
-}
+
 
 export default connect(mapStateToProps)(Landing);

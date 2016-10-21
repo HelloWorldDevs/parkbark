@@ -115,8 +115,8 @@ const styles = {
 
 const mapStateToProps = (state) => {
   return {
-    amenities: state.get('amenities').toJS(),
-    currentPark: state.getIn(['location', 'parks']).find((park) => park['title'] === state.get('current_park'))
+    amenities: state.getIn(['filter','amenities']).toJS(),
+    currentPark: state.getIn(['map', 'location', 'parks']).find((park) => park['title'] === state.getIn(['parkdetail','current_park']))
   }
 }
 

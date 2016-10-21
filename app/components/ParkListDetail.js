@@ -95,7 +95,7 @@ const styles = {
 
 const mapStateToProps = (state) => {
   return {
-    parks: state.getIn(['location', 'parks'])
+    parks: state.getIn(['map', 'location', 'parks'])
   }
 }
 

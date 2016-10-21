@@ -105,8 +105,8 @@ const styles = {
 
 const mapStateToProps = (state) => {
   return {
-    parks: state.getIn(['location', 'parks']),
-    hideState: state.get('hide')
+    parks: state.getIn(['map', 'location', 'parks']),
+    hideState: state.getIn(['map', 'hide'])
   }
 }
 

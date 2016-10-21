@@ -10,7 +10,7 @@ import {
 import { connect } from 'react-redux';
 import Button from './common/Button';
 import FilterListDetail from './FilterDetail';
-import {updateParksByFilterAction} from '../src/core';
+import {updateParksByFilterAction} from '../src/filter_core';
 
 
 class FilterList extends Component {
@@ -98,19 +98,19 @@ const styles = {
 
 const mapStateToProps = (state) => {
   return {
-    amenities: state.get('amenities').toJS(),
-    selectedFilters: state.get('amenities').toJS().filter((a) => a['selected'] === true),
-    stagedFilters: state.get('amenities').toJS().reduce((a, e, i) => {
+    amenities: state.getIn(['filter','amenities']).toJS(),
+    selectedFilters: state.getIn(['filter','amenities']).toJS().filter((a) => a['selected'] === true),
+    stagedFilters: state.getIn(['filter','amenities']).toJS().reduce((a, e, i) => {
       if(e['staged'] === 'add')
         a.push(i);
         return a
     },[]),
-    stagedFiltersRemove: state.get('amenities').toJS().reduce((a, e, i) => {
+    stagedFiltersRemove: state.getIn(['filter','amenities']).toJS().reduce((a, e, i) => {
       if(e['staged'] === 'remove')
         a.push(i);
       return a
     },[]),
-    coords: state.getIn(['location', 'coords'])
+    coords: state.getIn(['map','location', 'coords'])
   }
 }
 
