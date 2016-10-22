@@ -2,13 +2,36 @@ import React, { Component } from 'react';
 import { View, Image, StyleSheet , Text, Platform} from 'react-native';
 import PushNotification from 'react-native-push-notification';
 import { connect } from 'react-redux';
+import { Map } from 'immutable';
 import Button from '../components/common/Button.js';
 import {fetchAmenitiesAction} from '../src/map_core';
 
 
 const Landing = React.createClass ({
 
+  //overwrite default position and set parks in location state
   componentWillMount: function() {
+    navigator.geolocation.getCurrentPosition(
+        (position) => {
+          this.props.dispatch({
+            type: 'SET_LOCATION',
+            state : Map({
+              coords:{
+                latitude: position.coords.latitude,
+                longitude: position.coords.longitude,
+                latitudeDelta: .1,
+                longitudeDelta: .1
+              },
+              parks: []
+            })
+          });
+          const userLatLng = {latitude: position.coords.latitude, longitude: position.coords.longitude};
+          console.log(userLatLng);
+          this.props.dispatch({type: 'SET_POSITION', state: userLatLng})
+        },
+        (error) => {return},
+        {enableHighAccuracy: true, timeout: 20000, maximumAge: 1000}
+    );
     //TODO: Set notifications set check for android.
     if (Platform.OS === 'ios') {
       PushNotification.checkPermissions((response) => {
@@ -23,7 +46,6 @@ const Landing = React.createClass ({
   },
 
   componentDidMount: function() {
-    console.log(this.props);
     fetchAmenitiesAction().done((amenities) => this.props.dispatch({type: 'SET_AMENITIES', state: amenities}));
   },
   render:function() {
@@ -46,8 +68,6 @@ const Landing = React.createClass ({
   },
 
   onNextPress: function() {
-    // console.log(this.props);
-
     if (this.props.notificationState) {
       this.props.navigator.push({name: 'map'});
     } else {
@@ -91,7 +111,6 @@ var styles = StyleSheet.create({
 
 const mapStateToProps = (state) => {
   return {
-    state: state,
     markers: state.getIn(['map', 'location', 'parks']),
     notificationState: state.getIn(['core','notifications'])
   }

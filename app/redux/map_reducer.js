@@ -4,10 +4,8 @@ import {setLocations, setPosition, updateAnnotations, mapHide, updateRegion} fro
 export default function(state = Map({}), action) {
   switch (action.type) {
     case 'SET_LOCATION':
-      console.log(action.state);
       return setLocations(state, action.state);
     case 'SET_POSITION':
-      console.log(action.state);
       return setPosition(state, action.state);
     case 'SET_NAVIGATOR_PROPS':
       return setNavigatorProps(state, action.state);

@@ -11,7 +11,7 @@ import makeStore from './redux/store';
 const store = makeStore();
 
 
-
+//set default position
 store.dispatch({
   type: 'SET_LOCATION',
   state : Map({
@@ -23,16 +23,8 @@ store.dispatch({
     },
     default_position: {
       latitude: 45.523031,
-      longitude: -122.676772,
-    },
-    parks: [{
-      latlng: {
-        latitude:45.513752,
-        longitude: -122.661654
-      },
-      title: 'NXT Lab',
-      description: 'Here we are at HelloWorld building parkBark!'
-    }]
+      longitude: -122.676772
+    }
   })
 });
 

@@ -6,6 +6,7 @@ import {
 import { Map } from 'immutable';
 import { connect } from 'react-redux';
 import MapView from 'react-native-maps';
+import PositionMarker from '../components/PositionMarker';
 import SearchField from '../components/Search_Field.js';
 import {updateParksAction} from '../src/map_core';
 import ParkList from '../components/ParkList.js';
@@ -13,34 +14,7 @@ import ParkList from '../components/ParkList.js';
 
 class ParkMap extends Component {
 
-  componentDidMount() {
-    console.log(this.props.state)
-    navigator.geolocation.getCurrentPosition(
-        (position) => {
-          // var initialPosition = JSON.stringify(position);
-          console.log(this.props);
-          this.props.dispatch({
-            type: 'SET_LOCATION',
-            state : Map({
-              coords:{
-                latitude: position.coords.latitude,
-                longitude: position.coords.longitude,
-                latitudeDelta: .1,
-                longitudeDelta: .1
-              },
-              parks: []
-            })
-          });
-          const userLatLng = {latitude: position.coords.latitude, longitude: position.coords.longitude};
-          this.props.dispatch({type: 'SET_POSITION', state: userLatLng})
-        },
-        (error) => JSON.stringify(error),
-        {enableHighAccuracy: true, timeout: 20000, maximumAge: 1000}
-    );
-  }
-
   render() {
-    let position = this.props.position ? this.props.position : this.props.default_position;
     return (
       <View style={styles.container}>
         <SearchField navigator={this.props.navigator}/>
@@ -53,11 +27,7 @@ class ParkMap extends Component {
             onRegionChange={this.regionUpdate.bind(this)}
             onRegionChangeComplete={this.annotationUpdate.bind(this)}
         >
-          <MapView.Marker
-              key={'user_location'}
-              coordinate={position}
-              image={require('../img/user_location.png')}
-          />
+          <PositionMarker/>
           {this.props.markers.map((marker, i)=> (
               <MapView.Marker
                   key={i}
@@ -82,10 +52,9 @@ class ParkMap extends Component {
 //     // this.map.animateToCoordinate(region.nativeEvent.coordinate, 100);
 //   }
 
-regionShow() {
-  this.props.dispatch({type:'MAP_HIDE', state: true})
-}
-
+  regionShow() {
+    this.props.dispatch({type:'MAP_HIDE', state: true})
+  }
 
   regionUpdate(region) {
       this.props.dispatch({
@@ -96,7 +65,7 @@ regionShow() {
 
   annotationUpdate(region) {
     setTimeout(()=> {
-      console.log('updating annotations');
+      // console.log('updating annotations');
       var DIST = Math.ceil(this.props.coords.latitudeDelta * 69/2);
       var LAT = this.props.coords.latitude;
       var LNG = this.props.coords.longitude;
@@ -139,7 +108,6 @@ var styles = StyleSheet.create({
 const mapStateToProps = (state) => {
   return {
     coords: state.getIn(['map','location', 'coords']),
-    default_position: state.getIn(['map', 'location', 'default_position']),
     position: state.getIn(['map','position']),
     markers: state.getIn(['map', 'location', 'parks'])
   }

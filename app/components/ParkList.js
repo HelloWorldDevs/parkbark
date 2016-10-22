@@ -6,7 +6,9 @@ import {
     PanResponder,
     Easing,
     Text
-} from 'react-native';
+} from 'react-native'
+import Card from './common/Card.js'
+import CardSection from './common/CardSection.js';
 import { connect } from 'react-redux';
 import Button from './common/Button.js';
 import ParkListDetail from './ParkListDetail.js';
@@ -71,18 +73,19 @@ class ParkList extends Component {
 
     const bottom = this.slideValue.interpolate({
       inputRange: [0, 1],
-      outputRange: [-400, 0]
+      outputRange: [0, 0]
     });
 
 
     return (
         <View style={styles.scrollConainer}>
-          <Button bgcolor={'#fff'} text={' See Parks List '} onPress={this.slideIn.bind(this)}/>
           <Animated.View
               style={ { position: 'absolute', zIndex: 2, bottom, left: 0, right: 0, }}
           >
             <ScrollView bounces={false} style={styles.scrollView}>
-              <Button bgcolor={'#fff'} text={'Close'} onPress={this.slideOut}/>
+              <Card>
+                <Text style={styles.scrollViewTitle}>See Parks</Text>
+              </Card>
               {this.renderParkListDetails(this.props.parks)}
               <Button bgcolor={'#f0382c'} text={'Suggest a park'} onPress={this.onNextPress.bind(this)}/>
             </ScrollView>
@@ -92,9 +95,20 @@ class ParkList extends Component {
   }
 };
 
+//<Button bgcolor={'#fff'} text={' See Parks List '} onPress={this.slideIn.bind(this)}/>
+
+
+// {/*<Button bgcolor={'#fff'} text={'Close'} onPress={this.slideOut}/>*/}
+
+
+
 const styles = {
+  scrollViewTitle: {
+    alignSelf: 'center',
+    fontSize: 15
+  },
   scrollView : {
-    height: 300,
+    height: 50,
     backgroundColor: '#fff'
   },
   scrollConainer: {
