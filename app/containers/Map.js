@@ -43,8 +43,8 @@ class ParkMap extends Component {
     )
   }
 
+//  image={require('../img/map-pin@2x.png')}
 
-//image={require('../img/marker_blue.png')}
 
 //onPress={this.scrollToMarker.bind(this)}
 //

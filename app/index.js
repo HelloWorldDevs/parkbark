@@ -24,7 +24,8 @@ store.dispatch({
     default_position: {
       latitude: 45.523031,
       longitude: -122.676772
-    }
+    },
+    parks: []
   })
 });
 
