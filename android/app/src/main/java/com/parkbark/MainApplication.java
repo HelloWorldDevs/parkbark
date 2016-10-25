@@ -33,6 +33,7 @@ public class MainApplication extends Application implements ReactApplication {
             new RNDeviceInfo(),
             new MapsPackage(),
             new ReactNativePushNotificationPackage()
+
       );
     }
   };
