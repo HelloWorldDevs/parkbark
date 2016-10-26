@@ -14,6 +14,10 @@ import ParkList from '../components/ParkList.js';
 
 class ParkMap extends Component {
 
+    componentDidMount() {
+        console.log(this.props)
+    }
+
   render() {
     return (
       <View style={styles.container}>

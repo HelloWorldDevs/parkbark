@@ -43,6 +43,9 @@ const Landing = React.createClass ({
         }
       })
     }
+    if (Platform.OS === 'android') {
+        console.log('is android')
+    }
   },
 
   componentDidMount: function() {
