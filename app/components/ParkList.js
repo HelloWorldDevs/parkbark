@@ -73,19 +73,18 @@ class ParkList extends Component {
 
     const bottom = this.slideValue.interpolate({
       inputRange: [0, 1],
-      outputRange: [0, 0]
+      outputRange: [-400, 0]
     });
 
 
     return (
         <View style={styles.scrollConainer}>
+          <Button bgcolor={'#fff'} text={' See Parks List '} onPress={this.slideIn.bind(this)}/>
           <Animated.View
               style={ { position: 'absolute', zIndex: 2, bottom, left: 0, right: 0, }}
           >
             <ScrollView bounces={false} style={styles.scrollView}>
-              <Card>
-                <Text style={styles.scrollViewTitle}>See Parks</Text>
-              </Card>
+              <Button bgcolor={'#fff'} text={'Close'} onPress={this.slideOut}/>
               {this.renderParkListDetails(this.props.parks)}
               <Button bgcolor={'#f0382c'} text={'Suggest a park'} onPress={this.onNextPress.bind(this)}/>
             </ScrollView>
@@ -95,10 +94,11 @@ class ParkList extends Component {
   }
 };
 
-//<Button bgcolor={'#fff'} text={' See Parks List '} onPress={this.slideIn.bind(this)}/>
+{/*<Card>*/}
+  {/*<Text style={styles.scrollViewTitle}>See Parks</Text>*/}
+{/*</Card>*/}
 
 
-// {/*<Button bgcolor={'#fff'} text={'Close'} onPress={this.slideOut}/>*/}
 
 
 
@@ -108,7 +108,7 @@ const styles = {
     fontSize: 15
   },
   scrollView : {
-    height: 50,
+    height: 300,
     backgroundColor: '#fff'
   },
   scrollConainer: {
