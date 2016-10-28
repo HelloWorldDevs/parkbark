@@ -100,8 +100,6 @@ class ParkList extends Component {
 
 
 
-
-
 const styles = {
   scrollViewTitle: {
     alignSelf: 'center',

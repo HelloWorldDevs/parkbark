@@ -1,5 +1,6 @@
 import { Map } from 'immutable';
-import {createStore} from 'redux';
+import {createStore, applyMiddleware} from 'redux';
+import thunk from 'redux-thunk';
 import core from './core_reducer';
 import map from './map_reducer';
 import search from './search_reducer';
@@ -12,5 +13,5 @@ const initialState = Map();
 const rootReducer = combineReducers({ core, map, search, filter, survey, parkdetail});
 
 export default function makeStore() {
-  return createStore(rootReducer, initialState);
+  return createStore(rootReducer, initialState, applyMiddleware(thunk));
 }

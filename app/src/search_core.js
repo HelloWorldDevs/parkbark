@@ -11,12 +11,14 @@ export function fetchLocationAction(address, googleapi) {
         return res.json();
       })
       .then(function(resJson) {
-        var region = {};
-        region.latitude = resJson.results[0].geometry.location.lat;
-        region.longitude = resJson.results[0].geometry.location.lng;
-        region.latitudeDelta = .1;
-        region.longitudeDelta = .1;
-        return region;
+        if(resJson){
+          var region = {};
+          region.latitude = resJson.results[0].geometry.location.lat;
+          region.longitude = resJson.results[0].geometry.location.lng;
+          region.latitudeDelta = .1;
+          region.longitudeDelta = .1;
+          return region;
+        }
       })
       .catch((error) => {
         console.error(error);

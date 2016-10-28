@@ -11,7 +11,7 @@ export function setPosition(state, userLatLong) {
 }
 
 export function updateAnnotations(state, newState) {
-  console.log(newState);
+  // console.log('inside updateAnnotations', newState);
   return state.updateIn(['location','parks'], 0,  parks => parks = newState);
 }
 
@@ -28,6 +28,7 @@ export function updateSearch(state, search) {
 }
 
 export function updateParksAction(LAT, LNG, DIST){
+  // console.log('updateParksAction');
   return fetch('http://parkbark-api.bfdig.com/parks?loc='+ LAT + ',' + LNG + '<=' + DIST + 'miles', {
     method: 'get',
     headers: {
