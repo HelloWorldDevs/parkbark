@@ -15,8 +15,8 @@ class SearchFieldComponent extends Component {
           <View style={styles.inputWrapper}>
             {this.searchParksInput()}
             <TextInput onChangeText={this.handleChange.bind(this)} placeholder="Address, Zip, City" style={styles.input}/>
-          </View>
             {this.searchParksFilter()}
+          </View>
         </View>
     )
   }
@@ -74,8 +74,6 @@ var styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    paddingTop: 5,
-    paddingBottom: 5,
     paddingLeft: 10,
     paddingRight: 10
   },
@@ -83,6 +81,7 @@ var styles = StyleSheet.create({
     backgroundColor: '#fff',
     flexDirection: 'row',
     justifyContent: 'space-between',
+    alignItems: 'center',
     padding: 7,
     shadowColor: '#000',
     shadowOffset: {width: 0, height: 2 },
@@ -91,26 +90,21 @@ var styles = StyleSheet.create({
     elevation: 1
   },
   searchIcon: {
-    marginRight: 5,
-    height: 25,
-    width: 25
+    marginRight: 5
   },
   filterIconWrapper: {
     backgroundColor: '#fff',
-    padding: 7,
-    shadowColor: '#000',
-    shadowOffset: {width: 0, height: 2 },
-    shadowOpacity: 0.5,
-    shadowRadius: 2,
+    alignItems: 'center',
     elevation: 1
   },
   filterIcon: {
-    height: 25,
-    width: 25
+    marginLeft: 5
   },
   input: {
-    height: 25,
-    width: 250
+    width: 250,
+    fontSize: 16,
+    paddingTop: 0,
+    paddingBottom: 0
   }
 });
 
@@ -121,4 +115,3 @@ const mapStateToProps = (state) => {
 }
 
 export default connect(mapStateToProps)(SearchFieldComponent);
-
