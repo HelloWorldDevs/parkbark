@@ -3,8 +3,6 @@ import {View, Text, Image} from 'react-native';
 import CardSection from './CardSection.js';
 
 const Amenity = (props) => {
-    console.log(props.amenity)
-
     // Map icons to amenities
     switch (props.amenity) {
         case 'Agility Course':
@@ -45,7 +43,6 @@ const Amenity = (props) => {
             break;
         default:
         console.log('no amenity icon');
-
     }
 
     var topAmenities;
