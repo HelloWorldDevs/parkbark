@@ -37,7 +37,7 @@ class ParkDetail extends Component {
 
   renderAmenities({amenities}){
     let amenityIndex = 0;
-    return amenities.split(',').map(amenity => <Amenity index={amenityIndex++} key={amenity} amenity={amenity}/>)
+    return amenities.split(', ').map(amenity => <Amenity index={amenityIndex++} key={amenity} amenity={amenity}/>)
   }
 
   onBackPress(){
