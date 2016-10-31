@@ -48,15 +48,15 @@ const Amenity = (props) => {
     var topAmenities;
     if (props.index < 3){
         topAmenities =
-        <View>
+        <View style={{flexDirection: 'column', alignItems: 'center', justifyContent: 'center'}}>
             <Image source={icon}/>
-            <Text style={{textAlign: 'center', alignSelf: 'stretch'}}>
+            <Text style={{fontSize: 12}}>
                {props.amenity}
              </Text>
         </View>
     }
   return (
-      <View style={{flex: 1, flexDirection: 'column', margin: 3, alignSelf: 'stretch'}}>
+      <View>
         <CardSection>
          { topAmenities }
         </CardSection>
