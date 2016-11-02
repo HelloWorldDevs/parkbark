@@ -3,6 +3,7 @@ package com.parkbark;
 import android.app.Application;
 import android.util.Log;
 
+import com.sbugert.rnadmob.RNAdMobPackage;
 import com.facebook.react.ReactApplication;
 import com.learnium.RNDeviceInfo.RNDeviceInfo;
 import com.airbnb.android.react.maps.MapsPackage;
@@ -32,7 +33,8 @@ public class MainApplication extends Application implements ReactApplication {
           new MainReactPackage(),
             new RNDeviceInfo(),
             new MapsPackage(),
-            new ReactNativePushNotificationPackage()
+            new ReactNativePushNotificationPackage(),
+            new RNAdMobPackage()
 
       );
     }
