@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Image, StyleSheet , Text, AppState} from 'react-native';
+import { View, Image, StyleSheet , Text, AppState, Platform} from 'react-native';
 import { connect } from 'react-redux';
 import PushNotification from 'react-native-push-notification';
 import Button from '../components/common/Button.js';
@@ -39,13 +39,17 @@ const AdditionalFeatures = React.createClass ({
   },
 
   onFeaturesPress() {
-    PushNotification.requestPermissions().then(() => {
-      PushNotification.localNotificationSchedule({
-        message: "There are new Park Bark Features!", // (required)
-        date: new Date(Date.now() + (5 * 1000)).getTime() // in 5 secs
-      });
-      this.props.navigator.push({name: 'map'});
-    })
+    if(Platform.OS === 'ios') {
+      PushNotification.requestPermissions().then(() => {
+        PushNotification.localNotificationSchedule({
+          message: "There are new Park Bark Features!", // (required)
+          date: new Date(Date.now() + (5 * 1000)).getTime() // in 5 secs
+        });
+        this.props.navigator.push({name: 'map'});
+      })
+    } else if ( Platform.OS === 'android') {
+      console.log('android!')
+    }
   }
 })
 

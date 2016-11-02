@@ -126,22 +126,22 @@ android {
 }
 
 dependencies {
-    compile ('com.google.android.gms:play-services-gcm:8.4.0') {
+    compile ('com.google.android.gms:play-services-gcm:9.4.0') {
         force = true
     }
-    compile ('com.google.android.gms:play-services-maps:8.4.0') {
+    compile ('com.google.android.gms:play-services-maps:9.4.0') {
         force = true
     }
-    compile ('com.google.android.gms:play-services-location:8.4.0') {
+    compile ('com.google.android.gms:play-services-location:9.4.0') {
         force = true
     }
-    compile ('com.google.android.gms:play-services-analytics:8.4.0') {
+    compile ('com.google.android.gms:play-services-analytics:9.4.0') {
         force = true
     }
-    compile ('com.google.android.gms:play-services-ads:8.4.0') {
+    compile ('com.google.android.gms:play-services-ads:9.4.0') {
         force = true
     }
-    compile ('com.google.android.gms:play-services-base:8.4.0') {
+    compile ('com.google.android.gms:play-services-base:9.4.0') {
         force = true
     }
     compile project(':react-native-admob')
