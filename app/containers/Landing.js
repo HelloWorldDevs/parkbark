@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Image, StyleSheet , Text, Platform} from 'react-native';
+import { View, Image, StyleSheet , Text, Platform, PermissionsAndroid} from 'react-native';
 import PushNotification from 'react-native-push-notification';
 import { connect } from 'react-redux';
 import { Map } from 'immutable';
@@ -45,6 +45,7 @@ const Landing = React.createClass ({
     }
     if (Platform.OS === 'android') {
         console.log('is android')
+      console.log(PermissionsAndroid)
     }
   },
 

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Image, StyleSheet , Text, AppState, Platform} from 'react-native';
+import { View, Image, StyleSheet , Text, AppState, Platform, PermissionsAndroid} from 'react-native';
 import { connect } from 'react-redux';
 import PushNotification from 'react-native-push-notification';
 import Button from '../components/common/Button.js';
@@ -48,7 +48,9 @@ const AdditionalFeatures = React.createClass ({
         this.props.navigator.push({name: 'map'});
       })
     } else if ( Platform.OS === 'android') {
-      console.log('android!')
+      console.log(PermissionsAndroid.requestPermission(
+          PermissionsAndroid.PERMISSIONS.CAMERA
+      ))
     }
   }
 })
