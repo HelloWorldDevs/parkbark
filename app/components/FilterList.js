@@ -14,17 +14,17 @@ import {updateParksByFilterAction} from '../src/filter_core';
 
 
 class FilterList extends Component {
-  constructor(props){
+  constructor(props) {
     super(props);
   }
 
 //renders all FilterDetail components
-  renderFilters(){
+  renderFilters() {
     return this.props.amenities.map(filter => <FilterListDetail disabled={false} key={filter.name} filter={filter.name}/>)
   }
 
   //clears staged when back is press, does not clear selected
-  onBackPress(){
+  onBackPress() {
     this.props.dispatch({type: 'CLEAR_STAGED', state: false})
     this.props.navigator.pop();
   }
@@ -37,9 +37,13 @@ class FilterList extends Component {
     dispatch({type: 'CLEAR_STAGED', state: false});
     stagedFilters.forEach(i => dispatch({type: 'ADD_FILTER', state: i}));
     stagedFiltersRemove.forEach(i => dispatch({type: 'REMOVE_FILTER', state: i}));
+    dispatch({type: 'FILTER_SET', state: true});
     navigator.pop()
   }
 
+  componentWillMount() {
+    console.log(this.props.selectedFilters);
+  }
 
   //concatenates selected filters, sends query to db with action, and updates annotations (markers) on complete
   componentWillUnmount() {
@@ -51,21 +55,23 @@ class FilterList extends Component {
         return p + n.name
       }, '');
       console.log(filterQuery);
+      dispatch({type: 'QUERY_SET', state: filterQuery});
+      const dist = Math.ceil(coords.latitudeDelta * 69/2);
       const filteredCoords = coords.latitude + ',' + coords.longitude;
-      updateParksByFilterAction(filteredCoords, filterQuery).done((state) => {
+      updateParksByFilterAction(filteredCoords, dist, filterQuery).done((state) => {
         dispatch({type: 'UPDATE_ANNOTATIONS', state: state});
       })
     }
 
 
-
   //clears all staged and selected on press
   onClearFiltersPress() {
-    this.props.dispatch({type: 'CLEAR_FILTERS', state: false})
-    this.props.dispatch({type: 'CLEAR_STAGED', state: false})
+    this.props.dispatch({type: 'CLEAR_FILTERS', state: false});
+    this.props.dispatch({type: 'CLEAR_STAGED', state: false});
+    this.props.dispatch({type: 'FILTER_SET', state: false});
   }
 
-  render(){
+  render() {
     return (
         <View>
           <TouchableOpacity
@@ -110,7 +116,7 @@ const mapStateToProps = (state) => {
         a.push(i);
       return a
     },[]),
-    coords: state.getIn(['map','location', 'coords'])
+    coords: state.getIn(['map', 'new_coords']),
   }
 }
 

@@ -7,9 +7,9 @@ import MapView from 'react-native-maps';
 
 
 class ParkMarkers extends Component {
-  componentWillMount() {
-    console.log('parkMarkersMount!')
-  }
+  // componentWillMount() {
+  //   console.log('parkMarkersMount!', this.props)
+  // }
 
   render() {
     return (

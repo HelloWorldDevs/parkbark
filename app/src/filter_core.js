@@ -4,6 +4,14 @@ export function setAmenities(state, amenities) {
   return state.set('amenities', fromJS(amenities));
 }
 
+export function filterSet(state, setState) {
+  return state.set('filter-set', setState);
+}
+
+export function querySet(state, queryState) {
+  return state.set('filter-query', queryState);
+}
+
 export function addStagedFilter(state, filterIndex) {
   return state.setIn(['amenities', filterIndex, 'staged'], 'add');
 }
@@ -45,9 +53,9 @@ export function fetchAmenitiesAction() {
 }
 
 
-export function updateParksByFilterAction(coords, query) {
-  // console.log('http://parkbark-api.bfdig.com/parks?loc=' + coords + '<=5miles&amenities=' + query);
-  return fetch('http://parkbark-api.bfdig.com/parks?loc=' + coords + '<=5miles&amenities=' + query, {
+export function updateParksByFilterAction(coords, dist, query) {
+  console.log('http://parkbark-api.bfdig.com/parks?loc=' + coords + '<=' + dist + 'miles&amenities=' + query);
+  return fetch('http://parkbark-api.bfdig.com/parks?loc=' + coords + '<='+ dist +'miles&amenities=' + query, {
     method: 'get',
     headers: {
       'Accept': 'application/json',

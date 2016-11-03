@@ -42,16 +42,12 @@ class SearchFieldComponent extends Component {
   searchParksFilter(){
    return <TouchableOpacity
         underlayColor="gray"
-        onPress={this.showFilters.bind(this)}
+        onPress={this.props.onPress}
         style={styles.filterIconWrapper}>
       <Image source={require('../img/empty_filter@3x.png')} style={styles.filterIcon}/>
     </TouchableOpacity>
   }
 
-
-  showFilters(){
-    this.props.navigator.push({name: 'filterlist'});
-}
 
   fetchParks() {
     fetchLocationAction(this.props.search.search, googleapi).done((state) => {

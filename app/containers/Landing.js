@@ -4,7 +4,7 @@ import PushNotification from 'react-native-push-notification';
 import { connect } from 'react-redux';
 import { Map } from 'immutable';
 import Button from '../components/common/Button.js';
-import {fetchAmenitiesAction} from '../src/map_core';
+import {fetchAmenitiesAction} from '../src/filter_core';
 
 
 const Landing = React.createClass ({
@@ -43,10 +43,6 @@ const Landing = React.createClass ({
         }
       })
     }
-    if (Platform.OS === 'android') {
-        console.log('is android')
-      console.log(PermissionsAndroid)
-    }
   },
 
   componentDidMount: function() {
@@ -72,7 +68,7 @@ const Landing = React.createClass ({
   },
 
   onNextPress: function() {
-    if (this.props.notificationState) {
+    if (this.props.notificationState || Platform.OS === 'android') {
       this.props.navigator.push({name: 'map'});
     } else {
       this.props.navigator.push({name: 'features'});
@@ -115,7 +111,6 @@ var styles = StyleSheet.create({
 
 const mapStateToProps = (state) => {
   return {
-    markers: state.getIn(['map', 'location', 'parks']),
     notificationState: state.getIn(['core','notifications'])
   }
 }

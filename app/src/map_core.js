@@ -6,12 +6,15 @@ export function setLocations(state, locations) {
   return state.set('location', locations);
 }
 
+export function recordLocation(state, newCoords) {
+  return state.set('new_coords', newCoords);
+}
+
 export function setPosition(state, userLatLong) {
   return state.set('position', userLatLong);
 }
 
 export function updateAnnotations(state, newState) {
-  // console.log('inside updateAnnotations', newState);
   return state.updateIn(['location','parks'], 0,  parks => parks = newState);
 }
 
@@ -27,9 +30,9 @@ export function updateSearch(state, search) {
   return state.set('search', search);
 }
 
-export function updateParksAction(LAT, LNG, DIST){
+export function updateParksAction(coords, dist){
   // console.log('updateParksAction');
-  return fetch('http://parkbark-api.bfdig.com/parks?loc='+ LAT + ',' + LNG + '<=' + DIST + 'miles', {
+  return fetch('http://parkbark-api.bfdig.com/parks?loc=' + coords + '<=' + dist + 'miles', {
     method: 'get',
     headers: {
       'Accept': 'application/json',
@@ -86,19 +89,5 @@ export function fetchLocationAction(address, googleapi) {
       })
 }
 
-export function fetchAmenitiesAction() {
-  return fetch('http://parkbark-api.bfdig.com/amenities', {
-    method: 'get',
-    headers: {
-      'Accept': 'application/json',
-      'Content-Type': 'application/json'
-    }
-  })
-      .then(function(res) {
-        return res.json();
-      })
-      .then(function(resJson) {
-        return resJson;
-      });
-}
+
 

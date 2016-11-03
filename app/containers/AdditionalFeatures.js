@@ -38,6 +38,7 @@ const AdditionalFeatures = React.createClass ({
     this.props.navigator.push({name: 'map'});
   },
 
+
   onFeaturesPress() {
     if(Platform.OS === 'ios') {
       PushNotification.requestPermissions().then(() => {
@@ -47,10 +48,6 @@ const AdditionalFeatures = React.createClass ({
         });
         this.props.navigator.push({name: 'map'});
       })
-    } else if ( Platform.OS === 'android') {
-      console.log(PermissionsAndroid.requestPermission(
-          PermissionsAndroid.PERMISSIONS.CAMERA
-      ))
     }
   }
 })

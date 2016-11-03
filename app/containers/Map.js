@@ -10,6 +10,7 @@ import PositionMarker from '../components/PositionMarker';
 import ParkMarkers from '../components/ParkMarkers';
 import SearchField from '../components/Search_Field.js';
 import {updateParksAction} from '../src/map_core';
+import {updateParksByFilterAction} from '../src/filter_core';
 import ParkList from '../components/ParkList.js';
 
 
@@ -17,16 +18,21 @@ class ParkMap extends Component {
 
     componentDidMount() {
         console.log(this.props)
+        console.log(this.props.filterSet)
     }
 
   componentWillReceiveProps(props) {
       // console.log('recieving props', props)
     }
 
+  showFilters(){
+    this.props.navigator.push({name: 'filterlist'});
+  }
+
   render() {
     return (
       <View style={styles.container}>
-        <SearchField navigator={this.props.navigator}/>
+        <SearchField onPress={this.showFilters.bind(this)}/>
         <View style={styles.mapContainer}>
         <MapView
             ref={ref => { this.map = ref; }}
@@ -52,23 +58,35 @@ class ParkMap extends Component {
 //     // this.map.animateToCoordinate(region.nativeEvent.coordinate, 100);
 //   }
 
+
+
   regionShow() {
     this.props.dispatch({type:'MAP_HIDE', state: true})
+    console.log(this.props.filterSet, this.props.filterQuery)
+    if(this.props.selectedFilters) {
+      console.log(this.props.selectedFilters)
+    }
   }
 
+
   annotationUpdate(region) {
-      console.log('annotation update');
-      console.log(region);
-      var DIST = Math.ceil(region.latitudeDelta * 69/2);
-      var LAT = region.latitude;
-      var LNG = region.longitude;
-      console.log('lat: ' + LAT, 'long: ' + LNG, 'dist: ' + DIST);
-      updateParksAction(LAT , LNG, DIST).done((state) => {
+    this.props.dispatch({type:'RECORD_LOCATION', state: region})
+    this.regionShow();
+    console.log('annotation update');
+    var dist = Math.ceil(region.latitudeDelta * 69/2);
+    const coords = region.latitude + ',' + region.longitude;
+    // console.log('coords: ' + coords, 'dist: ' + dist);
+    if (!this.props.filterSet) {
+      updateParksAction(coords, dist).done((state) => {
         console.log('updateParksAction DONE!')
         this.props.dispatch({type: 'UPDATE_ANNOTATIONS', state: state});
       });
+    } else if (this.props.filterSet) {
+      updateParksByFilterAction(coords, dist, this.props.filterQuery).done((state) => {
+        this.props.dispatch({type: 'UPDATE_ANNOTATIONS', state: state});
+      })
+    }
   }
-
 };
 
 var styles = StyleSheet.create({
@@ -100,7 +118,9 @@ var styles = StyleSheet.create({
 
 const mapStateToProps = (state) => {
   return {
-    coords: state.getIn(['map','location', 'coords'])
+    coords: state.getIn(['map','location', 'coords']),
+    filterSet: state.getIn(['filter','filter-set']),
+    filterQuery: state.getIn(['filter','filter-query'])
   }
 }
 
