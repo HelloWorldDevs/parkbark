@@ -62,7 +62,6 @@ class ParkMap extends Component {
 
   regionShow() {
     this.props.dispatch({type:'MAP_HIDE', state: true})
-    console.log(this.props.filterSet, this.props.filterQuery)
     if(this.props.selectedFilters) {
       console.log(this.props.selectedFilters)
     }
@@ -70,12 +69,11 @@ class ParkMap extends Component {
 
 
   annotationUpdate(region) {
+    console.log(this.props.coords);
     this.props.dispatch({type:'RECORD_LOCATION', state: region})
     this.regionShow();
-    console.log('annotation update');
-    var dist = Math.ceil(region.latitudeDelta * 69/2);
+    const dist = Math.ceil(region.latitudeDelta * 69/2);
     const coords = region.latitude + ',' + region.longitude;
-    // console.log('coords: ' + coords, 'dist: ' + dist);
     if (!this.props.filterSet) {
       updateParksAction(coords, dist).done((state) => {
         console.log('updateParksAction DONE!')
