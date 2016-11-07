@@ -19,13 +19,13 @@ class ParkList extends Component {
     super(props);
 
     this.state = {
-      pan: new Animated.ValueXY()
+      scrollY: new Animated.Value(0)
     };
   }
 
   renderParkListDetails(parks){
     let parkIndex = 0;
-    return parks.map((park, i) => <ParkListDetail onPress={() => this.onDetailPress(park.title, park.address)} touchable={true} navigator={this.props.navigator} index={parkIndex++} key={i} title={park.title} address={park.address} address_display={park.address_display} distance={park.distance} amenities={park.amenities} />)
+    return parks.map((park, i) => <ParkListDetail onPress={() => this.onDetailPress(park.title)} touchable={true} navigator={this.props.navigator} index={parkIndex++} key={i} title={park.title} address={park.address} address_display={park.address_display} distance={park.distance} amenities={park.amenities} />)
   };
 
   slideValue = new Animated.Value(0);
@@ -58,8 +58,7 @@ class ParkList extends Component {
       this.props.navigator.push({name: 'parkName'});
   }
 
-  onDetailPress = (title, address) => {
-    console.log(address);
+  onDetailPress = (title) => {
     this.props.dispatch({type: 'UPDATE_SElECTED_PARK', state: title});
     this.props.navigator.push({name:'parkdetail'});
   }
@@ -77,11 +76,22 @@ class ParkList extends Component {
     });
 
 
+    const height = this.state.scrollY.interpolate({
+      inputRange: [0, 1],
+      outputRange: [400,401],
+      extrapolate: 'clamp',
+    })
+
+  //       <Animated.View style={{ backgroundColor: 'blue',height, zIndex: 2 }}>
+  // <Text>Hi!</Text>
+  // </Animated.View>
+
+
     return (
         <View style={styles.scrollConainer}>
           <Button bgcolor={'#fff'} text={' See Parks List '} onPress={this.slideIn.bind(this)}/>
           <Animated.View
-              style={ { position: 'absolute', zIndex: 2, bottom, left: 0, right: 0, }}
+              style={{height: height, position: 'absolute', zIndex: 2, bottom, left: 0, right: 0, }}
           >
             <ScrollView bounces={false} style={styles.scrollView}>
               <Button bgcolor={'#fff'} text={'Close'} onPress={this.slideOut}/>
@@ -93,8 +103,6 @@ class ParkList extends Component {
     )
   }
 };
-
-
 
 
 const styles = {

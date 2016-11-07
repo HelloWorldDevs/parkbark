@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import {
     Text,
-    View
+    View,
+    Linking
 } from 'react-native';
 import { connect } from 'react-redux';
 import MapView from 'react-native-maps';
@@ -13,32 +14,22 @@ import {getDistance} from '../src/map_core';
 class ParkMarkers extends Component {
   constructor() {
     super();
+    this.onCalloutPress.bind(this);
     this.selectedMarker = {};
     this.state = {selected: null}
   }
 
   componentDidUpdate() {
-    // console.log(this.state);
-    // console.log(this.selectedMarker[this.state.selected]);
     if(this.state.selected !== null && this.selectedMarker[this.state.selected] !== null) {
       this.selectedMarker[this.state.selected].showCallout();
     }
   }
 
-  // retrieveDistance(startlat, startlng, markerlat, markerlng) {
-  //   fetch(`https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins=${startlat},${startlng}&destinations=${markerlat},${markerlng}&key=${googledistanceapi}`)
-  //       .then(function(res) {
-  //         return res.json();
-  //       })
-  //       .then(function(resJson) {
-  //         if(resJson){
-  //          console.log(resJson.rows[0].elements[0].distance.text);
-  //         }
-  //       })
-  //       .catch((error) => {
-  //         console.error(error);
-  //       })
-  // }
+  onCalloutPress(title) {
+    console.log(this.props);
+    this.props.dispatch({type: 'UPDATE_SElECTED_PARK', state: title});
+    this.props.navigator.push({name:'parkdetail'});
+  }
 
   render() {
     return (
@@ -54,6 +45,7 @@ class ParkMarkers extends Component {
                 image={require('../img/map-pin@2x.png')}
                 title={marker.title}
                 description={marker.address_display + ' approx ' + getDistance(this.props.coords.latitude, this.props.coords.longitude, marker.latlng.latitude, marker.latlng.longitude) + 'mi'}
+                onCalloutPress={() => {this.onCalloutPress(marker.title)}}
             />
              ))}
           </View>

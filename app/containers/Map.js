@@ -42,7 +42,7 @@ class ParkMap extends Component {
             onRegionChangeComplete={this.annotationUpdate.bind(this)}
         >
           <PositionMarker/>
-          <ParkMarkers/>
+          <ParkMarkers navigator={this.props.navigator}/>
         </MapView>
       </View>
         <ParkList navigator={this.props.navigator}/>
