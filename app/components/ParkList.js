@@ -25,7 +25,7 @@ class ParkList extends Component {
 
   renderParkListDetails(parks){
     let parkIndex = 0;
-    return parks.map((park, i) => <ParkListDetail onPress={() => this.onDetailPress(park.title)} touchable={true} navigator={this.props.navigator} index={parkIndex++} key={i} title={park.title} address={park.address} address_display={park.address_display} distance={park.distance} amenities={park.amenities} />)
+    return parks.map((park, i) => <ParkListDetail onPress={() => this.onDetailPress(park.title, park.address)} touchable={true} navigator={this.props.navigator} index={parkIndex++} key={i} title={park.title} address={park.address} address_display={park.address_display} distance={park.distance} amenities={park.amenities} />)
   };
 
   slideValue = new Animated.Value(0);
@@ -58,11 +58,11 @@ class ParkList extends Component {
       this.props.navigator.push({name: 'parkName'});
   }
 
-  onDetailPress = (title) => {
+  onDetailPress = (title, address) => {
+    console.log(address);
     this.props.dispatch({type: 'UPDATE_SElECTED_PARK', state: title});
     this.props.navigator.push({name:'parkdetail'});
   }
-
 
 
   render() {
@@ -94,9 +94,6 @@ class ParkList extends Component {
   }
 };
 
-{/*<Card>*/}
-  {/*<Text style={styles.scrollViewTitle}>See Parks</Text>*/}
-{/*</Card>*/}
 
 
 

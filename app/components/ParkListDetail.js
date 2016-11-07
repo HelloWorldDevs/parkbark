@@ -2,6 +2,7 @@ import  React, {Component} from 'react';
 import {View, TouchableOpacity, Text, Animated, Easing} from 'react-native';
 import { connect } from 'react-redux';
 import { AdMobBanner } from 'react-native-admob';
+import {getDistance} from '../src/map_core';
 import Card from './common/Card.js'
 import CardSection from './common/CardSection.js'
 
@@ -11,7 +12,6 @@ class ParkListDetails extends Component{
     super(props)
     this.fadeValue = new Animated.Value(0);
   }
-
 
 
   fadeIn() {
@@ -46,6 +46,7 @@ class ParkListDetails extends Component{
     this.fadeOut();
   }
 
+
   render(){
     const opacity = this.fadeValue.interpolate({
       inputRange: [0, 1],
@@ -61,6 +62,8 @@ class ParkListDetails extends Component{
                didFailToReceiveAdWithError={this.bannerError}/></Card>;
     }
 
+    const parkCoords = this.props.address.split(',');
+
     return(
       <Animated.View style={{opacity}}>
         <TouchableOpacity onPress={this.props.onPress}>
@@ -69,7 +72,7 @@ class ParkListDetails extends Component{
               <Text>{this.props.title}</Text>
               <Text style={styles.parkAddress}>{this.props.address_display}</Text>
             </CardSection>
-            <Text style={styles.parkDistance}>{this.props.distance}</Text>
+            <Text style={styles.parkDistance}>{'apx ' + getDistance(this.props.coords.latitude, this.props.coords.longitude, parkCoords[0], parkCoords[1]) + 'mi'}</Text>
           </Card>
           { ads }
         </TouchableOpacity>
@@ -95,6 +98,7 @@ const styles = {
 
 const mapStateToProps = (state) => {
   return {
+    coords: state.getIn(['map','location', 'coords']),
     parks: state.getIn(['map', 'location', 'parks'])
   }
 }
