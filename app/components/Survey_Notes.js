@@ -25,14 +25,14 @@ class Survey_Notes extends Component {
     // If last question...
     // Wait for dispatch to UPDATE_SURVEY to complete
     setTimeout(() => {
-        this.sendFormData();
+        this.sendFormData().done(this.props.navigator.push({name: 'thanks'}));
     }, 2000);
   }
 
   sendFormData() {
       const formData = this.props.parkForm;
       console.log(formData)
-      sendSurveyResponses(formData);
+      return sendSurveyResponses(formData);
   }
 
   componentDidMount() {

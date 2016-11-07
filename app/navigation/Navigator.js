@@ -1,6 +1,7 @@
 import Map from '../containers/Map';
 import Landing from '../containers/Landing';
 import AdditionalFeatures from '../containers/AdditionalFeatures';
+import ThankYou from '../containers/ThankYou';
 import ParkDetail from '../containers/ParkDetail';
 import Survey_ParkName from '../components/Survey_ParkName';
 import Survey_ParkAddress from "../components/Survey_ParkAddress"
@@ -22,6 +23,7 @@ var ROUTES = {
   surveyNotes: Survey_Notes,
   parkName: Survey_ParkName,
   parkAddress: Survey_ParkAddress,
+  thanks: ThankYou,
   parkdetail: ParkDetail,
   filterlist: FilterList
 };

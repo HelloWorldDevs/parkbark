@@ -13,6 +13,7 @@ const Landing = React.createClass ({
   componentWillMount: function() {
     navigator.geolocation.getCurrentPosition(
         (position) => {
+          console.log('get current position', position)
           this.props.dispatch({
             type: 'SET_LOCATION',
             state : Map({
@@ -29,8 +30,8 @@ const Landing = React.createClass ({
           console.log(userLatLng);
           this.props.dispatch({type: 'SET_POSITION', state: userLatLng})
         },
-        (error) => {return},
-        {enableHighAccuracy: true, timeout: 20000, maximumAge: 1000}
+        (error) => {console.log(error)},
+        {enableHighAccuracy: false, timeout: 20000, maximumAge: 1000}
     );
     //TODO: Set notifications set check for android.
     if (Platform.OS === 'ios') {

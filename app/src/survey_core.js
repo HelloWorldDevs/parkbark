@@ -12,7 +12,7 @@ export function updateParkSurvey(state, updateValue) {
 
 
 export function sendSurveyResponses(formData) {
-    fetch('http://parkbark-api.bfdig.com/entity/node', {
+    return fetch('http://parkbark-api.bfdig.com/entity/node', {
         method: 'POST',
         headers: {
             'Accept': 'application/json',
@@ -44,5 +44,4 @@ export function sendSurveyResponses(formData) {
     .then((responseData) => {
         // console.log(responseData)
     })
-    .done();
 }
