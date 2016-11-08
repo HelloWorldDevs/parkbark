@@ -19,9 +19,26 @@ class ParkList extends Component {
     super(props);
 
     this.state = {
-      scrollY: new Animated.Value(0)
+      scrollY: new Animated.Value(0),
+      pan: new Animated.ValueXY()
     };
+
+    this.panResponder = PanResponder.create({    //Step 2
+      onMoveShouldSetResponderCapture: () => true,
+      onMoveShouldSetPanResponderCapture: () => true,
+      onPanResponderGrant: (e, gestureState) => {
+        this.state.pan.setOffset({y: this.state.pan.y._value});
+        this.state.pan.setValue({x: 0, y: 0});
+      },
+      onPanResponderMove           : Animated.event([null,{ //Step 3
+        dy : this.state.pan.y
+      }]),
+      onPanResponderRelease        : (e, gesture) => {
+        this.state.pan.flattenOffset();
+      } //Step 4
+    });
   }
+
 
   renderParkListDetails(parks){
     let parkIndex = 0;
@@ -82,19 +99,33 @@ class ParkList extends Component {
       extrapolate: 'clamp',
     })
 
-  //       <Animated.View style={{ backgroundColor: 'blue',height, zIndex: 2 }}>
+// Test View
+  //       <Animated.View
+  //   {...this.panResponder.panHandlers}
+  //   style={[this.state.pan.getLayout(), {height: 200, backgroundColor: 'blue'}]}>
   // <Text>Hi!</Text>
   // </Animated.View>
+
+// Scroll animation for height.
+    // scrollEventThrottle={16}
+    // onScroll={Animated.event(
+    //     [{nativeEvent: {contentOffset: {y: this.state.scrollY}}}]
+    // )}
+
+
+// <Button bgcolor={'#fff'} text={'Close'} onPress={this.slideOut}/>
 
 
     return (
         <View style={styles.scrollConainer}>
-          <Button bgcolor={'#fff'} text={' See Parks List '} onPress={this.slideIn.bind(this)}/>
           <Animated.View
-              style={{height: height, position: 'absolute', zIndex: 2, bottom, left: 0, right: 0, }}
+              {...this.panResponder.panHandlers}
+                 style={[this.state.pan.getLayout(), {position: 'absolute', zIndex: 2, bottom, left: 0, right: 0, }]}
           >
-            <ScrollView bounces={false} style={styles.scrollView}>
-              <Button bgcolor={'#fff'} text={'Close'} onPress={this.slideOut}/>
+            <ScrollView bounces={false} style={styles.scrollView}
+              scrollEnabled={false}
+            >
+              <Button bgcolor={'#fff'} text={' See Parks List '} onPress={this.slideIn.bind(this)}/>
               {this.renderParkListDetails(this.props.parks)}
               <Button bgcolor={'#f0382c'} text={'Suggest a park'} onPress={this.onNextPress.bind(this)}/>
             </ScrollView>
