@@ -10,7 +10,7 @@ export default class Button extends Component {
         alignItems: 'center',
         borderRadius: 15,
         padding: 5,
-        margin: 10
+        margin: 10,
       },
       buttonText: {
         alignSelf: 'center',

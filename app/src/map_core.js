@@ -70,24 +70,6 @@ export function updateParksAction(coords, dist){
       })
 }
 
-export function fetchLocationAction(address, googleapi) {
-  console.log(`https://maps.googleapis.com/maps/api/geocode/json?address=${address}&key=${googleapi}`);
-  return fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${address}&key=${googleapi}`)
-      .then(function(res) {
-        return res.json();
-      })
-      .then(function(resJson) {
-        var region = {};
-        region.latitude = resJson.results[0].geometry.location.lat;
-        region.longitude = resJson.results[0].geometry.location.lng;
-        region.latitudeDelta = .1;
-        region.longitudeDelta = .1;
-        return region;
-      })
-      .catch((error) => {
-        console.error(error);
-      })
-}
 
 export function getDistance(lat1,lon1,lat2,lon2) {
   var R = 6371; // Radius of the earth in km

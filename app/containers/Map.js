@@ -16,11 +16,6 @@ import ParkList from '../components/ParkList.js';
 
 class ParkMap extends Component {
 
-    componentDidMount() {
-        console.log(this.props)
-        console.log(this.props.filterSet)
-    }
-
   componentWillReceiveProps(props) {
       // console.log('recieving props', props)
     }
