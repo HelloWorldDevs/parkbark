@@ -50,7 +50,7 @@ class ParkDetail extends Component {
       title: "Park Bark is Awesome",
       message: "Hello!",
       url: "http://facebook.github.io/react-native/",
-      subject: "Share Link" //  for email
+      subject: 'Check out ' + this.props.currentPark.title
     };
     Share.open(shareOptions);
   }
