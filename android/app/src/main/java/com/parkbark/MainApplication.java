@@ -5,6 +5,7 @@ import android.util.Log;
 
 import com.sbugert.rnadmob.RNAdMobPackage;
 import com.facebook.react.ReactApplication;
+import cl.json.RNSharePackage;
 import com.learnium.RNDeviceInfo.RNDeviceInfo;
 import com.airbnb.android.react.maps.MapsPackage;
 import com.facebook.react.ReactInstanceManager;
@@ -31,11 +32,11 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
+            new RNSharePackage(),
+            new RNAdMobPackage(),
             new RNDeviceInfo(),
             new MapsPackage(),
-            new ReactNativePushNotificationPackage(),
-            new RNAdMobPackage()
-
+            new ReactNativePushNotificationPackage()
       );
     }
   };

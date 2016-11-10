@@ -11,6 +11,7 @@ import {
     Linking
 } from 'react-native';
 var ResponsiveImage = require('react-native-responsive-image');
+import Share from 'react-native-share';
 import Button from '../components/common/Button';
 import Card from '../components/common/Card.js';
 import CardSection from '../components/common/CardSection.js';
@@ -44,6 +45,16 @@ class ParkDetail extends Component {
     this.props.navigator.pop();
   }
 
+  onSharePress() {
+    let shareOptions = {
+      title: "Park Bark is Awesome",
+      message: "Hello!",
+      url: "http://facebook.github.io/react-native/",
+      subject: 'Check out ' + this.props.currentPark.title
+    };
+    Share.open(shareOptions);
+  }
+
   surveyPress() {
     // console.log(this.props);
     const title = this.props.currentPark.title;
@@ -67,6 +78,11 @@ class ParkDetail extends Component {
               onPress={this.onBackPress.bind(this)}
               style={{position: 'absolute', top: 20, left: 20, zIndex: 1}}>
             <Image style={{width: 25, height: 25, padding: 10}} source={require('../img/back-arrow@3x.png')}/>
+          </TouchableOpacity>
+          <TouchableOpacity
+              onPress={this.onSharePress.bind(this)}
+              style={{position: 'absolute', top: 20, right: 20, zIndex: 1}}>
+            <Image style={{width: 25, height: 25, padding: 10}} source={require('../img/share@2x.png')}/>
           </TouchableOpacity>
           <View style={{flex: 1, justifyContent: 'center', alignItems: 'stretch'}}>
             <ResponsiveImage
