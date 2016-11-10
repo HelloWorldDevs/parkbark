@@ -20,7 +20,8 @@ class ParkList extends Component {
     super(props);
 
     this.state = {
-      pan: new Animated.ValueXY()
+      pan: new Animated.ValueXY(),
+      listHeight: null
     };
 
 
@@ -47,7 +48,7 @@ class ParkList extends Component {
   }
 
   getTouchTravel({ moveX, moveY, dx, dy, vy}) {
-    console.log(moveX, moveY, dx, dy, vy);
+    // console.log(moveX, moveY, dx, dy, vy);
     var scrollState = null
     if(dy > 5 ||dy < -5) {
       scrollState = true;
@@ -66,30 +67,53 @@ class ParkList extends Component {
   slideValue = new Animated.Value(0);
 
   slideIn = () => {
-    var width = Dimensions.get('window').width;
-    var hieght = Dimensions.get('window').height;
-    console.log(this.state, width, hieght);
-    // console.log('slide!')
-    // this.props.dispatch({type:'MAP_HIDE', state: false})
-    Animated.timing(
-        this.state.pan,         // Auto-multiplexed
-        {
-          toValue: {x: 0, y: -hieght/3},
-          duration: 1500,
-          easing: Easing.elastic(1)
-        } // Back to zero
-    ).start();
+    var height = Dimensions.get('window').height;
+    var listHeight = this.state.listHeight;
+    this.props.dispatch({type:'MAP_HIDE', state: false})
+    if (listHeight < height/2) {
+      Animated.timing(
+          this.state.pan,
+          {
+            toValue: {x: 0, y: -listHeight + 50 },
+            duration: 1500,
+            easing: Easing.elastic(0)
+          }
+      ).start();
+    } else {
+      Animated.timing(
+          this.state.pan,
+          {
+            toValue: {x: 0, y: -height/2 },
+            duration: 1500,
+            easing: Easing.elastic(0)
+          }
+      ).start();
+    }
   }
 
   slideOut = () => {
-    // Animated.timing(
-    //     this.slideValue,
-    //     {
-    //       toValue: 0,
-    //       duration: 1500,
-    //       easing: Easing.elastic(1)
-    //     }
-    // ).start()
+    var listHeight = this.state.listHeight;
+    var height = Dimensions.get('window').height;
+    // console.log(this.state, width, height);
+    if (listHeight < height/2) {
+      Animated.timing(
+          this.state.pan,
+          {
+            toValue: {x: 0, y: listHeight + 50 },
+            duration: 10,
+            easing: Easing.elastic(1)
+          }
+      ).start();
+    } else {
+      Animated.timing(
+          this.state.pan,
+          {
+            toValue: {x: 0, y: height/2},
+            duration: 500,
+            easing: Easing.elastic(1)
+          }
+      ).start();
+    }
   }
 
   onNextPress = () => {
@@ -102,11 +126,42 @@ class ParkList extends Component {
     this.props.navigator.push({name:'parkdetail'});
   }
 
+  layoutSet = (event) => {
+    var {x, y, width, height} = event.nativeEvent.layout;
+    this.setState({listHeight: height})
+    // console.log(this.state);
+  }
+
 
   render() {
 
     if(this.props.hideState) {
       this.slideOut();
+    }
+
+    var height = Dimensions.get('window').height;
+    var listHeight = this.state.listHeight;
+    if (listHeight < height/2 && !this.props.hideState && this.state.pan.y._value < -listHeight +50) {
+      console.log('less than half list out of wack');
+      Animated.timing(
+          this.state.pan,
+          {
+            toValue: {x: 0, y: -listHeight +50},
+            duration: 500,
+            easing: Easing.elastic(0)
+          }
+      ).start();
+    }
+    else if (listHeight > height/2 && !this.props.hideState && this.state.pan.y._value < -height/2) {
+      console.log('greater than half list out of wack');
+      Animated.timing(
+          this.state.pan,
+          {
+            toValue: {x: 0, y: -height/2 },
+            duration: 1500,
+            easing: Easing.elastic(0)
+          }
+      ).start();
     }
 
     const bottom = this.slideValue.interpolate({
@@ -121,10 +176,13 @@ class ParkList extends Component {
           <Animated.View
               {...this.panResponder.panHandlers}
                  style={[this.state.pan.getLayout(), {position: 'absolute', zIndex: 2, alignItems: 'stretch', left: 0, right: 0}]}
+              onLayout={(event) => {this.layoutSet(event)}}
           >
             <ScrollView bounces={false} style={styles.scrollView}
               scrollEnabled={true}
             >
+              <Button bgcolor={'#fff'} text={' Close '} onPress={this.slideOut}/>
+
               {this.renderParkListDetails(this.props.parks)}
               <Button bgcolor={'#f0382c'} text={'Suggest a park'} onPress={this.onNextPress.bind(this)}/>
             </ScrollView>

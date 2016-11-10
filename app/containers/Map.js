@@ -35,6 +35,7 @@ class ParkMap extends Component {
             region={this.props.coords}
             onPress={this.regionShow.bind(this)}
             onRegionChangeComplete={this.annotationUpdate.bind(this)}
+            onRegionChange={this.regionShow.bind(this)}
         >
           <PositionMarker/>
           <ParkMarkers navigator={this.props.navigator}/>
@@ -46,20 +47,8 @@ class ParkMap extends Component {
   }
 
 
-
-//onPress={this.scrollToMarker.bind(this)}
-//
-// scrollToMarker(region) {
-//     // this.map.animateToCoordinate(region.nativeEvent.coordinate, 100);
-//   }
-
-
-
   regionShow() {
     this.props.dispatch({type:'MAP_HIDE', state: true})
-    if(this.props.selectedFilters) {
-      console.log(this.props.selectedFilters)
-    }
   }
 
 
