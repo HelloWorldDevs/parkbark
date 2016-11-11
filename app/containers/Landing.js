@@ -27,7 +27,7 @@ const Landing = React.createClass ({
             })
           });
           const userLatLng = {latitude: position.coords.latitude, longitude: position.coords.longitude};
-          console.log(userLatLng);
+          // console.log(userLatLng);
           this.props.dispatch({type: 'SET_POSITION', state: userLatLng})
         },
         (error) => {console.log(error)},

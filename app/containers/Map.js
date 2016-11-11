@@ -20,7 +20,7 @@ class ParkMap extends Component {
       // console.log('recieving props', props)
     }
 
-  showFilters(){
+  showFilters() {
     this.props.navigator.push({name: 'filterlist'});
   }
 
@@ -60,7 +60,6 @@ class ParkMap extends Component {
     const coords = region.latitude + ',' + region.longitude;
     if (!this.props.filterSet) {
       updateParksAction(coords, dist).done((state) => {
-        console.log('updateParksAction DONE!')
         this.props.dispatch({type: 'UPDATE_ANNOTATIONS', state: state});
       });
     } else if (this.props.filterSet) {

@@ -43,7 +43,7 @@ export function updateParksAction(coords, dist){
         return res.json();
       })
       .then(function(resJson) {
-        // console.log(resJson);
+        console.log(resJson);
         var parks = [];
         resJson.forEach((item)=> {
           var park = {};

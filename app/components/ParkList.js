@@ -24,7 +24,6 @@ class ParkList extends Component {
       listHeight: null
     };
 
-
     this.panResponder = PanResponder.create({    //Step 2
         onStartShouldSetPanResponder : () => true,
         onMoveShouldSetResponderCapture: () => true,
@@ -44,11 +43,32 @@ class ParkList extends Component {
   }
 
   componentDidMount() {
+    console.log('mounting');
     this.state.pan.setValue({y: Dimensions.get('window').height + 50});
   }
 
+  componentDidUpdate() {
+    var height = Dimensions.get('window').height;
+    var listHeight = this.state.listHeight;
+    // console.log('height: ', height , 'pan height: ', this.state.pan.y._value, 'list height: ', listHeight);
+
+    if(this.props.hideState && this.state.pan.y._value < height) {
+      this.slideOut();
+    }
+
+    if (listHeight < height/2 && !this.props.hideState && this.state.pan.y._value < -listHeight +50) {
+      console.log('less than half list out of wack');
+      Animated.timing(
+          this.state.pan,
+          {
+            toValue: {x: 0, y: -listHeight +50},
+            duration: 0
+          }
+      ).start();
+    }
+  }
+
   getTouchTravel({ moveX, moveY, dx, dy, vy}) {
-    // console.log(moveX, moveY, dx, dy, vy);
     var scrollState = null
     if(dy > 5 ||dy < -5) {
       scrollState = true;
@@ -69,7 +89,7 @@ class ParkList extends Component {
   slideIn = () => {
     var height = Dimensions.get('window').height;
     var listHeight = this.state.listHeight;
-    this.props.dispatch({type:'MAP_HIDE', state: false})
+    this.props.dispatch({type:'MAP_HIDE', state: false});
     if (listHeight < height/2) {
       Animated.timing(
           this.state.pan,
@@ -94,13 +114,12 @@ class ParkList extends Component {
   slideOut = () => {
     var listHeight = this.state.listHeight;
     var height = Dimensions.get('window').height;
-    // console.log(this.state, width, height);
     if (listHeight < height/2) {
       Animated.timing(
           this.state.pan,
           {
             toValue: {x: 0, y: listHeight + 50 },
-            duration: 10,
+            duration: 200,
             easing: Easing.elastic(1)
           }
       ).start();
@@ -109,12 +128,14 @@ class ParkList extends Component {
           this.state.pan,
           {
             toValue: {x: 0, y: height/2},
-            duration: 500,
+            duration: 200,
             easing: Easing.elastic(1)
           }
       ).start();
     }
   }
+
+
 
   onNextPress = () => {
       this.props.dispatch({type: 'SET_PARK_SURVEY', state: 'Suggest a Park'});
@@ -129,46 +150,10 @@ class ParkList extends Component {
   layoutSet = (event) => {
     var {x, y, width, height} = event.nativeEvent.layout;
     this.setState({listHeight: height})
-    // console.log(this.state);
   }
 
 
   render() {
-
-    if(this.props.hideState) {
-      this.slideOut();
-    }
-
-    var height = Dimensions.get('window').height;
-    var listHeight = this.state.listHeight;
-    if (listHeight < height/2 && !this.props.hideState && this.state.pan.y._value < -listHeight +50) {
-      console.log('less than half list out of wack');
-      Animated.timing(
-          this.state.pan,
-          {
-            toValue: {x: 0, y: -listHeight +50},
-            duration: 500,
-            easing: Easing.elastic(0)
-          }
-      ).start();
-    }
-    else if (listHeight > height/2 && !this.props.hideState && this.state.pan.y._value < -height/2) {
-      console.log('greater than half list out of wack');
-      Animated.timing(
-          this.state.pan,
-          {
-            toValue: {x: 0, y: -height/2 },
-            duration: 1500,
-            easing: Easing.elastic(0)
-          }
-      ).start();
-    }
-
-    const bottom = this.slideValue.interpolate({
-      inputRange: [0, 1],
-      outputRange: [-400, 0]
-    });
-
 
     return (
         <View style={styles.scrollConainer}>
@@ -190,7 +175,7 @@ class ParkList extends Component {
         </View>
     )
   }
-};
+}
 
 
 
