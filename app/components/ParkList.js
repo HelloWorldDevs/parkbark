@@ -86,12 +86,12 @@ class ParkList extends Component {
 
     return (
         <View style={styles.scrollConainer}>
-          <Button bgcolor={'#fff'} text={' See Parks List '} onPress={this.slideIn}/>
+          <Button bgimage={require('../img/orange-gradient.png')} bgcolor={'#fff'} text={' See Parks List '} onPress={this.slideIn}/>
           <Animated.View
                  style={{position: 'absolute', zIndex: 2, alignItems: 'stretch', left: 0, right: 0, bottom}}
           >
             <View style={styles.scrollViewHeader}>
-                  <Button bgcolor={'#fff'} text={' Show Map '} onPress={this.slideOut}/>
+                  <Button bgimage={require('../img/orange-gradient.png')} bgcolor={'#fff'} text={' Show Map '} onPress={this.slideOut}/>
               </View>
               <ScrollView
                 bounces={false} style={styles.scrollView}
@@ -99,7 +99,7 @@ class ParkList extends Component {
               >
                 { this.props.parks.length ? this.renderParkListDetails(this.props.parks) :
                     <Text style={styles.noResults}>No Parks Found</Text>}
-                <Button bgcolor={'#f0382c'} text={'Suggest a park'} onPress={this.onNextPress.bind(this)}/>
+                <Button bgimage={require('../img/orange-gradient.png')} text={'Suggest a park'} onPress={this.onNextPress.bind(this)}/>
               </ScrollView>
           </Animated.View>
         </View>

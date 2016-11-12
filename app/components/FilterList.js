@@ -82,8 +82,8 @@ class FilterList extends Component {
           <View style={styles.filterScrollView}>
             <Text style={styles.filterTitle}>Filter Parks</Text>
             {this.renderFilters()}
-            <Button bgcolor={'transparent'} text={'Clear Filters'} onPress={this.onClearFiltersPress.bind(this)}/>
-            <Button bgcolor={'#f0382c'} text={'Filter'} onPress={this.onFilterPress.bind(this)}/>
+            <Button bgimage={require('../img/orange-gradient.png')} text={'Clear Filters'} onPress={this.onClearFiltersPress.bind(this)}/>
+            <Button bgimage={require('../img/orange-gradient.png')} text={'Filter'} onPress={this.onFilterPress.bind(this)}/>
           </View>
         </View>
     )

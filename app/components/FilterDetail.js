@@ -1,5 +1,5 @@
 import  React, {Component} from 'react';
-import {View, TouchableOpacity, Text, Animated, Easing} from 'react-native';
+import {View, TouchableOpacity, Text, Animated, Easing, Image} from 'react-native';
 import { connect } from 'react-redux';
 import Card from './common/Card.js';
 import CardSection from './common/CardSection.js'
@@ -88,7 +88,9 @@ export default class FilterDetail extends Component {
                 onPress={this.onPress.bind(this)}>
               <Card>
                   <Animated.Text  style={{color}} >{this.props.filter}</Animated.Text>
-                  <Animated.Image style={{backgroundColor, borderRadius: 10, width: 20, height: 20}} source={require('../img/Ok@3x.png')} />
+                  <Animated.View style={{backgroundColor, borderRadius: 10, overflow: 'hidden'}}>
+                    <Image style={{ width: 20, height: 20, overflow: 'hidden'}} source={require('../img/Ok@3x.png')} />
+                  </Animated.View>
               </Card>
           </TouchableOpacity>
         </View>

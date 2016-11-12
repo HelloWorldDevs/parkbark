@@ -2,6 +2,11 @@ import React, { Component } from 'react';
 import { TouchableHighlight, StyleSheet , Text, Image} from 'react-native';
 
 export default class Button extends Component {
+
+  componentDidMount() {
+    console.log('text ', this.props.text);
+  }
+
   render() {
     const styles = {
       button: {
