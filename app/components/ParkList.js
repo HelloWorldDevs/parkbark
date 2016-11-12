@@ -21,32 +21,8 @@ class ParkList extends Component {
 
     this.state = {
       slideValue: new Animated.Value(0),
-      sliding: false,
-      listHeight: null,
-      listYHeight: null
     };
 
-    // this.panResponder = PanResponder.create({
-    //     onStartShouldSetPanResponder : () => true,
-    //     onMoveShouldSetResponderCapture: () => true,
-    //     onStartShouldSetResponderCapture: () => true,
-    //     onMoveShouldSetPanResponderCapture: (evt, gestureState) => !!this.getTouchTravel(gestureState),
-    //     onPanResponderGrant: (e, gestureState) => {
-    //       this.state.pan.setOffset({y: this.state.pan.y._value});
-    //       this.state.pan.setValue({x: 0, y: 0});
-    //     },
-    //     onPanResponderMove : (e, gestureState) => {
-    //       // if (this.state.pan.y._value) {
-    //       console.log(this.state.pan.y._value);
-    //         Animated.event([null, {
-    //           dy: this.state.pan.y
-    //         }])(e, gestureState);
-    //       // }
-    //     },
-    //     onPanResponderRelease : (e, gesture) => {
-    //       this.state.pan.flattenOffset();
-    //     }
-    // });
   }
 
   componentDidMount() {
@@ -75,7 +51,6 @@ class ParkList extends Component {
           easing: Easing.elastic(1)
         }
     ).start();
-
   };
 
   slideOut = () => {
@@ -102,33 +77,30 @@ class ParkList extends Component {
     this.props.navigator.push({name:'parkdetail'});
   };
 
-  layoutSet = (event) => {
-    var {x, y, width, height} = event.nativeEvent.layout;
-    this.setState({listHeight: height, listYHeight: y})
-  };
-
-
 
   render() {
     const bottom = this.state.slideValue.interpolate({
-             inputRange: [0, 1],
-              outputRange: [-Dimensions.get('window').height/2, 0]
-        });
+        inputRange: [0, 1],
+        outputRange: [-Dimensions.get('window').height - 180, 0]
+      });
 
     return (
         <View style={styles.scrollConainer}>
           <Button bgcolor={'#fff'} text={' See Parks List '} onPress={this.slideIn}/>
           <Animated.View
                  style={{position: 'absolute', zIndex: 2, alignItems: 'stretch', left: 0, right: 0, bottom}}
-              onLayout={(event) => {this.layoutSet(event)}}
           >
-            <ScrollView bounces={false} style={styles.scrollView}
-              scrollEnabled={true}
-            >
-              <Button bgcolor={'#fff'} text={' Close '} onPress={this.slideOut}/>
-              {this.renderParkListDetails(this.props.parks)}
-              <Button bgcolor={'#f0382c'} text={'Suggest a park'} onPress={this.onNextPress.bind(this)}/>
-            </ScrollView>
+            <View style={styles.scrollViewHeader}>
+                  <Button bgcolor={'#fff'} text={' Show Map '} onPress={this.slideOut}/>
+              </View>
+              <ScrollView
+                bounces={false} style={styles.scrollView}
+                scrollEnabled={true}
+              >
+                { this.props.parks.length ? this.renderParkListDetails(this.props.parks) :
+                    <Text style={styles.noResults}>No Parks Found</Text>}
+                <Button bgcolor={'#f0382c'} text={'Suggest a park'} onPress={this.onNextPress.bind(this)}/>
+              </ScrollView>
           </Animated.View>
         </View>
     )
@@ -140,13 +112,26 @@ const styles = {
     alignSelf: 'center',
     fontSize: 15
   },
+  scrollViewHeader: {
+    backgroundColor: '#fff',
+    borderColor: '#ddd',
+    borderBottomWidth: 1,
+    borderTopWidth: 0,
+    borderRightWidth: 0,
+    borderLeftWidth: 0,
+  },
   scrollView : {
-    height: Dimensions.get('window').height/2,
+    height: Dimensions.get('window').height -180,
     backgroundColor: '#fff'
   },
   scrollConainer: {
     alignSelf: 'stretch',
     padding: 5
+  },
+  noResults: {
+    color: '#f88b8e',
+    textAlign: 'center',
+    fontSize: 30
   }
 };
 

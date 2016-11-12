@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Map } from 'immutable';
-import { View, Image, StyleSheet, Text, TextInput, TouchableOpacity} from 'react-native';
+import { View, Image, StyleSheet, Text, TextInput, TouchableOpacity, Alert} from 'react-native';
 import { connect } from 'react-redux';
 import {fetchLocationAction} from '../src/search_core';
 import {googleapi} from '../api/googleapi.js';
@@ -14,7 +14,10 @@ class SearchFieldComponent extends Component {
         <View style={styles.fieldContainer}>
           <View style={styles.inputWrapper}>
             {this.searchParksInput()}
-            <TextInput onChangeText={this.handleChange.bind(this)} placeholder="Address, Zip, City" style={styles.input}/>
+            <TextInput
+                onChangeText={this.handleChange.bind(this)} placeholder="Address, Zip, City" style={styles.input}
+                onSubmitEditing={this.fetchParks.bind(this)}
+            />
             {this.searchParksFilter()}
           </View>
         </View>
@@ -50,9 +53,21 @@ class SearchFieldComponent extends Component {
 
 
   fetchParks() {
-    fetchLocationAction(this.props.search.search, googleapi).done((state) => {
-      this.props.dispatch({type: 'UPDATE_REGION', state: state});
-    });
+    if (this.props.search != undefined) {
+      fetchLocationAction(this.props.search.search, googleapi).done((state) => {
+        if (state === 'no location alert') {
+          Alert.alert(
+              'No Location Found',
+              'Your location was not found, please try another search',
+              [
+                {text: 'OK', onPress: () => {return}},
+              ]
+          )
+        } else {
+          this.props.dispatch({type: 'UPDATE_REGION', state: state});
+        }
+      });
+    }
   }
 }
 
