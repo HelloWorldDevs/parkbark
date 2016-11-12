@@ -9,7 +9,7 @@ import CardSection from './common/CardSection.js'
 
 class ParkListDetails extends Component{
   constructor(props) {
-    super(props)
+    super(props);
     this.fadeValue = new Animated.Value(0);
   }
 
@@ -38,11 +38,11 @@ class ParkListDetails extends Component{
     ).start()
   }
 
-  componentDidMount(){
+  componentDidMount() {
     this.fadeIn();
   }
 
-  componentWillUnmount(){
+  componentWillUnmount() {
     this.fadeOut();
   }
 

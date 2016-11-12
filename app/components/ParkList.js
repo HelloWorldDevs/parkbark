@@ -48,7 +48,7 @@ class ParkList extends Component {
         {
           toValue: 1,
           duration: 1500,
-          easing: Easing.elastic(1)
+          easing: Easing.elastic(0)
         }
     ).start();
   };

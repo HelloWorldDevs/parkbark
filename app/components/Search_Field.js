@@ -35,6 +35,7 @@ class SearchFieldComponent extends Component {
 
   searchParksInput() {
     return <TouchableOpacity
+        hitSlop={{top: 10, left: 10, bottom: 10, right: 10}}
         underlayColor="gray"
         onPress={this.fetchParks.bind(this)}>
       <Image source={require('../img/magnify@3x.png')} style={styles.searchIcon}/>
@@ -44,6 +45,7 @@ class SearchFieldComponent extends Component {
   searchParksFilter(){
    return <TouchableOpacity
         underlayColor="gray"
+        hitSlop={{top: 10, left: 10, bottom: 10, right: 10}}
         onPress={this.props.onPress}
         style={styles.filterIconWrapper}>
       <Image source={require('../img/empty_filter@3x.png')} style={styles.filterIcon}/>

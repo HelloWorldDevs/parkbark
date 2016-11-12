@@ -76,7 +76,9 @@ class FilterList extends Component {
         <View>
           <TouchableOpacity
               onPress={this.onBackPress.bind(this)}
-              style={{position: 'absolute', top: 30, right: 15, zIndex: 1}}>
+              style={{position: 'absolute', top: 30, right: 15, zIndex: 1}}
+              hitSlop={{top: 10, left: 10, bottom: 10, right: 10}}
+          >
             <Image style={{width: 20, height: 20}} source={require('../img/button_close.png')}/>
           </TouchableOpacity>
           <View style={styles.filterScrollView}>
