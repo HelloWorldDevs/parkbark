@@ -25,7 +25,6 @@ class SearchFieldComponent extends Component {
   }
 
   handleChange(text) {
-    console.log(text)
     this.props.dispatch({
       type: 'UPDATE_SEARCH',
       state: {
@@ -81,16 +80,18 @@ var styles = StyleSheet.create({
     top: 20,
     left: 0,
     right: 0,
+    flex: 1,
     alignSelf: 'stretch',
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
     paddingLeft: 10,
-    paddingRight: 10
+    paddingRight: 10,
   },
   inputWrapper: {
     backgroundColor: '#fff',
     flexDirection: 'row',
+    flex: 1,
     justifyContent: 'space-between',
     alignItems: 'center',
     padding: 7,

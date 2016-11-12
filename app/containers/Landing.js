@@ -53,7 +53,6 @@ const Landing = React.createClass ({
     return (
         <View style={styles.container}>
           <View style={styles.imageContainer}>
-            <Text style={styles.title}>Welcome to Park Bark</Text>
             <Image source={require('../img/welcomePup@2x.png')}/>
           </View>
           <View style={styles.textContainer}>
@@ -62,7 +61,7 @@ const Landing = React.createClass ({
               Looking for just the perfect place to let your dog run free? Fenced? Water available? We've got all of the
               details you're looking for.
             </Text>
-            <Button bgcolor={'#E79C23'} text={' --> '} onPress={this.onNextPress}/>
+            <Button bgimage={require('../img/orange-gradient.png')} icon={require('../img/forward-arrow@3x.png')} onPress={this.onNextPress}/>
           </View>
         </View>
     );
@@ -85,27 +84,21 @@ var styles = StyleSheet.create({
     flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
-    borderColor: '#008eff',
-    backgroundColor: '#F1F1F1'
-  },
-  imageContainer: {
-    flex: 1.5,
-    flexDirection: 'column',
-    justifyContent: 'center',
-    alignItems: 'center'
-  },
-  textContainer: {
-    flex: 1,
-    padding: 1
+    padding: 30
   },
   title: {
-    color: '#E79C23',
-    fontSize: 30,
-    fontWeight: "200"
-
+    color: '#F58120',
+    fontSize: 48,
+    fontFamily: 'Source Sans Pro 200',
+    lineHeight: 56,
+    paddingBottom: 15
   },
   text: {
-    color: "#8E8E8E"
+    fontFamily: 'Source Sans Pro 200',
+    color: '#5e5e5e',
+    lineHeight: 23,
+    fontSize: 16,
+    marginBottom: 5,
   }
 });
 
