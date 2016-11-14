@@ -1,5 +1,5 @@
 import  React, {Component} from 'react';
-import {View, TouchableOpacity, Text, Animated, Easing, Image} from 'react-native';
+import {View, TouchableOpacity, Text, Image} from 'react-native';
 import { connect } from 'react-redux';
 import Card from './common/Card.js';
 import CardSection from './common/CardSection.js'
@@ -7,43 +7,15 @@ import CardSection from './common/CardSection.js'
 
 export default class FilterDetail extends Component {
 
-  //assigns colorValue for animation on component mount depending on staged or selected
   componentWillMount() {
     const { staged, selected } = this.props.currentFilter;
     if (selected || staged === 'add') {
-      this.colorValue = new Animated.Value(1);
+         this.fontFamily = 'Source Sans Pro 700';
+         this.image = require('../img/Ok@3x.png');
     } else {
-      this.colorValue = new Animated.Value(0);
+        this.fontFamily = 'Source Sans Pro 200';
     }
   }
-
-
-
-  //colorFade in or out depending on staged or selected props
-  colorFade() {
-    const { staged, selected } = this.props.currentFilter;
-    if (!staged || staged === 'remove') {
-      Animated.timing(
-          this.colorValue,
-          {
-            toValue: 1,
-            duration: 500,
-            easing: Easing.elastic(1)
-          }
-      ).start()
-    }
-    if(staged === 'add' || selected) {
-      Animated.timing(
-          this.colorValue,
-          {
-            toValue: 0,
-            duration: 500,
-            easing: Easing.elastic(1)
-          }
-      ).start();
-    }
-  }
-
 
   //adds staged for add or remove prop to park amenity object in immutable state.
   onPress() {
@@ -51,46 +23,26 @@ export default class FilterDetail extends Component {
       const { staged, selected } = this.props.currentFilter;
       if(!staged || staged === 'remove') {
         this.props.dispatch({type: 'ADD_STAGED_FILTER', state: currentFilterIndex});
+        this.fontFamily = 'Source Sans Pro 700';
+        this.image = require('../img/Ok@3x.png');
       }
       if(staged === 'add' || selected) {
         this.props.dispatch({type: 'REMOVE_STAGED_FILTER', state: currentFilterIndex});
+        this.fontFamily = 'Source Sans Pro 200';
       }
-      this.colorFade();
   }
 
-
-
   render() {
-    //double check for staged or selected on re-render
-    const { staged, selected } = this.props.currentFilter;
-    if(!staged && !selected) {
-      Animated.timing(
-          this.colorValue,
-          {
-            toValue: 0,
-            duration: 500,
-            easing: Easing.elastic(1)
-          }
-      ).start();
-    }
-    const color = this.colorValue.interpolate({
-      inputRange: [0, 1],
-      outputRange: ['#5e5e5e', '#ef3a39']
-    });
-    const backgroundColor = this.colorValue.interpolate({
-      inputRange: [0, 1],
-      outputRange: ['#fff', '#ef3a39']
-    });
     return (
         <View>
             <TouchableOpacity
                 disabled={this.props.disabled}
                 onPress={this.onPress.bind(this)}>
               <Card>
-                  <Animated.Text  style={{color}} >{this.props.filter}</Animated.Text>
-                  <Animated.View style={{backgroundColor, borderRadius: 10, overflow: 'hidden'}}>
-                    <Image style={{ width: 20, height: 20, overflow: 'hidden'}} source={require('../img/Ok@3x.png')} />
-                  </Animated.View>
+                  <Text  style={{fontFamily: this.fontFamily}} >{this.props.filter}</Text>
+                  <View style={{borderRadius: 10, overflow: 'hidden'}}>
+                    <Image style={{ width: 20, height: 20, overflow: 'hidden'}} source={this.image || null} />
+                  </View>
               </Card>
           </TouchableOpacity>
         </View>
@@ -99,11 +51,7 @@ export default class FilterDetail extends Component {
 }
 
 const styles = {
-  filterButton: {
-    // flex: 1,
-    // alignItems: 'stretch',
-    // borderWidth: 1
-  }
+
 }
 
 
