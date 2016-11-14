@@ -29,6 +29,7 @@ export default class FilterDetail extends Component {
       if(staged === 'add' || selected) {
         this.props.dispatch({type: 'REMOVE_STAGED_FILTER', state: currentFilterIndex});
         this.fontFamily = 'Source Sans Pro 200';
+        this.image = null;
       }
   }
 

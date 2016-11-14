@@ -15,7 +15,11 @@ class SearchFieldComponent extends Component {
           <View style={styles.inputWrapper}>
             {this.searchParksInput()}
             <TextInput
-                onChangeText={this.handleChange.bind(this)} placeholder="Address, Zip, City" style={styles.input}
+                onChangeText={this.handleChange.bind(this)}
+                placeholder="Address, Zip, City"
+                placeholderTextColor='#5e5e5e'
+                underlineColorAndroid='#fff'
+                style={styles.input}
                 onSubmitEditing={this.fetchParks.bind(this)}
             />
             {this.searchParksFilter()}
