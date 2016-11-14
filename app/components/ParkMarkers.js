@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import {
     Text,
     View,
-    Linking
+    Linking,
+    StyleSheet
 } from 'react-native';
 import { connect } from 'react-redux';
 import MapView from 'react-native-maps';
@@ -46,13 +47,63 @@ class ParkMarkers extends Component {
                 title={marker.title}
                 description={marker.address_display + ' approx ' + getDistance(this.props.coords.latitude, this.props.coords.longitude, marker.latlng.latitude, marker.latlng.longitude) + 'mi'}
                 onCalloutPress={() => {this.onCalloutPress(marker.title)}}
-            />
+            >
+                <MapView.Callout style={styles.callout}>
+                    <View>
+                        <View style={styles.top}>
+                            <Text style={styles.title}>{marker.title}</Text>
+                            <Text style={styles.distance}>{getDistance(this.props.coords.latitude, this.props.coords.longitude, marker.latlng.latitude, marker.latlng.longitude) + 'mi'}</Text>
+                        </View>
+                        <Text style={styles.address}>{marker.address_display}</Text>
+
+                    </View>
+                </MapView.Callout>
+            </MapView.Marker>
              ))}
           </View>
     )
   }
 };
 
+var styles = StyleSheet.create({
+    callout: {
+        backgroundColor: '#fff',
+        padding: 2,
+        borderRadius: 2,
+        flex: 1,
+        position: 'relative',
+        alignItems: 'center',
+        elevation: 4,
+        shadowColor: 'rgba(0,0,0,.24)',
+        shadowOffset: {width: 0, height: 2},
+        shadowRadius: 4,
+    },
+    top: {
+        flex: 1,
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center'
+    },
+    title: {
+        fontFamily: 'Source Sans Pro regular',
+        fontSize: 14,
+        color: '#131313',
+        lineHeight: 23
+    },
+    address: {
+        fontFamily: 'Source Sans Pro 200',
+        fontSize: 12,
+        color: '#5e5e5e',
+        lineHeight: 23
+    },
+    distance: {
+        color: '#f58120',
+        fontSize: 14,
+        fontFamily: 'Source Sans Pro regular',
+        lineHeight: 23,
+        marginLeft: 5
+    }
+});
 
 const mapStateToProps = (state) => {
   return {

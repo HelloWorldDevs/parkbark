@@ -99,9 +99,10 @@ var styles = StyleSheet.create({
     padding: 7,
     shadowColor: '#000',
     shadowOffset: {width: 0, height: 2 },
-    shadowOpacity: 0.5,
-    shadowRadius: 2,
-    elevation: 1
+    shadowOpacity: 0.24,
+    shadowRadius: 4,
+    elevation: 4,
+    borderRadius: 2
   },
   searchIcon: {
     marginRight: 5
@@ -116,9 +117,12 @@ var styles = StyleSheet.create({
   },
   input: {
     width: 250,
-    fontSize: 16,
+    fontSize: 13,
     paddingTop: 0,
-    paddingBottom: 0
+    paddingBottom: 0,
+    color: '#5e5e5e',
+    fontFamily: 'Source Sans Pro 200',
+    lineHeight: 23
   }
 });
 
