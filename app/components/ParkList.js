@@ -86,12 +86,12 @@ class ParkList extends Component {
 
     return (
         <View style={styles.scrollConainer}>
-          <Button bgimage={require('../img/orange-gradient.png')} bgcolor={'#fff'} text={' See Parks List '} onPress={this.slideIn}/>
+          <Button bgimage={require('../img/transparent.png')} bgcolor={'#fff'} alignSelf={'flex-start'} text={' See Parks List '} style={styles.button} onPress={this.slideIn}/>
           <Animated.View
                  style={{position: 'absolute', zIndex: 2, alignItems: 'stretch', left: 0, right: 0, bottom}}
           >
             <View style={styles.scrollViewHeader}>
-                  <Button bgimage={require('../img/orange-gradient.png')} bgcolor={'#fff'} text={' Show Map '} onPress={this.slideOut}/>
+                  <Button bgimage={require('../img/transparent.png')} alignSelf={'flex-start'} bgcolor={'#fff'} text={' Show Map '} style={styles.button} onPress={this.slideOut}/>
               </View>
               <ScrollView
                 bounces={false} style={styles.scrollView}
@@ -132,6 +132,12 @@ const styles = {
     color: '#f88b8e',
     textAlign: 'center',
     fontSize: 30
+  },
+  button: {
+      fontFamily: 'Source Sans Pro regular',
+      fontSize: 14,
+      color: '#131313',
+      lineHeight: 23
   }
 };
 

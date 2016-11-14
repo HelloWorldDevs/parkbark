@@ -61,7 +61,7 @@ const Landing = React.createClass ({
               Looking for just the perfect place to let your dog run free? Fenced? Water available? We've got all of the
               details you're looking for.
             </Text>
-            <Button bgimage={require('../img/orange-gradient.png')} icon={require('../img/forward-arrow@3x.png')} onPress={this.onNextPress}/>
+            <Button bgimage={require('../img/orange-gradient.png')} icon={require('../img/forward-arrow@3x.png')} alignSelf={'center'} onPress={this.onNextPress}/>
           </View>
         </View>
     );

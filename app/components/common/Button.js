@@ -4,7 +4,7 @@ import { TouchableHighlight, StyleSheet , Text, Image} from 'react-native';
 export default class Button extends Component {
 
   componentDidMount() {
-    console.log('text ', this.props.text);
+    // console.log('text ', this.props.text);
   }
 
   render() {
@@ -13,6 +13,7 @@ export default class Button extends Component {
         backgroundColor: this.props.bgcolor,
         justifyContent: 'center',
         alignItems: 'center',
+        alignSelf: this.props.alignSelf,
         borderRadius: 15,
         padding: 5,
         margin: 10,
