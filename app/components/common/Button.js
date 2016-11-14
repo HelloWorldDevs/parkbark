@@ -21,7 +21,10 @@ export default class Button extends Component {
       },
       buttonText: {
         alignSelf: 'center',
-        fontSize: 15,
+        fontSize: this.props.fontSize,
+        color: this.props.textColor,
+        fontFamily: this.props.font,
+        marginTop: 3
     },
     buttonIcon: {
         alignSelf: 'center',

@@ -86,12 +86,30 @@ class ParkList extends Component {
 
     return (
         <View style={styles.scrollConainer}>
-          <Button bgimage={require('../img/transparent.png')} bgcolor={'#fff'} alignSelf={'flex-start'} text={' See Parks List '} style={styles.button} onPress={this.slideIn}/>
+          <Button
+            bgimage={require('../img/transparent.png')}
+            bgcolor={'#fff'}
+            alignSelf={'flex-start'}
+            text={' See Parks List '}
+            color={'#131313'}
+            font={'Source Sans Pro regular'}
+            fontSize={14}
+            onPress={this.slideIn}
+          />
           <Animated.View
                  style={{position: 'absolute', zIndex: 2, alignItems: 'stretch', left: 0, right: 0, bottom}}
           >
             <View style={styles.scrollViewHeader}>
-                  <Button bgimage={require('../img/transparent.png')} alignSelf={'flex-start'} bgcolor={'#fff'} text={' Show Map '} style={styles.button} onPress={this.slideOut}/>
+                  <Button
+                    bgimage={require('../img/transparent.png')}
+                    alignSelf={'flex-start'}
+                    bgcolor={'#fff'}
+                    text={' Show Map '}
+                    textColor={'#131313'}
+                    font={'Source Sans Pro regular'}
+                    fontSize={14}
+                    onPress={this.slideOut}
+                  />
               </View>
               <ScrollView
                 bounces={false} style={styles.scrollView}
@@ -99,7 +117,16 @@ class ParkList extends Component {
               >
                 { this.props.parks.length ? this.renderParkListDetails(this.props.parks) :
                     <Text style={styles.noResults}>No Parks Found</Text>}
-                <Button bgimage={require('../img/orange-gradient.png')} text={'Suggest a park'} onPress={this.onNextPress.bind(this)}/>
+                <Button
+                    bgimage={require('../img/transparent.png')}
+                    bgcolor={'#ef3a39'}
+                    text={'Suggest a park'}
+                    alignSelf={'stretch'}
+                    textColor={'#fff'}
+                    font={'Source Sans Pro 700'}
+                    fontSize={15}
+                    onPress={this.onNextPress.bind(this)}
+                />
               </ScrollView>
           </Animated.View>
         </View>
@@ -133,12 +160,6 @@ const styles = {
     textAlign: 'center',
     fontSize: 30
   },
-  button: {
-      fontFamily: 'Source Sans Pro regular',
-      fontSize: 14,
-      color: '#131313',
-      lineHeight: 23
-  }
 };
 
 const mapStateToProps = (state) => {
