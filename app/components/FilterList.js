@@ -5,7 +5,8 @@ import {
     Text,
     StyleSheet,
     Image,
-    TouchableOpacity
+    TouchableOpacity,
+    Dimensions
 } from 'react-native';
 import { connect } from 'react-redux';
 import Button from './common/Button';
@@ -73,33 +74,63 @@ class FilterList extends Component {
 
   render() {
     return (
-        <View>
+        <View style={styles.container}>
           <TouchableOpacity
               onPress={this.onBackPress.bind(this)}
               style={{position: 'absolute', top: 30, right: 15, zIndex: 1}}
               hitSlop={{top: 10, left: 10, bottom: 10, right: 10}}
           >
-            <Image style={{width: 20, height: 20}} source={require('../img/button_close.png')}/>
+            <Image style={{width: 20, height: 20, opacity: 0.67}} source={require('../img/button_close.png')}/>
           </TouchableOpacity>
-          <View style={styles.filterScrollView}>
+          <ScrollView style={styles.filterScrollView}>
             <Text style={styles.filterTitle}>Filter Parks</Text>
             {this.renderFilters()}
-            <Button bgimage={require('../img/orange-gradient.png')} text={'Clear Filters'} onPress={this.onClearFiltersPress.bind(this)}/>
-            <Button bgimage={require('../img/orange-gradient.png')} text={'Filter'} onPress={this.onFilterPress.bind(this)}/>
-          </View>
+            <View style={styles.buttonWrapper}>
+                <Button
+                    bgimage={require('../img/transparent.png')}
+                    bgcolor={'#fff'}
+                    text={'Clear Filters'}
+                    alignSelf={'center'}
+                    font={'Source Sans Pro 200'}
+                    textColor={'#8b8b8b'}
+                    fontSize={15}
+                    onPress={this.onClearFiltersPress.bind(this)}
+                />
+                <Button
+                    bgimage={require('../img/transparent.png')}
+                    bgcolor={'#ef3a39'}
+                    text={'Filter'}
+                    alignSelf={'stretch'}
+                    textColor={'#fff'}
+                    fontSize={15}
+                    fontFamily={'Source Sans Pro 700'}
+                    onPress={this.onFilterPress.bind(this)}
+                />
+            </View>
+          </ScrollView>
         </View>
     )
   }
 };
 
 const styles = {
+  container: {
+    backgroundColor: '#fff'
+},
   filterScrollView: {
+    height: Dimensions.get('window').height -100,
+    padding: 10,
     marginTop: 50,
-    padding: 10
+    marginBottom: 20
   },
   filterTitle: {
     color: '#ef3a39',
-    fontWeight: 'bold'
+    fontFamily: 'ArchivoNarrow-Bold',
+    fontSize: 12,
+    lineHeight: 19
+  },
+  buttonWrapper: {
+    marginTop: 20
   }
 }
 

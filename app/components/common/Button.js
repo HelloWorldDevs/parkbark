@@ -30,7 +30,7 @@ export default class Button extends Component {
         alignSelf: 'center',
         height: 12,
         width: 15,
-        marginTop: 3
+        marginTop: 0
     }
     }
 

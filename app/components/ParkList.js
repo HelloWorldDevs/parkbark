@@ -91,7 +91,7 @@ class ParkList extends Component {
             bgcolor={'#fff'}
             alignSelf={'flex-start'}
             text={' See Parks List '}
-            color={'#131313'}
+            textColor={'#131313'}
             font={'Source Sans Pro regular'}
             fontSize={14}
             onPress={this.slideIn}
