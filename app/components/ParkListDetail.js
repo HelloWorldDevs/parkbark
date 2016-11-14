@@ -69,7 +69,7 @@ class ParkListDetails extends Component{
         <TouchableOpacity onPress={this.props.onPress}>
           <Card>
             <CardSection>
-              <Text>{this.props.title}</Text>
+              <Text style={styles.parkTitle}>{this.props.title}</Text>
               <Text style={styles.parkAddress}>{this.props.address_display}</Text>
             </CardSection>
             <Text style={styles.parkDistance}>{'apx ' + getDistance(this.props.coords.latitude, this.props.coords.longitude, parkCoords[0], parkCoords[1]) + 'mi'}</Text>
@@ -82,16 +82,24 @@ class ParkListDetails extends Component{
 }
 
 const styles = {
-  // parkTitle :{
-  //
-  // },
+  parkTitle :{
+    fontSize: 14,
+    color: '#131313',
+    fontFamily: 'Source Sans Pro regular',
+    lineHeight: 23
+  },
   parkAddress: {
-    width: 200
+    width: 200,
+    fontFamily: 'Souce Sans Pro 200',
+    color: '#5e5e5e',
+    fontSize: 12
   },
   parkDistance: {
     flex: 1,
     color: '#f58120',
     textAlign: 'right',
+    fontSize: 14,
+    fontFamily: 'Source Sans Pro regular'
   }
 }
 
