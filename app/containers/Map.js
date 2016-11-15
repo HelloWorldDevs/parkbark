@@ -36,6 +36,7 @@ class ParkMap extends Component {
             onPress={this.regionShow.bind(this)}
             onRegionChangeComplete={this.annotationUpdate.bind(this)}
             onRegionChange={this.regionShow.bind(this)}
+            loadingEnabled={true}
         >
           <PositionMarker/>
           <ParkMarkers navigator={this.props.navigator}/>

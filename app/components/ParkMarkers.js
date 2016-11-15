@@ -27,7 +27,6 @@ class ParkMarkers extends Component {
   }
 
   onCalloutPress(title) {
-    console.log(this.props);
     this.props.dispatch({type: 'UPDATE_SElECTED_PARK', state: title});
     this.props.navigator.push({name:'parkdetail'});
   }
@@ -55,7 +54,6 @@ class ParkMarkers extends Component {
                             <Text style={styles.distance}>{getDistance(this.props.coords.latitude, this.props.coords.longitude, marker.latlng.latitude, marker.latlng.longitude) + 'mi'}</Text>
                         </View>
                         <Text style={styles.address}>{marker.address_display}</Text>
-
                     </View>
                 </MapView.Callout>
             </MapView.Marker>
