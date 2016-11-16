@@ -20,7 +20,7 @@ const styles = {
     paddingRight: 10,
     // borderWidth: 1,
     // borderRadius: 2,
-    borderColor: '#ddd',
+    borderColor: '#f0f0f0',
     borderBottomWidth: 1,
     borderTopWidth: 0,
     borderRightWidth: 0,
@@ -37,4 +37,3 @@ const styles = {
 }
 
 export default Card;
-

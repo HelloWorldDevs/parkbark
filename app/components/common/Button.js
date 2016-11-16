@@ -19,6 +19,12 @@ export default class Button extends Component {
         margin: 10,
         flexDirection: 'column'
       },
+      wrapper: {
+        flex: 1,
+        flexDirection: 'row-reverse',
+        alignItems: 'center',
+        justifyContent: 'center'
+      },
       buttonText: {
         alignSelf: 'center',
         fontSize: this.props.fontSize,
@@ -26,12 +32,10 @@ export default class Button extends Component {
         fontFamily: this.props.font,
         marginTop: 0
     },
-    buttonIcon: {
+      buttonIcon: {
         alignSelf: 'center',
-        height: 12,
-        width: 15,
-        position: 'relative',
-        top: 3
+        minHeight: 12,
+        minWidth: 15,
     }
     }
 
@@ -41,7 +45,7 @@ export default class Button extends Component {
         underlayColor={'#fff'}
         onPress={this.props.onPress}
     >
-        <Image source={this.props.bgimage}>
+        <Image source={this.props.bgimage} style={styles.wrapper}>
             <Text style={styles.buttonText}>{this.props.text}</Text>
             <Image style={styles.buttonIcon} source={this.props.icon} />
         </Image>

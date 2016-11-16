@@ -86,11 +86,14 @@ class ParkDetail extends Component {
           </TouchableOpacity>
           <View style={{flex: 1, justifyContent: 'center', alignItems: 'stretch'}}>
             <ResponsiveImage
-                source={{uri: currentPark.image}}
+                source={{uri: currentPark.image || null}}
                  initHeight="225"
             />
           </View>
           <ParkListDetail key={currentPark.title} onPress={this.onDetailPress.bind(this)} title={currentPark.title} address={currentPark.address} address_display={currentPark.address_display} distance={currentPark.distance}/>
+          <Card>
+            {this.renderAmenities(currentPark)}
+          </Card>
           <Card>
             <View style={{flex: 1, flexDirection: 'column'}}>
             <CardSection>
@@ -101,16 +104,25 @@ class ParkDetail extends Component {
               didFailToReceiveAdWithError={this.bannerError} />
             </CardSection>
               <CardSection>
-                  <Text style={styles.detailsTitle}>PARK DETAILS</Text>
-                  <Text>{currentPark.details}</Text>
+                  <View style={styles.parkDetails}>
+                    <Text style={styles.detailsTitle}>PARK DETAILS</Text>
+                    <Text style={styles.detailsText}>{currentPark.details}</Text>
+                  </View>
               </CardSection>
             </View>
           </Card>
-          <Card>
-            {this.renderAmenities(currentPark)}
-          </Card>
           {this.renderFilters()}
-          <Button bgcolor={'#E79C23'} text={'Check In'} onPress={this.surveyPress.bind(this)} />
+          <Button
+            bgimage={require('../img/transparent.png')}
+            bgcolor={'#f58120'}
+            icon={require('../img/check-in@3x.png')}
+            text={'  CHECK IN '}
+            textColor={'#fff'}
+            alignSelf={'flex-end'}
+            fontSize={14}
+            fontFamily={'Source Sans Pro 700'}
+            onPress={this.surveyPress.bind(this)}
+          />
         </ScrollView>
     )
   }
@@ -125,9 +137,27 @@ const styles = {
     flex: 1,
     height: 20
   },
-  detailTitle: {
-    fontWeight: 'bold'
-  }
+  parkDetails: {
+    borderColor: '#f0f0f0',
+    borderBottomWidth: 0,
+    borderTopWidth: 1,
+    borderRightWidth: 0,
+    borderLeftWidth: 0,
+    marginTop: 10
+  },
+  detailsTitle: {
+    fontFamily: 'ArchivoNarrow-Bold',
+    fontSize: 11,
+    color: '#838383',
+    lineHeight: 19,
+    paddingTop: 20
+},
+  detailsText: {
+    fontFamily: 'Source Sans Pro 200',
+    fontSize: 14,
+    color: '#5e5e5e',
+    lineHeight: 20
+}
 }
 
 const mapStateToProps = (state) => {
