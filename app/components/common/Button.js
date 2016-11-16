@@ -24,13 +24,14 @@ export default class Button extends Component {
         fontSize: this.props.fontSize,
         color: this.props.textColor,
         fontFamily: this.props.font,
-        marginTop: 3
+        marginTop: 0
     },
     buttonIcon: {
         alignSelf: 'center',
         height: 12,
         width: 15,
-        marginTop: 0
+        position: 'relative',
+        top: 3
     }
     }
 
