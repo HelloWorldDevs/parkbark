@@ -86,7 +86,7 @@ class ParkDetail extends Component {
           </TouchableOpacity>
           <View style={{flex: 1, justifyContent: 'center', alignItems: 'stretch'}}>
             <ResponsiveImage
-                source={{uri: currentPark.image || null}}
+                source={{uri: currentPark.image}}
                  initHeight="225"
             />
           </View>
@@ -113,14 +113,13 @@ class ParkDetail extends Component {
           </Card>
           {this.renderFilters()}
           <Button
-            bgimage={require('../img/transparent.png')}
-            bgcolor={'#f58120'}
+            bgimage={require('../img/orange-gradient.png')}
             icon={require('../img/check-in@3x.png')}
             text={'  CHECK IN '}
             textColor={'#fff'}
             alignSelf={'flex-end'}
             fontSize={14}
-            fontFamily={'Source Sans Pro 700'}
+            font={'Source Sans Pro 700'}
             onPress={this.surveyPress.bind(this)}
           />
         </ScrollView>

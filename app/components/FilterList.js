@@ -97,8 +97,7 @@ class FilterList extends Component {
                     onPress={this.onClearFiltersPress.bind(this)}
                 />
                 <Button
-                    bgimage={require('../img/transparent.png')}
-                    bgcolor={'#ef3a39'}
+                    bgimage={require('../img/red-gradient.png')}
                     text={'Filter'}
                     alignSelf={'stretch'}
                     textColor={'#fff'}

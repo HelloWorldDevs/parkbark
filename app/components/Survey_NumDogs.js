@@ -50,42 +50,68 @@ class Survey_NumDogs extends Component {
         return (
             <View
                 ref='surveyForm'
-                style={styles.form}
+                style={styles.container}
             >
-                       <Form
-                           ref='surveyFormNumDogs'
-                           onChange={this.handleFormChange.bind(this)}
-                       >
-                           <Text>How many dogs do you see at the park?</Text>
+                <Text style={styles.question}>How many dogs do you see at the park?</Text>
+                   <Form
+                       ref='surveyFormNumDogs'
+                       onChange={this.handleFormChange.bind(this)}
+                       style={styles.wrapper}
+                   >
+                           <Button
+                                bgimage={require('../img/Minus.png')}
+                                onPress={this.subtractNumber.bind(this)}
+                           />
                            <InputField
                                ref='num_dogs'
                                value={value}
+                               keyboardType= 'numeric'
+                               underlineColorAndroid='#fff'
+                               style={styles.input}
                            />
-                           <Button bgcolor={'#f0382c'} text={' + '} onPress={this.addNumber.bind(this)}/>
-                           <Button bgcolor={'#f0382c'} text={' - '} onPress={this.subtractNumber.bind(this)}/>
-
-                      </Form>
-              <Button bgcolor={'#E79C23'} text={' OK '} onPress={this.saveFormData.bind(this)}/>
+                           <Button
+                                bgimage={require('../img/Plus.png')}
+                                onPress={this.addNumber.bind(this)}
+                            />
+                  </Form>
+              <Button
+                bgimage={require('../img/red-gradient.png')}
+                text={' OK '}
+                fontSize={15}
+                font={'Source Sans Pro 700'}
+                textColor={'#fff'}
+                onPress={this.saveFormData.bind(this)}
+              />
             </View>
         )
     }
 }
 
 var styles = StyleSheet.create({
-    form: {
-        flex: 0,
-        padding: 30,
-    },
-    close: {
-        marginTop: 30,
-        textAlign: 'right',
-        marginRight: 10,
-    },
-    container: {
-      flex: 0,
-      justifyContent: 'center',
-      padding: 50,
-    }
+  container: {
+      padding: 30,
+      flexDirection: 'column',
+      justifyContent: 'space-between',
+      flex: 1
+  },
+  question: {
+      color: '#ef3a39',
+      fontFamily: 'Source Sans Pro 200',
+      fontSize: 48,
+      lineHeight: 51,
+  },
+  wrapper: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+  },
+  input: {
+      flex: 1,
+      fontSize: 140,
+      fontFamily: 'Source Sans Pro 900',
+      color: '#ef3a39',
+      lineHeight: 51,
+  }
 });
 
 const mapStateToProps = (state) => {

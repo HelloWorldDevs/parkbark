@@ -118,8 +118,7 @@ class ParkList extends Component {
                 { this.props.parks.length ? this.renderParkListDetails(this.props.parks) :
                     <Text style={styles.noResults}>No Parks Found</Text>}
                 <Button
-                    bgimage={require('../img/transparent.png')}
-                    bgcolor={'#ef3a39'}
+                    bgimage={require('../img/red-gradient.png')}
                     text={'Suggest a park'}
                     alignSelf={'stretch'}
                     textColor={'#fff'}
