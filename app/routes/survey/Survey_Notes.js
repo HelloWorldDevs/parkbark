@@ -44,14 +44,19 @@ class Survey_Notes extends Component {
 
     render() {
         return (
-            <View ref='surveyForm' style={styles.form}>
+            <View ref='surveyForm' style={styles.container}>
                     <Form ref='surveyFormNotes' onChange={this.handleFormChange.bind(this)}>
-                       <Text>Tell Us About The Park</Text>
+                       <Text style={styles.question}>Tell Us About The Park</Text>
                        <InputField
                            ref='notes'
                            placeholder='Notes'
                        />
-                      <Button bgcolor={'#E79C23'} text={' -->'} onPress={this.saveFormData.bind(this)}/>
+                      <Button
+                        bgcolor={'#E79C23'}
+                        bgimage={require('../../img/transparent.png')}
+                        text={' -->'}
+                        onPress={this.saveFormData.bind(this)}
+                      />
                     </Form>
             </View>
         )
@@ -59,20 +64,23 @@ class Survey_Notes extends Component {
 }
 
 var styles = StyleSheet.create({
-    form: {
-        flex: 0,
-        padding: 30,
-    },
-    close: {
-        marginTop: 30,
-        textAlign: 'right',
-        marginRight: 10,
-    },
     container: {
-      flex: 0,
-      justifyContent: 'center',
-      padding: 50,
-    }
+        padding: 30,
+        flexDirection: 'column',
+        justifyContent: 'space-between',
+        flex: 1
+    },
+    question: {
+        color: '#f58120',
+        fontSize: 48,
+        fontFamily: 'Source Sans Pro 200',
+        lineHeight: 51
+    },
+    wrapper: {
+      flexDirection: 'row',
+      alignItems: 'center',
+      justifyContent: 'space-between',
+    },
 })
 
 

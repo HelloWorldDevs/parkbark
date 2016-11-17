@@ -33,14 +33,21 @@ class Survey_ParkAddress extends Component {
 
     render() {
         return (
-            <View ref='suggest_park' style={styles.form}>
-                    <Form ref='SuggestedPark' onChange={this.handleFormChange.bind(this)}>
-                       <Text>Where is this park?</Text>
+            <View ref='suggest_park' style={styles.container}>
+                <Text style={styles.question}>Where is this park?</Text>
+                    <Form style={styles.wrapper} ref='SuggestedPark' onChange={this.handleFormChange.bind(this)}>
                        <InputField
                            ref='park_address'
                            placeholder='Park address'
+                           underlineColorAndroid='#fff'
+                           style={styles.input}
                        />
-                      <Button bgcolor={'#E79C23'} text={' -->'} onPress={this.saveFormData.bind(this)}/>
+                       <Button
+                         bgimage={require('../../img/orange-gradient.png')}
+                         icon={require('../../img/forward-arrow@3x.png')}
+                         alignSelf={'center'}
+                         onPress={this.saveFormData.bind(this)}
+                       />
                     </Form>
             </View>
         )
@@ -48,19 +55,25 @@ class Survey_ParkAddress extends Component {
 }
 
 var styles = StyleSheet.create({
-    form: {
-        flex: 0,
-        padding: 30,
-    },
-    close: {
-        marginTop: 30,
-        textAlign: 'right',
-        marginRight: 10,
-    },
     container: {
-      flex: 0,
-      justifyContent: 'center',
-      padding: 50,
+        padding: 30,
+        flexDirection: 'column',
+        justifyContent: 'space-between',
+        flex: 1
+    },
+    question: {
+        color: '#f58120',
+        fontSize: 48,
+        fontFamily: 'Source Sans Pro 200',
+        lineHeight: 51
+    },
+    wrapper: {
+    //   flexDirection: 'row',
+    //   alignItems: 'center',
+    //   justifyContent: 'space-between',
+    },
+    input: {
+        flex: 1
     }
 })
 

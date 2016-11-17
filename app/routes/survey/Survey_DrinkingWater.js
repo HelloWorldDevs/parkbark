@@ -30,9 +30,21 @@ class Survey_DrinkingWater extends Component {
 
   saveFormData(updateValue) {
       this.props.dispatch({type: 'UPDATE_SURVEY', state: updateValue});
-      this.props.navigator.push({name: 'surveyNotes'});
+    //   this.props.navigator.push({name: 'surveyNotes'});
+      // If last question...
+      // Wait for dispatch to UPDATE_SURVEY to complete
+          this.sendFormData().done(() => {
+            // console.log('sendFormData done');
+            this.props.navigator.push({name: 'thanks'})
+      });
   }
 
+  sendFormData() {
+      // console.log('sendFormData')
+      const formData = this.props.parkForm;
+      // console.log(formData)
+      return sendSurveyResponses(formData);
+  }
 
   componentDidMount() {
     // console.log(this.props);
@@ -42,47 +54,64 @@ class Survey_DrinkingWater extends Component {
         return (
             <View
                 ref='surveyForm'
-                style={styles.form}
+                style={styles.container}
             >
+                <Text style={styles.question}>Is there drinking water for dogs here?</Text>
                        <Form
                            ref='surveyFormDrinkingWater'
+                           style={styles.wrapper}
                        >
-                           <Text>Is there drinking water for dogs here?</Text>
 
                            <Button
-                            bgcolor={'#E79C23'}
-                            text={'YES'}
-                            onPress={this.clickYes.bind(this)}
-                            ref='drinking_water'
+                                bgimage={require('../../img/orange-circle.png')}
+                                text={'YES'}
+                                textColor={'#fff'}
+                                fontSize={42}
+                                font={'Source Sans Pro 900'}
+                                onPress={this.clickYes.bind(this)}
+                                ref='drinking_water'
                            />
                            <Button
-                            bgcolor={'#E79C23'}
-                            text={'NO'}
-                            onPress={this.clickNo.bind(this)}
-                            ref='drinking_water_no'
+                                bgimage={require('../../img/orange-circle.png')}
+                                text={'NO'}
+                                textColor={'#fff'}
+                                fontSize={42}
+                                font={'Source Sans Pro 900'}
+                                onPress={this.clickNo.bind(this)}
+                                ref='drinking_water_no'
                            />
 
                       </Form>
+                      <Button
+                        bgimage={require('../../img/transparent.png')}
+                        text={"I don't know"}
+                        textColor={'#8b8b8b'}
+                        fontSize={15}
+                        font={'Source Sans Pro 200'}
+                        // onPress={this.props.navigator.push({name: 'thanks'})}
+                    />
             </View>
         )
     }
 }
 
 var styles = StyleSheet.create({
-    form: {
-        flex: 0,
-        padding: 30,
-    },
-    close: {
-        marginTop: 30,
-        textAlign: 'right',
-        marginRight: 10,
-    },
     container: {
-      flex: 0,
+        padding: 30,
+        flexDirection: 'column',
+        justifyContent: 'space-between',
+        flex: 1
+    },
+    question: {
+        color: '#f58120',
+        fontSize: 48,
+        fontFamily: 'Source Sans Pro 200',
+    },
+    wrapper: {
+      flexDirection: 'row-reverse',
+      alignItems: 'center',
       justifyContent: 'center',
-      padding: 50,
-    }
+    },
 });
 
 const mapStateToProps = (state) => {
