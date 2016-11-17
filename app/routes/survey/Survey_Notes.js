@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import { StyleSheet, View, Modal, TouchableHighlight, Text } from 'react-native';
 import { connect } from 'react-redux';
-import { sendSurveyResponses } from '../src/survey_core';
-import Button from './common/Button.js';
+import { sendSurveyResponses } from '../../src/survey_core';
+import Button from '../../components/common/Button.js';
 import { Form, InputField } from 'react-native-form-generator';
 
-class Survey_ParkName extends Component {
+
+class Survey_Notes extends Component {
     constructor(props){
     super(props);
     this.state = {
@@ -18,26 +19,37 @@ class Survey_ParkName extends Component {
   }
 
   saveFormData() {
-      const updateValue = {};
-      updateValue.title = 'title';
-      updateValue.value = this.state.formData.title;
-      this.props.dispatch({type: 'UPDATE_SURVEY', state: updateValue});
-      this.props.navigator.push({name: 'parkAddress'});
+    const updateValue = {};
+    updateValue.title = 'notes';
+    updateValue.value = this.state.formData.notes;
+    this.props.dispatch({type: 'UPDATE_SURVEY', state: updateValue});
+    // If last question...
+    // Wait for dispatch to UPDATE_SURVEY to complete
+        this.sendFormData().done(() => {
+          console.log('sendFormData done');
+          this.props.navigator.push({name: 'thanks'})
+    });
+  }
+
+  sendFormData() {
+      // console.log('sendFormData')
+      const formData = this.props.parkForm;
+      // console.log(formData)
+      return sendSurveyResponses(formData);
   }
 
   componentDidMount() {
     //   console.log(this.props.parkForm);
-
   }
 
     render() {
         return (
-            <View ref='suggest_park' style={styles.form}>
-                    <Form ref='SuggestedPark' onChange={this.handleFormChange.bind(this)}>
-                       <Text>What's this park called?</Text>
+            <View ref='surveyForm' style={styles.form}>
+                    <Form ref='surveyFormNotes' onChange={this.handleFormChange.bind(this)}>
+                       <Text>Tell Us About The Park</Text>
                        <InputField
-                           ref='title'
-                           placeholder='Park name'
+                           ref='notes'
+                           placeholder='Notes'
                        />
                       <Button bgcolor={'#E79C23'} text={' -->'} onPress={this.saveFormData.bind(this)}/>
                     </Form>
@@ -70,4 +82,4 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default connect(mapStateToProps)(Survey_ParkName);
+export default connect(mapStateToProps)(Survey_Notes);

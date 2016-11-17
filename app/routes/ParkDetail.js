@@ -15,10 +15,9 @@ import Share from 'react-native-share';
 import Button from '../components/common/Button';
 import Card from '../components/common/Card.js';
 import CardSection from '../components/common/CardSection.js';
-import Amenity from '../components/common/Amenity.js';
-import ParkListDetail from '../components/ParkListDetail.js'
-import FilterListDetail from '../components/FilterDetail';
-import stylesheet from '../styles/styles.js'
+import Amenity from '../components/amenity_filter/Amenity.js';
+import ParkListDetail from '../components/park_list/ParkListDetail.js'
+import FilterListDetail from '../components/amenity_filter/FilterDetail';
 import { connect } from 'react-redux';
 
 

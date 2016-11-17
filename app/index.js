@@ -1,7 +1,7 @@
 //will import app container and add tie all component state with react-redux Provider
 
 import React, { Component } from 'react';
-import App from './containers/app';
+import App from './app';
 import { Map } from 'immutable';
 import {Provider} from 'react-redux';
 import {applyMiddleware, createStore} from 'redux';

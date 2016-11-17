@@ -2,9 +2,9 @@ import  React, {Component} from 'react';
 import {View, TouchableOpacity, Text, Animated, Easing} from 'react-native';
 import { connect } from 'react-redux';
 import { AdMobBanner } from 'react-native-admob';
-import {getDistance} from '../src/map_core';
-import Card from './common/Card.js'
-import CardSection from './common/CardSection.js'
+import {getDistance} from '../../src/map_core';
+import Card from '../common/Card.js'
+import CardSection from '../common/CardSection.js'
 
 
 class ParkListDetails extends Component{

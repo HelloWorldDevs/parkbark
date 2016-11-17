@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { StyleSheet, View, Modal, TouchableHighlight, Text } from 'react-native';
 import { connect } from 'react-redux';
-import { sendSurveyResponses } from '../src/survey_core';
-import Button from './common/Button.js';
+import { sendSurveyResponses } from '../../src/survey_core';
+import Button from '../../components/common/Button.js';
 import { Form, InputField } from 'react-native-form-generator';
 
 class Survey_ParkAddress extends Component {

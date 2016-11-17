@@ -1,8 +1,7 @@
 import  React, {Component} from 'react';
 import {View, TouchableOpacity, Text, Image} from 'react-native';
 import { connect } from 'react-redux';
-import Card from './common/Card.js';
-import CardSection from './common/CardSection.js'
+import Card from '../common/Card.js';
 
 
 export default class FilterDetail extends Component {
@@ -11,7 +10,7 @@ export default class FilterDetail extends Component {
     const { staged, selected } = this.props.currentFilter;
     if (selected || staged === 'add') {
          this.fontFamily = 'Source Sans Pro 700';
-         this.image = require('../img/Ok@3x.png');
+         this.image = require('../../img/Ok@3x.png');
     } else {
         this.fontFamily = 'Source Sans Pro 200';
     }
@@ -24,7 +23,7 @@ export default class FilterDetail extends Component {
       if(!staged || staged === 'remove') {
         this.props.dispatch({type: 'ADD_STAGED_FILTER', state: currentFilterIndex});
         this.fontFamily = 'Source Sans Pro 700';
-        this.image = require('../img/Ok@3x.png');
+        this.image = require('../../img/Ok@3x.png');
       }
       if(staged === 'add' || selected) {
         this.props.dispatch({type: 'REMOVE_STAGED_FILTER', state: currentFilterIndex});
@@ -49,10 +48,6 @@ export default class FilterDetail extends Component {
         </View>
     )
   }
-}
-
-const styles = {
-
 }
 
 

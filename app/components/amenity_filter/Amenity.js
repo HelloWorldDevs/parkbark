@@ -1,6 +1,6 @@
 import React from 'react';
 import {View, Text, Image} from 'react-native';
-import CardSection from './CardSection.js';
+import CardSection from '../common/CardSection.js';
 
 const Amenity = (props) => {
     // Map icons to amenities

@@ -1,13 +1,12 @@
 import React, { Component } from 'react';
 import { View, Image, StyleSheet , Text} from 'react-native';
+import TimerMixin from 'react-timer-mixin';
 
 
 const ThankYou = React.createClass ({
-
+  mixins: [TimerMixin],
   componentDidMount: function () {
-    setTimeout(() => {
-      this.changeScene()
-    }, 3000)
+    this.setTimeout(this.changeScene, 7000)
   },
 
   render: function () {
@@ -24,10 +23,11 @@ const ThankYou = React.createClass ({
   },
 
   changeScene: function () {
+    console.log('push map')
     this.props.navigator.push({name: 'map'});
   },
 
-})
+});
 
 
 var styles = StyleSheet.create({

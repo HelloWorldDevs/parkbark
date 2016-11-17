@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { StyleSheet, View, Modal, TouchableHighlight, Text } from 'react-native';
 import { connect } from 'react-redux';
-import { sendSurveyResponses } from '../src/survey_core';
-import Button from './common/Button.js';
+import { sendSurveyResponses } from '../../src/survey_core';
+import Button from '../../components/common/Button.js';
 import { Form, InputField } from 'react-native-form-generator';
 
 class Survey_NumDogs extends Component {
@@ -59,7 +59,7 @@ class Survey_NumDogs extends Component {
                        style={styles.wrapper}
                    >
                            <Button
-                                bgimage={require('../img/Minus.png')}
+                                bgimage={require('../../img/Minus.png')}
                                 onPress={this.subtractNumber.bind(this)}
                            />
                            <InputField
@@ -70,12 +70,12 @@ class Survey_NumDogs extends Component {
                                style={styles.input}
                            />
                            <Button
-                                bgimage={require('../img/Plus.png')}
+                                bgimage={require('../../img/Plus.png')}
                                 onPress={this.addNumber.bind(this)}
                             />
                   </Form>
               <Button
-                bgimage={require('../img/red-gradient.png')}
+                bgimage={require('../../img/red-gradient.png')}
                 text={' OK '}
                 fontSize={15}
                 font={'Source Sans Pro 700'}

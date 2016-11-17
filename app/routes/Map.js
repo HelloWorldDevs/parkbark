@@ -6,18 +6,18 @@ import {
 import { Map } from 'immutable';
 import { connect } from 'react-redux';
 import MapView from 'react-native-maps';
-import PositionMarker from '../components/PositionMarker';
-import ParkMarkers from '../components/ParkMarkers';
-import SearchField from '../components/Search_Field.js';
+import PositionMarker from '../components/map/PositionMarker';
+import ParkMarkers from '../components/map/ParkMarkers';
+import SearchField from '../components/search/Search_Field.js';
 import {updateParksAction} from '../src/map_core';
 import {updateParksByFilterAction} from '../src/filter_core';
-import ParkList from '../components/ParkList.js';
+import ParkList from '../components/park_list/ParkList.js';
 
 
 class ParkMap extends Component {
 
-  componentWillReceiveProps(props) {
-      // console.log('recieving props', props)
+  componentDidMount() {
+      console.log('map mount!')
     }
 
   showFilters() {
@@ -54,7 +54,7 @@ class ParkMap extends Component {
 
 
   annotationUpdate(region) {
-    console.log(this.props.coords);
+    // console.log(this.props.coords);
     this.props.dispatch({type:'RECORD_LOCATION', state: region})
     this.regionShow();
     const dist = Math.ceil(region.latitudeDelta * 69/2);

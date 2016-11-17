@@ -1,1 +1,0 @@
-//will contain code for both app.ios.js and app.android.js, for conversion between platforms.

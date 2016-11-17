@@ -7,8 +7,8 @@ import {
 } from 'react-native';
 import { connect } from 'react-redux';
 import MapView from 'react-native-maps';
-import {googledistanceapi} from '../api/googleapi.js';
-import {getDistance} from '../src/map_core';
+import {googledistanceapi} from '../../api/googleapi.js';
+import {getDistance} from '../../src/map_core';
 
 
 
@@ -42,7 +42,7 @@ class ParkMarkers extends Component {
                 }}
                 key={marker.title}
                 coordinate={marker.latlng}
-                image={require('../img/map-pin@2x.png')}
+                image={require('../../img/map-pin@2x.png')}
                 title={marker.title}
                 description={marker.address_display + ' approx ' + getDistance(this.props.coords.latitude, this.props.coords.longitude, marker.latlng.latitude, marker.latlng.longitude) + 'mi'}
                 onCalloutPress={() => {this.onCalloutPress(marker.title)}}

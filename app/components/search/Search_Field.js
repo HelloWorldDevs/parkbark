@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import { Map } from 'immutable';
 import { View, Image, StyleSheet, Text, TextInput, TouchableOpacity, Alert} from 'react-native';
 import { connect } from 'react-redux';
-import {fetchLocationAction} from '../src/search_core';
-import {googleapi} from '../api/googleapi.js';
+import {fetchLocationAction} from '../../src/search_core';
+import {googleapi} from '../../api/googleapi.js';
 
 
 
@@ -42,7 +42,7 @@ class SearchFieldComponent extends Component {
         hitSlop={{top: 10, left: 10, bottom: 10, right: 10}}
         underlayColor="gray"
         onPress={this.fetchParks.bind(this)}>
-      <Image source={require('../img/magnify@3x.png')} style={styles.searchIcon}/>
+      <Image source={require('../../img/magnify@3x.png')} style={styles.searchIcon}/>
     </TouchableOpacity>
   }
 
@@ -52,7 +52,7 @@ class SearchFieldComponent extends Component {
         hitSlop={{top: 10, left: 10, bottom: 10, right: 10}}
         onPress={this.props.onPress}
         style={styles.filterIconWrapper}>
-      <Image source={require('../img/empty_filter@3x.png')} style={styles.filterIcon}/>
+      <Image source={require('../../img/empty_filter@3x.png')} style={styles.filterIcon}/>
     </TouchableOpacity>
   }
 

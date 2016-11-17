@@ -8,10 +8,8 @@ import {
     Text,
     Dimensions
 } from 'react-native'
-import Card from './common/Card.js'
-import CardSection from './common/CardSection.js';
 import { connect } from 'react-redux';
-import Button from './common/Button.js';
+import Button from '../common/Button.js';
 import ParkListDetail from './ParkListDetail.js';
 
 
@@ -87,7 +85,7 @@ class ParkList extends Component {
     return (
         <View style={styles.scrollConainer}>
           <Button
-            bgimage={require('../img/transparent.png')}
+            bgimage={require('../../img/transparent.png')}
             bgcolor={'#fff'}
             alignSelf={'flex-start'}
             text={' See Parks List '}
@@ -101,7 +99,7 @@ class ParkList extends Component {
           >
             <View style={styles.scrollViewHeader}>
                   <Button
-                    bgimage={require('../img/transparent.png')}
+                    bgimage={require('../../img/transparent.png')}
                     alignSelf={'flex-start'}
                     bgcolor={'#fff'}
                     text={' Show Map '}
@@ -118,7 +116,7 @@ class ParkList extends Component {
                 { this.props.parks.length ? this.renderParkListDetails(this.props.parks) :
                     <Text style={styles.noResults}>No Parks Found</Text>}
                 <Button
-                    bgimage={require('../img/red-gradient.png')}
+                    bgimage={require('../../img/red-gradient.png')}
                     text={'Suggest a park'}
                     alignSelf={'stretch'}
                     textColor={'#fff'}

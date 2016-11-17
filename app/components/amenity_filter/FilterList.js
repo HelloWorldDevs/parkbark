@@ -9,9 +9,9 @@ import {
     Dimensions
 } from 'react-native';
 import { connect } from 'react-redux';
-import Button from './common/Button';
+import Button from '../common/Button';
 import FilterListDetail from './FilterDetail';
-import {updateParksByFilterAction} from '../src/filter_core';
+import {updateParksByFilterAction} from '../../src/filter_core';
 
 
 class FilterList extends Component {
@@ -80,14 +80,14 @@ class FilterList extends Component {
               style={{position: 'absolute', top: 30, right: 15, zIndex: 1}}
               hitSlop={{top: 10, left: 10, bottom: 10, right: 10}}
           >
-            <Image style={{width: 20, height: 20, opacity: 0.67}} source={require('../img/button_close.png')}/>
+            <Image style={{width: 20, height: 20, opacity: 0.67}} source={require('../../img/button_close.png')}/>
           </TouchableOpacity>
           <ScrollView style={styles.filterScrollView}>
             <Text style={styles.filterTitle}>Filter Parks</Text>
             {this.renderFilters()}
             <View style={styles.buttonWrapper}>
                 <Button
-                    bgimage={require('../img/transparent.png')}
+                    bgimage={require('../../img/transparent.png')}
                     bgcolor={'#fff'}
                     text={'Clear Filters'}
                     alignSelf={'center'}
@@ -97,7 +97,7 @@ class FilterList extends Component {
                     onPress={this.onClearFiltersPress.bind(this)}
                 />
                 <Button
-                    bgimage={require('../img/red-gradient.png')}
+                    bgimage={require('../../img/red-gradient.png')}
                     text={'Filter'}
                     alignSelf={'stretch'}
                     textColor={'#fff'}
