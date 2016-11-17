@@ -33,6 +33,7 @@ class ParkDetail extends Component {
 
   componentDidMount(){
     const {currentPark} = this.props;
+    console.log(this.bannerError);
   }
 
   renderAmenities({amenities}){
@@ -98,7 +99,7 @@ class ParkDetail extends Component {
             <CardSection>
             <AdMobBanner
               bannerSize="banner"
-              adUnitID="ca-app-pub-3940256099942544/6300978111" //fake id
+              adUnitID="ca-app-pub-7642882868968646/2620967210" //Park Bark test
               testDeviceID="EMULATOR"
               didFailToReceiveAdWithError={this.bannerError} />
             </CardSection>
