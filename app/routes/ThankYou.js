@@ -6,7 +6,7 @@ import TimerMixin from 'react-timer-mixin';
 const ThankYou = React.createClass ({
   mixins: [TimerMixin],
   componentDidMount: function () {
-    this.setTimeout(this.changeScene, 7000)
+    this.setTimeout(this.changeScene, 4000)
   },
 
   render: function () {
