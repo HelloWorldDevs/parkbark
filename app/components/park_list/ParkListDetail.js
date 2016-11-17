@@ -57,10 +57,10 @@ class ParkListDetails extends Component{
     if (this.props.index == 0) {
         ads = <Card><AdMobBanner
                bannerSize="banner"
+               //   adUnitID="ca-app-pub-3940256099942544/6300978111" // test
                adUnitID="ca-app-pub-7642882868968646/7528844815" //Park Bark test
                testDeviceID="EMULATOR"
                didFailToReceiveAdWithError={this.bannerError}/></Card>;
-        console.log(this.bannerError);
     }
 
     const parkCoords = this.props.address.split(',');
