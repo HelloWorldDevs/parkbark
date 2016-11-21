@@ -17,7 +17,7 @@ import Card from '../components/common/Card.js';
 import CardSection from '../components/common/CardSection.js';
 import Amenity from '../components/amenity_filter/Amenity.js';
 import ParkListDetail from '../components/park_list/ParkListDetail.js'
-import FilterListDetail from '../components/amenity_filter/FilterDetail';
+import FilterDetail from '../components/amenity_filter/FilterDetail';
 import { connect } from 'react-redux';
 
 
@@ -27,7 +27,15 @@ class ParkDetail extends Component {
   }
 
   renderFilters(){
-    return this.props.amenities.map(filter => <FilterListDetail disabled={true} key={filter.name} filter={filter.name}/>)
+    currentParkAmenities = this.props.currentPark.amenities.split(',').map((amenity) => amenity.trim());
+    matchingAmenities = [];
+    // console.log(currentParkAmenities);
+    this.props.amenities.map(filter => {
+      if(currentParkAmenities.indexOf(filter.name) > -1) {
+        matchingAmenities.push(filter)
+      }
+    });
+    return matchingAmenities.map(filter => <FilterDetail disabled={true} key={filter.name} filter={filter.name}/>)
   }
 
 
