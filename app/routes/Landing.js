@@ -80,25 +80,32 @@ const Landing = React.createClass ({
 
 var styles = StyleSheet.create({
   container: {
-    flex: 1,
     flexDirection: 'column',
-    justifyContent: 'center',
+    justifyContent: 'space-between',
     alignItems: 'center',
-    padding: 30
+    paddingLeft: 25,
+    paddingRight: 25,
+    flex: 1
+  },
+  imageContainer: {
+      flex: 0,
+      marginTop: 5
   },
   title: {
     color: '#F58120',
     fontSize: 48,
     fontFamily: 'Source Sans Pro 200',
     lineHeight: 56,
-    paddingBottom: 15
+    minHeight: 155,
+    flex: -1,
   },
   text: {
     fontFamily: 'Source Sans Pro 200',
     color: '#5e5e5e',
     lineHeight: 23,
     fontSize: 16,
-    marginBottom: 5,
+    minHeight: 90,
+    flex: -1,
   }
 });
 
