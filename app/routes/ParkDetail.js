@@ -8,7 +8,7 @@ import {
     StyleSheet,
     Image,
     TouchableOpacity,
-    Linking
+    Linking,
 } from 'react-native';
 var ResponsiveImage = require('react-native-responsive-image');
 import Share from 'react-native-share';
@@ -81,7 +81,8 @@ class ParkDetail extends Component {
   render(){
     const {currentPark} = this.props;
     return (
-        <ScrollView bounces={false}>
+    <View style={styles.container}>
+        <ScrollView bounces={false} style={styles.scrollview}>
           <TouchableOpacity
               onPress={this.onBackPress.bind(this)}
               style={{position: 'absolute', top: 20, left: 20, zIndex: 1}}>
@@ -121,22 +122,34 @@ class ParkDetail extends Component {
             </View>
           </Card>
           {this.renderFilters()}
-          <Button
-            bgimage={require('../img/orange-gradient.png')}
-            icon={require('../img/check-in@3x.png')}
-            text={'  CHECK IN '}
-            textColor={'#fff'}
-            alignSelf={'flex-end'}
-            fontSize={14}
-            font={'Source Sans Pro 700'}
-            onPress={this.surveyPress.bind(this)}
-          />
         </ScrollView>
+        <Button
+          bgimage={require('../img/orange-gradient.png')}
+          icon={require('../img/check-in@3x.png')}
+          text={'  CHECK IN '}
+          textColor={'#fff'}
+          alignSelf={'flex-end'}
+          position={'absolute'}
+          bottom={10}
+          right={10}
+          fontSize={14}
+          font={'Source Sans Pro 700'}
+          onPress={this.surveyPress.bind(this)}
+        />
+    </View>
     )
   }
 };
 
 const styles = {
+  container: {
+     flex: 1,
+     flexDirection: 'column',
+     backgroundColor: '#fff',
+  },
+  scrollview: {
+    flex: 1,
+  },
   imageWrapper: {
     flex: 1,
     alignItems: 'stretch'
