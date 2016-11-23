@@ -88,24 +88,22 @@ var styles = StyleSheet.create({
     flex: 1
   },
   imageContainer: {
-      flex: 0,
-      marginTop: 5
+      flex: .10,
+      marginTop: 5,
   },
   title: {
     color: '#F58120',
     fontSize: 48,
     fontFamily: 'Source Sans Pro 200',
     lineHeight: 56,
-    minHeight: 155,
-    flex: -1,
+    flex: .55,
   },
   text: {
     fontFamily: 'Source Sans Pro 200',
     color: '#5e5e5e',
     lineHeight: 23,
     fontSize: 16,
-    minHeight: 90,
-    flex: -1,
+    flex: .30,
   }
 });
 
