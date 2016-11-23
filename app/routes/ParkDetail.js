@@ -129,9 +129,6 @@ class ParkDetail extends Component {
           text={'  CHECK IN '}
           textColor={'#fff'}
           alignSelf={'flex-end'}
-          position={'absolute'}
-          bottom={10}
-          right={10}
           fontSize={14}
           font={'Source Sans Pro 700'}
           onPress={this.surveyPress.bind(this)}

@@ -18,9 +18,6 @@ export default class Button extends Component {
         padding: 5,
         margin: 10,
         flexDirection: 'column',
-        position: this.props.position,
-        bottom: this.props.bottom,
-        right: this.props.right
       },
       wrapper: {
         flex: 1,
