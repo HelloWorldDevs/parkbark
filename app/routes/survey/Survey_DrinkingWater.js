@@ -29,20 +29,16 @@ class Survey_DrinkingWater extends Component {
   }
 
   saveFormData(updateValue) {
-      this.props.dispatch({type: 'UPDATE_SURVEY', state: updateValue});
-    //   this.props.navigator.push({name: 'surveyNotes'});
+     this.props.dispatch({type: 'UPDATE_SURVEY', state: updateValue});
       // If last question...
       // Wait for dispatch to UPDATE_SURVEY to complete
           this.sendFormData().done(() => {
-            // console.log('sendFormData done');
             this.props.navigator.push({name: 'thanks'})
       });
   }
 
   sendFormData() {
-      // console.log('sendFormData')
       const formData = this.props.parkForm;
-      // console.log(formData)
       return sendSurveyResponses(formData);
   }
 
@@ -88,7 +84,7 @@ class Survey_DrinkingWater extends Component {
                         textColor={'#8b8b8b'}
                         fontSize={15}
                         font={'Source Sans Pro 200'}
-                        // onPress={this.props.navigator.push({name: 'thanks'})}
+                        onPress={this.clickNo.bind(this)}
                     />
             </View>
         )
