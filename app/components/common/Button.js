@@ -17,7 +17,7 @@ export default class Button extends Component {
         borderRadius: 15,
         padding: 5,
         margin: 10,
-        flexDirection: 'column'
+        flexDirection: 'column',
       },
       wrapper: {
         flex: 1,
@@ -42,7 +42,7 @@ export default class Button extends Component {
     return (
       <TouchableHighlight
         style={styles.button}
-        underlayColor={'#fff'}
+        underlayColor={'transparent'}
         onPress={this.props.onPress}
     >
         <Image source={this.props.bgimage} style={styles.wrapper}>

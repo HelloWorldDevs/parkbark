@@ -43,9 +43,7 @@ class Survey_DrinkingWater extends Component {
   }
 
   sendFormData() {
-      // console.log('sendFormData')
       const formData = this.props.parkForm;
-      console.log(formData);
       return sendSurveyResponses(formData);
   }
 
@@ -91,7 +89,7 @@ class Survey_DrinkingWater extends Component {
                         textColor={'#8b8b8b'}
                         fontSize={15}
                         font={'Source Sans Pro 200'}
-                        // onPress={this.props.navigator.push({name: 'thanks'})}
+                        onPress={this.clickNo.bind(this)}
                     />
             </View>
         )

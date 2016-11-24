@@ -114,19 +114,18 @@ var styles = StyleSheet.create({
   filterIconWrapper: {
     backgroundColor: '#fff',
     alignItems: 'center',
-    elevation: 1
-  },
-  filterIcon: {
+    marginRight: 5,
     marginLeft: 5
   },
   input: {
-    width: 250,
+    maxWidth: 250,
     fontSize: 13,
     paddingTop: 0,
     paddingBottom: 0,
     color: '#5e5e5e',
     fontFamily: 'Source Sans Pro 200',
-    lineHeight: 23
+    lineHeight: 23,
+    flex: 1
   }
 });
 
