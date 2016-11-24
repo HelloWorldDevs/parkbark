@@ -12,7 +12,7 @@ import FilterList from '../components/amenity_filter/FilterList';
 import React, { Component } from 'react';
 import { Navigator } from 'react-native';
 import { connect } from 'react-redux';
-
+import {BackAndroid} from 'react-native';
 
 var ROUTES = {
   landing: Landing,
@@ -29,25 +29,48 @@ var ROUTES = {
 };
 
 
-export default React.createClass ({
-  renderScene: function(route, navigator) {
+
+
+
+class NavigatorComponent extends Component {
+
+  constructor() {
+    super();
+    this.navigator = null;
+  }
+
+  componentDidMount() {
+    BackAndroid.addEventListener('hardwareBackPress', () => {
+      if (this.navigator && this.navigator.getCurrentRoutes().length > 1) {
+        this.navigator.pop();
+        return true;
+      }
+      return false;
+    });
+  }
+
+  renderScene(route, navigator) {
     var Component = ROUTES[route.name];
     return <Component route={route} navigator={navigator} />
-  },
+  }
 
-  render: function() {
+  render() {
     return (
         <Navigator
+            ref={(nav) => { this.navigator = nav; }}
             initialRoute={{name: 'landing'}}
-            renderScene={this.renderScene}
+            renderScene={this.renderScene.bind(this)}
             configureScene={()=> {
               return Navigator.SceneConfigs.FloatFromRight
             }}
         />
     )
-  },
+  }
 
 
-});
+}
+
+
+export default NavigatorComponent;
 
 

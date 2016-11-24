@@ -29,20 +29,23 @@ class Survey_DrinkingWater extends Component {
   }
 
   saveFormData(updateValue) {
+    console.log(updateValue);
       this.props.dispatch({type: 'UPDATE_SURVEY', state: updateValue});
     //   this.props.navigator.push({name: 'surveyNotes'});
       // If last question...
       // Wait for dispatch to UPDATE_SURVEY to complete
-          this.sendFormData().done(() => {
-            // console.log('sendFormData done');
-            this.props.navigator.push({name: 'thanks'})
-      });
+          if (this.props.parkForm[updateValue.title]) {
+            this.sendFormData().done(() => {
+              // console.log('sendFormData done');
+              this.props.navigator.push({name: 'thanks'})
+          });
+      };
   }
 
   sendFormData() {
       // console.log('sendFormData')
       const formData = this.props.parkForm;
-      // console.log(formData)
+      console.log(formData);
       return sendSurveyResponses(formData);
   }
 

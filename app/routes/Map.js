@@ -17,7 +17,7 @@ import ParkList from '../components/park_list/ParkList.js';
 class ParkMap extends Component {
 
   componentDidMount() {
-      console.log('map mount!')
+      console.log('map mount!', this.props.parkForm)
     }
 
   showFilters() {
@@ -58,7 +58,9 @@ class ParkMap extends Component {
     this.props.dispatch({type:'RECORD_LOCATION', state: region})
     this.regionShow();
     const dist = Math.ceil(region.latitudeDelta * 69/2);
-    const coords = region.latitude + ',' + region.longitude;
+    console.log(region.latitude, region.longitude);
+    const coords = region.latitude + 0.1E-3 + ',' + (region.longitude - -0.1E-3);
+    console.log(coords);
     if (!this.props.filterSet) {
       updateParksAction(coords, dist).done((state) => {
         this.props.dispatch({type: 'UPDATE_ANNOTATIONS', state: state});
@@ -102,7 +104,8 @@ const mapStateToProps = (state) => {
   return {
     coords: state.getIn(['map','location', 'coords']),
     filterSet: state.getIn(['filter','filter-set']),
-    filterQuery: state.getIn(['filter','filter-query'])
+    filterQuery: state.getIn(['filter','filter-query']),
+    parkForm: state.getIn(['survey', 'park_form'])
   }
 }
 

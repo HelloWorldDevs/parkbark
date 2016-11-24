@@ -52,14 +52,14 @@ export function updateParksAction(coords, dist){
           park.address = item.field_park_address;
           park.address_display = entities.decode(item.field_park_address_display);
           park.amenities = item.field_park_amenities;
-          park.details = item.field_park_details;
+          park.details = entities.decode(item.field_park_details);
           var latitude = parseFloat(item.field_park_address.split(',')[0]);
           var longitude = parseFloat(item.field_park_address.split(',')[1]);
           park.latlng = {
             latitude: latitude,
             longitude: longitude
           }
-          park.distance = parseFloat(item.field_park_address_proximity).toFixed(1) + 'mi';
+          park.distance = 'apx. ' + parseFloat(item.field_park_address_proximity).toFixed(1) + 'mi';
           parks.push(park);
         })
         // console.log(parks);

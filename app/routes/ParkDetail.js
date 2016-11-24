@@ -26,13 +26,16 @@ class ParkDetail extends Component {
     super(props);
   }
 
-  renderFilters(){
+  renderFilters() {
     currentParkAmenities = this.props.currentPark.amenities.split(',').map((amenity) => amenity.trim());
+    console.log(currentParkAmenities);
     matchingAmenities = [];
     // console.log(currentParkAmenities);
     this.props.amenities.map(filter => {
-      if(currentParkAmenities.indexOf(filter.name) > -1) {
-        matchingAmenities.push(filter)
+      if(currentParkAmenities.indexOf(filter.name) > -1 && currentParkAmenities.indexOf(filter.name) > 2) {
+        var matching = currentParkAmenities.splice(currentParkAmenities.indexOf(filter.name), 1);
+        console.log(matching);
+        matchingAmenities.push(matching)
       }
     });
     return matchingAmenities.map(filter => <FilterDetail disabled={true} key={filter.name} filter={filter.name}/>)
