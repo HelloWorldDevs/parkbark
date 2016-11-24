@@ -28,17 +28,34 @@ class ParkDetail extends Component {
 
   renderFilters() {
     currentParkAmenities = this.props.currentPark.amenities.split(',').map((amenity) => amenity.trim());
-    console.log(currentParkAmenities);
-    matchingAmenities = [];
     // console.log(currentParkAmenities);
+    const matchingAmenities = [];
+    const nonMatchingAmenities = [];
+    // console.log(currentParkAmenities);
+
+    //push matching amenities not rendered as images into array for rendering.
     this.props.amenities.map(filter => {
       if(currentParkAmenities.indexOf(filter.name) > -1 && currentParkAmenities.indexOf(filter.name) > 2) {
-        var matching = currentParkAmenities.splice(currentParkAmenities.indexOf(filter.name), 1);
-        console.log(matching);
-        matchingAmenities.push(matching)
+        // console.log(filter);
+        filter.checked = true;
+        matchingAmenities.push(filter);
       }
     });
-    return matchingAmenities.map(filter => <FilterDetail disabled={true} key={filter.name} filter={filter.name}/>)
+
+    //for checked and non checked showing amenities added and not added.
+    //
+    // this.props.amenities.map(filter => {
+    //   if(currentParkAmenities.indexOf(filter.name) === -1){
+    //     // console.log(filter);
+    //     filter.checked = false;
+    //     nonMatchingAmenities.push(filter);
+    //   }
+    // })
+    // const amenities = matchingAmenities.concat(nonMatchingAmenities);
+
+    const amenities = matchingAmenities;
+    console.log(amenities);
+    return amenities.map(filter => <FilterDetail checked={filter.checked} disabled={true} key={filter.name} filter={filter.name}/>)
   }
 
 

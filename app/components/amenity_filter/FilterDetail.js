@@ -8,11 +8,16 @@ export default class FilterDetail extends Component {
 
   componentWillMount() {
     const { staged, selected } = this.props.currentFilter;
-    if (selected || staged === 'add') {
+    if (selected || staged === 'add' ) {
          this.fontFamily = 'Source Sans Pro 700';
          this.image = require('../../img/Ok@3x.png');
     } else {
         this.fontFamily = 'Source Sans Pro 200';
+    }
+
+    if (this.props.checked) {
+      this.fontFamily = 'Source Sans Pro 700';
+      this.image = require('../../img/Ok@3x.png');
     }
   }
 

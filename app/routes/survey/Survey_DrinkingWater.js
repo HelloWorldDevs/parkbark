@@ -29,7 +29,7 @@ class Survey_DrinkingWater extends Component {
   }
 
   saveFormData(updateValue) {
-    console.log(updateValue);
+    // console.log(updateValue);
       this.props.dispatch({type: 'UPDATE_SURVEY', state: updateValue});
     //   this.props.navigator.push({name: 'surveyNotes'});
       // If last question...
@@ -62,7 +62,6 @@ class Survey_DrinkingWater extends Component {
                            ref='surveyFormDrinkingWater'
                            style={styles.wrapper}
                        >
-
                            <Button
                                 bgimage={require('../../img/orange-circle.png')}
                                 text={'YES'}

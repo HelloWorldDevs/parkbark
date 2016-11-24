@@ -58,9 +58,9 @@ class ParkMap extends Component {
     this.props.dispatch({type:'RECORD_LOCATION', state: region})
     this.regionShow();
     const dist = Math.ceil(region.latitudeDelta * 69/2);
-    console.log(region.latitude, region.longitude);
+    // console.log(region.latitude, region.longitude);
     const coords = region.latitude + 0.1E-3 + ',' + (region.longitude - -0.1E-3);
-    console.log(coords);
+    // console.log(coords);
     if (!this.props.filterSet) {
       updateParksAction(coords, dist).done((state) => {
         this.props.dispatch({type: 'UPDATE_ANNOTATIONS', state: state});
