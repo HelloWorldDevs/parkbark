@@ -9,6 +9,7 @@ import Survey_NumDogs from '../routes/survey/Survey_NumDogs';
 import Survey_DrinkingWater from '../routes/survey/Survey_DrinkingWater';
 import Survey_Notes from '../routes/survey/Survey_Notes';
 import FilterList from '../components/amenity_filter/FilterList';
+import AdInterstitial from '../components/common/AdInterstitial'
 import React, { Component } from 'react';
 import { Navigator } from 'react-native';
 import { connect } from 'react-redux';
@@ -25,7 +26,8 @@ var ROUTES = {
   parkAddress: Survey_ParkAddress,
   thanks: ThankYou,
   parkdetail: ParkDetail,
-  filterlist: FilterList
+  filterlist: FilterList,
+  adCTA: AdInterstitial
 };
 
 
@@ -72,5 +74,3 @@ class NavigatorComponent extends Component {
 
 
 export default NavigatorComponent;
-
-
