@@ -15,7 +15,6 @@ import AdInterstitial from '../components/common/AdInterstitial'
 import React, { Component } from 'react';
 import { Navigator } from 'react-native';
 import { connect } from 'react-redux';
-import {BackAndroid} from 'react-native';
 
 var ROUTES = {
   landing: Landing,

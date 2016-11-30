@@ -30,7 +30,7 @@ class ParkDetail extends Component {
 
   renderFilters() {
     currentParkAmenities = this.props.currentPark.amenities.split(',').map((amenity) => amenity.trim());
-    console.log(currentParkAmenities);
+    // console.log(currentParkAmenities);
     const matchingAmenities = [];
     const nonMatchingAmenities = [];
     // console.log(currentParkAmenities);

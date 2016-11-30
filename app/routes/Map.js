@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import {
     View,
-    StyleSheet
+    StyleSheet,
+    BackAndroid
 } from 'react-native';
 import { Map } from 'immutable';
 import { connect } from 'react-redux';
@@ -11,7 +12,7 @@ import ParkMarkers from '../components/map/ParkMarkers';
 import SearchField from '../components/search/Search_Field.js';
 import {updateParksAction} from '../src/map_core';
 import {updateParksByFilterAction} from '../src/filter_core';
-import ParkList from '../components/park_list/ParkList.js';
+import ParkList from '../components/park_list/ParkList.js'
 import { Actions } from 'react-native-router-flux';
 
 
@@ -22,7 +23,13 @@ class ParkMap extends Component {
   }
 
   componentDidMount() {
-      console.log('map mount!', this.props.parkForm)
+    console.log(this.props);
+    if(this.props.type === "REACT_NATIVE_ROUTER_FLUX_RESET"){
+      BackAndroid.addEventListener('hardwareBackPress', () => {
+        Actions.popTo('landing');
+         return true
+        });
+    }
   }
 
   showFilters() {

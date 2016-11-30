@@ -10,6 +10,7 @@ import { Actions } from 'react-native-router-flux';
 class Survey_DrinkingWater extends Component {
     constructor(props){
     super(props);
+    this.updateValue = null;
     this.state = {
       formData:{},
     }
@@ -31,19 +32,20 @@ class Survey_DrinkingWater extends Component {
   }
 
   saveFormData(updateValue) {
-    // console.log(updateValue);
+    console.log(updateValue);
       this.props.dispatch({type: 'UPDATE_SURVEY', state: updateValue});
+      this.updateValue = updateValue;
     //   this.props.navigator.push({name: 'surveyNotes'});
 
       // If last question...
       // Wait for dispatch to UPDATE_SURVEY to complete
-          if (this.props.parkForm[updateValue.title] || this.props.parkForm[updateValue.title] === 0) {
-            this.sendFormData().done(() => {
-              // console.log('sendFormData done');
-              // this.props.navigator.push({name: 'thanks'})
-              Actions.thanks();
-          });
-      };
+      //     if (this.props.parkForm[updateValue.title] || this.props.parkForm[updateValue.title] === 0) {
+      //       this.sendFormData().done(() => {
+      //         console.log('sendFormData done');
+      //         // this.props.navigator.push({name: 'thanks'})
+      //         Actions.thanks();
+      //     });
+      // };
   }
 
   sendFormData() {
@@ -53,6 +55,16 @@ class Survey_DrinkingWater extends Component {
 
   componentDidMount() {
     // console.log(this.props);
+  }
+
+  componentDidUpdate(props) {
+    if (this.props.parkForm[this.updateValue.title] || this.props.parkForm[this.updateValue.title] === 0) {
+      this.sendFormData().done(() => {
+        console.log('sendFormData done');
+        // this.props.navigator.push({name: 'thanks'})
+        Actions.thanks();
+      });
+    };
   }
 
     render() {

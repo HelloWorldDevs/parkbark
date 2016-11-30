@@ -1,13 +1,12 @@
 import React, { Component } from 'react';
 import { View, Image, StyleSheet , Text} from 'react-native';
-import TimerMixin from 'react-timer-mixin';
 import { Actions } from 'react-native-router-flux';
 
 
 const ThankYou = React.createClass ({
-  mixins: [TimerMixin],
   componentDidMount: function () {
-    this.setTimeout(this.changeScene, 8000)
+    console.log('thank you mount')
+    setTimeout(this.changeScene, 5000)
   },
 
   render: function () {
