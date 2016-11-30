@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { sendSurveyResponses } from '../../src/survey_core';
 import Button from '../../components/common/Button.js';
 import { Form, InputField } from 'react-native-form-generator';
+import { Actions } from 'react-native-router-flux';
 
 
 class Survey_Notes extends Component {
@@ -27,7 +28,8 @@ class Survey_Notes extends Component {
     // Wait for dispatch to UPDATE_SURVEY to complete
         this.sendFormData().done(() => {
           console.log('sendFormData done');
-          this.props.navigator.push({name: 'thanks'})
+          // this.props.navigator.push({name: 'thanks'})
+          Actions.thanks();
     });
   }
 

@@ -4,6 +4,8 @@ import { connect } from 'react-redux';
 import { sendSurveyResponses } from '../../src/survey_core';
 import Button from '../../components/common/Button.js';
 import { Form, InputField } from 'react-native-form-generator';
+import { Actions } from 'react-native-router-flux';
+
 
 class Survey_ParkAddress extends Component {
     constructor(props){
@@ -22,8 +24,10 @@ class Survey_ParkAddress extends Component {
       updateValue.title = 'suggested_park';
       updateValue.value = this.state.formData.park_address;
       this.props.dispatch({type: 'UPDATE_SURVEY', state: updateValue});
-      this.props.navigator.push({name: 'surveyNotes'});
+      // this.props.navigator.push({name: 'surveyNotes'});
+      Actions.surveyNotes();
   }
+
 
 
   componentDidMount() {

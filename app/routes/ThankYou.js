@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { View, Image, StyleSheet , Text} from 'react-native';
 import TimerMixin from 'react-timer-mixin';
+import { Actions } from 'react-native-router-flux';
 
 
 const ThankYou = React.createClass ({
@@ -18,8 +19,8 @@ const ThankYou = React.createClass ({
   },
 
   changeScene: function () {
-    console.log('push map')
-    this.props.navigator.push({name: 'map'});
+    console.log('push map');
+    Actions.map({type: 'reset'});
   },
 
 });

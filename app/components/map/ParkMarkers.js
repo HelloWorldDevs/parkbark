@@ -9,6 +9,7 @@ import { connect } from 'react-redux';
 import MapView from 'react-native-maps';
 import {googledistanceapi} from '../../api/googleapi.js';
 import {getDistance} from '../../src/map_core';
+import { Actions } from 'react-native-router-flux';
 
 
 
@@ -28,7 +29,8 @@ class ParkMarkers extends Component {
 
   onCalloutPress(title) {
     this.props.dispatch({type: 'UPDATE_SElECTED_PARK', state: title});
-    this.props.navigator.push({name:'parkdetail'});
+    // this.props.navigator.push({name:'parkdetail'});
+    Actions.parkdetail();
   }
 
   render() {

@@ -5,15 +5,21 @@ import { connect } from 'react-redux';
 import { Map } from 'immutable';
 import Button from '../components/common/Button.js';
 import {fetchAmenitiesAction} from '../src/filter_core';
+import { Actions } from 'react-native-router-flux';
+
 
 
 const Landing = React.createClass ({
+
+  componentWillUnmount() {
+    console.log('landing unmount')
+  },
 
   //overwrite default position and set parks in location state
   componentWillMount: function() {
     navigator.geolocation.getCurrentPosition(
         (position) => {
-          console.log('get current position', position)
+          console.log('get current position', position);
           this.props.dispatch({
             type: 'SET_LOCATION',
             state : Map({
@@ -69,7 +75,8 @@ const Landing = React.createClass ({
 
   onNextPress: function() {
     if (this.props.notificationState || Platform.OS === 'android') {
-      this.props.navigator.push({name: 'map'});
+      // this.props.navigator.push({name: 'map'});
+      Actions.map();
     } else {
       this.props.navigator.push({name: 'features'});
     }

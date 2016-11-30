@@ -4,6 +4,8 @@ import { connect } from 'react-redux';
 import { sendSurveyResponses } from '../../src/survey_core';
 import Button from '../../components/common/Button.js';
 import { Form, InputField } from 'react-native-form-generator';
+import { Actions } from 'react-native-router-flux';
+
 
 class Survey_DrinkingWater extends Component {
     constructor(props){
@@ -32,12 +34,14 @@ class Survey_DrinkingWater extends Component {
     // console.log(updateValue);
       this.props.dispatch({type: 'UPDATE_SURVEY', state: updateValue});
     //   this.props.navigator.push({name: 'surveyNotes'});
+
       // If last question...
       // Wait for dispatch to UPDATE_SURVEY to complete
-          if (this.props.parkForm[updateValue.title]) {
+          if (this.props.parkForm[updateValue.title] || this.props.parkForm[updateValue.title] === 0) {
             this.sendFormData().done(() => {
               // console.log('sendFormData done');
-              this.props.navigator.push({name: 'thanks'})
+              // this.props.navigator.push({name: 'thanks'})
+              Actions.thanks();
           });
       };
   }

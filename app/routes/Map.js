@@ -12,16 +12,22 @@ import SearchField from '../components/search/Search_Field.js';
 import {updateParksAction} from '../src/map_core';
 import {updateParksByFilterAction} from '../src/filter_core';
 import ParkList from '../components/park_list/ParkList.js';
+import { Actions } from 'react-native-router-flux';
+
 
 
 class ParkMap extends Component {
+  componentWillUnmount() {
+    console.log(' map unmount')
+  }
 
   componentDidMount() {
       console.log('map mount!', this.props.parkForm)
-    }
+  }
 
   showFilters() {
-    this.props.navigator.push({name: 'filterlist'});
+    // this.props.navigator.push({name: 'filterlist'});
+    Actions.filterlist();
   }
 
   render() {
@@ -105,7 +111,6 @@ const mapStateToProps = (state) => {
     coords: state.getIn(['map','location', 'coords']),
     filterSet: state.getIn(['filter','filter-set']),
     filterQuery: state.getIn(['filter','filter-query']),
-    parkForm: state.getIn(['survey', 'park_form'])
   }
 }
 

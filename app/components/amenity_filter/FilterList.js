@@ -12,6 +12,8 @@ import { connect } from 'react-redux';
 import Button from '../common/Button';
 import FilterListDetail from './FilterDetail';
 import {updateParksByFilterAction} from '../../src/filter_core';
+import { Actions } from 'react-native-router-flux';
+
 
 
 class FilterList extends Component {
@@ -27,7 +29,8 @@ class FilterList extends Component {
   //clears staged when back is press, does not clear selected
   onBackPress() {
     this.props.dispatch({type: 'CLEAR_STAGED', state: false})
-    this.props.navigator.pop();
+    // this.props.navigator.pop();
+    Actions.pop();
   }
 
 

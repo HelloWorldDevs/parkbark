@@ -11,6 +11,8 @@ import {
 import { connect } from 'react-redux';
 import Button from '../common/Button.js';
 import ParkListDetail from './ParkListDetail.js';
+import { Actions } from 'react-native-router-flux';
+
 
 
 class ParkList extends Component {
@@ -67,13 +69,16 @@ class ParkList extends Component {
 
   onNextPress = () => {
       this.props.dispatch({type: 'SET_PARK_SURVEY', state: 'Suggest a Park'});
-      this.props.navigator.push({name: 'parkName'});
+      // this.props.navigator.push({name: 'parkName'});
+      Actions.parkName();
   };
 
   onDetailPress = (title) => {
     this.props.dispatch({type: 'UPDATE_SElECTED_PARK', state: title});
-    this.props.navigator.push({name:'parkdetail'});
+    // this.props.navigator.push({name:'parkdetail'});
+    Actions.parkdetail()
   };
+
 
 
   render() {

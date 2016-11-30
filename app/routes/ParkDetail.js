@@ -19,6 +19,8 @@ import Amenity from '../components/amenity_filter/Amenity.js';
 import ParkListDetail from '../components/park_list/ParkListDetail.js'
 import FilterDetail from '../components/amenity_filter/FilterDetail';
 import { connect } from 'react-redux';
+import { Actions } from 'react-native-router-flux';
+
 
 
 class ParkDetail extends Component {
@@ -28,7 +30,7 @@ class ParkDetail extends Component {
 
   renderFilters() {
     currentParkAmenities = this.props.currentPark.amenities.split(',').map((amenity) => amenity.trim());
-    // console.log(currentParkAmenities);
+    console.log(currentParkAmenities);
     const matchingAmenities = [];
     const nonMatchingAmenities = [];
     // console.log(currentParkAmenities);
@@ -54,7 +56,7 @@ class ParkDetail extends Component {
     // const amenities = matchingAmenities.concat(nonMatchingAmenities);
 
     const amenities = matchingAmenities;
-    console.log(amenities);
+    // console.log(amenities);
     return amenities.map(filter => <FilterDetail checked={filter.checked} disabled={true} key={filter.name} filter={filter.name}/>)
   }
 
@@ -87,7 +89,8 @@ class ParkDetail extends Component {
     // console.log(this.props);
     const title = this.props.currentPark.title;
     this.props.dispatch({type: 'SET_PARK_SURVEY', state: title});
-    this.props.navigator.push({name: 'surveyNumDogs'});
+    // this.props.navigator.push({name: 'surveyNumDogs'});
+    Actions.surveyNumDogs();
 }
 
   onDetailPress() {
