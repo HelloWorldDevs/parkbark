@@ -46,7 +46,7 @@ class FilterList extends Component {
   }
 
   componentWillMount() {
-    console.log(this.props.selectedFilters);
+    // console.log(this.props.selectedFilters);
   }
 
   //concatenates selected filters, sends query to db with action, and updates annotations (markers) on complete
@@ -58,7 +58,7 @@ class FilterList extends Component {
         }
         return p + n.name
       }, '');
-      console.log(filterQuery);
+      // console.log(filterQuery);
       dispatch({type: 'QUERY_SET', state: filterQuery});
       const dist = Math.ceil(coords.latitudeDelta * 69/2);
       const filteredCoords = coords.latitude + ',' + coords.longitude;

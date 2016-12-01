@@ -1,5 +1,12 @@
 import React, { Component } from 'react';
-import { View, Image, StyleSheet , Text, Platform, PermissionsAndroid} from 'react-native';
+import {
+    View,
+    Image,
+    StyleSheet,
+    Text,
+    Platform,
+    BackAndroid
+} from 'react-native';
 import PushNotification from 'react-native-push-notification';
 import { connect } from 'react-redux';
 import { Map } from 'immutable';
@@ -54,6 +61,10 @@ const Landing = React.createClass ({
 
   componentDidMount: function() {
     fetchAmenitiesAction().done((amenities) => this.props.dispatch({type: 'SET_AMENITIES', state: amenities}));
+    BackAndroid.addEventListener('hardwareBackPress', () => {
+      BackAndroid.exitApp();
+      return true
+    });
   },
   render:function() {
     return (

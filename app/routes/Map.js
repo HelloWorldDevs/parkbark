@@ -26,7 +26,7 @@ class ParkMap extends Component {
     console.log(this.props);
     if(this.props.type === "REACT_NATIVE_ROUTER_FLUX_RESET"){
       BackAndroid.addEventListener('hardwareBackPress', () => {
-        Actions.popTo('landing');
+        Actions.landing({direction: 'leftToRight'});
          return true
         });
     }

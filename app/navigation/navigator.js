@@ -58,6 +58,8 @@ class NavigatorComponent extends Component {
     </Router>
   }
 
+  /// Old Navigator Component Code  ///
+
   // componentDidMount() {
   //   BackAndroid.addEventListener('hardwareBackPress', () => {
   //     if (this.navigator && this.navigator.getCurrentRoutes().length > 1 && this.navigator.getCurrentRoutes().pop().name != 'map') {
@@ -92,8 +94,6 @@ class NavigatorComponent extends Component {
   //       />
   //   )
   // }
-
-
 
 
 
