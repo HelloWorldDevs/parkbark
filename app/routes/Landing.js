@@ -4,6 +4,7 @@ import PushNotification from 'react-native-push-notification';
 import { connect } from 'react-redux';
 import { Map } from 'immutable';
 import Button from '../components/common/Button.js';
+import NetworkAlert from '../components/common/NetworkAlert';
 import {fetchAmenitiesAction} from '../src/filter_core';
 import { Actions } from 'react-native-router-flux';
 
@@ -58,6 +59,7 @@ const Landing = React.createClass ({
   render:function() {
     return (
         <View style={styles.container}>
+            <NetworkAlert />
           <View style={styles.imageContainer}>
             <Image source={require('../img/welcomePup@2x.png')}/>
           </View>
