@@ -23,7 +23,7 @@ class Survey_NumDogs extends Component {
       updateValue.value = this.state.formData.num_dogs;
       this.props.dispatch({type: 'UPDATE_SURVEY', state: updateValue});
       this.sendFormData().done(() => {
-        Actions.pop();
+        Actions.thanks();
       });
   }
 

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, View, Modal, TouchableHighlight, Text } from 'react-native';
+import { StyleSheet, View, TouchableHighlight, Text, Image, TouchableOpacity } from 'react-native';
 import { connect } from 'react-redux';
 import { sendSurveyResponses } from '../../src/survey_core';
 import Button from '../../components/common/Button.js';
@@ -18,26 +18,38 @@ class Survey_ParkAddress extends Component {
     this.setState({formData:formData})
     this.props.onFormChange && this.props.onFormChange(formData);
   }
-
+  onClosePress(formData) {
+      const updateValue = {};
+      updateValue.title = 'suggested_park';
+      updateValue.value = this.state.formData.suggested_park;
+      this.props.dispatch({type: 'UPDATE_SURVEY', state: updateValue});
+      this.sendFormData().done(() => {
+        Actions.thanks();
+      });
+  }
   saveFormData() {
       const updateValue = {};
       updateValue.title = 'suggested_park';
       updateValue.value = this.state.formData.park_address;
       this.props.dispatch({type: 'UPDATE_SURVEY', state: updateValue});
-      // this.props.navigator.push({name: 'surveyNotes'});
       Actions.surveyNotes();
   }
-
-
-
-  componentDidMount() {
-    //   console.log(this.props.parkForm);
-
+  sendFormData() {
+      const formData = this.props.parkForm;
+      console.log(formData)
+      return sendSurveyResponses(formData);
   }
 
     render() {
         return (
             <View ref='suggest_park' style={styles.container}>
+                <TouchableOpacity
+                    onPress={this.onClosePress.bind(this)}
+                    style={{position: 'absolute', top: 30, right: 15, zIndex: 1}}
+                    hitSlop={{top: 10, left: 10, bottom: 10, right: 10}}
+                >
+                  <Image style={{width: 20, height: 20, opacity: 0.67}} source={require('../../img/button_close.png')}/>
+                </TouchableOpacity>
                 <Text style={styles.question}>Where is this park?</Text>
                     <Form style={styles.wrapper} ref='SuggestedPark' onChange={this.handleFormChange.bind(this)}>
                        <InputField

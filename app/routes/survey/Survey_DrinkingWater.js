@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
-import { StyleSheet, Image, View, TouchableHighlight, Text, TouchableOpacity } from 'react-native';
+import { StyleSheet, View, TouchableHighlight, Text, TouchableOpacity, Image } from 'react-native';
 import { connect } from 'react-redux';
 import { sendSurveyResponses } from '../../src/survey_core';
 import Button from '../../components/common/Button.js';
 import { Form, InputField } from 'react-native-form-generator';
 import { Actions } from 'react-native-router-flux';
-
 
 class Survey_DrinkingWater extends Component {
     constructor(props){
@@ -36,21 +35,20 @@ class Survey_DrinkingWater extends Component {
       this.updateValue = updateValue;
   }
 
-  onClosePress(updateValue) {
-      this.updateValue = updateValue;
-      this.props.dispatch({type: 'UPDATE_SURVEY', state: updateValue});
-      this.sendFormData().done(() => {
-        Actions.pop();
-      });
-  }
-
-
   sendFormData() {
       const formData = this.props.parkForm;
       console.log(formData);
       return sendSurveyResponses(formData);
   }
-
+  onClosePress(formData) {
+      const updateValue = {};
+      updateValue.title = 'num_dogs';
+      updateValue.value = this.state.formData.num_dogs;
+      this.props.dispatch({type: 'UPDATE_SURVEY', state: updateValue});
+      this.sendFormData().done(() => {
+        Actions.thanks();
+      });
+  }
   componentDidMount() {
     // console.log(this.props);
   }
@@ -72,7 +70,7 @@ class Survey_DrinkingWater extends Component {
                     style={{position: 'absolute', top: 30, right: 15, zIndex: 1}}
                     hitSlop={{top: 10, left: 10, bottom: 10, right: 10}}
                 >
-                      <Image style={{width: 20, height: 20, opacity: 0.67}} source={require('../../img/button_close.png')}/>
+                  <Image style={{width: 20, height: 20, opacity: 0.67}} source={require('../../img/button_close.png')}/>
                 </TouchableOpacity>
                 <Text style={styles.question}>Is there drinking water for dogs here?</Text>
                        <Form
