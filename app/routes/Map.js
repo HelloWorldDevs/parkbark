@@ -14,6 +14,7 @@ import {updateParksAction} from '../src/map_core';
 import {updateParksByFilterAction} from '../src/filter_core';
 import ParkList from '../components/park_list/ParkList.js'
 import { Actions } from 'react-native-router-flux';
+import NetworkAlert from '../components/common/NetworkAlert';
 
 
 
@@ -40,6 +41,7 @@ class ParkMap extends Component {
   render() {
     return (
       <View style={styles.container}>
+        <NetworkAlert />
         <SearchField onPress={this.showFilters.bind(this)}/>
         <View style={styles.mapContainer}>
         <MapView
