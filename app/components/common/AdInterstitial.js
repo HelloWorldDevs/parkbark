@@ -9,17 +9,21 @@ import {
 } from 'react-native';
 import { connect } from 'react-redux';
 import Button from './Button';
+import { Actions } from 'react-native-router-flux';
+
 
 
 class AdInterstitial extends Component {
 
     onClose() {
-        this.props.navigator.push({name: 'map'});
+        // this.props.navigator.push({name: 'map'});
+      Actions.map({type: 'reset'});
     }
 
     keepAds() {
         console.log('keep ads')
-        this.props.navigator.push({name: 'map'})
+        // this.props.navigator.push({name: 'map'})
+      Actions.map({type: 'reset'});
     }
 
     removeAds() {

@@ -73,7 +73,8 @@ class ParkDetail extends Component {
 
   onBackPress(){
     // this.props.navigator.pop();
-    this.props.navigator.push({name: 'adCTA'})
+    // this.props.navigator.push({name: 'adCTA'})
+    Actions.adCTA();
   }
 
   onSharePress() {

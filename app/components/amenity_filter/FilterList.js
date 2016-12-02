@@ -14,8 +14,6 @@ import FilterListDetail from './FilterDetail';
 import {updateParksByFilterAction} from '../../src/filter_core';
 import { Actions } from 'react-native-router-flux';
 
-
-
 class FilterList extends Component {
   constructor(props) {
     super(props);
@@ -33,8 +31,6 @@ class FilterList extends Component {
     Actions.pop();
   }
 
-
-
   //filters according to staged and selected, filter button must be pressed to add staged to selected
   onFilterPress() {
     const {navigator, dispatch, stagedFilters, stagedFiltersRemove} = this.props;
@@ -42,7 +38,7 @@ class FilterList extends Component {
     stagedFilters.forEach(i => dispatch({type: 'ADD_FILTER', state: i}));
     stagedFiltersRemove.forEach(i => dispatch({type: 'REMOVE_FILTER', state: i}));
     dispatch({type: 'FILTER_SET', state: true});
-    navigator.pop()
+    Actions.pop()
   }
 
   componentWillMount() {
@@ -70,6 +66,7 @@ class FilterList extends Component {
 
   //clears all staged and selected on press
   onClearFiltersPress() {
+    console.log('clear fliters!');
     this.props.dispatch({type: 'CLEAR_FILTERS', state: false});
     this.props.dispatch({type: 'CLEAR_STAGED', state: false});
     this.props.dispatch({type: 'FILTER_SET', state: false});

@@ -6,7 +6,7 @@ import { Actions } from 'react-native-router-flux';
 const ThankYou = React.createClass ({
   componentDidMount: function () {
     console.log('thank you mount')
-    setTimeout(this.changeScene, 5000)
+    setTimeout(this.changeScene, 3000)
   },
 
   render: function () {
