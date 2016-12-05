@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, View, Modal, TouchableHighlight, Text } from 'react-native';
+import { StyleSheet, View, TouchableHighlight, Text, TouchableOpacity, Image } from 'react-native';
 import { connect } from 'react-redux';
 import { sendSurveyResponses } from '../../src/survey_core';
 import Button from '../../components/common/Button.js';
@@ -16,6 +16,17 @@ class Survey_NumDogs extends Component {
       },
     }
   }
+
+  onClosePress(formData) {
+      const updateValue = {};
+      updateValue.title = 'num_dogs';
+      updateValue.value = this.state.formData.num_dogs;
+      this.props.dispatch({type: 'UPDATE_SURVEY', state: updateValue});
+      this.sendFormData().done(() => {
+        Actions.thanks();
+      });
+  }
+
   handleFormChange(formData){
     this.setState({formData:formData})
     this.props.onFormChange && this.props.onFormChange(formData);
@@ -26,10 +37,13 @@ class Survey_NumDogs extends Component {
       updateValue.title = 'num_dogs';
       updateValue.value = this.state.formData.num_dogs;
       this.props.dispatch({type: 'UPDATE_SURVEY', state: updateValue});
-      // this.props.navigator.push({name: 'surveyDrinkingWater'});
       Actions.surveyDrinkingWater();
   }
 
+  sendFormData() {
+      const formData = this.props.parkForm;
+      return sendSurveyResponses(formData);
+  }
 
   addNumber(formData) {
       var newFormData = this.state.formData;
@@ -56,6 +70,13 @@ class Survey_NumDogs extends Component {
                 ref='surveyForm'
                 style={styles.container}
             >
+                <TouchableOpacity
+                    onPress={this.onClosePress.bind(this)}
+                    style={{position: 'absolute', top: 30, right: 15, zIndex: 1}}
+                    hitSlop={{top: 10, left: 10, bottom: 10, right: 10}}
+                >
+                  <Image style={{width: 20, height: 20, opacity: 0.67}} source={require('../../img/button_close.png')}/>
+                </TouchableOpacity>
                 <Text style={styles.question}>How many dogs do you see at the park?</Text>
                    <Form
                        ref='surveyFormNumDogs'
