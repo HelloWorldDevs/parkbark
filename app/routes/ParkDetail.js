@@ -30,7 +30,6 @@ class ParkDetail extends Component {
 
   renderFilters() {
     currentParkAmenities = this.props.currentPark.amenities.split(',').map((amenity) => amenity.trim());
-    // console.log(currentParkAmenities);
     const matchingAmenities = [];
     const nonMatchingAmenities = [];
     // console.log(currentParkAmenities);
@@ -72,8 +71,6 @@ class ParkDetail extends Component {
   }
 
   onBackPress(){
-    // this.props.navigator.pop();
-    // this.props.navigator.push({name: 'adCTA'})
     Actions.adCTA();
   }
 
@@ -91,7 +88,6 @@ class ParkDetail extends Component {
     // console.log(this.props);
     const title = this.props.currentPark.title;
     this.props.dispatch({type: 'SET_PARK_SURVEY', state: title});
-    // this.props.navigator.push({name: 'surveyNumDogs'});
     Actions.surveyNumDogs();
 }
 
@@ -194,13 +190,13 @@ const styles = {
     color: '#838383',
     lineHeight: 19,
     paddingTop: 20
-},
+  },
   detailsText: {
     fontFamily: 'Source Sans Pro 200',
     fontSize: 14,
     color: '#5e5e5e',
     lineHeight: 20
-}
+  }
 }
 
 const mapStateToProps = (state) => {
@@ -208,6 +204,6 @@ const mapStateToProps = (state) => {
     amenities: state.getIn(['filter','amenities']).toJS(),
     currentPark: state.getIn(['map', 'location', 'parks']).find((park) => park['title'] === state.getIn(['parkdetail','current_park']))
   }
-}
+};
 
 export default connect(mapStateToProps)(ParkDetail);

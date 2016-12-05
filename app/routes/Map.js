@@ -14,7 +14,7 @@ import {updateParksAction} from '../src/map_core';
 import {updateParksByFilterAction} from '../src/filter_core';
 import ParkList from '../components/park_list/ParkList.js'
 import { Actions } from 'react-native-router-flux';
-import NetworkAlert from '../components/common/NetworkAlert';
+import networkAlert from '../components/common/NetworkAlert';
 
 
 
@@ -34,14 +34,12 @@ class ParkMap extends Component {
   }
 
   showFilters() {
-    // this.props.navigator.push({name: 'filterlist'});
     Actions.filterlist();
   }
 
   render() {
     return (
       <View style={styles.container}>
-        <NetworkAlert />
         <SearchField onPress={this.showFilters.bind(this)}/>
         <View style={styles.mapContainer}>
         <MapView
@@ -54,10 +52,10 @@ class ParkMap extends Component {
             loadingEnabled={true}
         >
           <PositionMarker/>
-          <ParkMarkers navigator={this.props.navigator}/>
+          <ParkMarkers/>
         </MapView>
       </View>
-        <ParkList navigator={this.props.navigator}/>
+        <ParkList/>
     </View>
     )
   }
@@ -70,19 +68,24 @@ class ParkMap extends Component {
 
   annotationUpdate(region) {
     // console.log(this.props.coords);
-    this.props.dispatch({type:'RECORD_LOCATION', state: region})
+    this.props.dispatch({type:'RECORD_LOCATION', state: region});
     this.regionShow();
     const dist = Math.ceil(region.latitudeDelta * 69/2);
     // console.log(region.latitude, region.longitude);
     const coords = region.latitude + 0.1E-3 + ',' + (region.longitude - -0.1E-3);
-    // console.log(coords);
     if (!this.props.filterSet) {
-      updateParksAction(coords, dist).done((state) => {
-        this.props.dispatch({type: 'UPDATE_ANNOTATIONS', state: state});
+      updateParksAction(coords, dist).done((parks) => {
+        if (!parks) {
+          return networkAlert.checkConnection();
+        }
+        this.props.dispatch({type: 'UPDATE_ANNOTATIONS', state: parks});
       });
     } else if (this.props.filterSet) {
-      updateParksByFilterAction(coords, dist, this.props.filterQuery).done((state) => {
-        this.props.dispatch({type: 'UPDATE_ANNOTATIONS', state: state});
+      updateParksByFilterAction(coords, dist, this.props.filterQuery).done((parks) => {
+        if (!parks) {
+          return networkAlert.checkConnection();
+        }
+        this.props.dispatch({type: 'UPDATE_ANNOTATIONS', state: parks});
       })
     }
   }

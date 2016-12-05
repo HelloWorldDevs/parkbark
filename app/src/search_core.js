@@ -24,6 +24,7 @@ export function fetchLocationAction(address, googleapi) {
         })
         .catch((error) => {
           console.error(error);
-        })
+          return null;
+        });
 }
 

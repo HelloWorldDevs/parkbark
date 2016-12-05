@@ -1,5 +1,4 @@
 import {Scene, Router} from 'react-native-router-flux';
-
 import Map from '../routes/Map';
 import Landing from '../routes/Landing';
 import AdditionalFeatures from '../routes/AdditionalFeatures';
@@ -14,6 +13,7 @@ import FilterList from '../components/amenity_filter/FilterList';
 import AdInterstitial from '../components/common/AdInterstitial'
 import React, { Component } from 'react';
 import { Navigator } from 'react-native';
+import NetworkAlert from '../components/common/NetworkAlert';
 import { connect } from 'react-redux';
 
 var ROUTES = {
@@ -39,6 +39,10 @@ class NavigatorComponent extends Component {
   constructor() {
     super();
     this.navigator = null;
+  }
+
+  componentWillMount(){
+
   }
 
   render() {
@@ -95,7 +99,6 @@ class NavigatorComponent extends Component {
   //       />
   //   )
   // }
-
 
 
 }

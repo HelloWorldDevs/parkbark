@@ -49,6 +49,9 @@ export function fetchAmenitiesAction() {
       })
       .then(function(resJson) {
         return resJson;
+      }).catch(function() {
+        console.log("error");
+        return null;
       });
 }
 
@@ -85,10 +88,10 @@ export function updateParksByFilterAction(coords, dist, query) {
           park.distance = parseFloat(item.field_park_address_proximity).toFixed(1) + 'mi';
           parks.push(park);
         })
-        // console.log(parks);
         return parks;
       })
       .catch((error) => {
         console.error(error);
+        return null;
       })
 }

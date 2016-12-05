@@ -5,15 +5,18 @@ import {
     StyleSheet,
     Text,
     Platform,
-    BackAndroid
+    BackAndroid,
+    NetInfo,
+    Alert
 } from 'react-native';
 import PushNotification from 'react-native-push-notification';
 import { connect } from 'react-redux';
 import { Map } from 'immutable';
 import Button from '../components/common/Button.js';
-import NetworkAlert from '../components/common/NetworkAlert';
 import {fetchAmenitiesAction} from '../src/filter_core';
 import { Actions } from 'react-native-router-flux';
+import networkAlert from '../components/common/NetworkAlert';
+
 
 
 
@@ -22,7 +25,6 @@ const Landing = React.createClass ({
   componentWillUnmount() {
     console.log('landing unmount')
   },
-
   //overwrite default position and set parks in location state
   componentWillMount: function() {
     navigator.geolocation.getCurrentPosition(
@@ -44,9 +46,13 @@ const Landing = React.createClass ({
           // console.log(userLatLng);
           this.props.dispatch({type: 'SET_POSITION', state: userLatLng})
         },
-        (error) => {console.log(error)},
+        (error) => {
+          console.log(error);
+        },
         {enableHighAccuracy: false, timeout: 20000, maximumAge: 1000}
     );
+
+
     //TODO: Set notifications set check for android.
     if (Platform.OS === 'ios') {
       PushNotification.checkPermissions((response) => {
@@ -61,7 +67,12 @@ const Landing = React.createClass ({
   },
 
   componentDidMount: function() {
-    fetchAmenitiesAction().done((amenities) => this.props.dispatch({type: 'SET_AMENITIES', state: amenities}));
+    fetchAmenitiesAction().done((amenities) => {
+      if (!amenities) {
+        return networkAlert.checkConnection();
+      }
+      this.props.dispatch({type: 'SET_AMENITIES', state: amenities})
+    });
     BackAndroid.addEventListener('hardwareBackPress', () => {
       BackAndroid.exitApp();
       return true
@@ -70,7 +81,6 @@ const Landing = React.createClass ({
   render:function() {
     return (
         <View style={styles.container}>
-            <NetworkAlert />
           <View style={styles.imageContainer}>
             <Image source={require('../img/welcomePup@2x.png')}/>
           </View>
@@ -88,10 +98,10 @@ const Landing = React.createClass ({
 
   onNextPress: function() {
     if (this.props.notificationState || Platform.OS === 'android') {
-      // this.props.navigator.push({name: 'map'});
       Actions.map();
     } else {
-      this.props.navigator.push({name: 'features'});
+      // TODO:Handle notification check for IOS
+      // this.props.navigator.push({name: 'features'});
     }
 },
 

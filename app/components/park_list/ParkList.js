@@ -26,6 +26,7 @@ class ParkList extends Component {
   }
 
   componentDidMount() {
+
   }
 
   componentDidUpdate() {
@@ -34,7 +35,7 @@ class ParkList extends Component {
     }
   }
 
-  renderParkListDetails(parks){
+  renderParkListDetails(parks) {
     let parkIndex = 0;
     return parks.map((park, i) => <ParkListDetail onPress={() => this.onDetailPress(park.title)} touchable={true} navigator={this.props.navigator} index={parkIndex++} key={i} title={park.title} address={park.address} address_display={park.address_display} distance={park.distance} amenities={park.amenities} />)
   };
@@ -69,13 +70,11 @@ class ParkList extends Component {
 
   onNextPress = () => {
       this.props.dispatch({type: 'SET_PARK_SURVEY', state: 'Suggest a Park'});
-      // this.props.navigator.push({name: 'parkName'});
       Actions.parkName();
   };
 
   onDetailPress = (title) => {
     this.props.dispatch({type: 'UPDATE_SElECTED_PARK', state: title});
-    // this.props.navigator.push({name:'parkdetail'});
     Actions.parkdetail()
   };
 

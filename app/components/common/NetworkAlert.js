@@ -1,36 +1,51 @@
 import React, { Component } from 'react';
-import { NetInfo, Alert, View} from 'react-native';
+import { NetInfo, Alert, View, BackAndroid} from 'react-native';
 
-class NetworkAlert extends Component {
-    state = {
-        connectionInfo: null,
-    };
 
-    componentDidMount() {
-        NetInfo.addEventListener(
-            'change',
-            this._handleConnectionInfoChange
-        );
-        NetInfo.fetch().done(
-            (connectionInfo) => {
-                this.setState({connectionInfo});
-                console.log('status', this.state.connectionInfo);
-                if (this.state.connectionInfo == 'NONE') {
-                    Alert.alert(
-                        'Network Offline'
-                    )
-                }
+class NetworkAlert {
+    constructor() {
+        this.isConnected = null;
+        this._handleConnectionInfoChange = (connectionInfo) => {
+            this.isConnected = connectionInfo;
+            if (this.isConnected === false || this.isConnected === 'NONE') {
+                Alert.alert(
+                    'Network Offline',
+                    'Sorry, but WIFI is necessary to use our app',
+                    [
+                        {text: 'OK', onPress: () => {BackAndroid.exitApp()}},
+                    ],
+                    {
+                        cancelable: false
+                    }
+                )
             }
-        );
+        };
+        NetInfo.addEventListener('change', this._handleConnectionInfoChange);
     }
-    _handleConnectionInfoChange = (connectionInfo) => {
-        this.setState({ connectionInfo, });
-    };
 
-    render() {
-        return (
-            <View></View>
-        )
+
+    checkConnection() {
+        NetInfo.isConnected.fetch().then(isConnected => {
+            this.isConnected = isConnected;
+            if (this.isConnected === false ) {
+                Alert.alert(
+                    'Network Offline',
+                    'Sorry, but WIFI is necessary to use our app',
+                    [
+                        {text: 'OK', onPress: () => {BackAndroid.exitApp()}},
+                    ],
+                    {
+                        cancelable: false
+                    }
+                )
+            }
+        });
     }
+
 };
-export default NetworkAlert;
+
+
+
+
+const networkAlert = new NetworkAlert();
+export default networkAlert;

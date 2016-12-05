@@ -40,7 +40,7 @@ export function updateParksAction(coords, dist){
     }
   })
       .then(function(res) {
-        return res.json();
+          return res.json();
       })
       .then(function(resJson) {
         console.log(resJson);
@@ -62,12 +62,13 @@ export function updateParksAction(coords, dist){
           park.distance = 'apx. ' + parseFloat(item.field_park_address_proximity).toFixed(1) + 'mi';
           parks.push(park);
         })
-        // console.log(parks);
+        console.log(parks);
         return parks;
       })
       .catch((error) => {
         console.error(error);
-      })
+        return null;
+      });
 }
 
 
