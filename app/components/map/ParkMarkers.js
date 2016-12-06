@@ -46,24 +46,25 @@ class ParkMarkers extends Component {
                 coordinate={marker.latlng}
                 image={require('../../img/map-pin@2x.png')}
                 title={marker.title}
-                description={marker.address_display + ' approx ' + getDistance(this.props.coords.latitude, this.props.coords.longitude, marker.latlng.latitude, marker.latlng.longitude) + 'mi'}
+                description={marker.address_display + ' apx. ' + getDistance(this.props.coords.latitude, this.props.coords.longitude, marker.latlng.latitude, marker.latlng.longitude) + ' mi'}
                 onCalloutPress={() => {this.onCalloutPress(marker.title)}}
             >
-                <MapView.Callout style={styles.callout}>
-                    <View>
-                        <View style={styles.top}>
-                            <Text style={styles.title}>{marker.title}</Text>
-                            <Text style={styles.distance}>{getDistance(this.props.coords.latitude, this.props.coords.longitude, marker.latlng.latitude, marker.latlng.longitude) + 'mi'}</Text>
-                        </View>
-                        <Text style={styles.address}>{marker.address_display}</Text>
-                    </View>
-                </MapView.Callout>
             </MapView.Marker>
              ))}
           </View>
     )
   }
 };
+
+// {/*<MapView.Callout style={styles.callout}>*/}
+//   {/*<View>*/}
+//     {/*<View style={styles.top}>*/}
+//       {/*<Text style={styles.title}>{marker.title}</Text>*/}
+//       {/*<Text style={styles.distance}>{getDistance(this.props.coords.latitude, this.props.coords.longitude, marker.latlng.latitude, marker.latlng.longitude) + 'mi'}</Text>*/}
+//     {/*</View>*/}
+//     {/*<Text style={styles.address}>{marker.address_display}</Text>*/}
+//   {/*</View>*/}
+// {/*</MapView.Callout>*/}
 
 var styles = StyleSheet.create({
     callout: {

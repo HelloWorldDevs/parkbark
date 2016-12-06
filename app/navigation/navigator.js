@@ -16,22 +16,20 @@ import { Navigator } from 'react-native';
 import NetworkAlert from '../components/common/NetworkAlert';
 import { connect } from 'react-redux';
 
-var ROUTES = {
-  landing: Landing,
-  features: AdditionalFeatures,
-  map: Map,
-  surveyNumDogs: Survey_NumDogs,
-  surveyDrinkingWater: Survey_DrinkingWater,
-  surveyNotes: Survey_Notes,
-  parkName: Survey_ParkName,
-  parkAddress: Survey_ParkAddress,
-  thanks: ThankYou,
-  parkdetail: ParkDetail,
-  filterlist: FilterList,
-  adCTA: AdInterstitial
-};
-
-
+// var ROUTES = {
+//   landing: Landing,
+//   features: AdditionalFeatures,
+//   map: Map,
+//   surveyNumDogs: Survey_NumDogs,
+//   surveyDrinkingWater: Survey_DrinkingWater,
+//   surveyNotes: Survey_Notes,
+//   parkName: Survey_ParkName,
+//   parkAddress: Survey_ParkAddress,
+//   thanks: ThankYou,
+//   parkdetail: ParkDetail,
+//   filterlist: FilterList,
+//   adCTA: AdInterstitial
+// };
 
 
 class NavigatorComponent extends Component {
@@ -41,7 +39,7 @@ class NavigatorComponent extends Component {
     this.navigator = null;
   }
 
-  componentWillMount(){
+  componentWillMount() {
 
   }
 

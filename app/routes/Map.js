@@ -17,15 +17,14 @@ import { Actions } from 'react-native-router-flux';
 import networkAlert from '../components/common/NetworkAlert';
 
 
-
 class ParkMap extends Component {
   componentWillUnmount() {
-    console.log(' map unmount')
+    console.log(' map unmount');
   }
 
   componentDidMount() {
     console.log(this.props);
-    if(this.props.type === "REACT_NATIVE_ROUTER_FLUX_RESET"){
+    if(this.props.type === "REACT_NATIVE_ROUTER_FLUX_RESET") {
       BackAndroid.addEventListener('hardwareBackPress', () => {
         Actions.landing({direction: 'leftToRight'});
          return true
@@ -35,7 +34,7 @@ class ParkMap extends Component {
 
   showFilters() {
     Actions.filterlist();
-  }
+  };
 
   render() {
     return (

@@ -5,6 +5,7 @@ import { Map } from 'immutable';
 import {Provider} from 'react-redux';
 import {applyMiddleware, createStore} from 'redux';
 import makeStore from './redux/store';
+import Geolocator from './components/map/Geolocator';
 
 
 
@@ -31,6 +32,7 @@ store.dispatch({
 });
 
 
+geolocator = new Geolocator(store);
 
 
 const AppProvider = (
