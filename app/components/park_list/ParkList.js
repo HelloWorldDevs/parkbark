@@ -12,22 +12,19 @@ import { connect } from 'react-redux';
 import Button from '../common/Button.js';
 import ParkListDetail from './ParkListDetail.js';
 import { Actions } from 'react-native-router-flux';
+import {getDistance} from '../../src/map_core';
+
 
 
 
 class ParkList extends Component {
   constructor(props) {
     super(props);
-
     this.state = {
       slideValue: new Animated.Value(0),
     };
-
   }
 
-  componentDidMount() {
-
-  }
 
   componentDidUpdate() {
     if(this.props.hideState) {
@@ -37,12 +34,23 @@ class ParkList extends Component {
 
   renderParkListDetails(parks) {
     let parkIndex = 0;
-    return parks.map((park, i) => <ParkListDetail onPress={() => this.onDetailPress(park.title)} touchable={true} navigator={this.props.navigator} index={parkIndex++} key={i} title={park.title} address={park.address} address_display={park.address_display} distance={park.distance} amenities={park.amenities} />)
+
+    //sort all parks by distance from users coordinates and include distance prop :)
+    var parksSorted = parks.map((park) => {
+      var parkCoords = park.address.split(',');
+      park.distance = getDistance(this.props.coords.latitude, this.props.coords.longitude, parkCoords[0], parkCoords[1])
+      return park;
+    })
+      .sort(function(a, b) {
+      return a.distance - b.distance
+    });
+
+    return parksSorted.map((park, i) => <ParkListDetail onPress={() => this.onDetailPress(park.title)} touchable={true} navigator={this.props.navigator} index={parkIndex++} key={i} title={park.title} address={park.address} address_display={park.address_display} distance={park.distance} amenities={park.amenities} />)
   };
 
 
   slideIn = () => {
-    console.log('slide in');
+    // console.log('slide in');
     this.props.dispatch({type:'MAP_HIDE', state: false});
     Animated.timing(
         this.state.slideValue,
@@ -55,7 +63,7 @@ class ParkList extends Component {
   };
 
   slideOut = () => {
-    console.log('slide out');
+    // console.log('slide out');
     this.props.dispatch({type:'MAP_HIDE', state: false})
     Animated.timing(
         this.state.slideValue,
@@ -165,6 +173,7 @@ const styles = {
 
 const mapStateToProps = (state) => {
   return {
+    coords: state.getIn(['map','location', 'coords']),
     parks: state.getIn(['map', 'location', 'parks']),
     hideState: state.getIn(['map', 'hide'])
   }

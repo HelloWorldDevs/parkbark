@@ -19,7 +19,7 @@ const ThankYou = React.createClass ({
 
   changeScene: function () {
     console.log('push map');
-    Actions.map({type: 'reset'});
+    Actions.popTo({name:'parkdetail'});
   },
 
 });

@@ -4,7 +4,6 @@ import {
     StyleSheet,
     BackAndroid
 } from 'react-native';
-import { Map } from 'immutable';
 import { connect } from 'react-redux';
 import MapView from 'react-native-maps';
 import PositionMarker from '../components/map/PositionMarker';
@@ -18,19 +17,6 @@ import networkAlert from '../components/common/NetworkAlert';
 
 
 class ParkMap extends Component {
-  componentWillUnmount() {
-    console.log(' map unmount');
-  }
-
-  componentDidMount() {
-    console.log(this.props);
-    if(this.props.type === "REACT_NATIVE_ROUTER_FLUX_RESET") {
-      BackAndroid.addEventListener('hardwareBackPress', () => {
-        Actions.landing({direction: 'leftToRight'});
-         return true
-        });
-    }
-  }
 
   showFilters() {
     Actions.filterlist();

@@ -43,10 +43,11 @@ export function updateParksAction(coords, dist){
           return res.json();
       })
       .then(function(resJson) {
-        console.log(resJson);
+        // console.log(resJson);
         var parks = [];
         resJson.forEach((item)=> {
           var park = {};
+          park.proximity = item.field_park_address_proximity;
           park.title = item.title;
           park.image = item.field_park_image;
           park.address = item.field_park_address;
@@ -58,11 +59,10 @@ export function updateParksAction(coords, dist){
           park.latlng = {
             latitude: latitude,
             longitude: longitude
-          }
+          };
           park.distance = 'apx. ' + parseFloat(item.field_park_address_proximity).toFixed(1) + 'mi';
           parks.push(park);
-        })
-        console.log(parks);
+        });
         return parks;
       })
       .catch((error) => {

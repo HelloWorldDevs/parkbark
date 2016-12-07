@@ -9,12 +9,11 @@ import {
     NetInfo,
     Alert
 } from 'react-native';
+import { Actions } from 'react-native-router-flux';
 import PushNotification from 'react-native-push-notification';
 import { connect } from 'react-redux';
-import { Map } from 'immutable';
 import Button from '../components/common/Button.js';
 import {fetchAmenitiesAction} from '../src/filter_core';
-import { Actions } from 'react-native-router-flux';
 import networkAlert from '../components/common/NetworkAlert';
 
 
@@ -22,12 +21,7 @@ import networkAlert from '../components/common/NetworkAlert';
 
 const Landing = React.createClass ({
 
-  componentWillUnmount() {
-    console.log('landing unmount')
-  },
-  //overwrite default position and set parks in location state
   componentWillMount: function() {
-
 
     //TODO: Set notifications set check for android.
     if (Platform.OS === 'ios') {

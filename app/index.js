@@ -1,38 +1,14 @@
-//will import app container and add tie all component state with react-redux Provider
 import React, { Component } from 'react';
 import App from './app';
-import { Map } from 'immutable';
 import {Provider} from 'react-redux';
-import {applyMiddleware, createStore} from 'redux';
-import makeStore from './redux/store';
+import store from './redux/store';
 import Geolocator from './components/map/Geolocator';
 
 
 
 
-const store = makeStore();
 
-
-//set default position
-store.dispatch({
-  type: 'SET_LOCATION',
-  state : Map({
-    coords:{
-      latitude: 45.523031,
-      longitude: -122.676772,
-      latitudeDelta: .1,
-      longitudeDelta: .1
-    },
-    default_position: {
-      latitude: 45.523031,
-      longitude: -122.676772
-    },
-    parks: []
-  })
-});
-
-
-geolocator = new Geolocator(store);
+const geolocator = new Geolocator(store);
 
 
 const AppProvider = (

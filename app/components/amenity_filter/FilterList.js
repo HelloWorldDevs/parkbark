@@ -19,6 +19,11 @@ class FilterList extends Component {
     super(props);
   }
 
+  componentWillMount() {
+    this.props.dispatch({type: 'UPDATE_SCENE', state: this.props.name});
+  }
+
+
 //renders all FilterDetail components
   renderFilters() {
     return this.props.amenities.map(filter => <FilterListDetail disabled={false} key={filter.name} filter={filter.name}/>)
@@ -41,9 +46,6 @@ class FilterList extends Component {
     Actions.pop()
   }
 
-  componentWillMount() {
-    // console.log(this.props.selectedFilters);
-  }
 
   //concatenates selected filters, sends query to db with action, and updates annotations (markers) on complete
   componentWillUnmount() {

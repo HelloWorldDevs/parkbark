@@ -63,6 +63,7 @@ class ParkDetail extends Component {
   componentDidMount(){
     const {currentPark} = this.props;
     console.log(this.bannerError);
+    this.props.dispatch({type: 'UPDATE_SCENE', state: this.props.name});
   }
 
   renderAmenities({amenities}){
