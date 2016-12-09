@@ -16,7 +16,12 @@ import { Actions } from 'react-native-router-flux';
 import networkAlert from '../components/common/NetworkAlert';
 
 
+
 class ParkMap extends Component {
+
+  componentWillMount() {
+    this.annotationUpdate(this.props.coords);
+  }
 
   showFilters() {
     Actions.filterlist();
