@@ -33,6 +33,7 @@ class Survey_AgilityCourse extends Component {
   saveFormData(updateValue) {
       this.props.dispatch({type: 'UPDATE_SURVEY', state: updateValue});
       this.updateValue = updateValue;
+      Actions.surveyNotes();
   }
 
   sendFormData() {
@@ -45,12 +46,6 @@ class Survey_AgilityCourse extends Component {
       updateValue.title = 'agility_course';
       updateValue.value = this.state.formData.agility_course;
       this.props.dispatch({type: 'UPDATE_SURVEY', state: updateValue});
-      this.sendFormData().done(() => {
-        Actions.thanks();
-      });
-  }
-
-  componentDidUpdate(props) {
       this.sendFormData().done(() => {
         Actions.thanks();
       });

@@ -33,6 +33,7 @@ class Survey_OffLeash extends Component {
   saveFormData(updateValue) {
       this.props.dispatch({type: 'UPDATE_SURVEY', state: updateValue});
       this.updateValue = updateValue;
+      Actions.surveySmallDogs();
   }
 
   sendFormData() {
@@ -45,12 +46,6 @@ class Survey_OffLeash extends Component {
       updateValue.title = 'off_leash';
       updateValue.value = this.state.formData.off_leash;
       this.props.dispatch({type: 'UPDATE_SURVEY', state: updateValue});
-      this.sendFormData().done(() => {
-        Actions.thanks();
-      });
-  }
-
-  componentDidUpdate(props) {
       this.sendFormData().done(() => {
         Actions.thanks();
       });

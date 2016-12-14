@@ -33,6 +33,7 @@ class Survey_FencedArea extends Component {
   saveFormData(updateValue) {
       this.props.dispatch({type: 'UPDATE_SURVEY', state: updateValue});
       this.updateValue = updateValue;
+      Actions.surveyOffLeash();
   }
 
   sendFormData() {
@@ -45,12 +46,6 @@ class Survey_FencedArea extends Component {
       updateValue.title = 'fenced_area';
       updateValue.value = this.state.formData.fenced_area;
       this.props.dispatch({type: 'UPDATE_SURVEY', state: updateValue});
-      this.sendFormData().done(() => {
-        Actions.thanks();
-      });
-  }
-
-  componentDidUpdate(props) {
       this.sendFormData().done(() => {
         Actions.thanks();
       });

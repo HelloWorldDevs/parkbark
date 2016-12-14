@@ -33,6 +33,7 @@ class Survey_HikingTrails extends Component {
   saveFormData(updateValue) {
       this.props.dispatch({type: 'UPDATE_SURVEY', state: updateValue});
       this.updateValue = updateValue;
+      Actions.surveyShade();
   }
 
   sendFormData() {
@@ -45,12 +46,6 @@ class Survey_HikingTrails extends Component {
       updateValue.title = 'hiking_trails';
       updateValue.value = this.state.formData.hiking_trails;
       this.props.dispatch({type: 'UPDATE_SURVEY', state: updateValue});
-      this.sendFormData().done(() => {
-        Actions.thanks();
-      });
-  }
-
-  componentDidUpdate(props) {
       this.sendFormData().done(() => {
         Actions.thanks();
       });

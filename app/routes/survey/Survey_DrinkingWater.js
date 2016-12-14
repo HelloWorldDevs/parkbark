@@ -50,12 +50,6 @@ class Survey_DrinkingWater extends Component {
       });
   }
 
-  componentDidUpdate(props) {
-      this.sendFormData().done(() => {
-        Actions.thanks();
-      });
-  }
-
     render() {
         const B = (props) => <Text style={{fontFamily: 'Source Sans Pro 600'}}>{props.children}</Text>
         return (

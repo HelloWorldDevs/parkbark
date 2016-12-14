@@ -59,10 +59,6 @@ class Survey_NumDogs extends Component {
       this.refs.surveyFormNumDogs.refs.num_dogs.setValue(this.state.formData.num_dogs.toString());
   }
 
-  componentDidMount() {
-    // console.log(this.state.formData);
-  }
-
     render() {
         let value = this.state.formData.num_dogs.toString();
         return (

@@ -45,13 +45,6 @@ class Survey_Notes extends Component {
       return sendSurveyResponses(formData);
   }
 
-  // componentDidUpdate(props) {
-  //     this.sendFormData().done(() => {
-  //       Actions.thanks();
-  //     });
-  // }
-
-
     render() {
         return (
             <View ref='surveyForm' style={styles.container}>
@@ -63,15 +56,15 @@ class Survey_Notes extends Component {
                   <Image style={{width: 20, height: 20, opacity: 0.67}} source={require('../../img/button_close.png')}/>
                 </TouchableOpacity>
                     <Form ref='surveyFormNotes' onChange={this.handleFormChange.bind(this)}>
-                       <Text style={styles.question}>Tell Us About The Park</Text>
+                       <Text style={styles.question}>Anything you would like us to know?</Text>
                        <InputField
                            ref='notes'
-                           placeholder='Notes'
+                           placeholder='More details'
                        />
                       <Button
                         bgcolor={'#E79C23'}
                         bgimage={require('../../img/transparent.png')}
-                        text={' -->'}
+                        text={' DONE '}
                         onPress={this.saveFormData.bind(this)}
                       />
                     </Form>

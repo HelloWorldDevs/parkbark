@@ -33,6 +33,7 @@ class Survey_Benches extends Component {
   saveFormData(updateValue) {
       this.props.dispatch({type: 'UPDATE_SURVEY', state: updateValue});
       this.updateValue = updateValue;
+      Actions.surveyCoveredArea();
   }
 
   sendFormData() {
@@ -45,12 +46,6 @@ class Survey_Benches extends Component {
       updateValue.title = 'benches';
       updateValue.value = this.state.formData.benches;
       this.props.dispatch({type: 'UPDATE_SURVEY', state: updateValue});
-      this.sendFormData().done(() => {
-        Actions.thanks();
-      });
-  }
-
-  componentDidUpdate(props) {
       this.sendFormData().done(() => {
         Actions.thanks();
       });
