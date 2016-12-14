@@ -6,7 +6,7 @@ import Button from '../../components/common/Button.js';
 import { Form, InputField } from 'react-native-form-generator';
 import { Actions } from 'react-native-router-flux';
 
-class Survey_DrinkingWater extends Component {
+class Survey_FencedArea extends Component {
     constructor(props){
     super(props);
     this.updateValue = null;
@@ -17,15 +17,15 @@ class Survey_DrinkingWater extends Component {
 
   clickYes() {
       const updateValue = {};
-      updateValue.title = 'drinking_water';
+      updateValue.title = 'fenced_area';
       // Drinking Water TID for api
-      updateValue.value = 2;
+      updateValue.value = 3;
       this.saveFormData(updateValue);
   }
 
   clickNo() {
       const updateValue = {};
-      updateValue.title = 'drinking_water';
+      updateValue.title = 'fenced_area';
       updateValue.value = 0;
       this.saveFormData(updateValue);
   }
@@ -42,15 +42,12 @@ class Survey_DrinkingWater extends Component {
   }
   onClosePress(formData) {
       const updateValue = {};
-      updateValue.title = 'drinking_water';
-      updateValue.value = this.state.formData.drinking_water;
+      updateValue.title = 'fenced_area';
+      updateValue.value = this.state.formData.fenced_area;
       this.props.dispatch({type: 'UPDATE_SURVEY', state: updateValue});
       this.sendFormData().done(() => {
         Actions.thanks();
       });
-  }
-  componentDidMount() {
-    console.log('drinking water', this.props);
   }
 
   componentDidUpdate(props) {
@@ -72,9 +69,9 @@ class Survey_DrinkingWater extends Component {
                 >
                   <Image style={{width: 20, height: 20, opacity: 0.67}} source={require('../../img/button_close.png')}/>
                 </TouchableOpacity>
-                <Text style={styles.question}>Is there drinking water for dogs here?</Text>
+                <Text style={styles.question}>Is this dog park fenced in?</Text>
                        <Form
-                           ref='surveyFormDrinkingWater'
+                           ref='surveyFormFencedArea'
                            style={styles.wrapper}
                        >
                            <Button
@@ -135,4 +132,4 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default connect(mapStateToProps)(Survey_DrinkingWater);
+export default connect(mapStateToProps)(Survey_FencedArea);

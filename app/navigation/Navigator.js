@@ -9,6 +9,7 @@ import ParkDetail from '../routes/ParkDetail';
 import Survey_ParkName from '../routes/survey/Survey_ParkName';
 import Survey_ParkAddress from "../routes/survey/Survey_ParkAddress"
 import Survey_NumDogs from '../routes/survey/Survey_NumDogs';
+import Survey_FencedArea from '../routes/survey/Survey_FencedArea';
 import Survey_DrinkingWater from '../routes/survey/Survey_DrinkingWater';
 import Survey_Notes from '../routes/survey/Survey_Notes';
 import FilterList from '../components/amenity_filter/FilterList';
@@ -33,6 +34,7 @@ class NavigatorComponent extends Component {
         <Scene hideNavBar={true}  key="landing" component={Landing} initial={true}/>
         <Scene hideNavBar={true} key="map" component={Map} />
         <Scene hideNavBar={true} key="surveyNumDogs" component={Survey_NumDogs}/>
+        <Scene hideNavBar={true} key="surveyFencedArea" component={Survey_FencedArea}/>
         <Scene hideNavBar={true} key="surveyDrinkingWater" component={Survey_DrinkingWater}/>
         <Scene hideNavBar={true} key="surveyNotes" component={Survey_Notes} />
         <Scene hideNavBar={true} key="parkName" component={Survey_ParkName} />
