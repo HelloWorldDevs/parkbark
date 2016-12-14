@@ -6,7 +6,7 @@ import Button from '../../components/common/Button.js';
 import { Form, InputField } from 'react-native-form-generator';
 import { Actions } from 'react-native-router-flux';
 
-class Survey_FencedArea extends Component {
+class Survey_HikingTrails extends Component {
     constructor(props){
     super(props);
     this.updateValue = null;
@@ -17,15 +17,15 @@ class Survey_FencedArea extends Component {
 
   clickYes() {
       const updateValue = {};
-      updateValue.title = 'fenced_area';
+      updateValue.title = 'hiking_trails';
       // Drinking Water TID for api
-      updateValue.value = 3;
+      updateValue.value = 12;
       this.saveFormData(updateValue);
   }
 
   clickNo() {
       const updateValue = {};
-      updateValue.title = 'fenced_area';
+      updateValue.title = 'hiking_trails';
       updateValue.value = 0;
       this.saveFormData(updateValue);
   }
@@ -42,8 +42,8 @@ class Survey_FencedArea extends Component {
   }
   onClosePress(formData) {
       const updateValue = {};
-      updateValue.title = 'fenced_area';
-      updateValue.value = this.state.formData.fenced_area;
+      updateValue.title = 'hiking_trails';
+      updateValue.value = this.state.formData.hiking_trails;
       this.props.dispatch({type: 'UPDATE_SURVEY', state: updateValue});
       this.sendFormData().done(() => {
         Actions.thanks();
@@ -70,9 +70,9 @@ class Survey_FencedArea extends Component {
                 >
                   <Image style={{width: 20, height: 20, opacity: 0.67}} source={require('../../img/button_close.png')}/>
                 </TouchableOpacity>
-                <Text style={styles.question}>Is this dog park <B>fenced</B> in?</Text>
+                <Text style={styles.question}>Are there <B>hiking trails</B>?</Text>
                        <Form
-                           ref='surveyFormFencedArea'
+                           ref='surveyFormHikingTrails'
                            style={styles.wrapper}
                        >
                            <Button
@@ -82,7 +82,7 @@ class Survey_FencedArea extends Component {
                                 fontSize={42}
                                 font={'Source Sans Pro 900'}
                                 onPress={this.clickYes.bind(this)}
-                                ref='fenced_area'
+                                ref='hiking_trails'
                            />
                            <Button
                                 bgimage={require('../../img/orange-circle.png')}
@@ -91,7 +91,7 @@ class Survey_FencedArea extends Component {
                                 fontSize={42}
                                 font={'Source Sans Pro 900'}
                                 onPress={this.clickNo.bind(this)}
-                                ref='fenced_area_no'
+                                ref='hiking_trails_no'
                            />
 
                       </Form>
@@ -133,4 +133,4 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default connect(mapStateToProps)(Survey_FencedArea);
+export default connect(mapStateToProps)(Survey_HikingTrails);

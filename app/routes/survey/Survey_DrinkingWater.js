@@ -49,9 +49,6 @@ class Survey_DrinkingWater extends Component {
         Actions.thanks();
       });
   }
-  componentDidMount() {
-    console.log('drinking water', this.props);
-  }
 
   componentDidUpdate(props) {
       this.sendFormData().done(() => {
@@ -60,6 +57,7 @@ class Survey_DrinkingWater extends Component {
   }
 
     render() {
+        const B = (props) => <Text style={{fontFamily: 'Source Sans Pro 600'}}>{props.children}</Text>
         return (
             <View
                 ref='surveyForm'
@@ -72,7 +70,7 @@ class Survey_DrinkingWater extends Component {
                 >
                   <Image style={{width: 20, height: 20, opacity: 0.67}} source={require('../../img/button_close.png')}/>
                 </TouchableOpacity>
-                <Text style={styles.question}>Is there drinking water for dogs here?</Text>
+                <Text style={styles.question}>Is there <B>drinking water</B> for dogs here?</Text>
                        <Form
                            ref='surveyFormDrinkingWater'
                            style={styles.wrapper}
