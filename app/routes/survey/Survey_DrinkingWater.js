@@ -33,6 +33,7 @@ class Survey_DrinkingWater extends Component {
   saveFormData(updateValue) {
       this.props.dispatch({type: 'UPDATE_SURVEY', state: updateValue});
       this.updateValue = updateValue;
+      Actions.surveyPoopBags();
   }
 
   sendFormData() {

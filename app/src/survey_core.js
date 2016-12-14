@@ -36,6 +36,15 @@ export function sendSurveyResponses(formData) {
               "field_park_address_suggested":[{"value": formData.suggested_park}],
               "field_park_amenities": [
                 {"target_id": formData.drinking_water},
+                {"target_id": formData.agility_course},
+                {"target_id": formData.covered_area},
+                {"target_id": formData.fenced_area},
+                {"target_id": formData.hiking_trails},
+                {"target_id": formData.off_leash},
+                {"target_id": formData.poop_bags},
+                {"target_id": formData.restrooms},
+                {"target_id": formData.shade},
+                {"target_id": formData.small_dogs},
                 {"target_id": formData.benches}
               ]
           })
