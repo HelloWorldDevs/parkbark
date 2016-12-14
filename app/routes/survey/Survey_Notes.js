@@ -17,6 +17,7 @@ class Survey_Notes extends Component {
   handleFormChange(formData){
     this.setState({formData:formData})
     this.props.onFormChange && this.props.onFormChange(formData);
+    console.log(formData);
   }
 
   onClosePress(formData) {
@@ -41,7 +42,7 @@ class Survey_Notes extends Component {
 
   sendFormData() {
       const formData = this.props.parkForm;
-      console.log(formData)
+      console.log('sent', formData)
       return sendSurveyResponses(formData);
   }
 
@@ -55,7 +56,11 @@ class Survey_Notes extends Component {
                 >
                   <Image style={{width: 20, height: 20, opacity: 0.67}} source={require('../../img/button_close.png')}/>
                 </TouchableOpacity>
-                    <Form ref='surveyFormNotes' onChange={this.handleFormChange.bind(this)}>
+                    <Form
+                        ref='surveyFormNotes'
+                        style={styles.form}
+                        onChange={this.handleFormChange.bind(this)}
+                    >
                        <Text style={styles.question}>Anything you would like us to know?</Text>
                        <InputField
                            ref='notes'
@@ -65,6 +70,7 @@ class Survey_Notes extends Component {
                         bgcolor={'#E79C23'}
                         bgimage={require('../../img/transparent.png')}
                         text={' DONE '}
+                        textColor={'#ffffff'}
                         onPress={this.saveFormData.bind(this)}
                       />
                     </Form>
@@ -80,16 +86,16 @@ var styles = StyleSheet.create({
         justifyContent: 'space-between',
         flex: 1
     },
+    form: {
+        flex: 1,
+        justifyContent: 'space-between'
+    },
     question: {
         color: '#f58120',
         fontSize: 48,
         fontFamily: 'Source Sans Pro 200',
-        lineHeight: 51
-    },
-    wrapper: {
-      flexDirection: 'row',
-      alignItems: 'center',
-      justifyContent: 'space-between',
+        lineHeight: 51,
+        marginBottom: 15
     },
 })
 
