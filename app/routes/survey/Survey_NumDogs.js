@@ -96,7 +96,7 @@ class Survey_NumDogs extends Component {
                             />
                   </Form>
               <Button
-                bgimage={require('../../img/red-gradient.png')}
+                bgimage={require('../../img/orange-gradient-long.png')}
                 text={' OK '}
                 fontSize={15}
                 font={'Source Sans Pro 700'}
@@ -116,7 +116,7 @@ var styles = StyleSheet.create({
       flex: 1
   },
   question: {
-      color: '#ef3a39',
+      color: '#f58120',
       fontFamily: 'Source Sans Pro 200',
       fontSize: 48,
       lineHeight: 51,
@@ -130,7 +130,7 @@ var styles = StyleSheet.create({
       flex: 1,
       fontSize: 140,
       fontFamily: 'Source Sans Pro 900',
-      color: '#ef3a39',
+      color: '#f58120',
       lineHeight: 51,
   }
 });

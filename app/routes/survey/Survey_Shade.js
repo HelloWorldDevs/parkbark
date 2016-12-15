@@ -71,7 +71,7 @@ class Survey_Shade extends Component {
                            style={styles.wrapper}
                        >
                            <Button
-                                bgimage={require('../../img/orange-circle.png')}
+                                bgimage={require('../../img/red-circle.png')}
                                 text={'YES'}
                                 textColor={'#fff'}
                                 fontSize={42}
@@ -80,7 +80,7 @@ class Survey_Shade extends Component {
                                 ref='shade'
                            />
                            <Button
-                                bgimage={require('../../img/orange-circle.png')}
+                                bgimage={require('../../img/red-circle.png')}
                                 text={'NO'}
                                 textColor={'#fff'}
                                 fontSize={42}
@@ -111,7 +111,7 @@ var styles = StyleSheet.create({
         flex: 1
     },
     question: {
-        color: '#f58120',
+        color: '#ef3a39',
         fontSize: 48,
         fontFamily: 'Source Sans Pro 200',
     },

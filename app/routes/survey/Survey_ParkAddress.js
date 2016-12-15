@@ -32,7 +32,7 @@ class Survey_ParkAddress extends Component {
       updateValue.title = 'suggested_park';
       updateValue.value = this.state.formData.park_address;
       this.props.dispatch({type: 'UPDATE_SURVEY', state: updateValue});
-      Actions.surveyNotes();
+      Actions.surveyFencedArea();
   }
   sendFormData() {
       const formData = this.props.parkForm;
@@ -41,6 +41,7 @@ class Survey_ParkAddress extends Component {
   }
 
     render() {
+        const B = (props) => <Text style={{fontFamily: 'Source Sans Pro 600'}}>{props.children}</Text>
         return (
             <View ref='suggest_park' style={styles.container}>
                 <TouchableOpacity
@@ -50,27 +51,39 @@ class Survey_ParkAddress extends Component {
                 >
                   <Image style={{width: 20, height: 20, opacity: 0.67}} source={require('../../img/button_close.png')}/>
                 </TouchableOpacity>
-                <Text style={styles.question}>Where is this park?</Text>
-                    <Form style={styles.wrapper} ref='SuggestedPark' onChange={this.handleFormChange.bind(this)}>
+                <Text style={styles.question}>Where is this park <B>located</B>?</Text>
+                    <Form style={styles.form} ref='SuggestedPark' onChange={this.handleFormChange.bind(this)}>
                        <InputField
-                           ref='park_address'
-                           placeholder='Park address'
-                           underlineColorAndroid='#fff'
+                           ref='suggested_park'
+                           placeholder='Park address or cross streets'
+                           underlineColorAndroid='#F58120'
                            style={styles.input}
                        />
-                       <Button
-                         bgimage={require('../../img/orange-gradient.png')}
-                         icon={require('../../img/forward-arrow@3x.png')}
-                         alignSelf={'center'}
-                         onPress={this.saveFormData.bind(this)}
-                       />
+                       <View style={styles.wrapper}>
+                           <Button
+                             bgimage={require('../../img/transparent.png')}
+                             text={"I don't know"}
+                             textColor={'#8b8b8b'}
+                             fontSize={15}
+                             font={'Source Sans Pro 200'}
+                             alignSelf={'center'}
+                             onPress={this.saveFormData.bind(this)}
+                         />
+                          <Button
+                            bgimage={require('../../img/orange-gradient-long.png')}
+                            text={' OK '}
+                            textColor={'#fff'}
+                            alignSelf={'center'}
+                            onPress={this.saveFormData.bind(this)}
+                          />
+                      </View>
                     </Form>
             </View>
         )
     }
-}
+  }
 
-var styles = StyleSheet.create({
+  var styles = StyleSheet.create({
     container: {
         padding: 30,
         flexDirection: 'column',
@@ -78,20 +91,25 @@ var styles = StyleSheet.create({
         flex: 1
     },
     question: {
-        color: '#f58120',
+        color: '#F58120',
         fontSize: 48,
         fontFamily: 'Source Sans Pro 200',
-        lineHeight: 51
+        marginBottom: 100
     },
+    form: {
+        flex: 1,
+        justifyContent: 'center'
+    },
+    // input: {
+    //     flex: 1,
+    //     justifyContent: 'flex-end'
+    // },
     wrapper: {
-    //   flexDirection: 'row',
-    //   alignItems: 'center',
-    //   justifyContent: 'space-between',
-    },
-    input: {
-        flex: 1
+        flex: 1,
+        justifyContent: 'flex-end'
     }
-})
+  })
+
 
 const mapStateToProps = (state) => {
   return {
