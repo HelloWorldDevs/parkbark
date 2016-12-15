@@ -78,12 +78,12 @@ class ParkList extends Component {
 
   onNextPress = () => {
       this.props.dispatch({type: 'SET_PARK_SURVEY', state: 'Suggest a Park'});
-      Actions.parkName();
+      Actions.parkName({suggestPark: true});
   };
 
   onDetailPress = (title) => {
     this.props.dispatch({type: 'UPDATE_SElECTED_PARK', state: title});
-    Actions.parkdetail({suggestPark: true})
+    Actions.parkdetail()
   };
 
   render() {

@@ -33,6 +33,9 @@ class Survey_OffLeash extends Component {
   saveFormData(updateValue) {
       this.props.dispatch({type: 'UPDATE_SURVEY', state: updateValue});
       this.updateValue = updateValue;
+      if(this.props.suggestPark) {
+        return Actions.surveySmallDogs({suggestPark: true})
+      }
       Actions.surveySmallDogs();
   }
 
@@ -47,6 +50,9 @@ class Survey_OffLeash extends Component {
       updateValue.value = this.state.formData.off_leash;
       this.props.dispatch({type: 'UPDATE_SURVEY', state: updateValue});
       this.sendFormData().done(() => {
+        if(this.props.suggestPark) {
+          return Actions.thanks({suggestPark: true})
+        }
         Actions.thanks();
       });
   }

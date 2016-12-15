@@ -10,12 +10,15 @@ class Survey_ParkName extends Component {
     constructor(props){
     super(props);
     this.state = {
-      formData:{}
+      formData:{
+          title: 'Unknown'
+      }
     }
   }
   handleFormChange(formData){
     this.setState({formData:formData})
     this.props.onFormChange && this.props.onFormChange(formData);
+    console.log(formData);
   }
   onClosePress(formData) {
       const updateValue = {};
@@ -28,11 +31,15 @@ class Survey_ParkName extends Component {
       const updateValue = {};
       updateValue.title = 'title';
       updateValue.value = this.state.formData.title;
-      this.props.dispatch({type: 'UPDATE_SURVEY', state: updateValue});
-      Actions.parkAddress({suggestPark: true});
+      this.props.dispatch({type: 'UPDATE_SURVEY', state: updateValue})
+      if(this.props.suggestPark) {
+        return Actions.parkAddress({suggestPark: true})
+      }
+      Actions.parkAddress();
   }
 
     render() {
+        const B = (props) => <Text style={{fontFamily: 'Source Sans Pro 600'}}>{props.children}</Text>
         return (
             <View ref='suggest_park' style={styles.container}>
                 <TouchableOpacity
@@ -42,20 +49,32 @@ class Survey_ParkName extends Component {
                 >
                   <Image style={{width: 20, height: 20, opacity: 0.67}} source={require('../../img/button_close.png')}/>
                 </TouchableOpacity>
-                <Text style={styles.question}>What's this park called?</Text>
-                    <Form style={styles.wrapper} ref='SuggestedPark' onChange={this.handleFormChange.bind(this)}>
+                <Text style={styles.question}>What is the <B>name</B> of this dog park?</Text>
+                    <Form style={styles.form} ref='SuggestedPark' onChange={this.handleFormChange.bind(this)}>
                        <InputField
                            ref='title'
-                           placeholder='Park name'
-                           underlineColorAndroid='#fff'
+                           placeholder='Type Park Name'
+                           underlineColorAndroid='#EF3A39'
                            style={styles.input}
                        />
-                      <Button
-                        bgimage={require('../../img/orange-gradient.png')}
-                        icon={require('../../img/forward-arrow@3x.png')}
-                        alignSelf={'center'}
-                        onPress={this.saveFormData.bind(this)}
-                      />
+                       <View style={styles.wrapper}>
+                           <Button
+                             bgimage={require('../../img/transparent.png')}
+                             text={"I don't know"}
+                             textColor={'#8b8b8b'}
+                             fontSize={15}
+                             font={'Source Sans Pro 200'}
+                             alignSelf={'center'}
+                             onPress={this.saveFormData.bind(this)}
+                         />
+                          <Button
+                            bgimage={require('../../img/red-gradient.png')}
+                            text={' OK '}
+                            textColor={'#fff'}
+                            alignSelf={'center'}
+                            onPress={this.saveFormData.bind(this)}
+                          />
+                      </View>
                     </Form>
             </View>
         )
@@ -70,18 +89,22 @@ var styles = StyleSheet.create({
         flex: 1
     },
     question: {
-        color: '#f58120',
+        color: '#EF3A39',
         fontSize: 48,
         fontFamily: 'Source Sans Pro 200',
-        lineHeight: 51
+        marginBottom: 100
     },
+    form: {
+        flex: 1,
+        justifyContent: 'flex-end'
+    },
+    // input: {
+    //     flex: 1,
+    //     justifyContent: 'flex-end'
+    // },
     wrapper: {
-    //   flexDirection: 'row',
-    //   alignItems: 'center',
-    //   justifyContent: 'space-between',
-    },
-    input: {
-        flex: 1
+        flex: 1,
+        justifyContent: 'flex-end'
     }
 })
 

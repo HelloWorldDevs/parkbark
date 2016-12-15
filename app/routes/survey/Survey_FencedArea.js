@@ -33,6 +33,9 @@ class Survey_FencedArea extends Component {
   saveFormData(updateValue) {
       this.props.dispatch({type: 'UPDATE_SURVEY', state: updateValue});
       this.updateValue = updateValue;
+      if(this.props.suggestPark) {
+        return Actions.surveyOffLeash({suggestPark: true})
+      }
       Actions.surveyOffLeash();
   }
 
@@ -47,6 +50,9 @@ class Survey_FencedArea extends Component {
       updateValue.value = this.state.formData.fenced_area;
       this.props.dispatch({type: 'UPDATE_SURVEY', state: updateValue});
       this.sendFormData().done(() => {
+        if(this.props.suggestPark) {
+          return Actions.thanks({suggestPark: true})
+        }
         Actions.thanks();
       });
   }
@@ -71,7 +77,7 @@ class Survey_FencedArea extends Component {
                            style={styles.wrapper}
                        >
                            <Button
-                                bgimage={require('../../img/orange-circle.png')}
+                                bgimage={require('../../img/red-circle.png')}
                                 text={'YES'}
                                 textColor={'#fff'}
                                 fontSize={42}
@@ -80,7 +86,7 @@ class Survey_FencedArea extends Component {
                                 ref='fenced_area'
                            />
                            <Button
-                                bgimage={require('../../img/orange-circle.png')}
+                                bgimage={require('../../img/red-circle.png')}
                                 text={'NO'}
                                 textColor={'#fff'}
                                 fontSize={42}
@@ -111,7 +117,7 @@ var styles = StyleSheet.create({
         flex: 1
     },
     question: {
-        color: '#f58120',
+        color: '#ef3a39',
         fontSize: 48,
         fontFamily: 'Source Sans Pro 200',
     },
