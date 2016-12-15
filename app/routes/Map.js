@@ -6,6 +6,7 @@ import {
 } from 'react-native';
 import { connect } from 'react-redux';
 import MapView from 'react-native-maps';
+import Loading from '../components/common/Loading';
 import PositionMarker from '../components/map/PositionMarker';
 import ParkMarkers from '../components/map/ParkMarkers';
 import SearchField from '../components/search/Search_Field.js';
@@ -32,6 +33,7 @@ class ParkMap extends Component {
       <View style={styles.container}>
         <SearchField onPress={this.showFilters.bind(this)}/>
         <View style={styles.mapContainer}>
+        <Loading />
         <MapView
             ref={ref => { this.map = ref; }}
             style={styles.map}
@@ -57,7 +59,7 @@ class ParkMap extends Component {
 
 
   annotationUpdate(region) {
-    // console.log(this.props.coords);
+    this.props.dispatch({type: 'SET_LOADING', state: true});
     this.props.dispatch({type:'RECORD_LOCATION', state: region});
     this.regionShow();
     const dist = Math.ceil(region.latitudeDelta * 69/2);
@@ -69,6 +71,7 @@ class ParkMap extends Component {
           return networkAlert.checkConnection();
         }
         this.props.dispatch({type: 'UPDATE_ANNOTATIONS', state: parks});
+        this.props.dispatch({type: 'SET_LOADING', state: false});
       });
     } else if (this.props.filterSet) {
       updateParksByFilterAction(coords, dist, this.props.filterQuery).done((parks) => {
@@ -76,6 +79,7 @@ class ParkMap extends Component {
           return networkAlert.checkConnection();
         }
         this.props.dispatch({type: 'UPDATE_ANNOTATIONS', state: parks});
+        this.props.dispatch({type: 'SET_LOADING', state: false});
       })
     }
   }
@@ -100,6 +104,7 @@ var styles = StyleSheet.create({
   },
   map: {
     position: 'absolute',
+    zIndex: 0,
     right: 0,
     left: 0,
     top: 0,

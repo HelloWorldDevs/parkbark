@@ -42,7 +42,7 @@ class ParkMarkers extends Component {
                 onPress={() => {
                   this.setState({selected: marker.title})
                 }}
-                key={marker.title}
+                key={marker.title + i}
                 coordinate={marker.latlng}
                 image={require('../../img/map-pin@2x.png')}
                 title={marker.title}

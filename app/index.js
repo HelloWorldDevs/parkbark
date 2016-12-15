@@ -5,9 +5,6 @@ import store from './redux/store';
 import Geolocator from './components/map/Geolocator';
 
 
-
-
-
 const geolocator = new Geolocator(store);
 
 

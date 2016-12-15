@@ -1,5 +1,7 @@
 import {Map} from 'immutable';
 import {PermissionsAndroid, Alert} from 'react-native';
+import LocationServicesDialogBox from "react-native-android-location-services-dialog-box";
+
 
 
 class Geolocator {
@@ -24,23 +26,16 @@ class Geolocator {
     });
 
     ////// check for permissions on android, works with SDK API versions 23 and above
-    async function requestLocationPermission() {
-      try {
-        const granted = await PermissionsAndroid.requestPermission(
-            PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
-            {
-              'title': 'Park Bark Needs Your Location',
-              'message': 'Park Bark uses your location to suggest  dog parks in your area.'
-            }
-        );
-        if (granted) {
-          console.log("Location Position Allowed")
-        } else {
-          console.log("Location Permission Denied")
-        }
-      } catch (err) {
-        console.warn(err)
-      }
+    function requestLocationPermission() {
+      LocationServicesDialogBox.checkLocationServicesIsEnabled({
+        message: "<h2>Park Bark Needs Your Location</h2>This app would like to change your device settings:<br/><br/>Use GPS, Wi-Fi, and cell network for location<br/>",
+        ok: "OK",
+        cancel: "No Thank You"
+      }).then(function(success) {
+        console.log(success); // success => "enabled"
+      }).catch((error) => {
+        console.log(error.message); // error.message => "disabled"
+      });
     }
 
     //////get current position and set users location

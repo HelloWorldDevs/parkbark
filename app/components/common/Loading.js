@@ -1,47 +1,65 @@
 import React, { Component } from 'react';
 import { View, StyleSheet, ActivityIndicator } from 'react-native';
+import { connect } from 'react-redux';
 
-export default Loading = (props) => {
-    // This needs to go in the parent component, must be a class
-    // constructor(props) {
-    //     super(props);
-    //     this.state = {
-    //       animating: true,
-    //     };
-    // }
-    //
-    // componentWillUnmount() {
-    //     clearTimeout(this._timer);
-    // }
-    //
-    // setToggleTimeout() {
-    //     this._timer = setTimeout(() => {
-    //       this.setState({animating: !this.state.animating});
-    //       this.setToggleTimeout();
-    //     }, 1000);
-    // }
-    //
-    // componentDidMount() {
-    //     this.setToggleTimeout();
-    // }
 
-   return (
-      <View style = {styles.container}>
-         <ActivityIndicator animating = {props.animating}
-           style = {styles.activityIndicator} size = "small" color = '#f0382c'
-         />
-      </View>
-   );
+class Loading extends Component {
+
+   componentDidMount() {
+      // console.log(this.props.loading)
+   }
+
+   componentWillReceiveProps() {
+      // console.log('loading ', this.props.loading);
+   }
+
+
+   render() {
+      var zIndex = null;
+      if (this.props.loading) {
+         zIndex = 1;
+         return (
+             <View style = {[styles.container, {zIndex: zIndex}]}>
+                <ActivityIndicator animating = {true}
+                                   style = {[styles.activityIndicator, {zIndex: zIndex}]} size="large" color = '#f0382c'
+                />
+             </View>
+         );
+      }
+       else {
+         zIndex = 0;
+         return (
+             null
+         )
+      }
+   }
+
 }
 
 const styles = StyleSheet.create ({
    container: {
+      position: 'absolute',
+      zIndex: 1,
       flex: 1,
       justifyContent: 'center',
-      alignItems: 'center'
+      alignItems: 'center',
+      left: 0,
+      right: 0,
+      top: 0,
+      bottom: 0,
    },
    activityIndicator: {
-      justifyContent: 'center',
-      alignItems: 'center',
+      // justifyContent: 'center',
+      // alignItems:'center',
+
    }
 });
+
+
+const mapStateToProps = (state) => {
+   return {
+      loading: state.getIn(['core', 'loading'])
+   }
+}
+
+export default connect(mapStateToProps)(Loading);

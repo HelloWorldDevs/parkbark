@@ -82,7 +82,7 @@ var styles = StyleSheet.create({
   fieldContainer: {
     backgroundColor: 'rgba(0,0,0,0)',
     position: 'absolute',
-    zIndex: 1,
+    zIndex: 2,
     top: 20,
     left: 0,
     right: 0,

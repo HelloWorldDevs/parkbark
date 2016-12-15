@@ -38,7 +38,7 @@ class ParkList extends Component {
     //sort all parks by distance from users coordinates and include distance prop :)
     var parksSorted = parks.map((park) => {
       var parkCoords = park.address.split(',');
-      park.distance = getDistance(this.props.coords.latitude, this.props.coords.longitude, parkCoords[0], parkCoords[1])
+      park.distance = getDistance(this.props.coords.latitude, this.props.coords.longitude, parkCoords[0], parkCoords[1]);
       return park;
     })
       .sort(function(a, b) {
@@ -96,18 +96,20 @@ class ParkList extends Component {
 
     return (
         <View style={styles.scrollConainer}>
-          <Button
-            bgimage={require('../../img/transparent.png')}
-            bgcolor={'#fff'}
-            alignSelf={'flex-start'}
-            text={' See Parks List '}
-            textColor={'#131313'}
-            font={'Source Sans Pro regular'}
-            fontSize={14}
-            onPress={this.slideIn}
-          />
+          <View style={[styles.scrollViewHeader, styles.overlay, {bottom: 0}]}>
+            <Button
+                bgimage={require('../../img/transparent.png')}
+                bgcolor={'#fff'}
+                alignSelf={'flex-start'}
+                text={' See Parks List '}
+                textColor={'#131313'}
+                font={'Source Sans Pro regular'}
+                fontSize={14}
+                onPress={this.slideIn}
+            />
+          </View>
           <Animated.View
-                 style={{position: 'absolute', zIndex: 2, alignItems: 'stretch', left: 0, right: 0, bottom}}
+                 style={[styles.overlay, {bottom}]}
           >
             <View style={styles.scrollViewHeader}>
                   <Button
@@ -144,6 +146,10 @@ class ParkList extends Component {
 }
 
 const styles = {
+  scrollConainer: {
+    alignSelf: 'stretch',
+    padding: 5
+  },
   scrollViewTitle: {
     alignSelf: 'center',
     fontSize: 15
@@ -160,9 +166,11 @@ const styles = {
     height: Dimensions.get('window').height -180,
     backgroundColor: '#fff'
   },
-  scrollConainer: {
-    alignSelf: 'stretch',
-    padding: 5
+  overlay: {
+    position: 'absolute',
+    zIndex: 1,
+    left: 0,
+    right: 0
   },
   noResults: {
     color: '#f88b8e',
