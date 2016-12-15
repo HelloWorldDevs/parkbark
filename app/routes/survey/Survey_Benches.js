@@ -6,7 +6,7 @@ import Button from '../../components/common/Button.js';
 import { Form, InputField } from 'react-native-form-generator';
 import { Actions } from 'react-native-router-flux';
 
-class Survey_DrinkingWater extends Component {
+class Survey_Benches extends Component {
     constructor(props){
     super(props);
     this.updateValue = null;
@@ -17,15 +17,15 @@ class Survey_DrinkingWater extends Component {
 
   clickYes() {
       const updateValue = {};
-      updateValue.title = 'drinking_water';
+      updateValue.title = 'benches';
       // Drinking Water TID for api
-      updateValue.value = 2;
+      updateValue.value = 1;
       this.saveFormData(updateValue);
   }
 
   clickNo() {
       const updateValue = {};
-      updateValue.title = 'drinking_water';
+      updateValue.title = 'benches';
       updateValue.value = 0;
       this.saveFormData(updateValue);
   }
@@ -33,7 +33,7 @@ class Survey_DrinkingWater extends Component {
   saveFormData(updateValue) {
       this.props.dispatch({type: 'UPDATE_SURVEY', state: updateValue});
       this.updateValue = updateValue;
-      Actions.surveyPoopBags();
+      Actions.surveyCoveredArea();
   }
 
   sendFormData() {
@@ -43,8 +43,8 @@ class Survey_DrinkingWater extends Component {
   }
   onClosePress(formData) {
       const updateValue = {};
-      updateValue.title = 'drinking_water';
-      updateValue.value = this.state.formData.drinking_water;
+      updateValue.title = 'benches';
+      updateValue.value = this.state.formData.benches;
       this.props.dispatch({type: 'UPDATE_SURVEY', state: updateValue});
       this.sendFormData().done(() => {
         Actions.thanks();
@@ -65,9 +65,9 @@ class Survey_DrinkingWater extends Component {
                 >
                   <Image style={{width: 20, height: 20, opacity: 0.67}} source={require('../../img/button_close.png')}/>
                 </TouchableOpacity>
-                <Text style={styles.question}>Is there <B>drinking water</B> for dogs here?</Text>
+                <Text style={styles.question}>Are there <B>benches</B> at this dog park?</Text>
                        <Form
-                           ref='surveyFormDrinkingWater'
+                           ref='surveyFormBenches'
                            style={styles.wrapper}
                        >
                            <Button
@@ -77,7 +77,7 @@ class Survey_DrinkingWater extends Component {
                                 fontSize={42}
                                 font={'Source Sans Pro 900'}
                                 onPress={this.clickYes.bind(this)}
-                                ref='drinking_water'
+                                ref='benches'
                            />
                            <Button
                                 bgimage={require('../../img/orange-circle.png')}
@@ -86,7 +86,7 @@ class Survey_DrinkingWater extends Component {
                                 fontSize={42}
                                 font={'Source Sans Pro 900'}
                                 onPress={this.clickNo.bind(this)}
-                                ref='drinking_water_no'
+                                ref='benches_no'
                            />
 
                       </Form>
@@ -128,4 +128,4 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default connect(mapStateToProps)(Survey_DrinkingWater);
+export default connect(mapStateToProps)(Survey_Benches);

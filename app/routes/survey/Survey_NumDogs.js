@@ -37,7 +37,7 @@ class Survey_NumDogs extends Component {
       updateValue.title = 'num_dogs';
       updateValue.value = this.state.formData.num_dogs;
       this.props.dispatch({type: 'UPDATE_SURVEY', state: updateValue});
-      Actions.surveyDrinkingWater();
+      Actions.surveyFencedArea();
   }
 
   sendFormData() {
@@ -57,10 +57,6 @@ class Survey_NumDogs extends Component {
       newFormData.num_dogs = parseInt(this.state.formData.num_dogs) - 1;
       this.setState({formData: newFormData});
       this.refs.surveyFormNumDogs.refs.num_dogs.setValue(this.state.formData.num_dogs.toString());
-  }
-
-  componentDidMount() {
-    // console.log(this.state.formData);
   }
 
     render() {

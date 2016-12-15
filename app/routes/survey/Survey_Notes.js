@@ -11,7 +11,9 @@ class Survey_Notes extends Component {
     constructor(props){
     super(props);
     this.state = {
-      formData:{}
+      formData:{
+          notes: ' '
+      }
     }
   }
   handleFormChange(formData){
@@ -34,23 +36,18 @@ class Survey_Notes extends Component {
     updateValue.title = 'notes';
     updateValue.value = this.state.formData.notes;
     this.props.dispatch({type: 'UPDATE_SURVEY', state: updateValue});
-    this.sendFormData().done(() => {
-      Actions.thanks();
-    });
+    if (this.props.parkForm[updateValue.title]) {
+        this.sendFormData().done(() => {
+          Actions.thanks();
+        });
+    }
   }
 
   sendFormData() {
       const formData = this.props.parkForm;
-      console.log(formData)
+      console.log('sent', formData)
       return sendSurveyResponses(formData);
   }
-
-  // componentDidUpdate(props) {
-  //     this.sendFormData().done(() => {
-  //       Actions.thanks();
-  //     });
-  // }
-
 
     render() {
         return (
@@ -62,16 +59,21 @@ class Survey_Notes extends Component {
                 >
                   <Image style={{width: 20, height: 20, opacity: 0.67}} source={require('../../img/button_close.png')}/>
                 </TouchableOpacity>
-                    <Form ref='surveyFormNotes' onChange={this.handleFormChange.bind(this)}>
-                       <Text style={styles.question}>Tell Us About The Park</Text>
+                    <Form
+                        ref='surveyFormNotes'
+                        style={styles.form}
+                        onChange={this.handleFormChange.bind(this)}
+                    >
+                       <Text style={styles.question}>Anything you would like us to know?</Text>
                        <InputField
                            ref='notes'
-                           placeholder='Notes'
+                           placeholder='More details'
                        />
                       <Button
                         bgcolor={'#E79C23'}
                         bgimage={require('../../img/transparent.png')}
-                        text={' -->'}
+                        text={' DONE '}
+                        textColor={'#ffffff'}
                         onPress={this.saveFormData.bind(this)}
                       />
                     </Form>
@@ -87,16 +89,16 @@ var styles = StyleSheet.create({
         justifyContent: 'space-between',
         flex: 1
     },
+    form: {
+        flex: 1,
+        justifyContent: 'space-between'
+    },
     question: {
         color: '#f58120',
         fontSize: 48,
         fontFamily: 'Source Sans Pro 200',
-        lineHeight: 51
-    },
-    wrapper: {
-      flexDirection: 'row',
-      alignItems: 'center',
-      justifyContent: 'space-between',
+        lineHeight: 51,
+        marginBottom: 15
     },
 })
 
