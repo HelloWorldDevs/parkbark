@@ -11,13 +11,14 @@ class Survey_Notes extends Component {
     constructor(props){
     super(props);
     this.state = {
-      formData:{}
+      formData:{
+          notes: ' '
+      }
     }
   }
   handleFormChange(formData){
     this.setState({formData:formData})
     this.props.onFormChange && this.props.onFormChange(formData);
-    console.log(formData);
   }
 
   onClosePress(formData) {
@@ -35,9 +36,11 @@ class Survey_Notes extends Component {
     updateValue.title = 'notes';
     updateValue.value = this.state.formData.notes;
     this.props.dispatch({type: 'UPDATE_SURVEY', state: updateValue});
-    this.sendFormData().done(() => {
-      Actions.thanks();
-    });
+    if (this.props.parkForm[updateValue.title]) {
+        this.sendFormData().done(() => {
+          Actions.thanks();
+        });
+    }
   }
 
   sendFormData() {
