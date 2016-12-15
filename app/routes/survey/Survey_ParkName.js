@@ -29,7 +29,7 @@ class Survey_ParkName extends Component {
       updateValue.title = 'title';
       updateValue.value = this.state.formData.title;
       this.props.dispatch({type: 'UPDATE_SURVEY', state: updateValue});
-      Actions.parkAddress();
+      Actions.parkAddress({suggestPark: true});
   }
 
     render() {

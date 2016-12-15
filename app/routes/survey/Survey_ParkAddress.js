@@ -24,7 +24,7 @@ class Survey_ParkAddress extends Component {
       updateValue.value = this.state.formData.suggested_park;
       this.props.dispatch({type: 'UPDATE_SURVEY', state: updateValue});
       this.sendFormData().done(() => {
-        Actions.thanks();
+        Actions.thanks({suggestPark: true});
       });
   }
   saveFormData() {
@@ -32,7 +32,7 @@ class Survey_ParkAddress extends Component {
       updateValue.title = 'suggested_park';
       updateValue.value = this.state.formData.park_address;
       this.props.dispatch({type: 'UPDATE_SURVEY', state: updateValue});
-      Actions.surveyNotes();
+      Actions.surveyNotes({suggestPark: true});
   }
   sendFormData() {
       const formData = this.props.parkForm;

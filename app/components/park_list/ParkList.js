@@ -83,10 +83,8 @@ class ParkList extends Component {
 
   onDetailPress = (title) => {
     this.props.dispatch({type: 'UPDATE_SElECTED_PARK', state: title});
-    Actions.parkdetail()
+    Actions.parkdetail({suggestPark: true})
   };
-
-
 
   render() {
     const bottom = this.state.slideValue.interpolate({

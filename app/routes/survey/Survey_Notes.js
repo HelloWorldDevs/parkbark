@@ -27,6 +27,9 @@ class Survey_Notes extends Component {
       updateValue.value = this.state.formData.notes;
       this.props.dispatch({type: 'UPDATE_SURVEY', state: updateValue});
       this.sendFormData().done(() => {
+        if(this.props.suggestPark) {
+          return Actions.thanks({suggestPark: true})
+        }
         Actions.thanks();
       });
   }
@@ -38,6 +41,9 @@ class Survey_Notes extends Component {
     this.props.dispatch({type: 'UPDATE_SURVEY', state: updateValue});
     if (this.props.parkForm[updateValue.title]) {
         this.sendFormData().done(() => {
+          if(this.props.suggestPark) {
+            return Actions.thanks({suggestPark: true})
+          }
           Actions.thanks();
         });
     }

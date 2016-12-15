@@ -19,6 +19,9 @@ const ThankYou = React.createClass ({
 
   changeScene: function () {
     console.log('push map');
+    if(this.props.suggestPark) {
+      return Actions.popTo('map')
+    }
     Actions.popTo('parkdetail');
   },
 
