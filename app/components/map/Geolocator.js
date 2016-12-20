@@ -7,7 +7,7 @@ import LocationServicesDialogBox from "react-native-android-location-services-di
 class Geolocator {
   constructor(store) {
 
-    //set default position
+    set default position
     store.dispatch({
       type: 'SET_LOCATION',
       state: Map({

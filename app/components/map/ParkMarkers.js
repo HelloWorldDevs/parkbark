@@ -46,7 +46,7 @@ class ParkMarkers extends Component {
                 coordinate={marker.latlng}
                 image={require('../../img/map-pin@2x.png')}
                 title={marker.title}
-                description={marker.address_display + ' apx. ' + getDistance(this.props.coords.latitude, this.props.coords.longitude, marker.latlng.latitude, marker.latlng.longitude) + ' mi'}
+                description={marker.address_display + ' apx. ' + getDistance(this.props.position.latitude, this.props.position.longitude, marker.latlng.latitude, marker.latlng.longitude) + ' mi'}
                 onCalloutPress={() => {this.onCalloutPress(marker.title)}}
             >
             </MapView.Marker>
@@ -108,7 +108,7 @@ var styles = StyleSheet.create({
 
 const mapStateToProps = (state) => {
   return {
-    coords: state.getIn(['map','location', 'coords']),
+    position: state.getIn(['map','position']),
     markers: state.getIn(['map', 'location', 'parks'])
   }
 }
