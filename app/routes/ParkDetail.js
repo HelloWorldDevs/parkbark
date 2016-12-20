@@ -105,22 +105,30 @@ class ParkDetail extends Component {
     return (
     <View style={styles.container}>
         <ScrollView bounces={false} style={styles.scrollview}>
-          <TouchableOpacity
-              onPress={this.onBackPress.bind(this)}
-              style={{position: 'absolute', top: 20, left: 20, zIndex: 1}}>
-            <Image style={{width: 25, height: 25, padding: 10}} source={require('../img/back-arrow@3x.png')}/>
-          </TouchableOpacity>
-          <TouchableOpacity
-              onPress={this.onSharePress.bind(this)}
-              style={{position: 'absolute', top: 20, right: 20, zIndex: 1}}>
-            <Image style={{width: 25, height: 25, padding: 10}} source={require('../img/share@2x.png')}/>
-          </TouchableOpacity>
-          <View style={{flex: 1, justifyContent: 'center', alignItems: 'stretch'}}>
-            <ResponsiveImage
-                source={{uri: currentPark.image}}
-                 initHeight="225"
-            />
-          </View>
+            {/* Start top image stack */}
+            <View style={styles.parkImage}>
+              <ResponsiveImage
+                  source={{uri: currentPark.image}}
+                  initHeight="225"
+              />
+            </View>
+
+            <View style={{position: 'absolute', top: 0}}>
+                <Image source={require('../img/overlay@3x.png')} />
+            </View>
+
+            <TouchableOpacity
+                onPress={this.onBackPress.bind(this)}
+                style={{position: 'absolute', top: 20, left: 20}}>
+              <Image style={{width: 25, height: 25, padding: 10}} source={require('../img/back-arrow@3x.png')}/>
+            </TouchableOpacity>
+            <TouchableOpacity
+                onPress={this.onSharePress.bind(this)}
+                style={{position: 'absolute', top: 20, right: 20}}>
+              <Image style={{width: 25, height: 27, padding: 10}} source={require('../img/share@2x.png')}/>
+            </TouchableOpacity>
+            {/* End top image stack */}
+
           <ParkListDetail key={currentPark.title} onPress={this.onDetailPress.bind(this)} title={currentPark.title} address={currentPark.address} address_display={currentPark.address_display} distance={currentPark.distance}/>
           <Card>
             {this.renderAmenities(currentPark)}
@@ -176,6 +184,12 @@ const styles = {
   image: {
     flex: 1,
     height: 20
+  },
+  parkImage: {
+      flex: 1,
+      justifyContent: 'center',
+      alignItems: 'stretch',
+      zIndex: 0
   },
   parkDetails: {
     borderColor: '#f0f0f0',
