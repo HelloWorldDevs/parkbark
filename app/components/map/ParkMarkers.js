@@ -28,6 +28,7 @@ class ParkMarkers extends Component {
   }
 
   onCalloutPress(title) {
+    console.log('CALLOUT PRESS');
     this.props.dispatch({type: 'UPDATE_SElECTED_PARK', state: title});
     // this.props.navigator.push({name:'parkdetail'});
     Actions.parkdetail();
@@ -108,6 +109,7 @@ var styles = StyleSheet.create({
 
 const mapStateToProps = (state) => {
   return {
+    // coords: state.getIn(['map','location', 'coords']),
     position: state.getIn(['map','position']),
     markers: state.getIn(['map', 'location', 'parks'])
   }

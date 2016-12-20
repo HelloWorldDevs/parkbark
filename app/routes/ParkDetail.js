@@ -32,7 +32,6 @@ class ParkDetail extends Component {
     currentParkAmenities = this.props.currentPark.amenities.split(',').map((amenity) => amenity.trim());
     const matchingAmenities = [];
     const nonMatchingAmenities = [];
-    // console.log(currentParkAmenities);
 
     //push matching amenities not rendered as images into array for rendering.
     this.props.amenities.map(filter => {
@@ -55,7 +54,6 @@ class ParkDetail extends Component {
     // const amenities = matchingAmenities.concat(nonMatchingAmenities);
 
     const amenities = matchingAmenities;
-    // console.log(amenities);
     return amenities.map(filter => <FilterDetail checked={filter.checked} disabled={true} key={filter.name} filter={filter.name}/>)
   }
 
@@ -71,7 +69,7 @@ class ParkDetail extends Component {
     return amenities.split(', ').map(amenity => <Amenity index={amenityIndex++} key={amenity} amenity={amenity}/>)
   }
 
-  onBackPress(){
+  onBackPress() {
     Actions.adCTA();
   }
 
@@ -96,8 +94,11 @@ class ParkDetail extends Component {
     //TODO: set url on android platform
     lat = parseInt(this.props.currentPark.address.split(',')[0]);
     long = parseInt(this.props.currentPark.address.split(',')[1]);
-    var url = 'http://maps.apple.com/?daddr=' + this.props.currentPark.address;
-    Linking.openURL(url)
+
+    //IOS
+    // var url = 'http://maps.apple.com/?daddr=' + this.props.currentPark.address;
+
+    Linking.openURL(`http://maps.google.com/maps?daddr=${this.props.currentPark.address}`);
   }
 
   render(){
@@ -217,7 +218,8 @@ const styles = {
 const mapStateToProps = (state) => {
   return {
     amenities: state.getIn(['filter','amenities']).toJS(),
-    currentPark: state.getIn(['map', 'location', 'parks']).find((park) => park['title'] === state.getIn(['parkdetail','current_park']))
+    currentPark: state.getIn(['map', 'location', 'parks']).find((park) => park['title'] === state.getIn(['parkdetail','current_park'])),
+    position: state.getIn(['map','position']),
   }
 };
 

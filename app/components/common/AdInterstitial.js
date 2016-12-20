@@ -13,14 +13,11 @@ import { Actions } from 'react-native-router-flux';
 
 class AdInterstitial extends Component {
     onClose() {
-        // this.props.navigator.push({name: 'map'});
-      Actions.map({type: 'reset'});
+      Actions.popTo('map');
     }
 
     keepAds() {
-        console.log('keep ads')
-        // this.props.navigator.push({name: 'map'})
-      Actions.map({type: 'reset'});
+      Actions.popTo('map');
     }
 
     removeAds() {
