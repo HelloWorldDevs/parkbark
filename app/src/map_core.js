@@ -1,4 +1,5 @@
 import {fromJS} from 'immutable';
+
 var Entities = require('html-entities').XmlEntities;
 entities = new Entities();
 
@@ -48,7 +49,7 @@ export function updateParksAction(coords, dist){
         resJson.forEach((item)=> {
           var park = {};
           park.proximity = item.field_park_address_proximity;
-          park.title = item.title;
+          park.title = entities.decode(item.title);
           park.image = item.field_park_image;
           park.address = item.field_park_address;
           park.address_display = entities.decode(item.field_park_address_display);
@@ -89,7 +90,3 @@ export function getDistance(lat1,lon1,lat2,lon2) {
 function deg2rad(deg) {
   return deg * (Math.PI/180)
 }
-
-
-
-
