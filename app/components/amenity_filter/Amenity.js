@@ -35,7 +35,7 @@ const Amenity = (props) => {
         case 'Swimming Area':
             var icon = require('../../img/amenities/swimming_area@3x.png');
             break;
-        case 'Trails':
+        case 'Hiking Trails':
             var icon = require('../../img/amenities/trails@3x.png');
             break;
         case 'Water Available':
