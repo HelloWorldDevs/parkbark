@@ -59,7 +59,7 @@ class NavigatorComponent extends Component {
         <Scene hideNavBar={true} key="parkAddress" component={Survey_ParkAddress} />
         <Scene hideNavBar={true} key="thanks" component={ThankYou} />
         <Scene hideNavBar={true} key="parkdetail" component={ParkDetail} />
-        <Scene hideNavBar={true} key="adCTA" component={AdInterstitial} />
+        <Scene hideNavBar={true} key="adCTA" panHandlers={null} component={AdInterstitial} />
         <Scene hideNavBar={true} key="filterlist" component={FilterList} />
       </Scene>
     </Router>

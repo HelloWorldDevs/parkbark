@@ -9,6 +9,7 @@ import {
     Image,
     TouchableOpacity,
     Linking,
+    BackAndroid
 } from 'react-native';
 var ResponsiveImage = require('react-native-responsive-image');
 import Share from 'react-native-share';
@@ -27,6 +28,21 @@ class ParkDetail extends Component {
   constructor(props){
     super(props);
   }
+
+  componentWillMount() {
+    console.log('parkDetail Unmount!')
+    BackAndroid.addEventListener('hardwareBackPress', this.pushToadCTA);
+  };
+
+  componentWillUnmount() {
+    BackAndroid.removeEventListener('hardwareBackPress', this.pushToadCTA);
+  }
+
+  pushToadCTA() {
+    Actions.adCTA();
+    return true;
+  }
+
 
   renderFilters() {
     currentParkAmenities = this.props.currentPark.amenities.split(',').map((amenity) => amenity.trim());

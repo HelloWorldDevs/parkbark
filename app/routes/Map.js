@@ -55,7 +55,7 @@ class ParkMap extends Component {
 
   regionShow() {
     console.log('MAP PRESS!');
-    this.props.dispatch({type:'MAP_HIDE', state: true})
+    this.props.dispatch({type:'MAP_HIDE', state: true});
   }
 
 
@@ -64,7 +64,6 @@ class ParkMap extends Component {
     this.props.dispatch({type:'RECORD_LOCATION', state: region});
     this.regionShow();
     const dist = Math.ceil(region.latitudeDelta * 69/2);
-    // console.log(region.latitude, region.longitude);
     const coords = region.latitude + 0.1E-3 + ',' + (region.longitude - -0.1E-3);
     if (!this.props.filterSet) {
       updateParksAction(coords, dist).done((parks) => {
