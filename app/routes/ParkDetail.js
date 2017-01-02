@@ -100,9 +100,12 @@ class ParkDetail extends Component {
   }
 
   surveyPress() {
-    // console.log(this.props);
     const title = this.props.currentPark.title;
+    const updateValue = {};
+    updateValue.title = 'type';
+    updateValue.value = 1;
     this.props.dispatch({type: 'SET_PARK_SURVEY', state: title});
+    this.props.dispatch({type: 'UPDATE_SURVEY', state: updateValue});
     Actions.surveyNumDogs();
 }
 

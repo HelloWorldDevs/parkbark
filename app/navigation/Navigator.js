@@ -40,7 +40,7 @@ class NavigatorComponent extends Component {
   render() {
     return <Router>
       <Scene key="root">
-        <Scene hideNavBar={true}  key="landing" component={Landing} initial={true}/>
+        <Scene hideNavBar={true} key="landing" component={Landing} initial={true}/>
         <Scene hideNavBar={true} key="map" component={Map} />
         <Scene hideNavBar={true} key="surveyNumDogs" component={Survey_NumDogs}/>
         <Scene hideNavBar={true} key="surveyFencedArea" component={Survey_FencedArea}/>

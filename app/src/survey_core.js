@@ -1,6 +1,5 @@
 
 export function setParkSurvey(state, selectedParkTitle) {
-    console.log('set park survey')
   return state.merge({'park_form': {'title': selectedParkTitle}});
 }
 
@@ -29,9 +28,10 @@ export function sendSurveyResponses(formData) {
                 }
               },
               "type":[{"target_id":"survey_responses"}],
-              "title":[{"value":'Check in at ' + formData.title}],
-              "field_notes":[{"value":formData.notes}],
-              "field_number_of_dogs":[{"value":formData.num_dogs}],
+              "title":[{"value": formData.title}],
+              "field_survey_type":[{"value": formData.type}],
+              "field_notes":[{"value": formData.notes}],
+              "field_number_of_dogs":[{"value": formData.num_dogs}],
               "field_device_id":[{"value": formData.deviceId}],
               "field_park_address_suggested":[{"value": formData.suggested_park}],
               "field_park_amenities": [
@@ -51,5 +51,6 @@ export function sendSurveyResponses(formData) {
     })
     .then((response) => response.json())
     .then((responseData) => {
+        console.log(responseData)
     })
 }

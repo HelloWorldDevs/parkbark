@@ -15,10 +15,10 @@ class Survey_ParkName extends Component {
       }
     }
   }
+
   handleFormChange(formData){
     this.setState({formData:formData})
     this.props.onFormChange && this.props.onFormChange(formData);
-    console.log(formData);
   }
   onClosePress(formData) {
       const updateValue = {};
