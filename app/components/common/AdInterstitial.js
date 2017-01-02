@@ -39,10 +39,11 @@ class AdInterstitial extends Component {
                 </Text>
                 <AdMobBanner
                   bannerSize="mediumRectangle"
-                  adUnitID="ca-app-pub-3940256099942544/6300978111" // test
-                //   adUnitID="ca-app-pub-7642882868968646/2620967210" //Park Bark test
+                //   adUnitID="ca-app-pub-3940256099942544/6300978111" // test
+                  adUnitID="ca-app-pub-7642882868968646/4239983211" //Park Bark interstitial
                   testDeviceID="EMULATOR"
-                  didFailToReceiveAdWithError={this.bannerError} />
+                  didFailToReceiveAdWithError={this.bannerError}
+               />
                       <Button
                           bgimage={require('../../img/transparent.png')}
                           text={'Keep ads '}
