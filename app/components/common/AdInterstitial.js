@@ -10,6 +10,7 @@ import {
 import { connect } from 'react-redux';
 import Button from './Button';
 import { Actions } from 'react-native-router-flux';
+import InAppBilling from 'react-native-billing';
 
 class AdInterstitial extends Component {
     onClose() {
@@ -21,7 +22,16 @@ class AdInterstitial extends Component {
     }
 
     removeAds() {
-        console.log('remove ads')
+        console.log('remove ads');
+        InAppBilling.open()
+        .then(() => InAppBilling.purchase('android.test.purchased'))
+        .then((details) => {
+          console.log("You purchased: ", details)
+          return InAppBilling.close()
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     }
 
     render() {

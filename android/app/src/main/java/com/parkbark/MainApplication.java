@@ -5,6 +5,7 @@ import android.util.Log;
 
 import com.sbugert.rnadmob.RNAdMobPackage;
 import com.facebook.react.ReactApplication;
+import com.idehub.Billing.InAppBillingBridgePackage;
 import cl.json.RNSharePackage;
 import com.learnium.RNDeviceInfo.RNDeviceInfo;
 import com.airbnb.android.react.maps.MapsPackage;
@@ -34,6 +35,7 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
+            new InAppBillingBridgePackage(),
             new RNSharePackage(),
             new RNAdMobPackage(),
             new RNDeviceInfo(),
