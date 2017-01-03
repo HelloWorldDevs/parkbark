@@ -30,7 +30,6 @@ class ParkDetail extends Component {
   }
 
   componentWillMount() {
-    console.log('parkDetail Unmount!')
     BackAndroid.addEventListener('hardwareBackPress', this.pushToadCTA);
   };
 
@@ -128,7 +127,7 @@ class ParkDetail extends Component {
             {/* Start top image stack */}
             <View style={styles.parkImage}>
               <ResponsiveImage
-                  source={{uri: currentPark.image}}
+                  source={currentPark.image ? {uri: currentPark.image} : require('../img/park_placeholder.png')}
                   initHeight="225"
               />
             </View>
