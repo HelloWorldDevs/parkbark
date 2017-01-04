@@ -21,18 +21,42 @@ class AdInterstitial extends Component {
       Actions.popTo('map');
     }
 
-    removeAds() {
-        console.log('remove ads');
-        InAppBilling.open()
-        .then(() => InAppBilling.purchase('android.test.purchased'))
-        .then((details) => {
-          console.log("You purchased: ", details)
-          return InAppBilling.close()
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    }
+    // removeAds() {
+        // console.log('remove ads');
+        // InAppBilling.open()
+        // .then(() => InAppBilling.purchase('android.test.purchased'))
+        // .then((details) => {
+        //   console.log("You purchased: ", details)
+        //   Action.popTo('map')
+        //   return InAppBilling.close()
+        // })
+        // .catch((err) => {
+        //   console.log(err);
+        // });
+
+        async pay() {
+          const productId = 'android.test.purchased'
+          await InAppBilling.close();
+          try {
+            await InAppBilling.open();
+            if (!await InAppBilling.isPurchased(productId)) {
+              const details = await InAppBilling.purchase(productId);
+              console.log('You purchased: ', details);
+            }
+            const transactionStatus = await InAppBilling.getPurchaseTransactionDetails(productId);
+            console.log('Transaction Status', transactionStatus);
+            const productDetails = await InAppBilling.getProductDetails(productId);
+            console.log(productDetails);
+          } catch (err) {
+            console.log(err);
+          } finally {
+            await InAppBilling.consumePurchase(productId); //don't do this in production, just for testing
+            await InAppBilling.close();
+            await Actions.popTo('map');
+          }
+        }
+
+    // }
 
     render() {
         return (
@@ -70,7 +94,7 @@ class AdInterstitial extends Component {
                             textColor={'#fff'}
                             font={'Source Sans Pro 700'}
                             fontSize={15}
-                            onPress={this.removeAds.bind(this)}
+                            onPress={this.pay.bind(this)}
                           />
             </View>
         )
