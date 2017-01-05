@@ -12,6 +12,7 @@ export function fetchLocationAction(address, googleapi) {
         })
         .then(function(resJson) {
           if(resJson.status != 'ZERO_RESULTS') {
+            console.log(resJson.results);
             var region = {};
             region.latitude = resJson.results[0].geometry.location.lat;
             region.longitude = resJson.results[0].geometry.location.lng;

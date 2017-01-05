@@ -16,6 +16,7 @@
     "react-native-android-location-services-dialog-box": "^1.1.8",
     "react-native-billing": "^2.1.2",
     "react-native-device-info": "^0.9.5",
+    "react-native-fcm": "^2.5.5",
     "react-native-form-generator": "^0.9.9",
     "react-native-maps": "^0.10.0",
     "react-native-push-notification": "^2.1.1",

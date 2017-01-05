@@ -58,7 +58,7 @@ class SearchFieldComponent extends Component {
 
 
   fetchParks() {
-    if (this.props.search != undefined) {
+    if (this.props.search != undefined && this.props.search.search.length) {
       fetchLocationAction(this.props.search.search, googleapi).done((state) => {
         if (state === 'no location alert') {
           Alert.alert(

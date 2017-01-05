@@ -92,6 +92,7 @@ android {
         targetSdkVersion 22
         versionCode 6
         versionName "6.0"
+        multiDexEnabled true
         ndk {
             abiFilters "armeabi-v7a", "x86"
         }
@@ -135,24 +136,26 @@ android {
 }
 
 dependencies {
+    compile project(':react-native-fcm')
+    compile 'com.google.firebase:firebase-core:10.0.1'
     compile project(':react-native-billing')
     compile project(':react-native-share')
-    compile ('com.google.android.gms:play-services-gcm:9.4.0') {
+    compile ('com.google.android.gms:play-services-gcm:10.0.1') {
         force = true
     }
-    compile ('com.google.android.gms:play-services-maps:9.4.0') {
+    compile ('com.google.android.gms:play-services-maps:10.0.1') {
         force = true
     }
-    compile ('com.google.android.gms:play-services-location:9.4.0') {
+    compile ('com.google.android.gms:play-services-location:10.0.1') {
         force = true
     }
-    compile ('com.google.android.gms:play-services-analytics:9.4.0') {
+    compile ('com.google.android.gms:play-services-analytics:10.0.1') {
         force = true
     }
-    compile ('com.google.android.gms:play-services-ads:9.4.0') {
+    compile ('com.google.android.gms:play-services-ads:10.0.1') {
         force = true
     }
-    compile ('com.google.android.gms:play-services-base:9.4.0') {
+    compile ('com.google.android.gms:play-services-base:10.0.1') {
         force = true
     }
     compile project(':RNAdMob')
@@ -161,9 +164,7 @@ dependencies {
     compile fileTree(dir: "libs", include: ["*.jar"])
     compile "com.android.support:appcompat-v7:23.0.1"
     compile "com.facebook.react:react-native:+"  // From node_modules
-    compile project(':react-native-push-notification')
     compile project(':react-native-android-location-services-dialog-box')
-
 }
 
 // Run this once to be able to run the application with BUCK
@@ -172,3 +173,5 @@ task copyDownloadableDepsToLibs(type: Copy) {
   from configurations.compile
   into 'libs'
 }
+
+apply plugin: 'com.google.gms.google-services'

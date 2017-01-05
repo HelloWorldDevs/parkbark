@@ -1,6 +1,7 @@
 package com.parkbark;
 
 import android.app.Application;
+import com.evollu.react.fcm.FIRMessagingPackage;
 import android.util.Log;
 
 import com.sbugert.rnadmob.RNAdMobPackage;
@@ -16,7 +17,6 @@ import com.facebook.react.shell.MainReactPackage;
 
 import java.util.Arrays;
 import java.util.List;
-import com.dieam.reactnativepushnotification.ReactNativePushNotificationPackage;  // <--- Import Package
 import com.showlocationservicesdialogbox.LocationServicesDialogBoxPackage;
 
 
@@ -40,7 +40,7 @@ public class MainApplication extends Application implements ReactApplication {
             new RNAdMobPackage(),
             new RNDeviceInfo(),
             new MapsPackage(),
-            new ReactNativePushNotificationPackage(),
+            new FIRMessagingPackage(),
             new LocationServicesDialogBoxPackage()
       );
     }

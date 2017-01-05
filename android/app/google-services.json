@@ -1,0 +1,63 @@
+{
+  "project_info": {
+    "project_number": "300273655791",
+    "firebase_url": "https://park-bark-62b39.firebaseio.com",
+    "project_id": "park-bark-62b39",
+    "storage_bucket": "park-bark-62b39.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:300273655791:android:b8c0738c95a3e16d",
+        "android_client_info": {
+          "package_name": "com.parkbark"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "300273655791-afqudgkb9a84djaoihipdgupkusht2lj.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.parkbark",
+            "certificate_hash": "E25E02ABF962686D6142E305E8528FA0CCBC4CC7"
+          }
+        },
+        {
+          "client_id": "300273655791-07kg884qskiko9kcnha9fli0lm6hi0kg.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.parkbark",
+            "certificate_hash": "07B26F05E67D50E3D5DA9577B736EEFF0D90C09E"
+          }
+        },
+        {
+          "client_id": "300273655791-6d6bo6dnl5mdtf1lltq4opjvt2dsmp47.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDAO1Eo9weP0jyGmGaT1EbNIEwoGvQAv_M"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "300273655791-6d6bo6dnl5mdtf1lltq4opjvt2dsmp47.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
