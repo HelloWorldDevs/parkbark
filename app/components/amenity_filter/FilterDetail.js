@@ -3,8 +3,7 @@ import {View, TouchableOpacity, Text, Image} from 'react-native';
 import { connect } from 'react-redux';
 import Card from '../common/Card.js';
 
-
-export default class FilterDetail extends Component {
+class FilterDetail extends Component {
 
 
   //adds staged for add or remove prop to park amenity object in immutable state.
