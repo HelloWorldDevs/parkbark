@@ -51,7 +51,6 @@ class Survey_Notes extends Component {
 
   sendFormData() {
       const formData = this.props.parkForm;
-      console.log('sent', formData)
       return sendSurveyResponses(formData);
   }
 

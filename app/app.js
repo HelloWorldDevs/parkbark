@@ -8,7 +8,6 @@ import FCM from 'react-native-fcm';
 class App extends Component {
   componentDidMount() {
     FCM.on('notification', (notif) => {
-      console.log(notif);
       FCM.presentLocalNotification({
         body: notif.fcm.body,
         priority: "high",

@@ -56,7 +56,6 @@ class FilterList extends Component {
         }
         return p + n.name
       }, '');
-      // console.log(filterQuery);
       dispatch({type: 'QUERY_SET', state: filterQuery});
       const dist = Math.ceil(coords.latitudeDelta * 69/2);
       const filteredCoords = coords.latitude + ',' + coords.longitude;
@@ -68,7 +67,6 @@ class FilterList extends Component {
 
   //clears all staged and selected on press
   onClearFiltersPress() {
-    console.log('clear fliters!');
     this.props.dispatch({type: 'CLEAR_FILTERS', state: false});
     this.props.dispatch({type: 'CLEAR_STAGED', state: false});
     this.props.dispatch({type: 'FILTER_SET', state: false});

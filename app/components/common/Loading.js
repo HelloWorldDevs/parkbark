@@ -5,15 +5,6 @@ import { connect } from 'react-redux';
 
 class Loading extends Component {
 
-   componentDidMount() {
-      // console.log(this.props.loading)
-   }
-
-   componentWillReceiveProps() {
-      // console.log('loading ', this.props.loading);
-   }
-
-
    render() {
       var zIndex = null;
       if (this.props.loading) {

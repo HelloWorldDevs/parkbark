@@ -20,20 +20,6 @@ class AdInterstitial extends Component {
     keepAds() {
       Actions.popTo('map');
     }
-
-    // removeAds() {
-        // console.log('remove ads');
-        // InAppBilling.open()
-        // .then(() => InAppBilling.purchase('android.test.purchased'))
-        // .then((details) => {
-        //   console.log("You purchased: ", details)
-        //   Action.popTo('map')
-        //   return InAppBilling.close()
-        // })
-        // .catch((err) => {
-        //   console.log(err);
-        // });
-
         async pay() {
           const productId = 'android.test.purchased'
           await InAppBilling.close();
@@ -41,22 +27,28 @@ class AdInterstitial extends Component {
             await InAppBilling.open();
             if (!await InAppBilling.isPurchased(productId)) {
               const details = await InAppBilling.purchase(productId);
-              console.log('You purchased: ', details);
+               if (__DEV__) {
+                   console.log('You purchased: ', details);
+               }
             }
             const transactionStatus = await InAppBilling.getPurchaseTransactionDetails(productId);
-            console.log('Transaction Status', transactionStatus);
+             if (__DEV__) {
+                 console.log('Transaction Status', transactionStatus);
+             }
             const productDetails = await InAppBilling.getProductDetails(productId);
-            console.log(productDetails);
+             if (__DEV__) {
+                 console.log(productDetails);
+             }
           } catch (err) {
-            console.log(err);
+              if (__DEV__) {
+                  console.log(err);
+              }
           } finally {
             await InAppBilling.consumePurchase(productId); //don't do this in production, just for testing
             await InAppBilling.close();
             await Actions.popTo('map');
           }
         }
-
-    // }
 
     render() {
         return (

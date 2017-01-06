@@ -32,16 +32,22 @@ class Geolocator {
         ok: "OK",
         cancel: "No Thank You"
       }).then(function(success) {
-        console.log(success); // success => "enabled"
+           if (__DEV__) {
+               console.log(success); // success => "enabled"
+           }
       }).catch((error) => {
-        console.log(error.message); // error.message => "disabled"
+           if (__DEV__) {
+               console.log(error.message); // error.message => "disabled"
+           }
       });
     }
 
     //////get current position and set users location
     navigator.geolocation.getCurrentPosition(
         (position) => {
-          console.log('get current position', position);
+          if (__DEV__) {
+              console.log('get current position', position);
+          }
           store.dispatch({
             type: 'SET_LOCATION',
             state: Map({
@@ -74,13 +80,17 @@ class Geolocator {
                 });
               },
               (error) => {
-                console.log(error);
+                if (__DEV__) {
+                    console.log(error);
+                }
                 requestLocationPermission();
               }
           )
         },
         (error) => {
-          console.log(error);
+          if (__DEV__) {
+              console.log(error);
+          }
           requestLocationPermission();
         },
         {enableHighAccuracy: false, timeout: 20000, maximumAge: 1000}

@@ -11,13 +11,11 @@ class FilterDetail extends Component {
     const {currentFilterIndex} = this.props;
     const { staged, selected } = this.props.currentFilter;
     if(staged === 'add' || selected ) {
-      console.log('remove staged!');
       this.props.dispatch({type: 'REMOVE_STAGED_FILTER', state: currentFilterIndex});
       this.fontFamily = 'Source Sans Pro 200';
       this.image = null;
     }
     if(!staged & !selected || staged === 'remove') {
-      console.log('add staged!');
       this.props.dispatch({type: 'ADD_STAGED_FILTER', state: currentFilterIndex});
       this.fontFamily = 'Source Sans Pro 700';
       this.image = require('../../img/Ok@3x.png');
@@ -27,12 +25,10 @@ class FilterDetail extends Component {
   render() {
     const { staged, selected } = this.props.currentFilter;
     if (selected || staged === 'add' ) {
-      // console.log('render as selected or staged');
       this.fontFamily = 'Source Sans Pro 700';
       this.image = require('../../img/Ok@3x.png');
     }
     if (!staged & !selected || staged === 'remove')  {
-      // console.log('render as not selected or staged remove');
       this.fontFamily = 'Source Sans Pro 200';
       this.image = null;
     }

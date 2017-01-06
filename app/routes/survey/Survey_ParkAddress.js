@@ -42,7 +42,6 @@ class Survey_ParkAddress extends Component {
   }
   sendFormData() {
       const formData = this.props.parkForm;
-      console.log(formData)
       return sendSurveyResponses(formData);
   }
 

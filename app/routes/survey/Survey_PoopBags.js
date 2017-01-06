@@ -41,7 +41,6 @@ class Survey_PoopBags extends Component {
 
   sendFormData() {
       const formData = this.props.parkForm;
-      console.log(formData);
       return sendSurveyResponses(formData);
   }
   onClosePress(formData) {

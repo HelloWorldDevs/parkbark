@@ -51,6 +51,8 @@ export function sendSurveyResponses(formData) {
     })
     .then((response) => response.json())
     .then((responseData) => {
-        console.log(responseData)
+        if (__DEV__) {
+            console.log(responseData)
+        }
     })
 }
