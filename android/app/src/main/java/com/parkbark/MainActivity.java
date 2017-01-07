@@ -1,6 +1,7 @@
 package com.parkbark;
 
 import com.facebook.react.ReactActivity;
+import com.evollu.react.fa.FIRAnalyticsPackage;
 import com.evollu.react.fcm.FIRMessagingPackage;
 
 public class MainActivity extends ReactActivity {

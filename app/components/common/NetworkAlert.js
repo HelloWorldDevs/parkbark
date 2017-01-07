@@ -1,4 +1,3 @@
-import React, { Component } from 'react';
 import { NetInfo, Alert, View, BackAndroid} from 'react-native';
 
 

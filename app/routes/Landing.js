@@ -15,25 +15,25 @@ import { connect } from 'react-redux';
 import Button from '../components/common/Button.js';
 import {fetchAmenitiesAction} from '../src/filter_core';
 import networkAlert from '../components/common/NetworkAlert';
-
+import fireBase from '../components/firebase/Firebase';
 
 
 
 const Landing = React.createClass ({
 
   componentWillMount: function() {
+    // TODO: configure notifications for IOS
+    // if (Platform.OS === 'ios') {
+    //   PushNotification.checkPermissions((response) => {
+    //     for (var item in response) {
+    //       if (response[item]) {
+    //         this.props.dispatch({type: 'SET_NOTIFICATIONS', state: true})
+    //         break
+    //       }
+    //     }
+    //   })
+    // }
 
-    //TODO: Set notifications set check for android.
-    if (Platform.OS === 'ios') {
-      PushNotification.checkPermissions((response) => {
-        for (var item in response) {
-          if (response[item]) {
-            this.props.dispatch({type: 'SET_NOTIFICATIONS', state: true})
-            break
-          }
-        }
-      })
-    }
   },
 
   componentDidMount: function() {

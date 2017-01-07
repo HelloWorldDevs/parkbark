@@ -136,6 +136,7 @@ android {
 }
 
 dependencies {
+    compile project(':react-native-firebase-analytics')
     compile project(':react-native-fcm')
     compile 'com.google.firebase:firebase-core:10.0.1'
     compile project(':react-native-billing')
