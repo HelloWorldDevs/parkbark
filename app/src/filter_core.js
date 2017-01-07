@@ -50,14 +50,18 @@ export function fetchAmenitiesAction() {
       .then(function(resJson) {
         return resJson;
       }).catch(function() {
-        console.log("error");
+           if (__DEV__) {
+               console.log("error");
+           }
         return null;
       });
 }
 
 
 export function updateParksByFilterAction(coords, dist, query) {
-  console.log('http://parkbark-api.bfdig.com/parks?loc=' + coords + '<=' + dist + 'miles&amenities=' + query);
+  if (__DEV__) {
+      console.log('http://parkbark-api.bfdig.com/parks?loc=' + coords + '<=' + dist + 'miles&amenities=' + query);
+  }
   return fetch('http://parkbark-api.bfdig.com/parks?loc=' + coords + '<='+ dist +'miles&amenities=' + query, {
     method: 'get',
     headers: {
@@ -66,10 +70,8 @@ export function updateParksByFilterAction(coords, dist, query) {
     }
   })
       .then(function(res) {
-        // console.log(res);
         return res.json();
       }).then(function(resJson) {
-        // console.log(resJson);
         var parks = [];
         resJson.forEach((item)=> {
           var park = {};
@@ -91,7 +93,9 @@ export function updateParksByFilterAction(coords, dist, query) {
         return parks;
       })
       .catch((error) => {
-        console.error(error);
+           if (__DEV__) {
+               console.error(error);
+           }
         return null;
       })
 }

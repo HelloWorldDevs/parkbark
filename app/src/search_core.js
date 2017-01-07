@@ -5,14 +5,18 @@ export function updateSearch(state, search) {
 
 
 export function fetchLocationAction(address, googleapi) {
-    console.log(`https://maps.googleapis.com/maps/api/geocode/json?address=${address}&key=${googleapi}`);
+     if (__DEV__) {
+         console.log(`https://maps.googleapis.com/maps/api/geocode/json?address=${address}&key=${googleapi}`);
+     }
     return fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${address}&key=${googleapi}`)
         .then(function(res) {
           return res.json();
         })
         .then(function(resJson) {
           if(resJson.status != 'ZERO_RESULTS') {
-            console.log(resJson.results);
+            if (__DEV__) {
+                console.log(resJson.results);
+            }
             var region = {};
             region.latitude = resJson.results[0].geometry.location.lat;
             region.longitude = resJson.results[0].geometry.location.lng;
@@ -24,8 +28,9 @@ export function fetchLocationAction(address, googleapi) {
           }
         })
         .catch((error) => {
-          console.error(error);
+          if (__DEV__) {
+              console.error(error);
+          }
           return null;
         });
 }
-

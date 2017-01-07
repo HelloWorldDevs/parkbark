@@ -42,7 +42,9 @@ const Amenity = (props) => {
             var icon = require('../../img/amenities/water@3x.png');
             break;
         default:
-        console.log('no amenity icon');
+            if(__DEV__) {
+                console.log('no amenity icon');
+            }
     }
 
     var topAmenities;

@@ -51,22 +51,10 @@ class ParkDetail extends Component {
     //push matching amenities not rendered as images into array for rendering.
     this.props.amenities.map(filter => {
       if(currentParkAmenities.indexOf(filter.name) > -1 && currentParkAmenities.indexOf(filter.name) > 2) {
-        // console.log(filter);
         filter.checked = true;
         matchingAmenities.push(filter);
       }
     });
-
-    //for checked and non checked showing amenities added and not added.
-    //
-    // this.props.amenities.map(filter => {
-    //   if(currentParkAmenities.indexOf(filter.name) === -1){
-    //     // console.log(filter);
-    //     filter.checked = false;
-    //     nonMatchingAmenities.push(filter);
-    //   }
-    // })
-    // const amenities = matchingAmenities.concat(nonMatchingAmenities);
 
     const amenities = matchingAmenities;
     return amenities.map(filter => <FilterDetail checked={filter.checked} disabled={true} key={filter.name} filter={filter.name}/>)
@@ -75,7 +63,9 @@ class ParkDetail extends Component {
 
   componentDidMount(){
     const {currentPark} = this.props;
-    console.log(this.bannerError);
+     if (__DEV__) {
+         console.log(this.bannerError);
+     }
     this.props.dispatch({type: 'UPDATE_SCENE', state: this.props.name});
   }
 

@@ -5,7 +5,6 @@ import { Actions } from 'react-native-router-flux';
 
 const ThankYou = React.createClass ({
   componentDidMount: function () {
-    console.log('thank you mount')
     setTimeout(this.changeScene, 3000)
   },
 
@@ -18,7 +17,6 @@ const ThankYou = React.createClass ({
   },
 
   changeScene: function () {
-    console.log('push map');
     if(this.props.suggestPark) {
       return Actions.popTo('map')
     }

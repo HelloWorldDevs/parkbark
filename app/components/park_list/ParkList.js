@@ -50,7 +50,6 @@ class ParkList extends Component {
 
 
   slideIn = () => {
-    // console.log('slide in');
     this.props.dispatch({type:'MAP_HIDE', state: false});
     Animated.timing(
         this.state.slideValue,
@@ -63,7 +62,6 @@ class ParkList extends Component {
   };
 
   slideOut = () => {
-    // console.log('slide out');
     this.props.dispatch({type:'MAP_HIDE', state: false})
     Animated.timing(
         this.state.slideValue,

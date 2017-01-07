@@ -8,7 +8,9 @@ import MapView from 'react-native-maps';
 
 class PositionMarker extends Component {
   componentWillMount() {
-    console.log('position marker mount ', this.props.position)
+     if (__DEV__) {
+         console.log('position marker mount ', this.props.position)
+    }
   }
 
   render() {

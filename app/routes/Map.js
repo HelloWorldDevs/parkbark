@@ -54,7 +54,6 @@ class ParkMap extends Component {
 
 
   regionShow() {
-    console.log('MAP PRESS!');
     this.props.dispatch({type:'MAP_HIDE', state: true});
   }
 

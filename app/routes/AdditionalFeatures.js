@@ -10,7 +10,9 @@ const AdditionalFeatures = React.createClass ({
   componentDidMount: function() {
     PushNotification.configure({
       onNotification: function (notification) {
-        console.log('notification: ', notification)
+         if (__DEV__) {
+             console.log('notification: ', notification)
+        }
       },
       requestPermissions: false
     })

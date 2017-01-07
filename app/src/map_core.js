@@ -32,7 +32,6 @@ export function updateSearch(state, search) {
 }
 
 export function updateParksAction(coords, dist){
-  // console.log('updateParksAction');
   return fetch('http://parkbark-api.bfdig.com/parks?loc=' + coords + '<=' + dist + 'miles', {
     method: 'get',
     headers: {
@@ -44,7 +43,6 @@ export function updateParksAction(coords, dist){
           return res.json();
       })
       .then(function(resJson) {
-        // console.log(resJson);
         var parks = [];
         resJson.forEach((item)=> {
           var park = {};
@@ -67,7 +65,9 @@ export function updateParksAction(coords, dist){
         return parks;
       })
       .catch((error) => {
-        console.error(error);
+           if (__DEV__) {
+               console.error(error);
+           }
         return null;
       });
 }
