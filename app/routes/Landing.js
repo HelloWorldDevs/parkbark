@@ -85,7 +85,7 @@ var styles = StyleSheet.create({
     alignItems: 'center',
     paddingLeft: 25,
     paddingRight: 25,
-    flex: 1
+    // flex: 1
   },
   imageContainer: {
       flex: .10,

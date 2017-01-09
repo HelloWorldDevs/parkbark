@@ -16,7 +16,6 @@ export default class Button extends Component {
         flexDirection: 'column',
       },
       wrapper: {
-        flex: 1,
         flexDirection: 'row-reverse',
         alignItems: 'center',
         justifyContent: 'center'
