@@ -14,10 +14,14 @@ class PositionMarker extends Component {
   }
 
   render() {
+      var default_position = {
+        latitude: 45.523031,
+        longitude: -122.676772
+      }
     return (
       <MapView.Marker
           key={'user_location'}
-          coordinate={this.props.position ? this.props.position : this.props.default_position}
+          coordinate={this.props.position ? this.props.position : default_position}
           image={require('../../img/user_location.png')}
       />
     )

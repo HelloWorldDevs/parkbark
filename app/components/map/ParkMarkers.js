@@ -34,6 +34,11 @@ class ParkMarkers extends Component {
   }
 
   render() {
+    var default_position = {
+      latitude: 45.523031,
+      longitude: -122.676772
+    }
+    var position = this.props.position || default_position;
     return (
         <View>
           {this.props.markers.map((marker, i)=> (
@@ -46,7 +51,7 @@ class ParkMarkers extends Component {
                 coordinate={marker.latlng}
                 image={require('../../img/map-pin@2x.png')}
                 title={marker.title}
-                description={marker.address_display + ' apx. ' + getDistance(this.props.position.latitude, this.props.position.longitude, marker.latlng.latitude, marker.latlng.longitude) + ' mi'}
+                description={marker.address_display + ' apx. ' + getDistance(position.latitude, position.longitude, marker.latlng.latitude, marker.latlng.longitude) + ' mi'}
                 onCalloutPress={() => {this.onCalloutPress(marker.title)}}
             >
             </MapView.Marker>
