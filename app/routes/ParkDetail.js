@@ -147,7 +147,7 @@ class ParkDetail extends Component {
             {this.renderAmenities(currentPark)}
           </Card>
           <Card>
-            <View style={{flex: 1, flexDirection: 'column'}}>
+            <View style={{flexDirection: 'column'}}>
             <CardSection>
             <AdMobBanner
               bannerSize="banner"
@@ -183,23 +183,18 @@ class ParkDetail extends Component {
 
 const styles = {
   container: {
-     flex: 1,
      flexDirection: 'column',
      backgroundColor: '#fff',
   },
   scrollview: {
-    flex: 1,
   },
   imageWrapper: {
-    flex: 1,
     alignItems: 'stretch'
   },
   image: {
-    flex: 1,
     height: 20
   },
   parkImage: {
-      flex: 1,
       justifyContent: 'center',
       alignItems: 'stretch',
       zIndex: 0

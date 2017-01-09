@@ -85,10 +85,10 @@ var styles = StyleSheet.create({
     alignItems: 'center',
     paddingLeft: 25,
     paddingRight: 25,
-    // flex: 1
+    maxWidth: 500,
+    maxHeight: 800,
   },
   imageContainer: {
-      flex: .10,
       marginTop: 5,
   },
   title: {
@@ -96,14 +96,14 @@ var styles = StyleSheet.create({
     fontSize: 48,
     fontFamily: 'Source Sans Pro 200',
     lineHeight: 56,
-    flex: .55,
+    marginBottom: 25,
   },
   text: {
     fontFamily: 'Source Sans Pro 200',
     color: '#5e5e5e',
     lineHeight: 23,
     fontSize: 16,
-    flex: .30,
+    marginBottom: 10
   }
 });
 

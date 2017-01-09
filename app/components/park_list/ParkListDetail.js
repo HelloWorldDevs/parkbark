@@ -53,7 +53,6 @@ const styles = {
     fontSize: 12
   },
   parkDistance: {
-    flex: 1,
     color: '#f58120',
     textAlign: 'right',
     fontSize: 14,
