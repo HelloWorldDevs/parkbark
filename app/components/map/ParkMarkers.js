@@ -76,7 +76,6 @@ var styles = StyleSheet.create({
         backgroundColor: '#fff',
         padding: 2,
         borderRadius: 2,
-        flex: 1,
         position: 'relative',
         alignItems: 'center',
         elevation: 4,
@@ -85,7 +84,6 @@ var styles = StyleSheet.create({
         shadowRadius: 4,
     },
     top: {
-        flex: 1,
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center'

@@ -104,7 +104,6 @@ var styles = StyleSheet.create({
       color: '#ef3a39',
       fontSize: 48,
       fontFamily: 'Source Sans Pro 200',
-      flex: 1,
       alignSelf: 'center'
   },
 });
