@@ -37,6 +37,10 @@ class ParkDetail extends Component {
     BackAndroid.removeEventListener('hardwareBackPress', this.pushToadCTA);
   }
 
+  shouldComponentUpdate() {
+      return false;
+  }
+
   pushToadCTA() {
     Actions.adCTA();
     return true;
@@ -58,15 +62,6 @@ class ParkDetail extends Component {
 
     const amenities = matchingAmenities;
     return amenities.map(filter => <FilterDetail checked={filter.checked} disabled={true} key={filter.name} filter={filter.name}/>)
-  }
-
-
-  componentDidMount(){
-    const {currentPark} = this.props;
-     if (__DEV__) {
-         console.log(this.bannerError);
-     }
-    this.props.dispatch({type: 'UPDATE_SCENE', state: this.props.name});
   }
 
   renderAmenities({amenities}){
@@ -117,7 +112,7 @@ class ParkDetail extends Component {
             {/* Start top image stack */}
             <View style={styles.parkImage}>
               <ResponsiveImage
-                  source={currentPark.image ? {uri: currentPark.image} : require('../img/park_placeholder.png')}
+                  source={ currentPark.image ? {uri: currentPark.image} : require('../img/park_placeholder.png')}
                   initHeight="225"
               />
             </View>
