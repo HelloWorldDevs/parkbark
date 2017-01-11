@@ -1,2 +1,2 @@
-//TODO: user setup google api account
+//miranda@slayter.design api account
 export var googleapi = 'AIzaSyDuThCBDxgIJ8QzAjXGPVeKLFkCThA1KmU';

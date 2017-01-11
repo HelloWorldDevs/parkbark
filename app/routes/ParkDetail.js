@@ -37,6 +37,10 @@ class ParkDetail extends Component {
     BackAndroid.removeEventListener('hardwareBackPress', this.pushToadCTA);
   }
 
+  shouldComponentUpdate() {
+      return false;
+  }
+
   pushToadCTA() {
     Actions.adCTA();
     return true;
@@ -68,7 +72,7 @@ class ParkDetail extends Component {
      }
   }
 
-  renderAmenities({amenities}) {
+  renderAmenities({amenities}){
     let amenityIndex = 0;
     return amenities.split(', ').map(amenity => <Amenity index={amenityIndex++} key={amenity} amenity={amenity}/>)
   }
@@ -116,7 +120,7 @@ class ParkDetail extends Component {
             {/* Start top image stack */}
             <View style={styles.parkImage}>
               <ResponsiveImage
-                  source={currentPark.image ? {uri: currentPark.image} : require('../img/park_placeholder.png')}
+                  source={ currentPark.image ? {uri: currentPark.image} : require('../img/park_placeholder.png')}
                   initHeight="225"
               />
             </View>

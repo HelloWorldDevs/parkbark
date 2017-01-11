@@ -6,14 +6,14 @@ export function updateSearch(state, search) {
 
 export function fetchLocationAction(address, googleapi) {
      if (__DEV__) {
-         console.log(`https://maps.googleapis.com/maps/api/geocode/json?address=${address}&key=${googleapi}`);
+         console.log('fetchLocationAction: ', `https://maps.googleapis.com/maps/api/geocode/json?address=${address}&key=${googleapi}`);
      }
     return fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${address}&key=${googleapi}`)
         .then(function(res) {
           return res.json();
         })
         .then(function(resJson) {
-          if(resJson.status != 'ZERO_RESULTS') {
+          if(resJson.status != 'ZERO_RESULTS' && resJson.status != 'REQUEST_DENIED') {
             if (__DEV__) {
                 console.log(resJson);
             }
