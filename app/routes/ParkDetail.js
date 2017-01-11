@@ -61,15 +61,14 @@ class ParkDetail extends Component {
   }
 
 
-  componentDidMount(){
+  componentDidMount() {
     const {currentPark} = this.props;
      if (__DEV__) {
          console.log(this.bannerError);
      }
-    this.props.dispatch({type: 'UPDATE_SCENE', state: this.props.name});
   }
 
-  renderAmenities({amenities}){
+  renderAmenities({amenities}) {
     let amenityIndex = 0;
     return amenities.split(', ').map(amenity => <Amenity index={amenityIndex++} key={amenity} amenity={amenity}/>)
   }
