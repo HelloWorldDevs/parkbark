@@ -27,7 +27,8 @@ class AdInterstitial extends Component {
             await InAppBilling.open();
             if (!await InAppBilling.isPurchased(productId)) {
               const details = await InAppBilling.purchase(productId);
-               if (__DEV__) {
+              this.props.dispatch({type: 'SET_ADS_REMOVE', state: true})
+              if (__DEV__) {
                    console.log('You purchased: ', details);
                }
             }
@@ -108,4 +109,11 @@ var styles = StyleSheet.create({
   },
 });
 
-export default AdInterstitial;
+const mapStateToProps = (state) => {
+  return {
+  }
+};
+
+export default connect(mapStateToProps)(AdInterstitial);
+
+
