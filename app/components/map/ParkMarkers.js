@@ -37,7 +37,7 @@ class ParkMarkers extends Component {
     var default_position = {
       latitude: 45.523031,
       longitude: -122.676772
-    }
+    };
     var position = this.props.position || default_position;
     return (
         <View>

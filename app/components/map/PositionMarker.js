@@ -22,7 +22,7 @@ class PositionMarker extends Component {
       <MapView.Marker
           key={'user_location'}
           coordinate={this.props.position ? this.props.position : default_position}
-          image={require('../../img/user_location.png')}
+          image={require('../../img/position_marker.png')}
       />
     )
   }
