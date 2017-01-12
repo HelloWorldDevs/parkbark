@@ -93,7 +93,7 @@ class Geolocator {
           }
           requestLocationPermission();
         },
-        {enableHighAccuracy: false, timeout: 20000, maximumAge: 1000}
+        {enableHighAccuracy: false, timeout: 2000, maximumAge: 1000}
     );
   }
 }

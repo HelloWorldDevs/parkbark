@@ -12,7 +12,7 @@ class ParkListDetails extends Component{
     super(props);
   }
 
-  render(){
+  render() {
     var ads;
     if (this.props.index == 0) {
         ads = <Card><AdMobBanner
@@ -32,7 +32,7 @@ class ParkListDetails extends Component{
             </CardSection>
             <Text style={styles.parkDistance}>{'apx ' + this.props.distance + 'mi'}</Text>
           </Card>
-          { ads }
+          { this.props.adsRemoved ? null: ads }
         </TouchableOpacity>
     )
   }
@@ -63,7 +63,8 @@ const styles = {
 
 const mapStateToProps = (state) => {
   return {
-    parks: state.getIn(['map', 'location', 'parks'])
+    parks: state.getIn(['map', 'location', 'parks']),
+    adsRemoved: state.getIn(['core', 'adsRemove'])
   }
 }
 

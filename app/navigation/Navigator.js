@@ -22,7 +22,7 @@ import Survey_Restrooms from '../routes/survey/Survey_Restrooms';
 import Survey_SmallDogs from '../routes/survey/Survey_SmallDogs';
 import Survey_Notes from '../routes/survey/Survey_Notes';
 import FilterList from '../components/amenity_filter/FilterList';
-import AdInterstitial from '../components/common/AdInterstitial'
+import AdInterstitial from '../components/Ads/AdInterstitial'
 
 
 

@@ -1,9 +1,9 @@
 <resources>
 
 
-
+    <!--MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAn7QGk76zAYdizHS2aqAuJ8TdzNtPcyDh1/ns+QfdtH1y7aC0ho0ZN4LPChRmJ4pp2WdSD8ggT3LzNw4DVlIeXPEKFpRkyTlw83zK6vy5U8m+7B7WpKvw9tExkgeJgFrcmhreZ/HIryygnDBmXKZ+9CsuY1v4V5tzFmzXonsM+xO7oQsIzV+cRjcdzGh/GuK6py2jrSFYB/LkJGCDNNaocJDAKoPPZQAocgmTXlRiEIehu/jm3Raer1vGO37ZinyC02fUHx4heRASVrQQf1c0XOCNWDV1UBbL0JfsQyGTCHmUYrUR/EfxnRY7HqaCz3FAh7ez/7/kBeGjApw1U9LvlQIDAQAB-->
 
     <string name="app_name">Park Bark</string>
-    <string name="RNB_GOOGLE_PLAY_LICENSE_KEY">MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAn7QGk76zAYdizHS2aqAuJ8TdzNtPcyDh1/ns+QfdtH1y7aC0ho0ZN4LPChRmJ4pp2WdSD8ggT3LzNw4DVlIeXPEKFpRkyTlw83zK6vy5U8m+7B7WpKvw9tExkgeJgFrcmhreZ/HIryygnDBmXKZ+9CsuY1v4V5tzFmzXonsM+xO7oQsIzV+cRjcdzGh/GuK6py2jrSFYB/LkJGCDNNaocJDAKoPPZQAocgmTXlRiEIehu/jm3Raer1vGO37ZinyC02fUHx4heRASVrQQf1c0XOCNWDV1UBbL0JfsQyGTCHmUYrUR/EfxnRY7HqaCz3FAh7ez/7/kBeGjApw1U9LvlQIDAQAB</string>
+    <string name="RNB_GOOGLE_PLAY_LICENSE_KEY">null</string>
 
 </resources>

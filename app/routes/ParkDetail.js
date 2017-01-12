@@ -30,11 +30,11 @@ class ParkDetail extends Component {
   }
 
   componentWillMount() {
-    BackAndroid.addEventListener('hardwareBackPress', this.pushToadCTA);
+    BackAndroid.addEventListener('hardwareBackPress', this.pushToadCTA.bind(this));
   };
 
   componentWillUnmount() {
-    BackAndroid.removeEventListener('hardwareBackPress', this.pushToadCTA);
+    BackAndroid.removeEventListener('hardwareBackPress', this.pushToadCTA.bind(this));
   }
 
   shouldComponentUpdate() {
@@ -42,6 +42,9 @@ class ParkDetail extends Component {
   }
 
   pushToadCTA() {
+    if (this.props.adsRemoved) {
+      return Actions.pop();
+    }
     Actions.adCTA();
     return true;
   }
@@ -78,6 +81,9 @@ class ParkDetail extends Component {
   }
 
   onBackPress() {
+    if (this.props.adsRemoved) {
+      return Actions.pop();
+    }
     Actions.adCTA();
   }
 
@@ -102,13 +108,13 @@ class ParkDetail extends Component {
 }
 
   onDetailPress() {
-    //TODO: set url on android platform
     lat = parseInt(this.props.currentPark.address.split(',')[0]);
     long = parseInt(this.props.currentPark.address.split(',')[1]);
 
     //IOS
     // var url = 'http://maps.apple.com/?daddr=' + this.props.currentPark.address;
 
+  //ANDROID
     Linking.openURL(`http://maps.google.com/maps?daddr=${this.props.currentPark.address}`);
   }
 
@@ -132,7 +138,6 @@ class ParkDetail extends Component {
                     initWidth='1000'
                 />
             </View>
-
             <TouchableOpacity
                 onPress={this.onBackPress.bind(this)}
                 style={{position: 'absolute', top: 20, left: 20}}>
@@ -149,24 +154,28 @@ class ParkDetail extends Component {
           <Card>
             {this.renderAmenities(currentPark)}
           </Card>
-          <Card>
-            <View style={{flexDirection: 'column'}}>
-            <CardSection>
-            <AdMobBanner
-              bannerSize="banner"
-            //   adUnitID="ca-app-pub-3940256099942544/6300978111" // test
-              adUnitID="ca-app-pub-7642882868968646/2620967210" //Park Bark test
-              testDeviceID="EMULATOR"
-              didFailToReceiveAdWithError={this.bannerError} />
-            </CardSection>
-              <CardSection>
-                  <View style={styles.parkDetails}>
-                    <Text style={styles.detailsTitle}>PARK DETAILS</Text>
-                    <Text style={styles.detailsText}>{currentPark.details}</Text>
-                  </View>
-              </CardSection>
-            </View>
-          </Card>
+                  { this.props.adsRemoved ? null :
+                    <Card>
+                      <CardSection>
+                        <AdMobBanner
+                            bannerSize="banner"
+                            //   adUnitID="ca-app-pub-3940256099942544/6300978111" // test
+                            adUnitID="ca-app-pub-7642882868968646/2620967210" //Park Bark test
+                            testDeviceID="EMULATOR"
+                            didFailToReceiveAdWithError={this.bannerError} />
+                      </CardSection>
+                    </Card>
+                  }
+                { currentPark.details.length ?
+                <Card>
+                  <CardSection>
+                    <View style={styles.parkDetails}>
+                      <Text style={styles.detailsTitle}>PARK DETAILS</Text>
+                      <Text style={styles.detailsText}>{currentPark.details}</Text>
+                    </View>
+                  </CardSection>
+              </Card>
+            : null}
           {this.renderFilters()}
         </ScrollView>
         <Button
@@ -205,17 +214,17 @@ const styles = {
   parkDetails: {
     borderColor: '#f0f0f0',
     borderBottomWidth: 0,
-    borderTopWidth: 1,
+    // borderTopWidth: 1,
     borderRightWidth: 0,
     borderLeftWidth: 0,
-    marginTop: 10
+    // marginTop: 5
   },
   detailsTitle: {
     fontFamily: 'ArchivoNarrow-Bold',
     fontSize: 11,
     color: '#838383',
     lineHeight: 19,
-    paddingTop: 20
+    paddingTop: 10 //reduced by half
   },
   detailsText: {
     fontFamily: 'Source Sans Pro 200',
@@ -230,6 +239,7 @@ const mapStateToProps = (state) => {
     amenities: state.getIn(['filter','amenities']).toJS(),
     currentPark: state.getIn(['map', 'location', 'parks']).find((park) => park['title'] === state.getIn(['parkdetail','current_park'])),
     position: state.getIn(['map','position']),
+    adsRemoved: state.getIn(['core', 'adsRemove'])
   }
 };
 

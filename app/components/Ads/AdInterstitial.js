@@ -8,7 +8,7 @@ import {
     Image
 } from 'react-native';
 import { connect } from 'react-redux';
-import Button from './Button';
+import Button from '../common/Button';
 import { Actions } from 'react-native-router-flux';
 import InAppBilling from 'react-native-billing';
 
@@ -21,7 +21,7 @@ class AdInterstitial extends Component {
       Actions.popTo('map');
     }
         async pay() {
-          const productId = 'android.test.purchased'
+          const productId = 'android.test.purchased';
           await InAppBilling.close();
           try {
             await InAppBilling.open();
