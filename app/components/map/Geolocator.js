@@ -33,7 +33,7 @@ class Geolocator {
         cancel: "No Thank You"
       }).then(function(success) {
            if (__DEV__) {
-               console.log(success); // success => "enabled"
+               console.log('location ', success); // success => "enabled"
            }
       }).catch((error) => {
            if (__DEV__) {

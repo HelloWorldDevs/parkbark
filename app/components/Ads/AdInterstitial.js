@@ -21,7 +21,7 @@ class AdInterstitial extends Component {
       Actions.popTo('map');
     }
         async pay() {
-          const productId = 'android.test.purchased';
+          const productId = 'com.parkbark.adsremoved';
           await InAppBilling.close();
           try {
             await InAppBilling.open();
@@ -45,7 +45,7 @@ class AdInterstitial extends Component {
                   console.log(err);
               }
           } finally {
-            await InAppBilling.consumePurchase(productId); //don't do this in production, just for testing
+            // await InAppBilling.consumePurchase(productId); //don't do this in production, just for testing -- makes the purchase expire so you can try again
             await InAppBilling.close();
             await Actions.popTo('map');
           }
@@ -115,5 +115,3 @@ const mapStateToProps = (state) => {
 };
 
 export default connect(mapStateToProps)(AdInterstitial);
-
-
