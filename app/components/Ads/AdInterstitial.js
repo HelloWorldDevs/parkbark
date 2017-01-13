@@ -61,9 +61,11 @@ class AdInterstitial extends Component {
                 >
                   <Image style={{width: 20, height: 20, opacity: 0.67}} source={require('../../img/button_close.png')}/>
                 </TouchableOpacity>
+              <View style={styles.textContainer}>
                 <Text style={styles.text}>
-                    Ads help us keep this app free
+                  Ads help us keep this app free
                 </Text>
+              </View>
                 <AdMobBanner
                   bannerSize="mediumRectangle"
                 //   adUnitID="ca-app-pub-3940256099942544/6300978111" // test
@@ -101,11 +103,17 @@ var styles = StyleSheet.create({
     alignItems: 'center',
     padding: 25
 },
+  textContainer: {
+    padding: 15,
+    marginTop: 35,
+    marginBottom: 30
+  },
   text: {
-      color: '#ef3a39',
-      fontSize: 48,
-      fontFamily: 'Source Sans Pro 200',
-      alignSelf: 'center'
+    color: '#ef3a39',
+    textAlign: 'center',
+    fontSize: 35,
+    fontFamily: 'Source Sans Pro 200',
+    alignSelf: 'center'
   },
 });
 

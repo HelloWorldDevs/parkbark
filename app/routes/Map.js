@@ -91,7 +91,6 @@ var styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: 'white',
-    borderWidth: 3,
   },
   mapContainer: {
     marginLeft: 0,
