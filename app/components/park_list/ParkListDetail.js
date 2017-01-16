@@ -30,7 +30,9 @@ class ParkListDetails extends Component{
               <Text style={styles.parkTitle}>{this.props.title}</Text>
               <Text style={styles.parkAddress}>{this.props.address_display}</Text>
             </CardSection>
-            <Text style={styles.parkDistance}>{'apx ' + this.props.distance + 'mi'}</Text>
+            <CardSection>
+              <Text style={styles.parkDistance}>{'apx ' + this.props.distance + 'mi'}</Text>
+            </CardSection>
           </Card>
           { this.props.adsRemoved ? null: ads }
         </TouchableOpacity>
