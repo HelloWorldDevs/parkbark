@@ -52,7 +52,7 @@ const Amenity = (props) => {
         topAmenities =
         <View style={{flexDirection: 'column', alignItems: 'center', justifyContent: 'center', minWidth: 95, maxHeight: 40}}>
             <Image style={{width: 50, height:50, resizeMode: 'contain'}}source={icon}/>
-            <Text style={{fontSize: 11, color: '#5e5e5e', fontFamily: 'Source Sans Pro 200'}}>
+            <Text style={{fontSize: 11, color: '#5e5e5e', fontFamily: 'Source Sans Pro 200', marginBottom: 10}}>
                {props.amenity}
              </Text>
         </View>
