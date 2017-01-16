@@ -135,7 +135,7 @@ class ParkDetail extends Component {
                 <ResponsiveImage
                     source={require('../img/overlay@3x.png')}
                     initHeight='60'
-                    initWidth='1000'
+                    initWidth='500'
                 />
             </View>
             <TouchableOpacity
