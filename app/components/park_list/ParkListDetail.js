@@ -56,6 +56,8 @@ const styles = {
     color: '#f58120',
     textAlign: 'right',
     fontSize: 14,
+    lineHeight: 18,
+    textAlignVertical: 'top',
     fontFamily: 'Source Sans Pro regular'
   }
 }
