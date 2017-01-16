@@ -50,6 +50,7 @@ const Landing = React.createClass ({
   },
   render:function() {
     return (
+      <View style={styles.wrapper}>
         <View style={styles.container}>
           <View style={styles.imageContainer}>
             <Image source={require('../img/welcomePup@2x.png')}/>
@@ -63,6 +64,7 @@ const Landing = React.createClass ({
           </View>
           <Button bgimage={require('../img/orange-gradient-long.png')} icon={require('../img/forward-arrow@3x.png')} alignSelf={'center'} onPress={this.onNextPress}/>
         </View>
+      </View>
     );
   },
 
@@ -79,19 +81,22 @@ const Landing = React.createClass ({
 
 
 var styles = StyleSheet.create({
+  wrapper: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    flex: 1
+  },
   container: {
-    flexDirection: 'column',
-    justifyContent: 'space-between',
     alignItems: 'center',
     alignSelf: 'center',
     paddingLeft: 25,
     paddingRight: 25,
+    paddingTop: 10,
+    paddingBottom: 10,
     maxWidth: 500,
-    maxHeight: 800
   },
   imageContainer: {
-    justifyContent: 'center',
-    marginTop: 20,
+  //  marginTop: 20,
   },
   textContainer: {
     marginBottom: 10
