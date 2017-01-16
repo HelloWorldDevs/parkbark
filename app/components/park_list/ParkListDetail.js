@@ -43,7 +43,7 @@ const styles = {
     fontSize: 14,
     color: '#131313',
     fontFamily: 'Source Sans Pro regular',
-    lineHeight: 23,
+    lineHeight: 18,
     width: 200
   },
   parkAddress: {
