@@ -152,7 +152,7 @@ class ParkDetail extends Component {
 
           <ParkListDetail key={currentPark.title} onPress={this.onDetailPress.bind(this)} title={currentPark.title} address={currentPark.address} address_display={currentPark.address_display} distance={currentPark.distance}/>
           <Card>
-            {this.renderAmenities(currentPark)}
+              {this.renderAmenities(currentPark)}
           </Card>
                   { this.props.adsRemoved ? null :
                     <Card>
@@ -214,10 +214,8 @@ const styles = {
   parkDetails: {
     borderColor: '#f0f0f0',
     borderBottomWidth: 0,
-    // borderTopWidth: 1,
     borderRightWidth: 0,
     borderLeftWidth: 0,
-    // marginTop: 5
   },
   detailsTitle: {
     fontFamily: 'ArchivoNarrow-Bold',

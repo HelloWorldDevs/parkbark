@@ -18,7 +18,7 @@ class SearchFieldComponent extends Component {
                 onChangeText={this.handleChange.bind(this)}
                 placeholder="Address, Zip, City"
                 placeholderTextColor='#5e5e5e'
-                underlineColorAndroid='#fff'
+                underlineColorAndroid='rgba(0,0,0,0)'
                 style={styles.input}
                 onSubmitEditing={this.fetchParks.bind(this)}
             />
