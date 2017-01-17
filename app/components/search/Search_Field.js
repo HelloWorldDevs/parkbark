@@ -119,11 +119,11 @@ var styles = StyleSheet.create({
   },
   input: {
     maxWidth: 250,
-    fontSize: 13,
+    // fontSize: 13,
     paddingTop: 0,
     paddingBottom: 0,
     color: '#5e5e5e',
-    fontFamily: 'Source Sans Pro 200',
+    fontFamily: 'Source Sans Pro regular',
     lineHeight: 23,
     flex: 1
   }
