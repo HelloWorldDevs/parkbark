@@ -27,14 +27,15 @@ import { Actions } from 'react-native-router-flux';
 class ParkDetail extends Component {
   constructor(props){
     super(props);
+    this.pushToadCTA = this.pushToadCTA.bind(this);
   }
 
   componentWillMount() {
-    BackAndroid.addEventListener('hardwareBackPress', this.pushToadCTA.bind(this));
+    BackAndroid.addEventListener('hardwareBackPress', this.pushToadCTA);
   };
 
   componentWillUnmount() {
-    BackAndroid.removeEventListener('hardwareBackPress', this.pushToadCTA.bind(this));
+    BackAndroid.removeEventListener('hardwareBackPress', this.pushToadCTA);
   }
 
   shouldComponentUpdate() {
