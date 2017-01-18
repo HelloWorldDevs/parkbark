@@ -35,10 +35,17 @@ class ParkList extends Component {
   renderParkListDetails(parks) {
     let parkIndex = 0;
 
+    var default_position = {
+      latitude: 45.523031,
+      longitude: -122.676772
+    };
+
+    var position = this.props.coords || default_position;
+
     //sort all parks by distance from users coordinates and include distance prop :)
     var parksSorted = parks.map((park) => {
       var parkCoords = park.address.split(',');
-      park.distance = getDistance(this.props.coords.latitude, this.props.coords.longitude, parkCoords[0], parkCoords[1]);
+      park.distance = getDistance(position.latitude, position.longitude, parkCoords[0], parkCoords[1]);
       return park;
     })
       .sort(function(a, b) {

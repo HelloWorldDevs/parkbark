@@ -38,7 +38,8 @@ class ParkMarkers extends Component {
       latitude: 45.523031,
       longitude: -122.676772
     };
-    var position = this.props.position || default_position;
+    var position = this.props.coords || default_position;
+
     return (
         <View>
           {this.props.markers.map((marker, i)=> (
@@ -111,8 +112,8 @@ var styles = StyleSheet.create({
 
 const mapStateToProps = (state) => {
   return {
-    // coords: state.getIn(['map','location', 'coords']),
-    position: state.getIn(['map','position']),
+    coords: state.getIn(['map','location', 'coords']),
+    // position: state.getIn(['map','position']),
     markers: state.getIn(['map', 'location', 'parks'])
   }
 }

@@ -17,10 +17,6 @@ class Geolocator {
           latitudeDelta: .1,
           longitudeDelta: .1
         },
-        default_position: {
-          latitude: 45.523031,
-          longitude: -122.676772
-        },
         parks: []
       })
     });

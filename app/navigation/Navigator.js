@@ -32,10 +32,6 @@ class NavigatorComponent extends Component {
     super();
   }
 
-  componentWillMount() {
-
-  }
-
 
   render() {
     return <Router>
