@@ -11,7 +11,9 @@ class Survey_ParkAddress extends Component {
     constructor(props){
     super(props);
     this.state = {
-      formData:{}
+      formData:{
+        address: 'unknown'
+      }
     }
   }
   handleFormChange(formData){
@@ -20,8 +22,8 @@ class Survey_ParkAddress extends Component {
   }
   onClosePress(formData) {
       const updateValue = {};
-      updateValue.title = 'suggested_park';
-      updateValue.value = this.state.formData.suggested_park;
+      updateValue.title = 'address';
+      updateValue.value = this.state.formData.address;
       this.props.dispatch({type: 'UPDATE_SURVEY', state: updateValue});
       this.sendFormData().done(() => {
         if(this.props.suggestPark) {
@@ -32,8 +34,8 @@ class Survey_ParkAddress extends Component {
   }
   saveFormData() {
       const updateValue = {};
-      updateValue.title = 'suggested_park';
-      updateValue.value = this.state.formData.park_address;
+      updateValue.title = 'address';
+      updateValue.value = this.state.formData.address;
       this.props.dispatch({type: 'UPDATE_SURVEY', state: updateValue});
       if(this.props.suggestPark) {
         return Actions.surveyFencedArea({suggestPark: true})
@@ -57,9 +59,9 @@ class Survey_ParkAddress extends Component {
                   <Image style={{width: 20, height: 20, opacity: 0.67}} source={require('../../img/button_close.png')}/>
                 </TouchableOpacity>
                 <Text style={styles.question}>Where is this park <B>located</B>?</Text>
-                    <Form style={styles.form} ref='SuggestedPark' onChange={this.handleFormChange.bind(this)}>
+                    <Form style={styles.form} ref='parkaddress' onChange={this.handleFormChange.bind(this)}>
                        <InputField
-                           ref='suggested_park'
+                           ref='address'
                            placeholder='Park address or cross streets'
                            underlineColorAndroid='#F58120'
                            style={styles.input}

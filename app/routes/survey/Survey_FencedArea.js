@@ -18,7 +18,7 @@ class Survey_FencedArea extends Component {
   clickYes() {
       const updateValue = {};
       updateValue.title = 'fenced_area';
-      // Drinking Water TID for api
+      // Fenced Area TID for api
       updateValue.value = 3;
       this.saveFormData(updateValue);
   }
