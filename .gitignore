@@ -41,3 +41,4 @@ android/app/libs
 android/keystores/debug.keystore
 
 ./app/api/googleapi.js
+app-release.apk

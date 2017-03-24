@@ -1,7 +1,6 @@
 package com.parkbark;
 
 import android.app.Application;
-import com.evollu.react.fcm.FIRMessagingPackage;
 import android.util.Log;
 
 import com.sbugert.rnadmob.RNAdMobPackage;
@@ -40,7 +39,6 @@ public class MainApplication extends Application implements ReactApplication {
             new RNAdMobPackage(),
             new RNDeviceInfo(),
             new MapsPackage(),
-            new FIRMessagingPackage(),
             new LocationServicesDialogBoxPackage()
       );
     }
