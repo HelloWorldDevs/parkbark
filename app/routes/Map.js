@@ -33,8 +33,8 @@ class ParkMap extends Component {
       <View style={styles.container}>
         <SearchField onPress={this.showFilters.bind(this)}/>
         <View style={styles.mapContainer}>
-        <Loading />
-        <MapView
+          <Loading />
+          <MapView
             ref={ref => { this.map = ref; }}
             style={styles.map}
             region={this.props.coords}
@@ -42,12 +42,12 @@ class ParkMap extends Component {
             onRegionChangeComplete={this.annotationUpdate.bind(this)}
             onRegionChange={this.regionShow.bind(this)}
             loadingEnabled={true}
-        >
-          <PositionMarker/>
-          <ParkMarkers/>
-        </MapView>
-      </View>
-        <ParkList/>
+          >
+            <PositionMarker/>
+            <ParkMarkers/>
+          </MapView>
+        </View>
+        <ParkList />
     </View>
     )
   }

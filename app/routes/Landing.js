@@ -10,12 +10,10 @@ import {
     Alert
 } from 'react-native';
 import { Actions } from 'react-native-router-flux';
-import PushNotification from 'react-native-push-notification';
 import { connect } from 'react-redux';
 import Button from '../components/common/Button.js';
 import {fetchAmenitiesAction} from '../src/filter_core';
 import networkAlert from '../components/common/NetworkAlert';
-import fireBase from '../components/firebase/Firebase';
 
 
 
